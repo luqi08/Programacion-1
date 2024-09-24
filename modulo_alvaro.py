@@ -16,3 +16,7 @@ aviones = {"Boeing747":Boeing747}
 vuelos = {"EZE":{"Fecha":"20/10/2024", "Origen":"Misiones", "avion":"Boeing747"}}
 
 
+# Pasajeros: DNI, nombre, apellido
+# Pasajes: Numero de pasaje, numero de asiento, clase de asiento, codigo de equipaje
+# Aviones: Modelo, asientos 
+# Vuelos: Destino, fecha, origen
