@@ -15,7 +15,15 @@ import modulo_alvaro, modulo_facu, modulo_luis
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
-def funcion_prueba():
+def comprarBoleto():
+    return
+
+
+def modificarBoleto():
+    return
+
+
+def cancelarBoleto():
     return
 
 
@@ -26,21 +34,20 @@ def main():
     # -------------------------------------------------
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
-
+    aviones = {"boeing737":{},"airbusA320":{}}
     # -------------------------------------------------
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
     while True:
-        opciones = 4
+        opciones = 3
         while True:
             print()
             print("---------------------------")
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
-            print("[1] Opción 1")
-            print("[2] Opción 2")
-            print("[3] Opción 3")
-            print("[4] Opción 4")
+            print("[1] Comprar Boleto")
+            print("[2] Modificar Boleto")
+            print("[3] Cancelar Boleto")
             print("---------------------------")
             print("[0] Salir del programa")
             print()
@@ -58,13 +65,11 @@ def main():
             exit()  # También puede ser sys.exit() para lo cual hay que importar el módulo sys
 
         elif opcion == "1":  # Opción 1
-            ...
+            comprarBoleto()
         elif opcion == "2":  # Opción 2
-            ...
+            modificarBoleto()
         elif opcion == "3":  # Opción 3
-            ...
-        elif opcion == "4":  # Opción 4
-            ...
+            cancelarBoleto()
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
