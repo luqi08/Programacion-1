@@ -19,10 +19,6 @@ def comprarBoleto():
     return
 
 
-def modificarBoleto():
-    return
-
-
 def cancelarBoleto():
     return
 
@@ -46,8 +42,7 @@ def main():
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
             print("[1] Comprar Boleto")
-            print("[2] Modificar Boleto")
-            print("[3] Cancelar Boleto")
+            print("[2] Cancelar Boleto")
             print("---------------------------")
             print("[0] Salir del programa")
             print()
@@ -67,8 +62,6 @@ def main():
         elif opcion == "1":  # Opción 1
             comprarBoleto()
         elif opcion == "2":  # Opción 2
-            modificarBoleto()
-        elif opcion == "3":  # Opción 3
             cancelarBoleto()
 
         input("\nPresione ENTER para volver al menú.")
