@@ -50,6 +50,9 @@ def registrarDatos():
             nombre = "Nombre: "
             apellido = "Apellido: "
             dni = "DNI: "
+            verificadorApellido = False
+            verificadorNombre = False
+            verificadordni = False
         elif opcion == 5:
             if (
                 verificadorApellido == True
