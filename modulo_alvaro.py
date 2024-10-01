@@ -18,7 +18,8 @@ def registrarDatos():
         print(f"[1]{nombre}")
         print(f"[2]{apellido}")
         print(f"[3]{dni}")
-        print(f"[4]Completar")
+        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
+        print("[5]Completar")
         print("-----------------")
         opcion = int(input("Seleccione una opcion: "))
         if opcion == 1:
@@ -46,6 +47,10 @@ def registrarDatos():
             dni = dni + escribirDni
             verificadordni = True
         elif opcion == 4:
+            nombre = "Nombre: "
+            apellido = "Apellido: "
+            dni = "DNI: "
+        elif opcion == 5:
             if (
                 verificadorApellido == True
                 and verificadorNombre == True
@@ -54,10 +59,8 @@ def registrarDatos():
                 verificador == True
             else:
                 print("Aun quedan datos por completar")
-                opcion = input("Seleccione otra opcion: ")
         else:
             print("Esa opcion no existe")
-            opcion = input("INtente nuevamente: ")
     print("Sus datos")
     print("----------------")
     print(f"{nombre}")
