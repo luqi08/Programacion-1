@@ -95,4 +95,6 @@ vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", 'destino': 'eze'
 aviones = {"modelo": 'Boeing747'}
 
 matriz = crearMatriz(4,30,0)
-modificarPasaje(pasajes)
+
+if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
+    modificarPasaje(pasajes)
