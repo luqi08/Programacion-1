@@ -113,9 +113,9 @@ def main():
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
             print("[1] Comprar Boleto")
-            print("[2] Modificar Boleto")
+            print("[2] Eliminar Pasajero")
             print("[3] Cancelar Boleto")
-            print("[4] Cancelar Boleto")
+            print("[4] Modificar Pasajero")
             print("[5] Listar pasajeros")
             print("---------------------------")
             print("[0] Salir del programa")
@@ -145,13 +145,13 @@ def main():
         elif opcion == "3":  # Opción 3
             print()
             print("Ingrese el número de boleto: ")
-            cancelarBoleto()
+            modulo_facu.modificarPasaje()
 
         elif opcion == "4":  # Opción 3
             print()
             print("Ingrese el número de boleto: ")
-            eliminado = int(input('INGRESE DNI: '))
-            modulo_facu.modificarPasajero(pasajeros, eliminado)
+            modificado = int(input('INGRESE DNI: '))
+            modulo_facu.modificarPasajero(pasajeros, modificado)
 
         elif opcion == "5":  # Opción 3
             print()
