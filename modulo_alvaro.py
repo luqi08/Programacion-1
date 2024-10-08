@@ -22,7 +22,13 @@ def registrarDatos():
         print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[5]Completar")
         print("-----------------")
-        opcion = int(input("Seleccione una opcion: "))
+        while True:
+            opcion = input("Seleccione una opcion: ")
+            if opcion.isnumeric():
+                opcion = int(opcion)
+                break
+            else:
+                print('Debe ser un numero')
         if opcion == 1:
             print("Escriba su nombre.")
             escribirNombre = input()
