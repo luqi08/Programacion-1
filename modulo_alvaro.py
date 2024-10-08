@@ -21,7 +21,7 @@ def registrarDatos():
         print("[5]Completar")
         print("-----------------")
         opcion = input("Seleccione una opcion: ")
-        if opcion == '1':
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
             for letra in escribirNombre:
@@ -41,7 +41,7 @@ def registrarDatos():
                         bandera = True
             nombre = escribirNombre
             verificadorNombre == True
-        elif opcion == '2':
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
             for letra in escribirApellido:
@@ -60,20 +60,20 @@ def registrarDatos():
                     else:
                         bandera = True
             apellido = escribirApellido
-        elif opcion == '3':
+        elif opcion == "3":
             print("Escriba su DNI")
             escribirDni = input()
             while escribirDni == "" or escribirDni.isnumeric() == False:
                 print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
-        elif opcion == '4':
+        elif opcion == "4":
             nombre = ""
             apellido = ""
             dni = ""
             verificadorNombre = False
-        elif opcion == '5':
-            if nombre == '' or apellido == '' or dni == '':
+        elif opcion == "5":
+            if nombre == "" or apellido == "" or dni == "":
                 print("Aun quedan datos por completar")
             else:
                 break
@@ -87,8 +87,42 @@ def registrarDatos():
     print("----------------")
 
 
-if __name__ == "__main__":  # Para no ejecutar la función al importar el módulo
-    registrarDatos()
+def eliminarPasajero(pasajeros):
+
+    eliminar = False
+    while eliminar == False:
+        print("Desea eliminar el pasaje junto a la informacion del pasajero?")
+        print("--------------------")
+        print("[1] Eliminar pasajero")
+        print("[2] Volver al menu anterior")
+        print("--------------------")
+        opcion = input("Seleccione una opcion")
+        if opcion == "1":
+            print("Coloque el DNI del pasajero a eliminar")
+            dni = input("DNI: ")
+            if dni in pasajeros == True:
+                verificador = True
+            while dni != "" or dni.isnumeric == False or verificador == False:
+                print("Ese no es un dni posible")
+                dni = input("Intentelo nuevamente: ")
+                if dni in pasajeros == True:
+                    verificador = True
+            print(
+                "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
+            )
+            print("------------------")
+            print("[1] Eliminar pasajero")
+            print("[2] Volver al menu anterior")
+            print("------------------")
+            opcion = input()
+            if opcion == "1":
+                del pasajeros[int(dni)]
+                print(f"El pasajero {dni} ha sido eliminado")
+        elif opcion == "2":
+            break
+        else:
+            print("Esa opcion no existe")
+
 
 # Pasajeros: DNI, nombre, apellido
 # Pasajes: Numero de pasaje, numero de asiento, clase de asiento, codigo de equipaje
