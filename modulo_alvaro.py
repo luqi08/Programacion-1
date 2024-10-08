@@ -72,7 +72,8 @@ def registrarDatos():
     print("----------------")
 
 
-registrarDatos()
+if __name__ == "__main__":  # Para no ejecutar la función al importar el módulo
+    registrarDatos()
 
 # Pasajeros: DNI, nombre, apellido
 # Pasajes: Numero de pasaje, numero de asiento, clase de asiento, codigo de equipaje
