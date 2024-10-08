@@ -106,7 +106,7 @@ def main():
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
     while True:
-        opciones = 4
+        opciones = 6
         while True:
             print()
             print("---------------------------")
@@ -115,6 +115,8 @@ def main():
             print("[1] Comprar Boleto")
             print("[2] Modificar Boleto")
             print("[3] Cancelar Boleto")
+            print("[4] Cancelar Boleto")
+            print("[5] Listar pasajeros")
             print("---------------------------")
             print("[0] Salir del programa")
             print()
@@ -138,12 +140,22 @@ def main():
         elif opcion == "2":  # Opción 2
             print()
             print("Ingrese el número de boleto: ")
-            modificarBoleto()
+            modulo_alvaro.eliminarPasajero(pasajeros)
 
         elif opcion == "3":  # Opción 3
             print()
             print("Ingrese el número de boleto: ")
             cancelarBoleto()
+
+        elif opcion == "4":  # Opción 3
+            print()
+            print("Ingrese el número de boleto: ")
+            eliminado = int(input('INGRESE DNI: '))
+            modulo_facu.modificarPasajero(pasajeros, eliminado)
+
+        elif opcion == "5":  # Opción 3
+            print()
+            print(pasajeros)
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")

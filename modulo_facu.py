@@ -96,5 +96,110 @@ aviones = {"modelo": 'Boeing747'}
 
 matriz = crearMatriz(4,30,0)
 
-if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
-    modificarPasaje(pasajes)
+# if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
+#     modificarPasaje(pasajes)
+
+pasajeros = {
+    47307151: {'nombre': 'Juan', 'apellido': 'Perez'},
+    40215863: {'nombre': 'Maria', 'apellido': 'Gomez'},
+    38901453: {'nombre': 'Carlos', 'apellido': 'Lopez'},
+    42758963: {'nombre': 'Ana', 'apellido': 'Martinez'},
+    39456821: {'nombre': 'Jose', 'apellido': 'Rodriguez'},
+    41874529: {'nombre': 'Laura', 'apellido': 'Fernandez'},
+    40125678: {'nombre': 'Sofia', 'apellido': 'Garcia'},
+    38501452: {'nombre': 'Diego', 'apellido': 'Sanchez'},
+    42896532: {'nombre': 'Camila', 'apellido': 'Diaz'},
+    41236547: {'nombre': 'Martin', 'apellido': 'Gonzalez'},
+    43985621: {'nombre': 'Lucia', 'apellido': 'Romero'},
+    39874512: {'nombre': 'Mateo', 'apellido': 'Castro'},
+    41798543: {'nombre': 'Julieta', 'apellido': 'Suarez'},
+    43652189: {'nombre': 'Lucas', 'apellido': 'Mendez'},
+    41327856: {'nombre': 'Emilia', 'apellido': 'Vega'},
+    42789654: {'nombre': 'Nicolas', 'apellido': 'Cabrera'},
+    39452187: {'nombre': 'Valentina', 'apellido': 'Silva'},
+    42985612: {'nombre': 'Federico', 'apellido': 'Molina'},
+    40312654: {'nombre': 'Agustina', 'apellido': 'Rios'},
+    41985463: {'nombre': 'Tomas', 'apellido': 'Ortega'},
+    41258743: {'nombre': 'Milagros', 'apellido': 'Ibarra'},
+    43625489: {'nombre': 'Gabriel', 'apellido': 'Reyes'},
+    39874532: {'nombre': 'Sol', 'apellido': 'Moreno'},
+    42987145: {'nombre': 'Benjamin', 'apellido': 'Paz'},
+    40541236: {'nombre': 'Martina', 'apellido': 'Campos'},
+    41896325: {'nombre': 'Sebastian', 'apellido': 'Soto'},
+    42365471: {'nombre': 'Bianca', 'apellido': 'Villalba'},
+    43852147: {'nombre': 'Maximiliano', 'apellido': 'Aguilar'},
+    40215698: {'nombre': 'Florencia', 'apellido': 'Pereyra'},
+    42589647: {'nombre': 'Leandro', 'apellido': 'Navarro'}
+}
+
+def modificarPasajero(pasajeros: dict, dni: int):
+    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    verificador = False
+    while verificador == False:
+        print("Ingrese sus datos")
+        print("-----------------")
+        print(f"[1]Nombre: {pasajeros[dni]['nombre']}")
+        print(f"[2]Apellido: {pasajeros[dni]['apellido']}")
+        print(f"[3]DNI: {dni}")
+        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
+        print("[5]Completar")
+        print("-----------------")
+        opcion = input("Seleccione una opcion: ")
+        if opcion == '1':
+            print("Escriba su nombre.")
+            escribirNombre = input()
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
+                escribirNombre = input("Escribalo nuevamente: ")
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            pasajeros[dni]['nombre'] = escribirNombre
+            verificadorNombre == True
+        elif opcion == '2':
+            print("Escriba su apellido")
+            escribirApellido = input()
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
+                escribirApellido = input("Escribalo nuevamente: ")
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            pasajeros[dni]['apellido'] = escribirApellido
+        elif opcion == '3':
+            print('El DNI no puede modificarse')
+        elif opcion == '4':
+            pasajeros[dni]['nombre'] = ""
+            pasajeros[dni]['apellido'] = ""
+            verificadorNombre = False
+        elif opcion == '5':
+            if pasajeros[dni]['nombre'] == '' or pasajeros[dni]['apellido'] == '' or dni == '':
+                print("Aun quedan datos por completar")
+            else:
+                break
+        else:
+            print("Esa opcion no existe")
+    print("Sus datos")
+    print("----------------")
+    print(f"Nombre: {pasajeros[dni]['nombre']}")
+    print(f"Apellido: {pasajeros[dni]['apellido']}")
+    print(f"DNI: {dni}")
+    print("----------------")
