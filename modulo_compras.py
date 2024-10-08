@@ -38,13 +38,6 @@ def comprarBoleto():
         print()
 
         opcion = input("Seleccione un destino: ")
-        if opcion in [
-            str(i) for i in range(0, destinos)
-        ]:  # Sólo continua si se elije una opcion de menú válida
-            break
-        else:
-            input("Opción inválida. Presione ENTER para volver a seleccionar.")
-        print()
 
         if opcion == 0:
             break
@@ -120,6 +113,10 @@ def comprarBoleto():
 
         elif opcion == 24:
             destino = "Tucumán"
+
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+        print()
     return
 
 
