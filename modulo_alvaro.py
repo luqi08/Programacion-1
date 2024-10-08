@@ -5,13 +5,12 @@ airbusA320neoclaseEconomica = (28, 6)
 
 
 def registrarDatos():
+    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     nombre = ""
     apellido = ""
     dni = ""
     verificador = False
     verificadorNombre = False
-    verificadorApellido = False
-    verificadordni = False
     while verificador == False:
         print("Ingrese sus datos")
         print("-----------------")
@@ -21,54 +20,70 @@ def registrarDatos():
         print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[5]Completar")
         print("-----------------")
-        opcion = int(input("Seleccione una opcion: "))
-        if opcion == 1:
+        opcion = input("Seleccione una opcion: ")
+        if opcion == '1':
             print("Escriba su nombre.")
             escribirNombre = input()
-            while escribirNombre == "":
-                print("No es valido dejar el espacio en blanco")
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirNombre = input("Escribalo nuevamente: ")
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             nombre = escribirNombre
             verificadorNombre == True
-        elif opcion == 2:
+        elif opcion == '2':
             print("Escriba su apellido")
             escribirApellido = input()
-            while escribirApellido == "":
-                print("No es valido dejar espacios en blanco")
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirApellido = input("Escribalo nuevamente: ")
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             apellido = escribirApellido
-            verificadorApellido = True
-        elif opcion == 3:
+        elif opcion == '3':
             print("Escriba su DNI")
             escribirDni = input()
-            while escribirDni == "":
-                print("No es valido dejar espacion en blanco")
+            while escribirDni == "" or escribirDni.isnumeric() == False:
+                print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
-            verificadordni = True
-        elif opcion == 4:
+        elif opcion == '4':
             nombre = ""
             apellido = ""
             dni = ""
-            verificadorApellido = False
             verificadorNombre = False
-            verificadordni = False
-        elif opcion == 5:
-            if (
-                verificadorApellido == True
-                and verificadorNombre == True
-                and verificadordni == True
-            ):
-                verificador == True
-            else:
+        elif opcion == '5':
+            if nombre == '' or apellido == '' or dni == '':
                 print("Aun quedan datos por completar")
+            else:
+                break
         else:
             print("Esa opcion no existe")
     print("Sus datos")
     print("----------------")
-    print(f"{nombre}")
-    print(f"{apellido}")
-    print(f"{dni}")
+    print(f"Nombre: {nombre}")
+    print(f"Apellido: {apellido}")
+    print(f"DNI: {dni}")
     print("----------------")
 
 
