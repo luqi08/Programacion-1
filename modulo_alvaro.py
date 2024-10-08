@@ -5,23 +5,19 @@ airbusA320neoclaseEconomica = (28, 6)
 
 
 def registrarDatos():
-    """
-    Ingreso de datos del cliente con un menu incluido
-    """
-    nombre = "Nombre: "
-    apellido = "Apellido: "
-    dni = "DNI: "
-    verificador = 0
-    verificadorNombre = 0
-    verificadorApellido = 0
-    verificadordni = 0
-    while verificador == 0:
-        print("-----------------")
+    nombre = ""
+    apellido = ""
+    dni = ""
+    verificador = False
+    verificadorNombre = False
+    verificadorApellido = False
+    verificadordni = False
+    while verificador == False:
         print("Ingrese sus datos")
         print("-----------------")
-        print(f"[1]{nombre}")
-        print(f"[2]{apellido}")
-        print(f"[3]{dni}")
+        print(f"[1]Nombre: {nombre}")
+        print(f"[2]Apellido: {apellido}")
+        print(f"[3]DNI: {dni}")
         print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[5]Completar")
         print("-----------------")
@@ -32,8 +28,8 @@ def registrarDatos():
             while escribirNombre == "":
                 print("No es valido dejar el espacio en blanco")
                 escribirNombre = input("Escribalo nuevamente: ")
-            nombre = nombre + escribirNombre
-            verificadorNombre == 1
+            nombre = escribirNombre
+            verificadorNombre == True
         elif opcion == 2:
             print("Escriba su apellido")
             escribirApellido = input()

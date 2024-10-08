@@ -120,6 +120,10 @@ def comprarBoleto():
 
         elif opcion == 24:
             destino = "Tucumán"
+
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+        print()
     return
 
 
