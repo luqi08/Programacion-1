@@ -99,7 +99,7 @@ def main():
         elif opcion == "2":  # Opción 2
             print()
             print("Ingrese el número de boleto: ")
-            modificarBoleto()
+            modulo_alvaro.eliminarPasajero(pasajeros)
 
         elif opcion == "3":  # Opción 3
             print()

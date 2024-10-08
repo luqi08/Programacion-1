@@ -203,5 +203,3 @@ def modificarPasajero(pasajeros: dict, dni: int):
     print(f"Apellido: {pasajeros[dni]['apellido']}")
     print(f"DNI: {dni}")
     print("----------------")
-
-modificarPasajero(pasajeros, 47307151)
