@@ -27,8 +27,46 @@ def main():
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
     aviones = {
-        "boeing737": {"primera": 20, "economica": 162},
-        "airbusA320": {"primera": 28, "economica": 150},
+        "Boeing747-800": {
+            "Matricula": "LV-ABC",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-BRD",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-CFT",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-DRT",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-EFP",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-GHT",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-HJK",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-JLM",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-KRS",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-LPQ",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
     }
 
     pasajeros = {
@@ -63,6 +101,7 @@ def main():
         40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
         42589647: {"nombre": "Leandro", "apellido": "Navarro"},
     }
+
     # -------------------------------------------------
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
