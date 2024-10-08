@@ -5,6 +5,7 @@ airbusA320neoclaseEconomica = (28, 6)
 
 
 def registrarDatos():
+    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     nombre = ""
     apellido = ""
     dni = ""
@@ -24,34 +25,50 @@ def registrarDatos():
         opcion = int(input("Seleccione una opcion: "))
         if opcion == 1:
             print("Escriba su nombre.")
-            while True:
-                escribirNombre = input()
-                if len(escribirNombre) == 0:
-                    print('No puede dejarlo en blanco')
-                elif escribirNombre.isdigit():
-                    print('El nombre no deben ser numeros')
-                else:
+            escribirNombre = input()
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
                     break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
+                escribirNombre = input("Escribalo nuevamente: ")
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             nombre = escribirNombre
             verificadorNombre == True
         elif opcion == 2:
             print("Escriba su apellido")
             escribirApellido = input()
-            while escribirApellido == "":
-                print("No es valido dejar espacios en blanco")
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirApellido = input("Escribalo nuevamente: ")
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             apellido = escribirApellido
             verificadorApellido = True
         elif opcion == 3:
             print("Escriba su DNI")
-            while True:
-                escribirDni = input()
-                if len(escribirDni) == 0:
-                    print('No puede dejarlo en blanco')
-                elif escribirDni.isnumeric() == False:
-                    print('El DNI deben ser numeros')
-                else:
-                    break
+            escribirDni = input()
+            while escribirDni == "" or escribirDni.isnumeric() == False:
+                print("No es valido dejar espacion en blanco ni involucrar letras")
+                escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
             verificadordni = True
         elif opcion == 4:
