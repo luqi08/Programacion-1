@@ -22,8 +22,8 @@ def registrarDatos():
         print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[5]Completar")
         print("-----------------")
-        opcion = int(input("Seleccione una opcion: "))
-        if opcion == 1:
+        opcion = input("Seleccione una opcion: ")
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
             for letra in escribirNombre:
@@ -43,7 +43,7 @@ def registrarDatos():
                         bandera = True
             nombre = escribirNombre
             verificadorNombre == True
-        elif opcion == 2:
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
             for letra in escribirApellido:
@@ -63,7 +63,7 @@ def registrarDatos():
                         bandera = True
             apellido = escribirApellido
             verificadorApellido = True
-        elif opcion == 3:
+        elif opcion == "3":
             print("Escriba su DNI")
             escribirDni = input()
             while escribirDni == "" or escribirDni.isnumeric() == False:
@@ -71,16 +71,21 @@ def registrarDatos():
                 escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
             verificadordni = True
-        elif opcion == 4:
+        elif opcion == "4":
             nombre = ""
             apellido = ""
             dni = ""
             verificadorApellido = False
             verificadorNombre = False
             verificadordni = False
-        elif opcion == 5:
+        elif opcion == "5":
             verificador = verificadorApellido + verificadordni + verificadorNombre
-            if verificador == 3:
+            print(verificador)
+            if (
+                verificadordni == True
+                and verificadorApellido == True
+                and verificadorNombre == True
+            ):
                 break
             else:
                 print("Aun quedan datos por completar")

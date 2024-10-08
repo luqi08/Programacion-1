@@ -26,7 +26,10 @@ def main():
     # -------------------------------------------------
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
-    aviones = {"boeing737":{"primera":20, "economica":162},"airbusA320":{"primera":28,"economica":150}}
+    aviones = {
+        "boeing737": {"primera": 20, "economica": 162},
+        "airbusA320": {"primera": 28, "economica": 150},
+    }
     # -------------------------------------------------
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
@@ -58,7 +61,8 @@ def main():
 
         elif opcion == "1":  # Opción 1
             modulo_compras.comprarBoleto()
-            
+            modulo_alvaro.registrarDatos()
+
         elif opcion == "2":  # Opción 2
             print()
             print("Ingrese el número de boleto: ")
