@@ -26,17 +26,41 @@ def registrarDatos():
         if opcion == 1:
             print("Escriba su nombre.")
             escribirNombre = input()
-            while escribirNombre == "" or escribirNombre.isnumeric() == True:
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
                 print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirNombre = input("Escribalo nuevamente: ")
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             nombre = escribirNombre
             verificadorNombre == True
         elif opcion == 2:
             print("Escriba su apellido")
             escribirApellido = input()
-            while escribirApellido == "" or escribirApellido.isnumeric() == True:
-                print("No es valido dejar espacios en blanco ni involucrar numeros")
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirApellido = input("Escribalo nuevamente: ")
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
             apellido = escribirApellido
             verificadorApellido = True
         elif opcion == 3:
