@@ -4,7 +4,7 @@ airbusA320neoclaseEjecutiva = (3, 4)
 airbusA320neoclaseEconomica = (28, 6)
 
 
-def registrarDatos():
+def registrarDatos(pasajeros):
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     nombre = ""
     apellido = ""
@@ -85,6 +85,8 @@ def registrarDatos():
     print(f"Apellido: {apellido}")
     print(f"DNI: {dni}")
     print("----------------")
+    pasajeros[dni] = {'nombre': nombre, 'apellido': apellido}
+    print('Pasajero registrado')
 
 
 def eliminarPasajero(pasajeros):
@@ -102,7 +104,7 @@ def eliminarPasajero(pasajeros):
             dni = int(input("DNI: "))
             if dni in pasajeros == True:
                 verificador = True
-            while dni.isnumeric == False or verificador == False:
+            while verificador == False:
                 print("Ese no es un dni posible")
                 dni = int(input("Intentelo nuevamente: "))
                 if dni in pasajeros == True:

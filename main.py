@@ -135,7 +135,7 @@ def main():
 
         elif opcion == "1":  # Opción 1
             modulo_compras.comprarBoleto()
-            modulo_alvaro.registrarDatos()
+            modulo_alvaro.registrarDatos(pasajeros)
 
         elif opcion == "2":  # Opción 2
             print()
@@ -155,7 +155,7 @@ def main():
 
         elif opcion == "5":  # Opción 3
             print()
-            print(pasajeros)
+            modulo_facu.listarPasajeros(pasajeros)
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")

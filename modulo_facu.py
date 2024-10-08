@@ -204,3 +204,7 @@ def modificarPasajero(pasajeros: dict, dni: int):
     print(f"DNI: {dni}")
     print("----------------")
     print("Pasajero Modificado Correctamente")
+
+def listarPasajeros(pasajeros: dict):
+    for dni, datos in pasajeros.items():
+        print(f'DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}')
