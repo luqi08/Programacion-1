@@ -36,7 +36,7 @@ def registrarDatos():
             while escribirApellido == "":
                 print("No es valido dejar espacios en blanco")
                 escribirApellido = input("Escribalo nuevamente: ")
-            apellido = apellido + escribirApellido
+            apellido = escribirApellido
             verificadorApellido = True
         elif opcion == 3:
             print("Escriba su DNI")
@@ -44,12 +44,12 @@ def registrarDatos():
             while escribirDni == "":
                 print("No es valido dejar espacion en blanco")
                 escribirDni = input("Intentelo nuevamente: ")
-            dni = dni + escribirDni
+            dni = escribirDni
             verificadordni = True
         elif opcion == 4:
-            nombre = "Nombre: "
-            apellido = "Apellido: "
-            dni = "DNI: "
+            nombre = ""
+            apellido = ""
+            dni = ""
             verificadorApellido = False
             verificadorNombre = False
             verificadordni = False
