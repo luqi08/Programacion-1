@@ -67,7 +67,7 @@ def registrarDatos():
             print("Escriba su DNI")
             escribirDni = input()
             while escribirDni == "" or escribirDni.isnumeric() == False:
-                print("No es valido dejar espacion en blanco ni involucrar letras")
+                print("No es valido dejar espacios en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
             verificadordni = True
