@@ -4,75 +4,132 @@ airbusA320neoclaseEjecutiva = (3, 4)
 airbusA320neoclaseEconomica = (28, 6)
 
 
-def registrarDatos():
-    nombre = "Nombre: "
-    apellido = "Apellido: "
-    dni = "DNI: "
+def registrarDatos(pasajeros):
+    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    nombre = ""
+    apellido = ""
+    dni = ""
     verificador = False
     verificadorNombre = False
-    verificadorApellido = False
-    verificadordni = False
     while verificador == False:
         print("Ingrese sus datos")
         print("-----------------")
-        print(f"[1]{nombre}")
-        print(f"[2]{apellido}")
-        print(f"[3]{dni}")
+        print(f"[1]Nombre: {nombre}")
+        print(f"[2]Apellido: {apellido}")
+        print(f"[3]DNI: {dni}")
         print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[5]Completar")
         print("-----------------")
-        opcion = int(input("Seleccione una opcion: "))
-        if opcion == 1:
+        opcion = input("Seleccione una opcion: ")
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
-            while escribirNombre == "":
-                print("No es valido dejar el espacio en blanco")
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirNombre = input("Escribalo nuevamente: ")
-            nombre = nombre + escribirNombre
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            nombre = escribirNombre
             verificadorNombre == True
-        elif opcion == 2:
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
-            while escribirApellido == "":
-                print("No es valido dejar espacios en blanco")
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
                 escribirApellido = input("Escribalo nuevamente: ")
-            apellido = apellido + escribirApellido
-            verificadorApellido = True
-        elif opcion == 3:
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            apellido = escribirApellido
+        elif opcion == "3":
             print("Escriba su DNI")
             escribirDni = input()
-            while escribirDni == "":
-                print("No es valido dejar espacion en blanco")
+            while escribirDni == "" or escribirDni.isnumeric() == False:
+                print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
-            dni = dni + escribirDni
-            verificadordni = True
-        elif opcion == 4:
-            nombre = "Nombre: "
-            apellido = "Apellido: "
-            dni = "DNI: "
-            verificadorApellido = False
+            dni = escribirDni
+        elif opcion == "4":
+            nombre = ""
+            apellido = ""
+            dni = ""
             verificadorNombre = False
-            verificadordni = False
-        elif opcion == 5:
-            if (
-                verificadorApellido == True
-                and verificadorNombre == True
-                and verificadordni == True
-            ):
-                verificador == True
-            else:
+        elif opcion == "5":
+            if nombre == "" or apellido == "" or dni == "":
                 print("Aun quedan datos por completar")
+            else:
+                break
         else:
             print("Esa opcion no existe")
     print("Sus datos")
     print("----------------")
-    print(f"{nombre}")
-    print(f"{apellido}")
-    print(f"{dni}")
+    print(f"Nombre: {nombre}")
+    print(f"Apellido: {apellido}")
+    print(f"DNI: {dni}")
     print("----------------")
+    pasajeros[dni] = {'nombre': nombre, 'apellido': apellido}
+    print('Pasajero registrado')
 
 
-registrarDatos()
+def eliminarPasajero(pasajeros):
+
+    eliminar = False
+    while eliminar == False:
+        print("Desea eliminar el pasaje junto a la informacion del pasajero?")
+        print("--------------------")
+        print("[1] Eliminar pasajero")
+        print("[2] Volver al menu anterior")
+        print("--------------------")
+        opcion = input("Seleccione una opcion")
+        if opcion == "1":
+            verificador = False
+            print("Coloque el DNI del pasajero a eliminar")
+            dni = int(input("DNI: "))
+            if dni in list(pasajeros.keys()) == True:
+                verificador = True
+            else:
+                verificador = False
+            while verificador == False:
+                print("Ese no es un dni posible")
+                dni = int(input("Intentelo nuevamente: "))
+                if dni in pasajeros == True:
+                    verificador = True
+                else:
+                    verificador = False
+            print(
+                "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
+            )
+            print("------------------")
+            print("[1] Eliminar pasajero")
+            print("[2] Volver al menu anterior")
+            print("------------------")
+            opcion = input()
+            if opcion == "1":
+                del pasajeros[int(dni)]
+                print(f"El pasajero {dni} ha sido eliminado")
+        elif opcion == "2":
+            break
+        else:
+            print("Esa opcion no existe")
+
 
 # Pasajeros: DNI, nombre, apellido
 # Pasajes: Numero de pasaje, numero de asiento, clase de asiento, codigo de equipaje

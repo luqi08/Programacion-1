@@ -9,16 +9,12 @@ Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 # ----------------------------------------------------------------------------------------------
 # MÓDULOS
 # ----------------------------------------------------------------------------------------------
-import modulo_alvaro, modulo_facu, modulo_luis
+import modulo_alvaro, modulo_facu, modulo_luis, modulo_compras
 
 
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
-def comprarBoleto():
-    return
-
-
 def cancelarBoleto():
     return
 
@@ -30,20 +26,97 @@ def main():
     # -------------------------------------------------
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
-    aviones = {"boeing737":{"asientos":},"airbusA320":{"asientos":}}
+    aviones = {
+        "Boeing747-800": {
+            "Matricula": "LV-ABC",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-BRD",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-CFT",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-DRT",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "Boeing747-800": {
+            "Matricula": "LV-EFP",
+            "Asientos": {"primera": 20, "economica": 162},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-GHT",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-HJK",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-JLM",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-KRS",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+        "AirbusA320Neo": {
+            "Matricula": "LV-LPQ",
+            "Asientos": {"primera": 28, "economica": 150},
+        },
+    }
+
+    pasajeros = {
+        47307151: {"nombre": "Juan", "apellido": "Perez"},
+        40215863: {"nombre": "Maria", "apellido": "Gomez"},
+        38901453: {"nombre": "Carlos", "apellido": "Lopez"},
+        42758963: {"nombre": "Ana", "apellido": "Martinez"},
+        39456821: {"nombre": "Jose", "apellido": "Rodriguez"},
+        41874529: {"nombre": "Laura", "apellido": "Fernandez"},
+        40125678: {"nombre": "Sofia", "apellido": "Garcia"},
+        38501452: {"nombre": "Diego", "apellido": "Sanchez"},
+        42896532: {"nombre": "Camila", "apellido": "Diaz"},
+        41236547: {"nombre": "Martin", "apellido": "Gonzalez"},
+        43985621: {"nombre": "Lucia", "apellido": "Romero"},
+        39874512: {"nombre": "Mateo", "apellido": "Castro"},
+        41798543: {"nombre": "Julieta", "apellido": "Suarez"},
+        43652189: {"nombre": "Lucas", "apellido": "Mendez"},
+        41327856: {"nombre": "Emilia", "apellido": "Vega"},
+        42789654: {"nombre": "Nicolas", "apellido": "Cabrera"},
+        39452187: {"nombre": "Valentina", "apellido": "Silva"},
+        42985612: {"nombre": "Federico", "apellido": "Molina"},
+        40312654: {"nombre": "Agustina", "apellido": "Rios"},
+        41985463: {"nombre": "Tomas", "apellido": "Ortega"},
+        41258743: {"nombre": "Milagros", "apellido": "Ibarra"},
+        43625489: {"nombre": "Gabriel", "apellido": "Reyes"},
+        39874532: {"nombre": "Sol", "apellido": "Moreno"},
+        42987145: {"nombre": "Benjamin", "apellido": "Paz"},
+        40541236: {"nombre": "Martina", "apellido": "Campos"},
+        41896325: {"nombre": "Sebastian", "apellido": "Soto"},
+        42365471: {"nombre": "Bianca", "apellido": "Villalba"},
+        43852147: {"nombre": "Maximiliano", "apellido": "Aguilar"},
+        40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
+        42589647: {"nombre": "Leandro", "apellido": "Navarro"},
+    }
+
     # -------------------------------------------------
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
     while True:
-        opciones = 3
+        opciones = 6
         while True:
             print()
             print("---------------------------")
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
             print("[1] Comprar Boleto")
-            print("[2] Modificar Boleto")
+            print("[2] Eliminar Pasajero")
             print("[3] Cancelar Boleto")
+            print("[4] Modificar Pasajero")
+            print("[5] Listar pasajeros")
             print("---------------------------")
             print("[0] Salir del programa")
             print()
@@ -61,48 +134,28 @@ def main():
             exit()  # También puede ser sys.exit() para lo cual hay que importar el módulo sys
 
         elif opcion == "1":  # Opción 1
-            print()
-            print("---------------------------")
-            print("DESTINO                    ")
-            print("---------------------------")
-            print("[1] Buenos Aires")
-            print("[2] Catamarca")
-            print("[3] Chaco")
-            print("[4] Chubut")
-            print("[5] Ciudad Autónoma de Buenos Aires (CABA)")
-            print("[6] Córdoba")
-            print("[7] Corrientes")
-            print("[8] Entre Ríos")
-            print("[9] Formosa")
-            print("[10] Jujuy")
-            print("[11] La Pampa")
-            print("[12] La Rioja")
-            print("[13] Mendoza")
-            print("[14] Misiones")
-            print("[15] Neuquén")
-            print("[16] Río Negro")
-            print("[17] Salta")
-            print("[18] San Juan")
-            print("[19] San Luis")
-            print("[20] Santa Cruz")
-            print("[21] Santa Fe")
-            print("[22] Santiago del Estero")
-            print("[23] Tierra del Fuego")
-            print("[24] Tucumán")
-            print("---------------------------")
-            print("[0] Salir del programa")
-            print()
-            comprarBoleto()
-            
+            modulo_compras.comprarBoleto()
+            modulo_alvaro.registrarDatos(pasajeros)
+
         elif opcion == "2":  # Opción 2
             print()
             print("Ingrese el número de boleto: ")
-            modificarBoleto()
+            modulo_alvaro.eliminarPasajero(pasajeros)
 
         elif opcion == "3":  # Opción 3
             print()
             print("Ingrese el número de boleto: ")
-            cancelarBoleto()
+            modulo_facu.modificarPasaje()
+
+        elif opcion == "4":  # Opción 3
+            print()
+            print("Ingrese el número de boleto: ")
+            modificado = int(input('INGRESE DNI: '))
+            modulo_facu.modificarPasajero(pasajeros, modificado)
+
+        elif opcion == "5":  # Opción 3
+            print()
+            modulo_facu.listarPasajeros(pasajeros)
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
