@@ -5,14 +5,18 @@ airbusA320neoclaseEconomica = (28, 6)
 
 
 def registrarDatos():
+    """
+    Ingreso de datos del cliente con un menu incluido
+    """
     nombre = "Nombre: "
     apellido = "Apellido: "
     dni = "DNI: "
-    verificador = False
-    verificadorNombre = False
-    verificadorApellido = False
-    verificadordni = False
-    while verificador == False:
+    verificador = 0
+    verificadorNombre = 0
+    verificadorApellido = 0
+    verificadordni = 0
+    while verificador == 0:
+        print("-----------------")
         print("Ingrese sus datos")
         print("-----------------")
         print(f"[1]{nombre}")
@@ -29,7 +33,7 @@ def registrarDatos():
                 print("No es valido dejar el espacio en blanco")
                 escribirNombre = input("Escribalo nuevamente: ")
             nombre = nombre + escribirNombre
-            verificadorNombre == True
+            verificadorNombre == 1
         elif opcion == 2:
             print("Escriba su apellido")
             escribirApellido = input()
@@ -37,7 +41,7 @@ def registrarDatos():
                 print("No es valido dejar espacios en blanco")
                 escribirApellido = input("Escribalo nuevamente: ")
             apellido = apellido + escribirApellido
-            verificadorApellido = True
+            verificadorApellido = 1
         elif opcion == 3:
             print("Escriba su DNI")
             escribirDni = input()
@@ -45,21 +49,18 @@ def registrarDatos():
                 print("No es valido dejar espacion en blanco")
                 escribirDni = input("Intentelo nuevamente: ")
             dni = dni + escribirDni
-            verificadordni = True
+            verificadordni = 1
         elif opcion == 4:
             nombre = "Nombre: "
             apellido = "Apellido: "
             dni = "DNI: "
-            verificadorApellido = False
-            verificadorNombre = False
-            verificadordni = False
+            verificadorApellido = 0
+            verificadorNombre = 0
+            verificadordni = 0
         elif opcion == 5:
-            if (
-                verificadorApellido == True
-                and verificadorNombre == True
-                and verificadordni == True
-            ):
-                verificador == True
+            verificador = verificadorApellido + verificadordni + verificadorNombre
+            if verificador == 3:
+                break
             else:
                 print("Aun quedan datos por completar")
         else:
