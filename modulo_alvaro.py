@@ -21,7 +21,7 @@ def registrarDatos():
         print("[5]Completar")
         print("-----------------")
         opcion = input("Seleccione una opcion: ")
-        if opcion == '1':
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
             for letra in escribirNombre:
@@ -41,7 +41,7 @@ def registrarDatos():
                         bandera = True
             nombre = escribirNombre
             verificadorNombre == True
-        elif opcion == '2':
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
             for letra in escribirApellido:
@@ -60,20 +60,20 @@ def registrarDatos():
                     else:
                         bandera = True
             apellido = escribirApellido
-        elif opcion == '3':
+        elif opcion == "3":
             print("Escriba su DNI")
             escribirDni = input()
             while escribirDni == "" or escribirDni.isnumeric() == False:
                 print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
             dni = escribirDni
-        elif opcion == '4':
+        elif opcion == "4":
             nombre = ""
             apellido = ""
             dni = ""
             verificadorNombre = False
-        elif opcion == '5':
-            if nombre == '' or apellido == '' or dni == '':
+        elif opcion == "5":
+            if nombre == "" or apellido == "" or dni == "":
                 print("Aun quedan datos por completar")
             else:
                 break
