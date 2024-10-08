@@ -1,3 +1,6 @@
+import time
+
+
 def comprarBoleto():
     destino = ""
     while True:
@@ -47,55 +50,78 @@ def comprarBoleto():
             break
 
         elif opcion == 1:
-            ...
-        elif opcion == 2:
-            ...
-        elif opcion == 3:
-            ...
-        elif opcion == 4:
-            ...
-        elif opcion == 5:
-            ...
-        elif opcion == 6:
-            ...
-        elif opcion == 7:
-            ...
-        elif opcion == 8:
-            ...
-        elif opcion == 9:
-            ...
-        elif opcion == 10:
-            ...
-        elif opcion == 11:
-            ...
-        elif opcion == 12:
-            ...
-        elif opcion == 13:
-            ...
-        elif opcion == 14:
-            ...
-        elif opcion == 15:
-            ...
-        elif opcion == 16:
-            ...
-        elif opcion == 17:
-            ...
-        elif opcion == 18:
-            ...
-        elif opcion == 19:
-            ...
-        elif opcion == 20:
-            ...
-        elif opcion == 21:
-            ...
-        elif opcion == 22:
-            ...
-        elif opcion == 23:
-            ...
-        elif opcion == 24:
-            ...
+            destino = "Buenos Aires"
 
+        elif opcion == 2:
+            destino = "Catamarca"
+
+        elif opcion == 3:
+            destino = "Chaco"
+
+        elif opcion == 4:
+            destino = "Chubut"
+
+        elif opcion == 5:
+            destino = "Ciudad Autónoma de Buenos Aires"
+
+        elif opcion == 6:
+            destino = "Córdoba"
+
+        elif opcion == 7:
+            destino = "Corrientes"
+
+        elif opcion == 8:
+            destino = "Entre Rios"
+
+        elif opcion == 9:
+            destino = "Formosa"
+
+        elif opcion == 10:
+            destino = "Jujuy"
+
+        elif opcion == 11:
+            destino = "La Pampa"
+
+        elif opcion == 12:
+            destino = "La Rioja"
+
+        elif opcion == 13:
+            destino = "Mendoza"
+
+        elif opcion == 14:
+            destino = "Misiones"
+
+        elif opcion == 15:
+            destino = "Neuquén"
+
+        elif opcion == 16:
+            destino = "Río Negro"
+
+        elif opcion == 17:
+            destino = "Salta"
+
+        elif opcion == 18:
+            destino = "San Juan"
+
+        elif opcion == 19:
+            destino = "San Luis"
+
+        elif opcion == 20:
+            destino = "Santa Cruz"
+
+        elif opcion == 21:
+            destino = "Santa Fe"
+
+        elif opcion == 22:
+            destino = "Santiago del Estero"
+
+        elif opcion == 23:
+            destino = "Tierra del Fuego"
+
+        elif opcion == 24:
+            destino = "Tucumán"
     return
 
-if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
+
+if __name__ == "__main__":  # Para no ejecutar la función al importar el módulo
     comprarBoleto()
