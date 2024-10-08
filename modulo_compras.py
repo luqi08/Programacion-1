@@ -4,7 +4,7 @@ import time
 def comprarBoleto():
     destino = ""
     while True:
-        destinos = 24
+        opciones = 25
         print()
         print("---------------------------")
         print("DESTINO                    ")
@@ -38,6 +38,13 @@ def comprarBoleto():
         print()
 
         opcion = input("Seleccione un destino: ")
+        if opcion in [
+            str(i) for i in range(0, opciones)
+        ]:  # Sólo continua si se elije una opcion de menú válida
+            break
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+        print()
 
         if opcion == 0:
             break
