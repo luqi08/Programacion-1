@@ -99,12 +99,12 @@ def eliminarPasajero(pasajeros):
         opcion = input("Seleccione una opcion")
         if opcion == "1":
             print("Coloque el DNI del pasajero a eliminar")
-            dni = input("DNI: ")
+            dni = int(input("DNI: "))
             if dni in pasajeros == True:
                 verificador = True
-            while dni != "" or dni.isnumeric == False or verificador == False:
+            while dni.isnumeric == False or verificador == False:
                 print("Ese no es un dni posible")
-                dni = input("Intentelo nuevamente: ")
+                dni = int(input("Intentelo nuevamente: "))
                 if dni in pasajeros == True:
                     verificador = True
             print(
