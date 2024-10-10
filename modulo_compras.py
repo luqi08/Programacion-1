@@ -1,7 +1,10 @@
-import time
+import time, modulo_alvaro, modulo_facu
 
 
-def comprarBoleto():
+def comprarBoleto(pasajeros: dict) -> dict:
+    """
+    elegir destino -> elegir fecha disponible -> elegir asiento disponible -> registrar datos personales
+    """
     destino = ""
     while True:
         opciones = 25
@@ -124,6 +127,8 @@ def comprarBoleto():
         else:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
+    modulo_alvaro.registrarDatos(pasajeros)
+
     return
 
 

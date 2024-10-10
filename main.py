@@ -344,8 +344,7 @@ def main():
             exit()  # También puede ser sys.exit() para lo cual hay que importar el módulo sys
 
         elif opcion == "1":  # Comprar Boleto
-            modulo_compras.comprarBoleto()
-            modulo_alvaro.registrarDatos(pasajeros)
+            modulo_compras.comprarBoleto(pasajeros)
 
         elif opcion == "2":  # Modificar Boleto
             print()
