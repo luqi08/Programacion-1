@@ -1,7 +1,59 @@
 # Estructura de Datos
+pasajeros = {"dni": {"nombre": str, "Apellido": str}}
 
-pasajeros = {"dni": "Nombre Apellido"}
-pasajes = {"Numero de Pasaje": {"clase": "", "asiento": "", "dni": int}}
+pasajes = {"Numero de Pasaje": {"clase": str, "asiento": str, "dni": int}}
+
+aviones = {
+    "modelo": {
+        "Matricula": str,
+        "Asientos": {"primera": int, "economica": int},
+    }
+}
+
+vuelos = {
+    "Numero de Vuelo": {
+        "Fecha": "dd/mm/yyyy | hh:mm",
+        "Origen": str,
+        "Destino": str,
+        "Avion": "Matricula de Avion",
+    }
+}
+
+
+# PRECARGADOS
+pasajeros = {  # 30 Pasajeros precargados
+    47307151: {"nombre": "Juan", "apellido": "Perez"},
+    40215863: {"nombre": "Maria", "apellido": "Gomez"},
+    38901453: {"nombre": "Carlos", "apellido": "Lopez"},
+    42758963: {"nombre": "Ana", "apellido": "Martinez"},
+    39456821: {"nombre": "Jose", "apellido": "Rodriguez"},
+    41874529: {"nombre": "Laura", "apellido": "Fernandez"},
+    40125678: {"nombre": "Sofia", "apellido": "Garcia"},
+    38501452: {"nombre": "Diego", "apellido": "Sanchez"},
+    42896532: {"nombre": "Camila", "apellido": "Diaz"},
+    41236547: {"nombre": "Martin", "apellido": "Gonzalez"},
+    43985621: {"nombre": "Lucia", "apellido": "Romero"},
+    39874512: {"nombre": "Mateo", "apellido": "Castro"},
+    41798543: {"nombre": "Julieta", "apellido": "Suarez"},
+    43652189: {"nombre": "Lucas", "apellido": "Mendez"},
+    41327856: {"nombre": "Emilia", "apellido": "Vega"},
+    42789654: {"nombre": "Nicolas", "apellido": "Cabrera"},
+    39452187: {"nombre": "Valentina", "apellido": "Silva"},
+    42985612: {"nombre": "Federico", "apellido": "Molina"},
+    40312654: {"nombre": "Agustina", "apellido": "Rios"},
+    41985463: {"nombre": "Tomas", "apellido": "Ortega"},
+    41258743: {"nombre": "Milagros", "apellido": "Ibarra"},
+    43625489: {"nombre": "Gabriel", "apellido": "Reyes"},
+    39874532: {"nombre": "Sol", "apellido": "Moreno"},
+    42987145: {"nombre": "Benjamin", "apellido": "Paz"},
+    40541236: {"nombre": "Martina", "apellido": "Campos"},
+    41896325: {"nombre": "Sebastian", "apellido": "Soto"},
+    42365471: {"nombre": "Bianca", "apellido": "Villalba"},
+    43852147: {"nombre": "Maximiliano", "apellido": "Aguilar"},
+    40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
+    42589647: {"nombre": "Leandro", "apellido": "Navarro"},
+}
+
 
 aviones = {
     "Boeing747-800": {
@@ -45,14 +97,7 @@ aviones = {
         "Asientos": {"primera": 28, "economica": 150},
     },
 }
-vuelos = {
-    "Numero de Vuelo": {
-        "Fecha": "dd/mm/yyyy | hh:mm",
-        "Origen": "",
-        "Destino": "",
-        "Avion": "Matricula de Avion",
-    }
-}
+
 
 vuelos = {
     # Día 1 - Lunes

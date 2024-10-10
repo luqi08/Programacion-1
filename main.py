@@ -314,17 +314,19 @@ def main():
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
     while True:
-        opciones = 6
+        opciones = 7
         while True:
             print()
             print("---------------------------")
             print("MENÚ DEL SISTEMA           ")
             print("---------------------------")
             print("[1] Comprar Boleto")
-            print("[2] Eliminar Pasajero")
+            print("[2] Modificar Boleto")
             print("[3] Cancelar Boleto")
-            print("[4] Modificar Pasajero")
-            print("[5] Listar pasajeros")
+            print("---------------------------")
+            print("[4] Eliminar Pasajero")
+            print("[5] Modificar Pasajero")
+            print("[6] Listar pasajeros")
             print("---------------------------")
             print("[0] Salir del programa")
             print()
@@ -345,23 +347,26 @@ def main():
             modulo_compras.comprarBoleto()
             modulo_alvaro.registrarDatos(pasajeros)
 
-        elif opcion == "2":  # Eliminar Pasajero
-            print()
-            print("Ingrese el número de boleto: ")
-            modulo_alvaro.eliminarPasajero(pasajeros)
-
-        elif opcion == "3":  # Modificar
+        elif opcion == "2":  # Modificar Boleto
             print()
             print("Ingrese el número de boleto: ")
             modulo_facu.modificarPasaje()
 
-        elif opcion == "4":  # Opción 3
+        elif opcion == "3":  # Cancelar Boleto
+            ...
+
+        elif opcion == "4":  # Eliminar Pasajero
+            print()
+            print("Ingrese el número de boleto: ")
+            modulo_alvaro.eliminarPasajero(pasajeros)
+
+        elif opcion == "5":  # Opción 3
             print()
             print("Ingrese el número de boleto: ")
             modificado = int(input("INGRESE DNI: "))
             modulo_facu.modificarPasajero(pasajeros, modificado)
 
-        elif opcion == "5":  # Opción 3
+        elif opcion == "6":  # Opción 3
             print()
             modulo_facu.listarPasajeros(pasajeros)
 
