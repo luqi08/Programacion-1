@@ -30,48 +30,49 @@ def main():
     # -------------------------------------------------
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
-    aviones = {  # 10 Aviones
-        "Boeing747-800": {
-            "Matricula": "LV-ABC",
-            "Asientos": {"primera": 20, "economica": 162},
-        },
-        "Boeing747-800": {
-            "Matricula": "LV-BRD",
-            "Asientos": {"primera": 20, "economica": 162},
-        },
-        "Boeing747-800": {
-            "Matricula": "LV-CFT",
-            "Asientos": {"primera": 20, "economica": 162},
-        },
-        "Boeing747-800": {
-            "Matricula": "LV-DRT",
-            "Asientos": {"primera": 20, "economica": 162},
-        },
-        "Boeing747-800": {
-            "Matricula": "LV-EFP",
-            "Asientos": {"primera": 20, "economica": 162},
-        },
-        "AirbusA320Neo": {
-            "Matricula": "LV-GHT",
-            "Asientos": {"primera": 28, "economica": 150},
-        },
-        "AirbusA320Neo": {
-            "Matricula": "LV-HJK",
-            "Asientos": {"primera": 28, "economica": 150},
-        },
-        "AirbusA320Neo": {
-            "Matricula": "LV-JLM",
-            "Asientos": {"primera": 28, "economica": 150},
-        },
-        "AirbusA320Neo": {
-            "Matricula": "LV-KRS",
-            "Asientos": {"primera": 28, "economica": 150},
-        },
-        "AirbusA320Neo": {
-            "Matricula": "LV-LPQ",
-            "Asientos": {"primera": 28, "economica": 150},
-        },
-    }
+    aviones = {
+    "LV-ABC": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-BRD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-CFT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-DRT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-EFP": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-GHT": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-HJK": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-JLM": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-KRS": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-LPQ": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+}
+
 
     pasajeros = {  # 30 Pasajeros precargados
         47307151: {"nombre": "Juan", "apellido": "Perez"},
