@@ -1,7 +1,7 @@
 import time, modulo_alvaro, modulo_facu
 
 
-def comprarBoleto(pasajeros: dict) -> dict:
+def comprarPasaje(pasajeros: dict) -> dict:
     """
     elegir destino -> elegir fecha disponible -> elegir asiento disponible -> registrar datos personales
     """
