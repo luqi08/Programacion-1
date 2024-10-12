@@ -98,7 +98,7 @@ def registrarDatos(pasajeros):
     return
 
 
-def eliminarPasajero(pasajeros):
+def eliminarPasaje(pasajeros):
     """
     Elimina la información de un pasajero del sistema mediante su DNI, verificando
     previamente si el pasajero existe en el diccionario de pasajeros.
