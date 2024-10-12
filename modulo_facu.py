@@ -1,22 +1,26 @@
-#FUNCIONES
+# FUNCIONES
 """FALTA FUNCION PARA CAMBIAR DE CLASE"""
-def crearMatriz(filas,columnas,relleno):
+
+
+def crearMatriz(filas, columnas, relleno):
     return [[relleno] * columnas for fila in range(filas)]
 
+
 def letraNumero(letra):
-    if letra == 'A':
+    if letra == "A":
         letra = 0
-    elif letra == 'B':
+    elif letra == "B":
         letra = 1
-    elif letra == 'C':
+    elif letra == "C":
         letra = 2
-    elif letra == 'D':
+    elif letra == "D":
         letra = 3
-    elif letra == 'E':
+    elif letra == "E":
         letra = 4
-    elif letra == 'F':
+    elif letra == "F":
         letra = 5
     return letra
+
 
 def mostrarMatriz(matriz):
     longitud = len(matriz[0])
@@ -30,12 +34,14 @@ def mostrarMatriz(matriz):
         letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
         print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
         if indice == medio - 1:
-            print('PASILLO'.center(longitud * 3 + 1, '='))
-    print('PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA')
+            print("PASILLO".center(longitud * 3 + 1, "="))
+    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
+
 
 def mostrarPasaje(codigoPasaje):
     for clave, valor in pasajes[codigoPasaje].items():
-        print(f'{clave}: {valor}'.title())
+        print(f"{clave}: {valor}".title())
+
 
 def cambiarAsiento(codigoPasaje):
     longitud = len(matriz[0])
@@ -44,93 +50,98 @@ def cambiarAsiento(codigoPasaje):
         letra = chr(65 + indice)
         listaLetras.append(letra)
     while True:
-        filaAsiento = input('SELECCIONE LETRA (A,B,C,ETC.): ')
+        filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
         if filaAsiento.capitalize() not in listaLetras:
-            print(f'{filaAsiento} NO ESTÁ EN EL RANGO')
+            print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
         else:
             break
     while True:
-        filaColumna = int(input('SELECCIONE NUMERO (1,2,3,ETC.): '))
+        filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
         if filaColumna < 1 or filaColumna > longitud:
-            print(f'{filaColumna} NO ESTÁ EN EL RANGO')
+            print(f"{filaColumna} NO ESTÁ EN EL RANGO")
         else:
             break
-    pasajes[codigoPasaje]['asiento'] = filaAsiento.capitalize() + str(filaColumna)
+    pasajes[codigoPasaje]["asiento"] = filaAsiento.capitalize() + str(filaColumna)
     filaAsiento = letraNumero(filaAsiento.capitalize())
     matriz[filaAsiento][filaColumna - 1] = 1
 
+
 def modificarPasaje(pasajes):
     while True:
-        codigoPasaje = int(input('INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: '))
+        codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
         if codigoPasaje == 2:
             exit()
         elif codigoPasaje not in pasajes:
-            print(f'SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...')
+            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
         else:
-            print('--------------------------')
+            print("--------------------------")
             mostrarPasaje(codigoPasaje)
-            print('--------------------------')
+            print("--------------------------")
             while True:
-                print('[1] CAMBIAR ASIENTO')
-                print('[2] SALIR')
-                opcion = int(input('SELECCIONE UNA OPCION: '))
+                print("[1] CAMBIAR ASIENTO")
+                print("[2] SALIR")
+                opcion = int(input("SELECCIONE UNA OPCION: "))
                 if opcion == 1:
                     print()
-                    print(f'ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}')
+                    print(f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}")
                     mostrarMatriz(matriz)
                     cambiarAsiento(codigoPasaje)
                     print()
-                    print(f'NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}')
+                    print(f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}")
                     mostrarMatriz(matriz)
                     break
                 elif opcion == 2:
                     exit()
                 else:
-                    print('INGRESE UN VALOR EN EL RANGO')
+                    print("INGRESE UN VALOR EN EL RANGO")
             break
 
-#MAIN
-pasajes = {000000: {'avion': 4523452, "clase": "primera", "asiento": "G8", "pasajero": 2354323}}
-vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", 'destino': 'eze'}}
-aviones = {"modelo": 'Boeing747'}
 
-matriz = crearMatriz(4,30,0)
+# MAIN
+pasajes = {
+    000000: {"avion": 4523452, "clase": "primera", "asiento": "G8", "pasajero": 2354323}
+}
+vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", "destino": "eze"}}
+aviones = {"modelo": "Boeing747"}
+
+matriz = crearMatriz(4, 30, 0)
 
 # if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
 #     modificarPasaje(pasajes)
 
 pasajeros = {
-    47307151: {'nombre': 'Juan', 'apellido': 'Perez'},
-    40215863: {'nombre': 'Maria', 'apellido': 'Gomez'},
-    38901453: {'nombre': 'Carlos', 'apellido': 'Lopez'},
-    42758963: {'nombre': 'Ana', 'apellido': 'Martinez'},
-    39456821: {'nombre': 'Jose', 'apellido': 'Rodriguez'},
-    41874529: {'nombre': 'Laura', 'apellido': 'Fernandez'},
-    40125678: {'nombre': 'Sofia', 'apellido': 'Garcia'},
-    38501452: {'nombre': 'Diego', 'apellido': 'Sanchez'},
-    42896532: {'nombre': 'Camila', 'apellido': 'Diaz'},
-    41236547: {'nombre': 'Martin', 'apellido': 'Gonzalez'},
-    43985621: {'nombre': 'Lucia', 'apellido': 'Romero'},
-    39874512: {'nombre': 'Mateo', 'apellido': 'Castro'},
-    41798543: {'nombre': 'Julieta', 'apellido': 'Suarez'},
-    43652189: {'nombre': 'Lucas', 'apellido': 'Mendez'},
-    41327856: {'nombre': 'Emilia', 'apellido': 'Vega'},
-    42789654: {'nombre': 'Nicolas', 'apellido': 'Cabrera'},
-    39452187: {'nombre': 'Valentina', 'apellido': 'Silva'},
-    42985612: {'nombre': 'Federico', 'apellido': 'Molina'},
-    40312654: {'nombre': 'Agustina', 'apellido': 'Rios'},
-    41985463: {'nombre': 'Tomas', 'apellido': 'Ortega'},
-    41258743: {'nombre': 'Milagros', 'apellido': 'Ibarra'},
-    43625489: {'nombre': 'Gabriel', 'apellido': 'Reyes'},
-    39874532: {'nombre': 'Sol', 'apellido': 'Moreno'},
-    42987145: {'nombre': 'Benjamin', 'apellido': 'Paz'},
-    40541236: {'nombre': 'Martina', 'apellido': 'Campos'},
-    41896325: {'nombre': 'Sebastian', 'apellido': 'Soto'},
-    42365471: {'nombre': 'Bianca', 'apellido': 'Villalba'},
-    43852147: {'nombre': 'Maximiliano', 'apellido': 'Aguilar'},
-    40215698: {'nombre': 'Florencia', 'apellido': 'Pereyra'},
-    42589647: {'nombre': 'Leandro', 'apellido': 'Navarro'}
+    47307151: {"nombre": "Juan", "apellido": "Perez"},
+    40215863: {"nombre": "Maria", "apellido": "Gomez"},
+    38901453: {"nombre": "Carlos", "apellido": "Lopez"},
+    42758963: {"nombre": "Ana", "apellido": "Martinez"},
+    39456821: {"nombre": "Jose", "apellido": "Rodriguez"},
+    41874529: {"nombre": "Laura", "apellido": "Fernandez"},
+    40125678: {"nombre": "Sofia", "apellido": "Garcia"},
+    38501452: {"nombre": "Diego", "apellido": "Sanchez"},
+    42896532: {"nombre": "Camila", "apellido": "Diaz"},
+    41236547: {"nombre": "Martin", "apellido": "Gonzalez"},
+    43985621: {"nombre": "Lucia", "apellido": "Romero"},
+    39874512: {"nombre": "Mateo", "apellido": "Castro"},
+    41798543: {"nombre": "Julieta", "apellido": "Suarez"},
+    43652189: {"nombre": "Lucas", "apellido": "Mendez"},
+    41327856: {"nombre": "Emilia", "apellido": "Vega"},
+    42789654: {"nombre": "Nicolas", "apellido": "Cabrera"},
+    39452187: {"nombre": "Valentina", "apellido": "Silva"},
+    42985612: {"nombre": "Federico", "apellido": "Molina"},
+    40312654: {"nombre": "Agustina", "apellido": "Rios"},
+    41985463: {"nombre": "Tomas", "apellido": "Ortega"},
+    41258743: {"nombre": "Milagros", "apellido": "Ibarra"},
+    43625489: {"nombre": "Gabriel", "apellido": "Reyes"},
+    39874532: {"nombre": "Sol", "apellido": "Moreno"},
+    42987145: {"nombre": "Benjamin", "apellido": "Paz"},
+    40541236: {"nombre": "Martina", "apellido": "Campos"},
+    41896325: {"nombre": "Sebastian", "apellido": "Soto"},
+    42365471: {"nombre": "Bianca", "apellido": "Villalba"},
+    43852147: {"nombre": "Maximiliano", "apellido": "Aguilar"},
+    40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
+    42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
+
 
 def modificarPasajero(pasajeros: dict, dni: int):
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -145,7 +156,7 @@ def modificarPasajero(pasajeros: dict, dni: int):
         print("[5]Completar")
         print("-----------------")
         opcion = input("Seleccione una opcion: ")
-        if opcion == '1':
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
             for letra in escribirNombre:
@@ -163,9 +174,9 @@ def modificarPasajero(pasajeros: dict, dni: int):
                         break
                     else:
                         bandera = True
-            pasajeros[dni]['nombre'] = escribirNombre
+            pasajeros[dni]["nombre"] = escribirNombre
             verificadorNombre == True
-        elif opcion == '2':
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
             for letra in escribirApellido:
@@ -183,15 +194,19 @@ def modificarPasajero(pasajeros: dict, dni: int):
                         break
                     else:
                         bandera = True
-            pasajeros[dni]['apellido'] = escribirApellido
-        elif opcion == '3':
-            print('El DNI no puede modificarse')
-        elif opcion == '4':
-            pasajeros[dni]['nombre'] = ""
-            pasajeros[dni]['apellido'] = ""
+            pasajeros[dni]["apellido"] = escribirApellido
+        elif opcion == "3":
+            print("El DNI no puede modificarse")
+        elif opcion == "4":
+            pasajeros[dni]["nombre"] = ""
+            pasajeros[dni]["apellido"] = ""
             verificadorNombre = False
-        elif opcion == '5':
-            if pasajeros[dni]['nombre'] == '' or pasajeros[dni]['apellido'] == '' or dni == '':
+        elif opcion == "5":
+            if (
+                pasajeros[dni]["nombre"] == ""
+                or pasajeros[dni]["apellido"] == ""
+                or dni == ""
+            ):
                 print("Aun quedan datos por completar")
             else:
                 break
@@ -205,6 +220,7 @@ def modificarPasajero(pasajeros: dict, dni: int):
     print("----------------")
     print("Pasajero Modificado Correctamente")
 
+
 def listarPasajeros(pasajeros: dict):
     for dni, datos in pasajeros.items():
-        print(f'DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}')
+        print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
