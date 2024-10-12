@@ -1,3 +1,4 @@
+#Precarga de aviones
 aviones = {
 "LV-ABC": {
     "modelo": "Boeing747-800",
