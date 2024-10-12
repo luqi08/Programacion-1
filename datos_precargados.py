@@ -1,49 +1,49 @@
-#Precarga de aviones
+# Precarga de aviones
 aviones = {
-"LV-ABC": {
-    "modelo": "Boeing747-800",
-    "Asientos": {"primera": 20, "economica": 162},
-},
-"LV-BRD": {
-    "modelo": "Boeing747-800",
-    "Asientos": {"primera": 20, "economica": 162},
-},
-"LV-CFT": {
-    "modelo": "Boeing747-800",
-    "Asientos": {"primera": 20, "economica": 162},
-},
-"LV-DRT": {
-    "modelo": "Boeing747-800",
-    "Asientos": {"primera": 20, "economica": 162},
-},
-"LV-EFP": {
-    "modelo": "Boeing747-800",
-    "Asientos": {"primera": 20, "economica": 162},
-},
-"LV-GHT": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": {"primera": 28, "economica": 150},
-},
-"LV-HJK": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": {"primera": 28, "economica": 150},
-},
-"LV-JLM": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": {"primera": 28, "economica": 150},
-},
-"LV-KRS": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": {"primera": 28, "economica": 150},
-},
-"LV-LPQ": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": {"primera": 28, "economica": 150},
-},
+    "LV-ABC": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-BRD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-CFT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-DRT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-EFP": {
+        "modelo": "Boeing747-800",
+        "Asientos": {"primera": 20, "economica": 162},
+    },
+    "LV-GHT": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-HJK": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-JLM": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-KRS": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
+    "LV-LPQ": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {"primera": 28, "economica": 150},
+    },
 }
 
 
-#Precarga de pasajeros
+# Precarga de pasajeros
 pasajeros = {
     47307151: {"nombre": "Juan", "apellido": "Perez"},
     40215863: {"nombre": "Maria", "apellido": "Gomez"},
@@ -77,7 +77,7 @@ pasajeros = {
     42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
 
-#Precarga de vuelos
+# Precarga de vuelos
 vuelos = {
     # Día 1 - Lunes
     "VU001": {
