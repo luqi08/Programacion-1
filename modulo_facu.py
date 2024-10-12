@@ -14,6 +14,7 @@ def crearMatriz(filas, columnas, relleno):
     """   
     return [[relleno] * columnas for fila in range(filas)]
 
+
 def letraNumero(letra):
     """
     Convierte una letra en su correspondiente número para indexación de matriz.
@@ -26,15 +27,15 @@ def letraNumero(letra):
     """
     if letra == 'A':
         letra = 0
-    elif letra == 'B':
+    elif letra == "B":
         letra = 1
-    elif letra == 'C':
+    elif letra == "C":
         letra = 2
-    elif letra == 'D':
+    elif letra == "D":
         letra = 3
-    elif letra == 'E':
+    elif letra == "E":
         letra = 4
-    elif letra == 'F':
+    elif letra == "F":
         letra = 5
     return letra
 
@@ -90,18 +91,18 @@ def cambiarAsiento(codigoPasaje, matriz):
         letra = chr(65 + indice)
         listaLetras.append(letra)
     while True:
-        filaAsiento = input('SELECCIONE LETRA (A,B,C,ETC.): ')
+        filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
         if filaAsiento.capitalize() not in listaLetras:
-            print(f'{filaAsiento} NO ESTÁ EN EL RANGO')
+            print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
         else:
             break
     while True:
-        filaColumna = int(input('SELECCIONE NUMERO (1,2,3,ETC.): '))
+        filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
         if filaColumna < 1 or filaColumna > longitud:
-            print(f'{filaColumna} NO ESTÁ EN EL RANGO')
+            print(f"{filaColumna} NO ESTÁ EN EL RANGO")
         else:
             break
-    pasajes[codigoPasaje]['asiento'] = filaAsiento.capitalize() + str(filaColumna)
+    pasajes[codigoPasaje]["asiento"] = filaAsiento.capitalize() + str(filaColumna)
     filaAsiento = letraNumero(filaAsiento.capitalize())
     matriz[filaAsiento][filaColumna - 1] = 1
     return
@@ -134,15 +135,15 @@ def modificarPasaje(pasajes):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = int(input('INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: '))
+        codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
         if codigoPasaje == 2:
             exit()
         elif codigoPasaje not in pasajes:
-            print(f'SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...')
+            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
         else:
-            print('--------------------------')
+            print("--------------------------")
             mostrarPasaje(codigoPasaje)
-            print('--------------------------')
+            print("--------------------------")
             while True:
                 print('[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE')
                 print('[2] CAMBIAR CLASE')
@@ -174,7 +175,7 @@ def modificarPasaje(pasajes):
                 elif opcion == 3:
                     exit()
                 else:
-                    print('INGRESE UN VALOR EN EL RANGO')
+                    print("INGRESE UN VALOR EN EL RANGO")
             break
 
 #MAIN
@@ -208,7 +209,7 @@ def modificarPasajero(pasajeros: dict, dni: int):
         print("[5]Completar")
         print("-----------------")
         opcion = input("Seleccione una opcion: ")
-        if opcion == '1':
+        if opcion == "1":
             print("Escriba su nombre.")
             escribirNombre = input()
             for letra in escribirNombre:
@@ -226,9 +227,9 @@ def modificarPasajero(pasajeros: dict, dni: int):
                         break
                     else:
                         bandera = True
-            pasajeros[dni]['nombre'] = escribirNombre
+            pasajeros[dni]["nombre"] = escribirNombre
             verificadorNombre == True
-        elif opcion == '2':
+        elif opcion == "2":
             print("Escriba su apellido")
             escribirApellido = input()
             for letra in escribirApellido:
@@ -246,15 +247,19 @@ def modificarPasajero(pasajeros: dict, dni: int):
                         break
                     else:
                         bandera = True
-            pasajeros[dni]['apellido'] = escribirApellido
-        elif opcion == '3':
-            print('El DNI no puede modificarse')
-        elif opcion == '4':
-            pasajeros[dni]['nombre'] = ""
-            pasajeros[dni]['apellido'] = ""
+            pasajeros[dni]["apellido"] = escribirApellido
+        elif opcion == "3":
+            print("El DNI no puede modificarse")
+        elif opcion == "4":
+            pasajeros[dni]["nombre"] = ""
+            pasajeros[dni]["apellido"] = ""
             verificadorNombre = False
-        elif opcion == '5':
-            if pasajeros[dni]['nombre'] == '' or pasajeros[dni]['apellido'] == '' or dni == '':
+        elif opcion == "5":
+            if (
+                pasajeros[dni]["nombre"] == ""
+                or pasajeros[dni]["apellido"] == ""
+                or dni == ""
+            ):
                 print("Aun quedan datos por completar")
             else:
                 break

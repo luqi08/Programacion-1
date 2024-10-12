@@ -4,8 +4,8 @@ pasajeros = {"dni": {"nombre": str, "Apellido": str}}
 pasajes = {"Numero de Pasaje": {"clase": str, "asiento": str, "dni": int}}
 
 aviones = {
-    "modelo": {
-        "Matricula": str,
+    "matricula": {
+        "modelo": str,
         "Asientos": {"primera": int, "economica": int},
     }
 }
@@ -54,49 +54,92 @@ pasajeros = {  # 30 Pasajeros precargados
     42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
 
-
 aviones = {
-    "Boeing747-800": {
-        "Matricula": "LV-ABC",
+    "LV-ABC": {
+        "modelo": "Boeing747-800",
         "Asientos": {"primera": 20, "economica": 162},
     },
-    "Boeing747-800": {
-        "Matricula": "LV-BRD",
+    "LV-BRD": {
+        "modelo": "Boeing747-800",
         "Asientos": {"primera": 20, "economica": 162},
     },
-    "Boeing747-800": {
-        "Matricula": "LV-CFT",
+    "LV-CFT": {
+        "modelo": "Boeing747-800",
         "Asientos": {"primera": 20, "economica": 162},
     },
-    "Boeing747-800": {
-        "Matricula": "LV-DRT",
+    "LV-DRT": {
+        "modelo": "Boeing747-800",
         "Asientos": {"primera": 20, "economica": 162},
     },
-    "Boeing747-800": {
-        "Matricula": "LV-EFP",
+    "LV-EFP": {
+        "modelo": "Boeing747-800",
         "Asientos": {"primera": 20, "economica": 162},
     },
-    "AirbusA320Neo": {
-        "Matricula": "LV-GHT",
+    "LV-GHT": {
+        "modelo": "AirbusA320Neo",
         "Asientos": {"primera": 28, "economica": 150},
     },
-    "AirbusA320Neo": {
-        "Matricula": "LV-HJK",
+    "LV-HJK": {
+        "modelo": "AirbusA320Neo",
         "Asientos": {"primera": 28, "economica": 150},
     },
-    "AirbusA320Neo": {
-        "Matricula": "LV-JLM",
+    "LV-JLM": {
+        "modelo": "AirbusA320Neo",
         "Asientos": {"primera": 28, "economica": 150},
     },
-    "AirbusA320Neo": {
-        "Matricula": "LV-KRS",
+    "LV-KRS": {
+        "modelo": "AirbusA320Neo",
         "Asientos": {"primera": 28, "economica": 150},
     },
-    "AirbusA320Neo": {
-        "Matricula": "LV-LPQ",
+    "LV-LPQ": {
+        "modelo": "AirbusA320Neo",
         "Asientos": {"primera": 28, "economica": 150},
     },
 }
+
+# VIEJO
+# aviones = {
+#     "Boeing747-800": {
+#         "Matricula": "LV-ABC",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-BRD",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-CFT",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-DRT",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-EFP",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-GHT",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-HJK",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-JLM",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-KRS",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-LPQ",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+# }
 
 
 vuelos = {
