@@ -44,7 +44,7 @@ aviones = {
 
 
 #Precarga de pasajeros
-pasajeros = {  # 30 Pasajeros precargados
+pasajeros = {
     47307151: {"nombre": "Juan", "apellido": "Perez"},
     40215863: {"nombre": "Maria", "apellido": "Gomez"},
     38901453: {"nombre": "Carlos", "apellido": "Lopez"},
