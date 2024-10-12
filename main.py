@@ -80,8 +80,7 @@ def main():
                 continue  # Volver al ciclo principal, no se termina el programa
 
             elif opcion_submenu == "1":  # Comprar Pasaje
-                modulo_compras.comprarPasaje(datos_precargados.pasajeros)
-                continue
+                dni = modulo_compras.comprarPasaje(datos_precargados.pasajeros)
 
             elif opcion_submenu == "2":  # Modificar Pasaje
                 print("Ingrese el número de boleto: ")

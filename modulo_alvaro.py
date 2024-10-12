@@ -95,7 +95,7 @@ def registrarDatos(pasajeros):
     print("----------------")
     pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
     print("Pasajero registrado")
-    return
+    return dni
 
 
 def eliminarPasaje(pasajeros):
