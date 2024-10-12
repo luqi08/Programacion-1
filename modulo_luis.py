@@ -1,7 +1,7 @@
 # Estructura de Datos
 pasajeros = {"dni": {"nombre": str, "Apellido": str}}
 
-pasajes = {"Numero de Pasaje": {"clase": str, "asiento": str, "dni": int}}
+pasajes = {"Numero de Pasaje": {"clase": str, "asiento": str, "dni": int, "vuelo": "Numero de Vuelo"}}
 
 aviones = {
     "matricula": {
