@@ -30,6 +30,8 @@ def main():
     # -------------------------------------------------
     # Inicialización de variables
     # ----------------------------------------------------------------------------------------------
+
+    # Precarga de aviones
     aviones = {  # 10 Aviones
         "Boeing747-800": {
             "Matricula": "LV-ABC",
@@ -73,6 +75,7 @@ def main():
         },
     }
 
+    #Precarga de pasajeros
     pasajeros = {  # 30 Pasajeros precargados
         47307151: {"nombre": "Juan", "apellido": "Perez"},
         40215863: {"nombre": "Maria", "apellido": "Gomez"},
@@ -106,6 +109,7 @@ def main():
         42589647: {"nombre": "Leandro", "apellido": "Navarro"},
     }
 
+    #Precarga de vuelos
     vuelos = {
         # Día 1 - Lunes
         "VU001": {

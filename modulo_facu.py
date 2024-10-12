@@ -1,9 +1,29 @@
 #FUNCIONES
 "ARREGLAR CREACION DE MATRICES AL USAR LA SEGUNDA OPCION DE CAMBIAR DE CLASE"
-def crearMatriz(filas,columnas,relleno):
+def crearMatriz(filas, columnas, relleno):
+    """
+    Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
+
+    Args:
+    - filas (int): Número de filas de la matriz.
+    - columnas (int): Número de columnas de la matriz.
+    - relleno (any): Valor con el que se llenará la matriz.
+
+    Returns:
+    - list: Matriz creada con las dimensiones y valores especificados.
+    """   
     return [[relleno] * columnas for fila in range(filas)]
 
 def letraNumero(letra):
+    """
+    Convierte una letra en su correspondiente número para indexación de matriz.
+
+    Args:
+    - letra (str): Letra del abecedario ('A'-'F').
+
+    Returns:
+    - int: Número correspondiente (0-5) para 'A'-'F'.
+    """
     if letra == 'A':
         letra = 0
     elif letra == 'B':
@@ -19,6 +39,14 @@ def letraNumero(letra):
     return letra
 
 def mostrarMatriz(matriz, pasaje, codigo):
+    """
+    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
+
+    Args:
+    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
+    - codigo (str): Código identificador del pasaje.
+    """
     longitud = len(matriz[0])
     ancho_columna = 2
     filas_totales = len(matriz)
@@ -35,12 +63,27 @@ def mostrarMatriz(matriz, pasaje, codigo):
         if indice == medio - 1:
             print('PASILLO'.center(longitud * 3 + 1, '='))
     print('PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA')
+    return
 
 def mostrarPasaje(codigoPasaje):
+    """
+    Muestra los detalles del pasaje especificado.
+
+    Args:
+    - codigoPasaje (str): Código identificador del pasaje.
+    """
     for clave, valor in pasajes[codigoPasaje].items():
         print(f'{clave}: {valor}'.title())
+    return
 
 def cambiarAsiento(codigoPasaje, matriz):
+    """
+    Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
+
+    Args:
+    - codigoPasaje (str): Código identificador del pasaje.
+    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    """
     longitud = len(matriz[0])
     listaLetras = []
     for indice, fila in enumerate(matriz):
@@ -61,8 +104,19 @@ def cambiarAsiento(codigoPasaje, matriz):
     pasajes[codigoPasaje]['asiento'] = filaAsiento.capitalize() + str(filaColumna)
     filaAsiento = letraNumero(filaAsiento.capitalize())
     matriz[filaAsiento][filaColumna - 1] = 1
+    return
 
 def esEjecutiva(pasajes, codigo):
+    """
+    Verifica si un asiento pertenece a la clase ejecutiva o no.
+
+    Args:
+    - pasajes (dict): Información sobre los pasajes y asientos ocupados.
+    - codigo (str): Código identificador del pasaje.
+
+    Returns:
+    - bool: True si el asiento es ejecutivo, False si no lo es.
+    """
     asiento = pasajes[codigo]['asiento']
     numero_asiento = int(asiento[1:])
     if numero_asiento < 5:
@@ -71,6 +125,14 @@ def esEjecutiva(pasajes, codigo):
         return False
 
 def modificarPasaje(pasajes):
+    """
+    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento 
+    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y 
+    solicita acciones al usuario.
+
+    Args:
+    - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
+    """
     while True:
         codigoPasaje = int(input('INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: '))
         if codigoPasaje == 2:
@@ -126,40 +188,14 @@ matrizEconomica = crearMatriz(4,4,0)
 # if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
 #     modificarPasaje(pasajes)
 
-pasajeros = {
-    47307151: {'nombre': 'Juan', 'apellido': 'Perez'},
-    40215863: {'nombre': 'Maria', 'apellido': 'Gomez'},
-    38901453: {'nombre': 'Carlos', 'apellido': 'Lopez'},
-    42758963: {'nombre': 'Ana', 'apellido': 'Martinez'},
-    39456821: {'nombre': 'Jose', 'apellido': 'Rodriguez'},
-    41874529: {'nombre': 'Laura', 'apellido': 'Fernandez'},
-    40125678: {'nombre': 'Sofia', 'apellido': 'Garcia'},
-    38501452: {'nombre': 'Diego', 'apellido': 'Sanchez'},
-    42896532: {'nombre': 'Camila', 'apellido': 'Diaz'},
-    41236547: {'nombre': 'Martin', 'apellido': 'Gonzalez'},
-    43985621: {'nombre': 'Lucia', 'apellido': 'Romero'},
-    39874512: {'nombre': 'Mateo', 'apellido': 'Castro'},
-    41798543: {'nombre': 'Julieta', 'apellido': 'Suarez'},
-    43652189: {'nombre': 'Lucas', 'apellido': 'Mendez'},
-    41327856: {'nombre': 'Emilia', 'apellido': 'Vega'},
-    42789654: {'nombre': 'Nicolas', 'apellido': 'Cabrera'},
-    39452187: {'nombre': 'Valentina', 'apellido': 'Silva'},
-    42985612: {'nombre': 'Federico', 'apellido': 'Molina'},
-    40312654: {'nombre': 'Agustina', 'apellido': 'Rios'},
-    41985463: {'nombre': 'Tomas', 'apellido': 'Ortega'},
-    41258743: {'nombre': 'Milagros', 'apellido': 'Ibarra'},
-    43625489: {'nombre': 'Gabriel', 'apellido': 'Reyes'},
-    39874532: {'nombre': 'Sol', 'apellido': 'Moreno'},
-    42987145: {'nombre': 'Benjamin', 'apellido': 'Paz'},
-    40541236: {'nombre': 'Martina', 'apellido': 'Campos'},
-    41896325: {'nombre': 'Sebastian', 'apellido': 'Soto'},
-    42365471: {'nombre': 'Bianca', 'apellido': 'Villalba'},
-    43852147: {'nombre': 'Maximiliano', 'apellido': 'Aguilar'},
-    40215698: {'nombre': 'Florencia', 'apellido': 'Pereyra'},
-    42589647: {'nombre': 'Leandro', 'apellido': 'Navarro'}
-}
-
 def modificarPasajero(pasajeros: dict, dni: int):
+    """
+    Permite modificar los datos de un pasajero identificado por su DNI.
+
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    - dni (int): DNI del pasajero que se desea modificar.
+    """
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     verificador = False
     while verificador == False:
@@ -231,7 +267,15 @@ def modificarPasajero(pasajeros: dict, dni: int):
     print(f"DNI: {dni}")
     print("----------------")
     print("Pasajero Modificado Correctamente")
+    return
 
 def listarPasajeros(pasajeros: dict):
+    """
+    Lista todos los pasajeros registrados junto con su DNI y nombre completo.
+
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    """
     for dni, datos in pasajeros.items():
         print(f'DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}')
+        return

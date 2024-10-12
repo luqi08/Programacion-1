@@ -133,4 +133,4 @@ def comprarPasaje(pasajeros: dict) -> dict:
 
 
 if __name__ == "__main__":  # Para no ejecutar la función al importar el módulo
-    comprarBoleto()
+    comprarPasaje()
