@@ -118,17 +118,20 @@ def eliminarPasaje(pasajeros):
             verificador = False
             print("Coloque el DNI del pasajero a eliminar")
             dni = int(input("DNI: "))
-            print(
-                "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
-            )
-            print("------------------")
-            print("[1] Eliminar pasajero")
-            print("[2] Volver al menu anterior")
-            print("------------------")
-            opcion = input()
-            if opcion == "1":
-                del pasajeros[int(dni)]
-                print(f"El pasajero {dni} ha sido eliminado")
+            if dni not in pasajeros:
+                print("Dicho dni no se encuentra registrado")
+            else:
+                print(
+                    "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
+                )
+                print("------------------")
+                print("[1] Eliminar pasajero")
+                print("[2] Volver al menu anterior")
+                print("------------------")
+                opcion = input()
+                if opcion == "1":
+                    del pasajeros[int(dni)]
+                    print(f"El pasajero {dni} ha sido eliminado")
         elif opcion == "2":
             break
         else:
