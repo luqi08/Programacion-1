@@ -6,8 +6,8 @@ airbusA320neoclaseEconomica = (28, 6)
 
 def registrarDatos(pasajeros):
     """
-    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se 
-    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos 
+    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
+    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
     ingresados son almacenados en el diccionario de pasajeros.
 
     Args:
@@ -93,14 +93,14 @@ def registrarDatos(pasajeros):
     print(f"Apellido: {apellido}")
     print(f"DNI: {dni}")
     print("----------------")
-    pasajeros[dni] = {'nombre': nombre, 'apellido': apellido}
-    print('Pasajero registrado')
+    pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
+    print("Pasajero registrado")
     return
 
 
 def eliminarPasajero(pasajeros):
     """
-    Elimina la información de un pasajero del sistema mediante su DNI, verificando 
+    Elimina la información de un pasajero del sistema mediante su DNI, verificando
     previamente si el pasajero existe en el diccionario de pasajeros.
 
     Args:
@@ -118,17 +118,6 @@ def eliminarPasajero(pasajeros):
             verificador = False
             print("Coloque el DNI del pasajero a eliminar")
             dni = int(input("DNI: "))
-            if dni in list(pasajeros.keys()) == True:
-                verificador = True
-            else:
-                verificador = False
-            while verificador == False:
-                print("Ese no es un dni posible")
-                dni = int(input("Intentelo nuevamente: "))
-                if dni in pasajeros == True:
-                    verificador = True
-                else:
-                    verificador = False
             print(
                 "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
             )
