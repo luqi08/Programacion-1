@@ -85,9 +85,9 @@ def main():
 
             elif opcion_submenu == "2":  # Modificar Pasaje
                 print("Ingrese el número de boleto: ")
-                modulo_facu.modificarPasaje()
+                modulo_facu.modificarPasaje(datos_precargados.pasajeros)
 
-            elif opcion_submenu == "3":
+            elif opcion_submenu == "3":  # Eliminar Pasaje
                 modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
 
         elif opcion == "2":  # SUBMENÚ PASAJEROS
@@ -113,12 +113,12 @@ def main():
                 continue  # Volver al ciclo principal
 
             elif opcion_submenu == "1":  # Listar Pasajeros
+                modulo_facu.listarPasajeros(datos_precargados.pasajeros)
+
+            elif opcion_submenu == "2":  # Modificar Pasajero
                 print("Ingrese el número de boleto: ")
                 modificado = int(input("INGRESE DNI: "))
                 modulo_facu.modificarPasajero(datos_precargados.pasajeros, modificado)
-
-            elif opcion_submenu == "2":  # Modificar Pasajero
-                modulo_facu.listarPasajeros(datos_precargados.pasajeros)
 
         elif opcion == "3":  # SUBMENÚ VUELOS
             while True:
