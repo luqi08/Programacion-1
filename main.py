@@ -88,7 +88,8 @@ def main():
                 modulo_facu.modificarPasaje()
 
             elif opcion_submenu == "3":
-                modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
+                modulo_alvaro.eliminarPasaje
+                (datos_precargados.pasajeros)
 
         elif opcion == "2":  # SUBMENÚ PASAJEROS
             while True:
