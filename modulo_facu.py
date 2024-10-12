@@ -1,5 +1,7 @@
-#FUNCIONES
+# FUNCIONES
 "ARREGLAR CREACION DE MATRICES AL USAR LA SEGUNDA OPCION DE CAMBIAR DE CLASE"
+
+
 def crearMatriz(filas, columnas, relleno):
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
@@ -11,7 +13,7 @@ def crearMatriz(filas, columnas, relleno):
 
     Returns:
     - list: Matriz creada con las dimensiones y valores especificados.
-    """   
+    """
     return [[relleno] * columnas for fila in range(filas)]
 
 
@@ -25,7 +27,7 @@ def letraNumero(letra):
     Returns:
     - int: Número correspondiente (0-5) para 'A'-'F'.
     """
-    if letra == 'A':
+    if letra == "A":
         letra = 0
     elif letra == "B":
         letra = 1
@@ -38,6 +40,7 @@ def letraNumero(letra):
     elif letra == "F":
         letra = 5
     return letra
+
 
 def mostrarMatriz(matriz, pasaje, codigo):
     """
@@ -62,9 +65,10 @@ def mostrarMatriz(matriz, pasaje, codigo):
         letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
         print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
         if indice == medio - 1:
-            print('PASILLO'.center(longitud * 3 + 1, '='))
-    print('PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA')
+            print("PASILLO".center(longitud * 3 + 1, "="))
+    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
+
 
 def mostrarPasaje(codigoPasaje):
     """
@@ -74,8 +78,9 @@ def mostrarPasaje(codigoPasaje):
     - codigoPasaje (str): Código identificador del pasaje.
     """
     for clave, valor in pasajes[codigoPasaje].items():
-        print(f'{clave}: {valor}'.title())
+        print(f"{clave}: {valor}".title())
     return
+
 
 def cambiarAsiento(codigoPasaje, matriz):
     """
@@ -107,6 +112,7 @@ def cambiarAsiento(codigoPasaje, matriz):
     matriz[filaAsiento][filaColumna - 1] = 1
     return
 
+
 def esEjecutiva(pasajes, codigo):
     """
     Verifica si un asiento pertenece a la clase ejecutiva o no.
@@ -118,17 +124,18 @@ def esEjecutiva(pasajes, codigo):
     Returns:
     - bool: True si el asiento es ejecutivo, False si no lo es.
     """
-    asiento = pasajes[codigo]['asiento']
+    asiento = pasajes[codigo]["asiento"]
     numero_asiento = int(asiento[1:])
     if numero_asiento < 5:
         return True
     else:
         return False
 
+
 def modificarPasaje(pasajes):
     """
-    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento 
-    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y 
+    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
+    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
     solicita acciones al usuario.
 
     Args:
@@ -145,13 +152,15 @@ def modificarPasaje(pasajes):
             mostrarPasaje(codigoPasaje)
             print("--------------------------")
             while True:
-                print('[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE')
-                print('[2] CAMBIAR CLASE')
-                print('[3] SALIR')
-                opcion = int(input('SELECCIONE UNA OPCION: '))
+                print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
+                print("[2] CAMBIAR CLASE")
+                print("[3] SALIR")
+                opcion = int(input("SELECCIONE UNA OPCION: "))
                 if opcion == 1:
                     print()
-                    print(f'ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}')
+                    print(
+                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                    )
                     if esEjecutiva(pasajes, codigoPasaje):
                         mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizEjecutiva)
@@ -159,35 +168,41 @@ def modificarPasaje(pasajes):
                         mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizEconomica)
                     print()
-                    print(f'NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}')
+                    print(
+                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                    )
                     break
                 elif opcion == 2:
                     while True:
-                        print('[1] ECONÓMICA')
-                        print('[2] EJECUTIVA')
-                        opcion = int(input('SELECCIONE UNA OPCION: '))
+                        print("[1] ECONÓMICA")
+                        print("[2] EJECUTIVA")
+                        opcion = int(input("SELECCIONE UNA OPCION: "))
                         if opcion == 1:
                             ...
                         elif opcion == 2:
                             ...
                         else:
-                            print('INGRESE UN VALOR EN EL RANGO')
+                            print("INGRESE UN VALOR EN EL RANGO")
                 elif opcion == 3:
                     exit()
                 else:
                     print("INGRESE UN VALOR EN EL RANGO")
             break
 
-#MAIN
-pasajes = {000000: {'avion': 4523452, "clase": "primera", "asiento": "D4", "pasajero": 2354323}}
-vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", 'destino': 'eze'}}
-aviones = {"modelo": 'Boeing747'}
 
-matrizEjecutiva = crearMatriz(6,30,0)
-matrizEconomica = crearMatriz(4,4,0)
+# MAIN
+pasajes = {
+    000000: {"avion": 4523452, "clase": "primera", "asiento": "D4", "pasajero": 2354323}
+}
+vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", "destino": "eze"}}
+aviones = {"modelo": "Boeing747"}
+
+matrizEjecutiva = crearMatriz(6, 30, 0)
+matrizEconomica = crearMatriz(4, 4, 0)
 
 # if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
 #     modificarPasaje(pasajes)
+
 
 def modificarPasajero(pasajeros: dict, dni: int):
     """
@@ -274,6 +289,7 @@ def modificarPasajero(pasajeros: dict, dni: int):
     print("Pasajero Modificado Correctamente")
     return
 
+
 def listarPasajeros(pasajeros: dict):
     """
     Lista todos los pasajeros registrados junto con su DNI y nombre completo.
@@ -282,5 +298,5 @@ def listarPasajeros(pasajeros: dict):
     - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
     """
     for dni, datos in pasajeros.items():
-        print(f'DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}')
+        print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
         return

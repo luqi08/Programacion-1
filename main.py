@@ -22,6 +22,7 @@ def preGenerarPasajes():
 def cancelarBoleto():
     return
 
+
 # ----------------------------------------------------------------------------------------------
 # CUERPO PRINCIPAL
 # ----------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ def main():
                 modulo_facu.modificarPasaje(datos_precargados.pasajes)
 
             elif opcion_submenu == "3":
-                ...
+                modulo_alvaro.eliminarPasajero(datos_precargados.pasajeros)
 
         elif opcion == "2":  # SUBMENÚ PASAJEROS
             while True:
@@ -182,7 +183,6 @@ def main():
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
-
 
 
 # Punto de entrada al programa
