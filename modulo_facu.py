@@ -213,20 +213,33 @@ def modificarPasajero(pasajeros: dict, dni: int):
     - dni (int): DNI del pasajero que se desea modificar.
     """
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-    verificador = False
-    while verificador == False:
+
+    # Verificar existencia DNI
+    while dni not in pasajeros:
+        print()
+        print(f"El DNI {dni} no se encuentra registrado")
+        print()
+        dni = int(input("Reingrese el DNI o [0] Para volver al Menú Principal: "))
+        if dni == 0:
+            return
+
+    copiaNombre = pasajeros[dni]["nombre"]
+    copiaApellido = pasajeros[dni]["apellido"]
+    copiaDNI = dni
+
+    while True:
         print("Ingrese sus datos")
         print("-----------------")
-        print(f"[1]Nombre: {pasajeros[dni]['nombre']}")
-        print(f"[2]Apellido: {pasajeros[dni]['apellido']}")
-        print(f"[3]DNI: {dni}")
-        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[5]Completar")
+        print(f"[1] Nombre: {pasajeros[dni]['nombre']}")
+        print(f"[2] Apellido: {pasajeros[dni]['apellido']}")
+        print(f"[3] DNI: {dni}")
+        print("[4] Guardar")
+        print("[5] Cancelar")
         print("-----------------")
         opcion = input("Seleccione una opcion: ")
+
         if opcion == "1":
-            print("Escriba su nombre.")
-            escribirNombre = input()
+            escribirNombre = input("Ingrese Nombre: ")
             for letra in escribirNombre:
                 if letra in prohibidos:
                     bandera = False
@@ -243,10 +256,9 @@ def modificarPasajero(pasajeros: dict, dni: int):
                     else:
                         bandera = True
             pasajeros[dni]["nombre"] = escribirNombre
-            verificadorNombre == True
+
         elif opcion == "2":
-            print("Escriba su apellido")
-            escribirApellido = input()
+            escribirApellido = input("Ingrese Apellido: ")
             for letra in escribirApellido:
                 if letra in prohibidos:
                     bandera = False
@@ -263,23 +275,22 @@ def modificarPasajero(pasajeros: dict, dni: int):
                     else:
                         bandera = True
             pasajeros[dni]["apellido"] = escribirApellido
+
         elif opcion == "3":
+            print()
             print("El DNI no puede modificarse")
+
         elif opcion == "4":
-            pasajeros[dni]["nombre"] = ""
-            pasajeros[dni]["apellido"] = ""
-            verificadorNombre = False
-        elif opcion == "5":
-            if (
-                pasajeros[dni]["nombre"] == ""
-                or pasajeros[dni]["apellido"] == ""
-                or dni == ""
-            ):
-                print("Aun quedan datos por completar")
-            else:
-                break
+            break
+
+        elif opcion == "5":  # Cancelar
+            pasajeros[dni]["nombre"] = copiaNombre
+            pasajeros[dni]["apellido"] = copiaApellido
+            break
+        
+
         else:
-            print("Esa opcion no existe")
+            print("OPCIÓN INVÁLIDA")
     print("Sus datos")
     print("----------------")
     print(f"Nombre: {pasajeros[dni]['nombre']}")

@@ -115,9 +115,8 @@ def main():
                 modulo_facu.listarPasajeros(datos_precargados.pasajeros)
 
             elif opcion_submenu == "2":  # Modificar Pasajero
-                print("Ingrese el número de boleto: ")
-                modificado = int(input("INGRESE DNI: "))
-                modulo_facu.modificarPasajero(datos_precargados.pasajeros, modificado)
+                dni = int(input("INGRESE DNI: "))
+                modulo_facu.modificarPasajero(datos_precargados.pasajeros, dni)
 
         elif opcion == "3":  # SUBMENÚ VUELOS
             while True:
