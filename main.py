@@ -45,19 +45,17 @@ def main():
             print()
 
             opcion = input("Seleccione una opción: ")
-            if opcion in [
-                str(i) for i in range(0, opciones)
-            ]:  # Sólo continua si se elije una opcion de menú válida
+            if opcion in [str(i) for i in range(0, opciones)]:
                 break
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
         print()
 
         if opcion == "0":  # Opción salir del programa
-            exit()
+            print("Saliendo del programa...")
+            break  # Salir del ciclo principal
 
-        elif opcion == "1":  # SUBMENÚ BOLETOS
-            opciones = 4
+        elif opcion == "1":  # SUBMENÚ PASAJES
             while True:
                 print()
                 print("---------------------------")
@@ -70,31 +68,27 @@ def main():
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
 
-                opcion = input("Seleccione una opción: ")
-                if opcion in [
-                    str(i) for i in range(0, opciones)
-                ]:  # Sólo continua si se elije una opcion de menú válida
+                opcion_submenu = input("Seleccione una opción: ")
+                if opcion_submenu in [str(i) for i in range(0, 4)]:
                     break
                 else:
                     input("Opción inválida. Presione ENTER para volver a seleccionar.")
             print()
 
-            if opcion == "0":
-                exit()
+            if opcion_submenu == "0":  # Volver al menú principal
+                continue  # Volver al ciclo principal, no se termina el programa
 
-            elif opcion == "1":  # Comprar Pasaje
+            elif opcion_submenu == "1":  # Comprar Pasaje
                 modulo_compras.comprarPasaje(datos_precargados.pasajeros)
 
-            elif opcion == "2":  # Modificar Pasaje
-                print()
+            elif opcion_submenu == "2":  # Modificar Pasaje
                 print("Ingrese el número de boleto: ")
                 modulo_facu.modificarPasaje()
 
-            elif opcion == "3":
+            elif opcion_submenu == "3":
                 ...
 
         elif opcion == "2":  # SUBMENÚ PASAJEROS
-            opciones = 3
             while True:
                 print()
                 print("---------------------------")
@@ -106,29 +100,25 @@ def main():
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
 
-                opcion = input("Seleccione una opción: ")
-                if opcion in [
-                    str(i) for i in range(0, opciones)
-                ]:  # Sólo continua si se elije una opcion de menú válida
+                opcion_submenu = input("Seleccione una opción: ")
+                if opcion_submenu in [str(i) for i in range(0, 3)]:
                     break
                 else:
                     input("Opción inválida. Presione ENTER para volver a seleccionar.")
             print()
 
-            if opcion == "0":
-                exit()
-            elif opcion == "1":  # Listar Pasajeros
-                print()
+            if opcion_submenu == "0":  # Volver al menú principal
+                continue  # Volver al ciclo principal
+
+            elif opcion_submenu == "1":  # Listar Pasajeros
                 print("Ingrese el número de boleto: ")
                 modificado = int(input("INGRESE DNI: "))
                 modulo_facu.modificarPasajero(datos_precargados.pasajeros, modificado)
 
-            elif opcion == "2":  # Modificar Pasajero
-                print()
+            elif opcion_submenu == "2":  # Modificar Pasajero
                 modulo_facu.listarPasajeros(datos_precargados.pasajeros)
 
         elif opcion == "3":  # SUBMENÚ VUELOS
-            opciones = 4
             while True:
                 print()
                 print("---------------------------")
@@ -141,31 +131,28 @@ def main():
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
 
-                opcion = input("Seleccione una opción: ")
-                if opcion in [
-                    str(i) for i in range(0, opciones)
-                ]:  # Sólo continua si se elije una opcion de menú válida
+                opcion_submenu = input("Seleccione una opción: ")
+                if opcion_submenu in [str(i) for i in range(0, 4)]:
                     break
                 else:
                     input("Opción inválida. Presione ENTER para volver a seleccionar.")
             print()
 
-            if opcion == "0":
-                exit()
+            if opcion_submenu == "0":  # Volver al menú principal
+                continue
 
-            elif opcion == "1":  # Listar Vuelos
+            elif opcion_submenu == "1":  # Listar Vuelos
                 ...
-            elif opcion == "2":  # Modificar Vuelo
+            elif opcion_submenu == "2":  # Modificar Vuelo
                 ...
-            elif opcion == "3":  # Eliminar Vuelo
+            elif opcion_submenu == "3":  # Eliminar Vuelo
                 ...
 
-        elif opcion == "4":  # SUBMENÚ VUELOS
-            opciones = 5
+        elif opcion == "4":  # SUBMENÚ AVIONES
             while True:
                 print()
                 print("---------------------------")
-                print("MENÚ AVIONES                ")
+                print("MENÚ AVIONES               ")
                 print("---------------------------")
                 print("[1] Registrar")
                 print("[2] Listar")
@@ -175,29 +162,28 @@ def main():
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
 
-                opcion = input("Seleccione una opción: ")
-                if opcion in [
-                    str(i) for i in range(0, opciones)
-                ]:  # Sólo continua si se elije una opcion de menú válida
+                opcion_submenu = input("Seleccione una opción: ")
+                if opcion_submenu in [str(i) for i in range(0, 5)]:
                     break
                 else:
                     input("Opción inválida. Presione ENTER para volver a seleccionar.")
             print()
 
-            if opcion == "0":
-                exit()
+            if opcion_submenu == "0":  # Volver al menú principal
+                continue
 
-            elif opcion == "1":  # Listar Aviones
+            elif opcion_submenu == "1":  # Registrar Avión
                 ...
-            elif opcion == "2":  # Listar Aviones
+            elif opcion_submenu == "2":  # Listar Aviones
                 ...
-            elif opcion == "3":  # Modificar Aviones
+            elif opcion_submenu == "3":  # Modificar Aviones
                 ...
-            elif opcion == "4":  # Eliminar Aviones
+            elif opcion_submenu == "4":  # Eliminar Aviones
                 ...
 
         input("\nPresione ENTER para volver al menú.")
         print("\n\n")
+
 
 
 # Punto de entrada al programa
