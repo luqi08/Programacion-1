@@ -351,9 +351,14 @@ def listarPasajes(pasajes, pasajeros):
         print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
     return
 
-import datos_precargados
-
 def eliminarPasajero(pasajeros, pasajes):
+    """
+    Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
+
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
     while True:
         dni = input("Ingrese DNI de pasajero para eliminar su información o [0] para salir: ")
         if dni == "0":
@@ -380,13 +385,20 @@ def eliminarPasajero(pasajeros, pasajes):
             
             # Eliminar su pasaje asociado
             eliminarPasaje(dni, pasajes)
-            return dni
         elif opcion == "2":
             break
         else:
             print("Ingrese una opción válida")
+    return
 
 def eliminarPasaje(dni, pasajes):
+    """
+    Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
+
+    Args:
+    - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
     for codigo, datos in list(pasajes.items()):
         if datos["dni"] == dni:
             del pasajes[codigo]
