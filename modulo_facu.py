@@ -382,9 +382,9 @@ def eliminarPasajero(pasajeros, pasajes):
             # Eliminar al pasajero
             del pasajeros[dni]
             print(f"El pasajero con DNI {dni} ha sido eliminado.")
-            
             # Eliminar su pasaje asociado
             eliminarPasaje(dni, pasajes)
+            return
         elif opcion == "2":
             break
         else:
