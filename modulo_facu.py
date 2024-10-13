@@ -347,5 +347,5 @@ def listarPasajes(pasajes, pasajeros):
     """
     for nPasaje, datos in pasajes.items():
         nombre = nombrePasajero(pasajeros, datos["dni"])
-        print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
+        print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
     return
