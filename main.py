@@ -39,7 +39,7 @@ def subMenuPasajes():
             print("[0] Volver al menú principal")
             print()
             opcion_submenu = input("Seleccione una opción: ")
-            if opcion_submenu in [str(i) for i in range(0, 4)]:
+            if opcion_submenu in [str(i) for i in range(0, opciones)]:
                 break
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -49,10 +49,8 @@ def subMenuPasajes():
 
         elif opcion_submenu == "1":  # Comprar Pasaje
             dni = modulo_compras.comprarPasaje(datos_precargados.pasajeros)
-        elif opcion_submenu == "2":  # Comprar Pasaje
-            modulo_facu.listarPasajes(
-                datos_precargados.pasajes, datos_precargados.pasajeros
-            )
+        elif opcion_submenu == "2":  # Listar Pasajes
+            modulo_facu.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
             continue
         elif opcion_submenu == "3":  # Modificar Pasaje
             print("Ingrese el número de boleto: ")
@@ -76,7 +74,7 @@ def subMenuPasajeros():
             print("[0] Volver al menú principal")
             print()
             opcion_submenu = input("Seleccione una opción: ")
-            if opcion_submenu in [str(i) for i in range(0, 3)]:
+            if opcion_submenu in [str(i) for i in range(0, opciones)]:
                 break
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -109,7 +107,7 @@ def subMenuVuelos():
             print("[0] Volver al menú principal")
             print()
             opcion_submenu = input("Seleccione una opción: ")
-            if opcion_submenu in [str(i) for i in range(0, 4)]:
+            if opcion_submenu in [str(i) for i in range(0, opciones)]:
                 break
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -145,7 +143,7 @@ def subMenuAviones():
             print("[0] Volver al menú principal")
             print()
             opcion_submenu = input("Seleccione una opción: ")
-            if opcion_submenu in [str(i) for i in range(0, 5)]:
+            if opcion_submenu in [str(i) for i in range(0, opciones)]:
                 break
             else:
                 input("Opción inválida. Presione ENTER para volver a seleccionar.")
