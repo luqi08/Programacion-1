@@ -46,18 +46,16 @@ def subMenuPasajes():
         print()
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal, no se termina el programa
-
         elif opcion_submenu == "1":  # Comprar Pasaje
             dni = modulo_compras.comprarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "2":  # Listar Pasajes
             modulo_facu.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
-            continue
         elif opcion_submenu == "3":  # Modificar Pasaje
             print("Ingrese el número de boleto: ")
             modulo_facu.modificarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasaje
             modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
-        return
+    return
 
 
 def subMenuPasajeros():
@@ -81,14 +79,12 @@ def subMenuPasajeros():
         print()
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal
-
         elif opcion_submenu == "1":  # Listar Pasajeros
             modulo_facu.listarPasajeros(datos_precargados.pasajeros)
-            continue
         elif opcion_submenu == "2":  # Modificar Pasajero
             dni = int(input("INGRESE DNI: "))
             modulo_facu.modificarPasajero(datos_precargados.pasajeros, dni)
-        return
+    return
 
 
 def subMenuVuelos():
@@ -114,12 +110,10 @@ def subMenuVuelos():
         print()
         if opcion_submenu == "0":  # Volver al menú principal
             break
-
         elif opcion_submenu == "1":  # Registrar Vuelos
             ...
         elif opcion_submenu == "2":  # Listar Vuelos
             modulo_facu.listarVuelos(datos_precargados.vuelos)
-            continue
         elif opcion_submenu == "3":  # Modificar Vuelo
             ...
         elif opcion_submenu == "4":  # Eliminar Vuelo
@@ -155,7 +149,6 @@ def subMenuAviones():
             ...
         elif opcion_submenu == "2":  # Listar Aviones
             modulo_facu.listarAviones(datos_precargados.aviones)
-            continue
         elif opcion_submenu == "3":  # Modificar Aviones
             ...
         elif opcion_submenu == "4":  # Eliminar Aviones
