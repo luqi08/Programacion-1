@@ -74,7 +74,7 @@ def registrarDatos(pasajeros):
             while escribirDni == "" or escribirDni.isnumeric() == False:
                 print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirDni = input("Intentelo nuevamente: ")
-            dni = escribirDni
+            dni = int(escribirDni)
         elif opcion == "4":
             nombre = ""
             apellido = ""
