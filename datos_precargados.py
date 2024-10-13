@@ -115,7 +115,7 @@ vuelos = {
     # Día 1 - Lunes
     "VU001": {
         "Fecha": "07/10/2024 | 06:00",
-        "Origen": "Ciudad Autónoma de Buenos Aires (CABA)",
+        "Origen": "Santa Fe",
         "Destino": "La Plata (Buenos Aires)",
         "Avion": "LV-ABC",
     },
