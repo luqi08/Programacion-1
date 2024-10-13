@@ -2,188 +2,8 @@
 pasajeros = {"dni": {"nombre": str, "Apellido": str}}
 
 pasajes = {
-    "123456789012345": {
-        "clase": "Economica",
-        "asiento": "12A",
-        "dni": 47307151,  # Juan Perez
-        "vuelo": "LV-ABC",
-    },
-    "123456789012346": {
-        "clase": "Primera",
-        "asiento": "2B",
-        "dni": 40215863,  # Maria Gomez
-        "vuelo": "LV-BRD",
-    },
-    "123456789012347": {
-        "clase": "Economica",
-        "asiento": "18C",
-        "dni": 38901453,  # Carlos Lopez
-        "vuelo": "LV-CFT",
-    },
-    "123456789012348": {
-        "clase": "Primera",
-        "asiento": "5A",
-        "dni": 42758963,  # Ana Martinez
-        "vuelo": "LV-DRT",
-    },
-    "123456789012349": {
-        "clase": "Economica",
-        "asiento": "22D",
-        "dni": 39456821,  # Jose Rodriguez
-        "vuelo": "LV-EFP",
-    },
-    "123456789012350": {
-        "clase": "Primera",
-        "asiento": "1A",
-        "dni": 41874529,  # Laura Fernandez
-        "vuelo": "LV-GHT",
-    },
-    "123456789012351": {
-        "clase": "Economica",
-        "asiento": "15C",
-        "dni": 40125678,  # Sofia Garcia
-        "vuelo": "LV-HJK",
-    },
-    "123456789012352": {
-        "clase": "Primera",
-        "asiento": "3A",
-        "dni": 38501452,  # Diego Sanchez
-        "vuelo": "LV-JLM",
-    },
-    "123456789012353": {
-        "clase": "Economica",
-        "asiento": "10B",
-        "dni": 42896532,  # Camila Diaz
-        "vuelo": "LV-KRS",
-    },
-    "123456789012354": {
-        "clase": "Economica",
-        "asiento": "17A",
-        "dni": 41236547,  # Martin Gonzalez
-        "vuelo": "LV-LPQ",
-    },
-    "123456789012355": {
-        "clase": "Primera",
-        "asiento": "4B",
-        "dni": 43985621,  # Lucia Romero
-        "vuelo": "LV-ABC",
-    },
-    "123456789012356": {
-        "clase": "Economica",
-        "asiento": "25D",
-        "dni": 39874512,  # Mateo Castro
-        "vuelo": "LV-BRD",
-    },
-    "123456789012357": {
-        "clase": "Economica",
-        "asiento": "21A",
-        "dni": 41798543,  # Julieta Suarez
-        "vuelo": "LV-CFT",
-    },
-    "123456789012358": {
-        "clase": "Primera",
-        "asiento": "2A",
-        "dni": 43652189,  # Lucas Mendez
-        "vuelo": "LV-DRT",
-    },
-    "123456789012359": {
-        "clase": "Economica",
-        "asiento": "30C",
-        "dni": 41327856,  # Emilia Vega
-        "vuelo": "LV-EFP",
-    },
-    "123456789012360": {
-        "clase": "Economica",
-        "asiento": "19B",
-        "dni": 42789654,  # Nicolas Cabrera
-        "vuelo": "LV-GHT",
-    },
-    "123456789012361": {
-        "clase": "Primera",
-        "asiento": "1C",
-        "dni": 39452187,  # Valentina Silva
-        "vuelo": "LV-HJK",
-    },
-    "123456789012362": {
-        "clase": "Economica",
-        "asiento": "27A",
-        "dni": 42985612,  # Federico Molina
-        "vuelo": "LV-JLM",
-    },
-    "123456789012363": {
-        "clase": "Economica",
-        "asiento": "14D",
-        "dni": 40312654,  # Agustina Rios
-        "vuelo": "LV-KRS",
-    },
-    "123456789012364": {
-        "clase": "Primera",
-        "asiento": "6A",
-        "dni": 41985463,  # Tomas Ortega
-        "vuelo": "LV-LPQ",
-    },
-    "123456789012365": {
-        "clase": "Economica",
-        "asiento": "12C",
-        "dni": 41258743,  # Milagros Ibarra
-        "vuelo": "LV-ABC",
-    },
-    "123456789012366": {
-        "clase": "Primera",
-        "asiento": "7B",
-        "dni": 43625489,  # Gabriel Reyes
-        "vuelo": "LV-BRD",
-    },
-    "123456789012367": {
-        "clase": "Economica",
-        "asiento": "24A",
-        "dni": 39874532,  # Sol Moreno
-        "vuelo": "LV-CFT",
-    },
-    "123456789012368": {
-        "clase": "Economica",
-        "asiento": "16D",
-        "dni": 42987145,  # Benjamin Paz
-        "vuelo": "LV-DRT",
-    },
-    "123456789012369": {
-        "clase": "Primera",
-        "asiento": "8A",
-        "dni": 40541236,  # Martina Campos
-        "vuelo": "LV-EFP",
-    },
-    "123456789012370": {
-        "clase": "Economica",
-        "asiento": "22B",
-        "dni": 41896325,  # Sebastian Soto
-        "vuelo": "LV-GHT",
-    },
-    "123456789012371": {
-        "clase": "Economica",
-        "asiento": "18A",
-        "dni": 42365471,  # Bianca Villalba
-        "vuelo": "LV-HJK",
-    },
-    "123456789012372": {
-        "clase": "Primera",
-        "asiento": "9C",
-        "dni": 43852147,  # Maximiliano Aguilar
-        "vuelo": "LV-JLM",
-    },
-    "123456789012373": {
-        "clase": "Economica",
-        "asiento": "26D",
-        "dni": 40215698,  # Florencia Pereyra
-        "vuelo": "LV-KRS",
-    },
-    "123456789012374": {
-        "clase": "Economica",
-        "asiento": "29B",
-        "dni": 42589647,  # Leandro Navarro
-        "vuelo": "LV-LPQ",
-    },
+    "pasaje": {"dni": int, "vuelo": str, "clase": str, "asiento": str}
 }
-
 
 aviones = {
     "matricula": {
@@ -235,6 +55,104 @@ pasajeros = {  # 30 Pasajeros precargados
     40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
     42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
+pasajes = {
+    "PA001": {"dni": 47307151, "vuelo": "VU001", "clase": "primera", "asiento": "A1"},
+    "PA002": {
+        "dni": 40215863,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "C12",
+    },
+    "PA003": {"dni": 38901453, "vuelo": "VU001", "clase": "primera", "asiento": "B3"},
+    "PA004": {
+        "dni": 42758963,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "D27",
+    },
+    "PA005": {"dni": 39456821, "vuelo": "VU001", "clase": "primera", "asiento": "C2"},
+    "PA006": {
+        "dni": 41874529,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A18",
+    },
+    "PA007": {"dni": 40125678, "vuelo": "VU001", "clase": "primera", "asiento": "D4"},
+    "PA008": {
+        "dni": 38501452,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "F30",
+    },
+    "PA009": {"dni": 42896532, "vuelo": "VU001", "clase": "primera", "asiento": "B1"},
+    "PA010": {
+        "dni": 41236547,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "E23",
+    },
+    "PA011": {"dni": 43985621, "vuelo": "VU001", "clase": "primera", "asiento": "A2"},
+    "PA012": {
+        "dni": 39874512,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "B19",
+    },
+    "PA013": {"dni": 41798543, "vuelo": "VU001", "clase": "primera", "asiento": "C1"},
+    "PA014": {
+        "dni": 43652189,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "D15",
+    },
+    "PA015": {"dni": 41327856, "vuelo": "VU001", "clase": "primera", "asiento": "D3"},
+    "PA016": {"dni": 42789654, "vuelo": "VU001", "clase": "economica", "asiento": "F9"},
+    "PA017": {"dni": 39452187, "vuelo": "VU001", "clase": "primera", "asiento": "B2"},
+    "PA018": {
+        "dni": 42985612,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A25",
+    },
+    "PA019": {"dni": 40312654, "vuelo": "VU001", "clase": "primera", "asiento": "C3"},
+    "PA020": {
+        "dni": 41985463,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "E11",
+    },
+    "PA021": {"dni": 41258743, "vuelo": "VU001", "clase": "primera", "asiento": "D2"},
+    "PA022": {
+        "dni": 43625489,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "C22",
+    },
+    "PA023": {"dni": 39874532, "vuelo": "VU001", "clase": "primera", "asiento": "A3"},
+    "PA024": {
+        "dni": 42987145,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "B10",
+    },
+    "PA025": {"dni": 40541236, "vuelo": "VU001", "clase": "primera", "asiento": "B4"},
+    "PA026": {"dni": 41896325, "vuelo": "VU001", "clase": "economica", "asiento": "D8"},
+    "PA027": {"dni": 42365471, "vuelo": "VU001", "clase": "primera", "asiento": "C4"},
+    "PA028": {
+        "dni": 43852147,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "F20",
+    },
+    "PA029": {"dni": 40215698, "vuelo": "VU001", "clase": "primera", "asiento": "D1"},
+    "PA030": {
+        "dni": 42589647,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A17",
+    },
+}
+
 
 aviones = {
     "LV-ABC": {
@@ -278,50 +196,6 @@ aviones = {
         "Asientos": {"primera": 28, "economica": 150},
     },
 }
-
-# VIEJO
-# aviones = {
-#     "Boeing747-800": {
-#         "Matricula": "LV-ABC",
-#         "Asientos": {"primera": 20, "economica": 162},
-#     },
-#     "Boeing747-800": {
-#         "Matricula": "LV-BRD",
-#         "Asientos": {"primera": 20, "economica": 162},
-#     },
-#     "Boeing747-800": {
-#         "Matricula": "LV-CFT",
-#         "Asientos": {"primera": 20, "economica": 162},
-#     },
-#     "Boeing747-800": {
-#         "Matricula": "LV-DRT",
-#         "Asientos": {"primera": 20, "economica": 162},
-#     },
-#     "Boeing747-800": {
-#         "Matricula": "LV-EFP",
-#         "Asientos": {"primera": 20, "economica": 162},
-#     },
-#     "AirbusA320Neo": {
-#         "Matricula": "LV-GHT",
-#         "Asientos": {"primera": 28, "economica": 150},
-#     },
-#     "AirbusA320Neo": {
-#         "Matricula": "LV-HJK",
-#         "Asientos": {"primera": 28, "economica": 150},
-#     },
-#     "AirbusA320Neo": {
-#         "Matricula": "LV-JLM",
-#         "Asientos": {"primera": 28, "economica": 150},
-#     },
-#     "AirbusA320Neo": {
-#         "Matricula": "LV-KRS",
-#         "Asientos": {"primera": 28, "economica": 150},
-#     },
-#     "AirbusA320Neo": {
-#         "Matricula": "LV-LPQ",
-#         "Asientos": {"primera": 28, "economica": 150},
-#     },
-# }
 
 
 vuelos = {
@@ -525,3 +399,231 @@ vuelos = {
         "Avion": "LV-BRD",
     },
 }
+
+# VIEJO
+
+# pasajes = {
+#     "123456789012345": {
+#         "clase": "Economica",
+#         "asiento": "12A",
+#         "dni": 47307151,  # Juan Perez
+#         "vuelo": "LV-ABC",
+#     },
+#     "123456789012346": {
+#         "clase": "Primera",
+#         "asiento": "2B",
+#         "dni": 40215863,  # Maria Gomez
+#         "vuelo": "LV-BRD",
+#     },
+#     "123456789012347": {
+#         "clase": "Economica",
+#         "asiento": "18C",
+#         "dni": 38901453,  # Carlos Lopez
+#         "vuelo": "LV-CFT",
+#     },
+#     "123456789012348": {
+#         "clase": "Primera",
+#         "asiento": "5A",
+#         "dni": 42758963,  # Ana Martinez
+#         "vuelo": "LV-DRT",
+#     },
+#     "123456789012349": {
+#         "clase": "Economica",
+#         "asiento": "22D",
+#         "dni": 39456821,  # Jose Rodriguez
+#         "vuelo": "LV-EFP",
+#     },
+#     "123456789012350": {
+#         "clase": "Primera",
+#         "asiento": "1A",
+#         "dni": 41874529,  # Laura Fernandez
+#         "vuelo": "LV-GHT",
+#     },
+#     "123456789012351": {
+#         "clase": "Economica",
+#         "asiento": "15C",
+#         "dni": 40125678,  # Sofia Garcia
+#         "vuelo": "LV-HJK",
+#     },
+#     "123456789012352": {
+#         "clase": "Primera",
+#         "asiento": "3A",
+#         "dni": 38501452,  # Diego Sanchez
+#         "vuelo": "LV-JLM",
+#     },
+#     "123456789012353": {
+#         "clase": "Economica",
+#         "asiento": "10B",
+#         "dni": 42896532,  # Camila Diaz
+#         "vuelo": "LV-KRS",
+#     },
+#     "123456789012354": {
+#         "clase": "Economica",
+#         "asiento": "17A",
+#         "dni": 41236547,  # Martin Gonzalez
+#         "vuelo": "LV-LPQ",
+#     },
+#     "123456789012355": {
+#         "clase": "Primera",
+#         "asiento": "4B",
+#         "dni": 43985621,  # Lucia Romero
+#         "vuelo": "LV-ABC",
+#     },
+#     "123456789012356": {
+#         "clase": "Economica",
+#         "asiento": "25D",
+#         "dni": 39874512,  # Mateo Castro
+#         "vuelo": "LV-BRD",
+#     },
+#     "123456789012357": {
+#         "clase": "Economica",
+#         "asiento": "21A",
+#         "dni": 41798543,  # Julieta Suarez
+#         "vuelo": "LV-CFT",
+#     },
+#     "123456789012358": {
+#         "clase": "Primera",
+#         "asiento": "2A",
+#         "dni": 43652189,  # Lucas Mendez
+#         "vuelo": "LV-DRT",
+#     },
+#     "123456789012359": {
+#         "clase": "Economica",
+#         "asiento": "30C",
+#         "dni": 41327856,  # Emilia Vega
+#         "vuelo": "LV-EFP",
+#     },
+#     "123456789012360": {
+#         "clase": "Economica",
+#         "asiento": "19B",
+#         "dni": 42789654,  # Nicolas Cabrera
+#         "vuelo": "LV-GHT",
+#     },
+#     "123456789012361": {
+#         "clase": "Primera",
+#         "asiento": "1C",
+#         "dni": 39452187,  # Valentina Silva
+#         "vuelo": "LV-HJK",
+#     },
+#     "123456789012362": {
+#         "clase": "Economica",
+#         "asiento": "27A",
+#         "dni": 42985612,  # Federico Molina
+#         "vuelo": "LV-JLM",
+#     },
+#     "123456789012363": {
+#         "clase": "Economica",
+#         "asiento": "14D",
+#         "dni": 40312654,  # Agustina Rios
+#         "vuelo": "LV-KRS",
+#     },
+#     "123456789012364": {
+#         "clase": "Primera",
+#         "asiento": "6A",
+#         "dni": 41985463,  # Tomas Ortega
+#         "vuelo": "LV-LPQ",
+#     },
+#     "123456789012365": {
+#         "clase": "Economica",
+#         "asiento": "12C",
+#         "dni": 41258743,  # Milagros Ibarra
+#         "vuelo": "LV-ABC",
+#     },
+#     "123456789012366": {
+#         "clase": "Primera",
+#         "asiento": "7B",
+#         "dni": 43625489,  # Gabriel Reyes
+#         "vuelo": "LV-BRD",
+#     },
+#     "123456789012367": {
+#         "clase": "Economica",
+#         "asiento": "24A",
+#         "dni": 39874532,  # Sol Moreno
+#         "vuelo": "LV-CFT",
+#     },
+#     "123456789012368": {
+#         "clase": "Economica",
+#         "asiento": "16D",
+#         "dni": 42987145,  # Benjamin Paz
+#         "vuelo": "LV-DRT",
+#     },
+#     "123456789012369": {
+#         "clase": "Primera",
+#         "asiento": "8A",
+#         "dni": 40541236,  # Martina Campos
+#         "vuelo": "LV-EFP",
+#     },
+#     "123456789012370": {
+#         "clase": "Economica",
+#         "asiento": "22B",
+#         "dni": 41896325,  # Sebastian Soto
+#         "vuelo": "LV-GHT",
+#     },
+#     "123456789012371": {
+#         "clase": "Economica",
+#         "asiento": "18A",
+#         "dni": 42365471,  # Bianca Villalba
+#         "vuelo": "LV-HJK",
+#     },
+#     "123456789012372": {
+#         "clase": "Primera",
+#         "asiento": "9C",
+#         "dni": 43852147,  # Maximiliano Aguilar
+#         "vuelo": "LV-JLM",
+#     },
+#     "123456789012373": {
+#         "clase": "Economica",
+#         "asiento": "26D",
+#         "dni": 40215698,  # Florencia Pereyra
+#         "vuelo": "LV-KRS",
+#     },
+#     "123456789012374": {
+#         "clase": "Economica",
+#         "asiento": "29B",
+#         "dni": 42589647,  # Leandro Navarro
+#         "vuelo": "LV-LPQ",
+#     },
+# }
+
+# aviones = {
+#     "Boeing747-800": {
+#         "Matricula": "LV-ABC",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-BRD",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-CFT",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-DRT",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "Boeing747-800": {
+#         "Matricula": "LV-EFP",
+#         "Asientos": {"primera": 20, "economica": 162},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-GHT",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-HJK",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-JLM",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-KRS",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+#     "AirbusA320Neo": {
+#         "Matricula": "LV-LPQ",
+#         "Asientos": {"primera": 28, "economica": 150},
+#     },
+# }

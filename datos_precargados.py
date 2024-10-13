@@ -1,36 +1,101 @@
-#Precarga pasajes
+# Precarga pasajes
 "FALTA AGREGAR LOS DATOS DEL VUELO A ESTE DICCIONARIO DE PASAJES"
 pasajes = {
-    "PA001": {"dni": 47307151, "clase": "primera", "asiento": "A1"},
-    "PA002": {"dni": 40215863, "clase": "economica", "asiento": "C12"},
-    "PA003": {"dni": 38901453, "clase": "primera", "asiento": "B3"},
-    "PA004": {"dni": 42758963, "clase": "economica", "asiento": "D27"},
-    "PA005": {"dni": 39456821, "clase": "primera", "asiento": "C2"},
-    "PA006": {"dni": 41874529, "clase": "economica", "asiento": "A18"},
-    "PA007": {"dni": 40125678, "clase": "primera", "asiento": "D4"},
-    "PA008": {"dni": 38501452, "clase": "economica", "asiento": "F30"},
-    "PA009": {"dni": 42896532, "clase": "primera", "asiento": "B1"},
-    "PA010": {"dni": 41236547, "clase": "economica", "asiento": "E23"},
-    "PA011": {"dni": 43985621, "clase": "primera", "asiento": "A2"},
-    "PA012": {"dni": 39874512, "clase": "economica", "asiento": "B19"},
-    "PA013": {"dni": 41798543, "clase": "primera", "asiento": "C1"},
-    "PA014": {"dni": 43652189, "clase": "economica", "asiento": "D15"},
-    "PA015": {"dni": 41327856, "clase": "primera", "asiento": "D3"},
-    "PA016": {"dni": 42789654, "clase": "economica", "asiento": "F9"},
-    "PA017": {"dni": 39452187, "clase": "primera", "asiento": "B2"},
-    "PA018": {"dni": 42985612, "clase": "economica", "asiento": "A25"},
-    "PA019": {"dni": 40312654, "clase": "primera", "asiento": "C3"},
-    "PA020": {"dni": 41985463, "clase": "economica", "asiento": "E11"},
-    "PA021": {"dni": 41258743, "clase": "primera", "asiento": "D2"},
-    "PA022": {"dni": 43625489, "clase": "economica", "asiento": "C22"},
-    "PA023": {"dni": 39874532, "clase": "primera", "asiento": "A3"},
-    "PA024": {"dni": 42987145, "clase": "economica", "asiento": "B10"},
-    "PA025": {"dni": 40541236, "clase": "primera", "asiento": "B4"},
-    "PA026": {"dni": 41896325, "clase": "economica", "asiento": "D8"},
-    "PA027": {"dni": 42365471, "clase": "primera", "asiento": "C4"},
-    "PA028": {"dni": 43852147, "clase": "economica", "asiento": "F20"},
-    "PA029": {"dni": 40215698, "clase": "primera", "asiento": "D1"},
-    "PA030": {"dni": 42589647, "clase": "economica", "asiento": "A17"}
+    "PA001": {"dni": 47307151, "vuelo": "VU001", "clase": "primera", "asiento": "A1"},
+    "PA002": {
+        "dni": 40215863,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "C12",
+    },
+    "PA003": {"dni": 38901453, "vuelo": "VU001", "clase": "primera", "asiento": "B3"},
+    "PA004": {
+        "dni": 42758963,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "D27",
+    },
+    "PA005": {"dni": 39456821, "vuelo": "VU001", "clase": "primera", "asiento": "C2"},
+    "PA006": {
+        "dni": 41874529,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A18",
+    },
+    "PA007": {"dni": 40125678, "vuelo": "VU001", "clase": "primera", "asiento": "D4"},
+    "PA008": {
+        "dni": 38501452,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "F30",
+    },
+    "PA009": {"dni": 42896532, "vuelo": "VU001", "clase": "primera", "asiento": "B1"},
+    "PA010": {
+        "dni": 41236547,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "E23",
+    },
+    "PA011": {"dni": 43985621, "vuelo": "VU001", "clase": "primera", "asiento": "A2"},
+    "PA012": {
+        "dni": 39874512,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "B19",
+    },
+    "PA013": {"dni": 41798543, "vuelo": "VU001", "clase": "primera", "asiento": "C1"},
+    "PA014": {
+        "dni": 43652189,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "D15",
+    },
+    "PA015": {"dni": 41327856, "vuelo": "VU001", "clase": "primera", "asiento": "D3"},
+    "PA016": {"dni": 42789654, "vuelo": "VU001", "clase": "economica", "asiento": "F9"},
+    "PA017": {"dni": 39452187, "vuelo": "VU001", "clase": "primera", "asiento": "B2"},
+    "PA018": {
+        "dni": 42985612,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A25",
+    },
+    "PA019": {"dni": 40312654, "vuelo": "VU001", "clase": "primera", "asiento": "C3"},
+    "PA020": {
+        "dni": 41985463,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "E11",
+    },
+    "PA021": {"dni": 41258743, "vuelo": "VU001", "clase": "primera", "asiento": "D2"},
+    "PA022": {
+        "dni": 43625489,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "C22",
+    },
+    "PA023": {"dni": 39874532, "vuelo": "VU001", "clase": "primera", "asiento": "A3"},
+    "PA024": {
+        "dni": 42987145,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "B10",
+    },
+    "PA025": {"dni": 40541236, "vuelo": "VU001", "clase": "primera", "asiento": "B4"},
+    "PA026": {"dni": 41896325, "vuelo": "VU001", "clase": "economica", "asiento": "D8"},
+    "PA027": {"dni": 42365471, "vuelo": "VU001", "clase": "primera", "asiento": "C4"},
+    "PA028": {
+        "dni": 43852147,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "F20",
+    },
+    "PA029": {"dni": 40215698, "vuelo": "VU001", "clase": "primera", "asiento": "D1"},
+    "PA030": {
+        "dni": 42589647,
+        "vuelo": "VU001",
+        "clase": "economica",
+        "asiento": "A17",
+    },
 }
 
 # Precarga de aviones
@@ -111,7 +176,6 @@ pasajeros = {
     40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
     42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
-
 # Precarga de vuelos
 vuelos = {
     # Día 1 - Lunes
