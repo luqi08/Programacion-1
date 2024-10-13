@@ -311,3 +311,41 @@ def listarPasajeros(pasajeros: dict):
     for dni, datos in pasajeros.items():
         print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
     return
+
+def listarVuelos(vuelos: dict):
+    """
+    Lista todos los vuelos registrados junto con sus datos
+
+    Args:
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
+    """
+    for nVuelo, datos in vuelos.items():
+        print(f"VUELO: {nVuelo},  FECHA: {datos["Fecha"]},  ORIGEN: {datos["Origen"]},  DESTINO: {datos["Destino"]},  AVIÓN: {datos["Avion"]}")
+    return
+
+def listarAviones(aviones: dict):
+    """
+    Lista todos los aviones registrados junto con sus datos
+
+    Args:
+    - aviones (dict): Diccionario que contiene la información de los aviones.
+    """
+    for nAvion, datos in aviones.items():
+        print(f"MATRICULA: {nAvion},  MODELO: {datos["modelo"]},  ASIENTOS: PRIMERA CLASE: {datos["Asientos"]["primera"]}  CLASE ECONÓMICA: {datos["Asientos"]["economica"]}")
+    return
+
+def nombrePasajero(pasajeros, dni):
+    nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
+    return nombre
+
+def listarPasajes(pasajes, pasajeros):
+    """
+    Lista todos los pasajes registrados junto con sus datos
+
+    Args:
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
+    for nPasaje, datos in pasajes.items():
+        nombre = nombrePasajero(pasajeros, datos["dni"])
+        print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
+    return

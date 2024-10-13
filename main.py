@@ -63,8 +63,9 @@ def main():
                 print("MENÚ PASAJES               ")
                 print("---------------------------")
                 print("[1] Comprar")
-                print("[2] Modificar")
-                print("[3] Cancelar")
+                print("[2] Listar")
+                print("[3] Modificar")
+                print("[4] Cancelar")
                 print("---------------------------")
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
@@ -82,11 +83,14 @@ def main():
             elif opcion_submenu == "1":  # Comprar Pasaje
                 dni = modulo_compras.comprarPasaje(datos_precargados.pasajeros)
 
-            elif opcion_submenu == "2":  # Modificar Pasaje
+            elif opcion_submenu == "2":  # Comprar Pasaje
+                modulo_facu.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
+
+            elif opcion_submenu == "3":  # Modificar Pasaje
                 print("Ingrese el número de boleto: ")
                 modulo_facu.modificarPasaje(datos_precargados.pasajeros)
 
-            elif opcion_submenu == "3":  # Eliminar Pasaje
+            elif opcion_submenu == "4":  # Eliminar Pasaje
                 modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
 
         elif opcion == "2":  # SUBMENÚ PASAJEROS
@@ -124,9 +128,10 @@ def main():
                 print("---------------------------")
                 print("MENÚ VUELOS                ")
                 print("---------------------------")
-                print("[1] Listar")
-                print("[2] Modificar")
-                print("[3] Eliminar")
+                print("[1] Registrar")
+                print("[2] Listar")
+                print("[3] Modificar")
+                print("[4] Eliminar")
                 print("---------------------------")
                 print("[0] Volver al MENÚ PRINCIPAL")
                 print()
@@ -141,11 +146,13 @@ def main():
             if opcion_submenu == "0":  # Volver al menú principal
                 continue
 
-            elif opcion_submenu == "1":  # Listar Vuelos
+            elif opcion_submenu == "1":  # Registrar Vuelos
                 ...
-            elif opcion_submenu == "2":  # Modificar Vuelo
+            elif opcion_submenu == "2":  # Listar Vuelos
+                modulo_facu.listarVuelos(datos_precargados.vuelos)
+            elif opcion_submenu == "3":  # Modificar Vuelo
                 ...
-            elif opcion_submenu == "3":  # Eliminar Vuelo
+            elif opcion_submenu == "4":  # Eliminar Vuelo
                 ...
 
         elif opcion == "4":  # SUBMENÚ AVIONES
@@ -175,7 +182,7 @@ def main():
             elif opcion_submenu == "1":  # Registrar Avión
                 ...
             elif opcion_submenu == "2":  # Listar Aviones
-                ...
+                modulo_facu.listarAviones(datos_precargados.aviones)
             elif opcion_submenu == "3":  # Modificar Aviones
                 ...
             elif opcion_submenu == "4":  # Eliminar Aviones
