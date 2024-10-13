@@ -335,8 +335,9 @@ def listarAviones(aviones: dict):
     return
 
 def nombrePasajero(pasajeros, dni):
-    nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
-    return nombre
+    if dni in pasajeros:
+        nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
+        return nombre
 
 def listarPasajes(pasajes, pasajeros):
     """
@@ -349,3 +350,45 @@ def listarPasajes(pasajes, pasajeros):
         nombre = nombrePasajero(pasajeros, datos["dni"])
         print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
     return
+
+import datos_precargados
+
+def eliminarPasajero(pasajeros, pasajes):
+    while True:
+        dni = input("Ingrese DNI de pasajero para eliminar su información o [0] para salir: ")
+        if dni == "0":
+            return
+        elif dni == "":
+            print("No ha ingresado el DNI")
+        elif not dni.isnumeric():
+            print("Solo se aceptan números")
+        elif int(dni) not in pasajeros.keys():
+            print("El pasajero no está registrado")
+        else:
+            dni = int(dni)
+            break
+
+    while True:
+        print("¿Está seguro de eliminarlo?")
+        print("[1] Si")
+        print("[2] Volver")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            # Eliminar al pasajero
+            del pasajeros[dni]
+            print(f"El pasajero con DNI {dni} ha sido eliminado.")
+            
+            # Eliminar su pasaje asociado
+            eliminarPasaje(dni, pasajes)
+            return dni
+        elif opcion == "2":
+            break
+        else:
+            print("Ingrese una opción válida")
+
+def eliminarPasaje(dni, pasajes):
+    for codigo, datos in list(pasajes.items()):
+        if datos["dni"] == dni:
+            del pasajes[codigo]
+            print(f"El pasaje {codigo} del pasajero con DNI {dni} ha sido eliminado.")
+            return

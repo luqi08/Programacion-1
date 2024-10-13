@@ -54,7 +54,8 @@ def subMenuPasajes():
             print("Ingrese el número de boleto: ")
             modulo_facu.modificarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
+            modulo_facu.eliminarPasajero(datos_precargados.pasajeros, datos_precargados.pasajes)
+            #modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
     return
 
 
