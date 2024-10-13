@@ -83,8 +83,7 @@ def subMenuPasajeros():
         elif opcion_submenu == "1":  # Listar Pasajeros
             modulo_facu.listarPasajeros(datos_precargados.pasajeros)
         elif opcion_submenu == "2":  # Modificar Pasajero
-            dni = int(input("INGRESE DNI: "))
-            modulo_facu.modificarPasajero(datos_precargados.pasajeros, dni)
+            modulo_facu.modificarPasajero(datos_precargados.pasajeros)
     return
 
 

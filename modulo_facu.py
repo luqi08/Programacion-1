@@ -204,7 +204,7 @@ matrizEconomica = crearMatriz(4, 4, 0)
 #     modificarPasaje(pasajes)
 
 
-def modificarPasajero(pasajeros: dict, dni: int):
+def modificarPasajero(pasajeros: dict):
     """
     Permite modificar los datos de un pasajero identificado por su DNI.
 
@@ -214,14 +214,20 @@ def modificarPasajero(pasajeros: dict, dni: int):
     """
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-    # Verificar existencia DNI
-    while dni not in pasajeros:
-        print()
-        print(f"El DNI {dni} no se encuentra registrado")
-        print()
-        dni = int(input("Reingrese el DNI o [0] Para volver al Menú Principal: "))
-        if dni == 0:
-            return
+    while True:
+        dni = input("Ingrese DNI o [0] Para volver al Menú Anterior: ")
+        if dni.isnumeric() == True:  # Verificar ingreso válido
+            dni = int(dni)
+            if dni == 0:
+                return
+            elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
+                print()
+                print(f"El DNI {dni} no se encuentra registrado")
+                print()
+            else:
+                break
+        else:
+            print("Ingreso Inválido")
 
     copiaNombre = pasajeros[dni]["nombre"]
     copiaApellido = pasajeros[dni]["apellido"]
@@ -287,7 +293,6 @@ def modificarPasajero(pasajeros: dict, dni: int):
             pasajeros[dni]["nombre"] = copiaNombre
             pasajeros[dni]["apellido"] = copiaApellido
             break
-        
 
         else:
             print("OPCIÓN INVÁLIDA")
@@ -312,6 +317,7 @@ def listarPasajeros(pasajeros: dict):
         print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
     return
 
+
 def listarVuelos(vuelos: dict):
     """
     Lista todos los vuelos registrados junto con sus datos
@@ -320,8 +326,11 @@ def listarVuelos(vuelos: dict):
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
     for nVuelo, datos in vuelos.items():
-        print(f"VUELO: {nVuelo},  FECHA: {datos["Fecha"]},  ORIGEN: {datos["Origen"]},  DESTINO: {datos["Destino"]},  AVIÓN: {datos["Avion"]}")
+        print(
+            f"VUELO: {nVuelo},  FECHA: {datos["Fecha"]},  ORIGEN: {datos["Origen"]},  DESTINO: {datos["Destino"]},  AVIÓN: {datos["Avion"]}"
+        )
     return
+
 
 def listarAviones(aviones: dict):
     """
@@ -331,13 +340,17 @@ def listarAviones(aviones: dict):
     - aviones (dict): Diccionario que contiene la información de los aviones.
     """
     for nAvion, datos in aviones.items():
-        print(f"MATRICULA: {nAvion},  MODELO: {datos["modelo"]},  ASIENTOS: PRIMERA CLASE: {datos["Asientos"]["primera"]}  CLASE ECONÓMICA: {datos["Asientos"]["economica"]}")
+        print(
+            f"MATRICULA: {nAvion},  MODELO: {datos["modelo"]},  ASIENTOS: PRIMERA CLASE: {datos["Asientos"]["primera"]}  CLASE ECONÓMICA: {datos["Asientos"]["economica"]}"
+        )
     return
+
 
 def nombrePasajero(pasajeros, dni):
     if dni in pasajeros:
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
+
 
 def listarPasajes(pasajes, pasajeros):
     """
@@ -348,8 +361,11 @@ def listarPasajes(pasajes, pasajeros):
     """
     for nPasaje, datos in pasajes.items():
         nombre = nombrePasajero(pasajeros, datos["dni"])
-        print(f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}")
+        print(
+            f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}"
+        )
     return
+
 
 def eliminarPasajero(pasajeros, pasajes):
     """
@@ -360,7 +376,9 @@ def eliminarPasajero(pasajeros, pasajes):
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        dni = input("Ingrese DNI de pasajero para eliminar su información o [0] para salir: ")
+        dni = input(
+            "Ingrese DNI de pasajero para eliminar su información o [0] para salir: "
+        )
         if dni == "0":
             return
         elif dni == "":
@@ -390,6 +408,7 @@ def eliminarPasajero(pasajeros, pasajes):
         else:
             print("Ingrese una opción válida")
     return
+
 
 def eliminarPasaje(dni, pasajes):
     """
