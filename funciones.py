@@ -229,7 +229,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
 
     # Registrar datos del pasajero
-    dni = modulo_alvaro.registrarDatos(pasajeros)
+    dni = registrarDatos(pasajeros)
 
     # Crear el nuevo pasaje
     pasajes[nuevo_id] = {
@@ -357,65 +357,66 @@ def nombrePasajero(pasajeros, dni):
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
 
-    # def modificarPasaje(pasajes):
-    """
-    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
-    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
-    solicita acciones al usuario.
 
-    Args:
-    - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
-    """
-    while True:
-        codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
-        if codigoPasaje == 2:
-            exit()
-        elif codigoPasaje not in pasajes:
-            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
-        else:
-            print("--------------------------")
-            mostrarPasaje(codigoPasaje)
-            print("--------------------------")
-            while True:
-                print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
-                print("[2] CAMBIAR CLASE")
-                print("[3] SALIR")
-                opcion = int(input("SELECCIONE UNA OPCION: "))
-                if opcion == 1:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizEjecutiva)
-                    else:
-                        mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizEconomica)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    break
-                elif opcion == 2:
-                    while True:
-                        print("[1] ECONÓMICA")
-                        print("[2] EJECUTIVA")
-                        opcion = int(input("SELECCIONE UNA OPCION: "))
-                        if opcion == 1:
-                            ...
-                        elif opcion == 2:
-                            ...
+#   def modificarPasaje(pasajes):
+        """
+        Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
+        dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
+        solicita acciones al usuario.
+
+        Args:
+        - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
+        """
+        while True:
+            codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
+            if codigoPasaje == 2:
+                exit()
+            elif codigoPasaje not in pasajes:
+                print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
+            else:
+                print("--------------------------")
+                mostrarPasaje(codigoPasaje)
+                print("--------------------------")
+                while True:
+                    print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
+                    print("[2] CAMBIAR CLASE")
+                    print("[3] SALIR")
+                    opcion = int(input("SELECCIONE UNA OPCION: "))
+                    if opcion == 1:
+                        print()
+                        print(
+                            f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                        )
+                        if esEjecutiva(pasajes, codigoPasaje):
+                            mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
+                            cambiarAsiento(codigoPasaje, matrizEjecutiva)
                         else:
-                            print("INGRESE UN VALOR EN EL RANGO")
-                elif opcion == 3:
-                    exit()
-                else:
-                    print("INGRESE UN VALOR EN EL RANGO")
-            break
+                            mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
+                            cambiarAsiento(codigoPasaje, matrizEconomica)
+                        print()
+                        print(
+                            f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                        )
+                        break
+                    elif opcion == 2:
+                        while True:
+                            print("[1] ECONÓMICA")
+                            print("[2] EJECUTIVA")
+                            opcion = int(input("SELECCIONE UNA OPCION: "))
+                            if opcion == 1:
+                                ...
+                            elif opcion == 2:
+                                ...
+                            else:
+                                print("INGRESE UN VALOR EN EL RANGO")
+                    elif opcion == 3:
+                        exit()
+                    else:
+                        print("INGRESE UN VALOR EN EL RANGO")
+                break
 
 
-def eliminarPasaje(dni, pasajes):  # MODULO FACU
+def eliminarPasaje(dni, pasajes):
     """
     Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
 
@@ -428,47 +429,6 @@ def eliminarPasaje(dni, pasajes):  # MODULO FACU
             del pasajes[codigo]
             print(f"El pasaje {codigo} del pasajero con DNI {dni} ha sido eliminado.")
             return
-
-
-def eliminarPasaje(pasajeros):  # MODULO ALVARO
-    """
-    Elimina la información de un pasajero del sistema mediante su DNI, verificando
-    previamente si el pasajero existe en el diccionario de pasajeros.
-
-    Args:
-    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
-    """
-    eliminar = False
-    while eliminar == False:
-        print("Desea eliminar el pasaje junto a la informacion del pasajero?")
-        print("--------------------")
-        print("[1] Eliminar pasajero")
-        print("[2] Volver al menu anterior")
-        print("--------------------")
-        opcion = input("Seleccione una opcion")
-        if opcion == "1":
-            verificador = False
-            print("Coloque el DNI del pasajero a eliminar")
-            dni = int(input("DNI: "))
-            if dni not in pasajeros:
-                print("Dicho dni no se encuentra registrado")
-            else:
-                print(
-                    "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
-                )
-                print("------------------")
-                print("[1] Eliminar pasajero")
-                print("[2] Volver al menu anterior")
-                print("------------------")
-                opcion = input()
-                if opcion == "1":
-                    del pasajeros[int(dni)]
-                    print(f"El pasajero {dni} ha sido eliminado")
-        elif opcion == "2":
-            break
-        else:
-            print("Esa opcion no existe")
-    return
 
 
 # ----------------------------------------------------------------------------------------------
@@ -513,7 +473,6 @@ def modificarPasajero(pasajeros: dict):
 
     copiaNombre = pasajeros[dni]["nombre"]
     copiaApellido = pasajeros[dni]["apellido"]
-    copiaDNI = dni
 
     while True:
         print("Ingrese sus datos")
