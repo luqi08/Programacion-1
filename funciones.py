@@ -191,24 +191,19 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         print(f"[{idx}] {vuelo_info['Fecha']} | Origen: {vuelo_info['Origen']}")
 
     while True:
-        try:
-            seleccion = int(
-                input("Seleccione el número del vuelo: ")
-            )  # Pedimos el número del vuelo
-            if (
-                1 <= seleccion <= len(vuelos_lista)
-            ):  # Verificamos que el número esté en el rango válido
-                vuelo_seleccionado = vuelos_lista[seleccion - 1][
-                    0
-                ]  # Obtenemos el código del vuelo
-                vuelo = vuelos_lista[seleccion - 1][
-                    1
-                ]  # Obtenemos la información del vuelo
+        seleccion = input("Seleccione el número del vuelo: ")  # Pedimos el número del vuelo
+
+        if seleccion.isdigit():  # Verificamos que la entrada sea un número
+            seleccion = int(seleccion)
+
+            if 1 <= seleccion <= len(vuelos_lista):  # Verificamos que el número esté en el rango válido
+                vuelo_seleccionado = vuelos_lista[seleccion - 1][0]  # Obtenemos el código del vuelo
                 break
             else:
                 input("Selección inválida. Presione ENTER para volver a seleccionar.")
-        except ValueError:
+        else:
             input("Entrada inválida. Presione ENTER para volver a intentar.")
+
 
     # Selección de clase
     while True:
