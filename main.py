@@ -17,14 +17,6 @@ import datos_precargados
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
-def preGenerarPasajes():
-    return
-
-
-def cancelarBoleto():
-    return
-
-
 def subMenuPasajes():
     while True:
         opciones = 5
