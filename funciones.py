@@ -1,7 +1,6 @@
-import modulo_alvaro
-
-
+# ----------------------------------------------------------------------------------------------
 # FUNCIONES
+# ----------------------------------------------------------------------------------------------
 def crearMatriz(filas, columnas, relleno):
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
@@ -69,7 +68,7 @@ def mostrarMatriz(matriz, pasaje, codigo):
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
 
-#def cambiarAsiento(codigoPasaje, matriz):
+    # def cambiarAsiento(codigoPasaje, matriz):
     """
     Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
 
@@ -119,64 +118,9 @@ def esEjecutiva(pasajes, codigo):
         return False
 
 
-#def modificarPasaje(pasajes):
-    """
-    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
-    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
-    solicita acciones al usuario.
-
-    Args:
-    - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
-    """
-    while True:
-        codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
-        if codigoPasaje == 2:
-            exit()
-        elif codigoPasaje not in pasajes:
-            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
-        else:
-            print("--------------------------")
-            mostrarPasaje(codigoPasaje)
-            print("--------------------------")
-            while True:
-                print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
-                print("[2] CAMBIAR CLASE")
-                print("[3] SALIR")
-                opcion = int(input("SELECCIONE UNA OPCION: "))
-                if opcion == 1:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizEjecutiva)
-                    else:
-                        mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizEconomica)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    break
-                elif opcion == 2:
-                    while True:
-                        print("[1] ECONÓMICA")
-                        print("[2] EJECUTIVA")
-                        opcion = int(input("SELECCIONE UNA OPCION: "))
-                        if opcion == 1:
-                            ...
-                        elif opcion == 2:
-                            ...
-                        else:
-                            print("INGRESE UN VALOR EN EL RANGO")
-                elif opcion == 3:
-                    exit()
-                else:
-                    print("INGRESE UN VALOR EN EL RANGO")
-            break
-
-
+# ----------------------------------------------------------------------------------------------
+# PASAJES
+# ----------------------------------------------------------------------------------------------
 def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
@@ -239,17 +183,27 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
 
     # Seleccionar vuelo
     print("\nVuelos disponibles para", destino)
-    vuelos_lista = list(vuelos_destino.items())  # Convertimos el diccionario en una lista de tuplas
+    vuelos_lista = list(
+        vuelos_destino.items()
+    )  # Convertimos el diccionario en una lista de tuplas
 
     for idx, (vuelo_id, vuelo_info) in enumerate(vuelos_lista, start=1):
         print(f"[{idx}] {vuelo_info['Fecha']} | Origen: {vuelo_info['Origen']}")
 
     while True:
         try:
-            seleccion = int(input("Seleccione el número del vuelo: "))  # Pedimos el número del vuelo
-            if 1 <= seleccion <= len(vuelos_lista):  # Verificamos que el número esté en el rango válido
-                vuelo_seleccionado = vuelos_lista[seleccion - 1][0]  # Obtenemos el código del vuelo
-                vuelo = vuelos_lista[seleccion - 1][1]  # Obtenemos la información del vuelo
+            seleccion = int(
+                input("Seleccione el número del vuelo: ")
+            )  # Pedimos el número del vuelo
+            if (
+                1 <= seleccion <= len(vuelos_lista)
+            ):  # Verificamos que el número esté en el rango válido
+                vuelo_seleccionado = vuelos_lista[seleccion - 1][
+                    0
+                ]  # Obtenemos el código del vuelo
+                vuelo = vuelos_lista[seleccion - 1][
+                    1
+                ]  # Obtenemos la información del vuelo
                 break
             else:
                 input("Selección inválida. Presione ENTER para volver a seleccionar.")
@@ -287,6 +241,249 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
     return pasajes
+
+
+def registrarDatos(pasajeros):
+    """
+    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
+    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
+    ingresados son almacenados en el diccionario de pasajeros.
+
+    Args:
+    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
+    """
+    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    nombre = ""
+    apellido = ""
+    dni = ""
+    verificador = False
+    verificadorNombre = False
+    while verificador == False:
+        print("Ingrese sus datos")
+        print("-----------------")
+        print(f"[1]Nombre: {nombre}")
+        print(f"[2]Apellido: {apellido}")
+        print(f"[3]DNI: {dni}")
+        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
+        print("[5]Completar")
+        print("-----------------")
+        opcion = input("Seleccione una opcion: ")
+        if opcion == "1":
+            print("Escriba su nombre.")
+            escribirNombre = input().capitalize()
+            for letra in escribirNombre:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirNombre == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
+                escribirNombre = input("Escribalo nuevamente: ").capitalize()
+                for letra in escribirNombre:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            nombre = escribirNombre
+            verificadorNombre == True
+        elif opcion == "2":
+            print("Escriba su apellido")
+            escribirApellido = input().capitalize()
+            for letra in escribirApellido:
+                if letra in prohibidos:
+                    bandera = False
+                    break
+                else:
+                    bandera = True
+            while escribirApellido == "" or bandera == False:
+                print("No es valido dejar el espacio en blanco ni involucrar numeros")
+                escribirApellido = input("Escribalo nuevamente: ").capitalize()
+                for letra in escribirApellido:
+                    if letra in prohibidos:
+                        bandera = False
+                        break
+                    else:
+                        bandera = True
+            apellido = escribirApellido
+        elif opcion == "3":
+            print("Escriba su DNI")
+            escribirDni = input()
+            while escribirDni == "" or escribirDni.isnumeric() == False:
+                print("No es valido dejar espacion en blanco ni involucrar letras")
+                escribirDni = input("Intentelo nuevamente: ")
+            dni = int(escribirDni)
+        elif opcion == "4":
+            nombre = ""
+            apellido = ""
+            dni = ""
+            verificadorNombre = False
+        elif opcion == "5":
+            if nombre == "" or apellido == "" or dni == "":
+                print("Aun quedan datos por completar")
+            else:
+                break
+        else:
+            print("Esa opcion no existe")
+    print("Sus datos")
+    print("----------------")
+    print(f"Nombre: {nombre}")
+    print(f"Apellido: {apellido}")
+    print(f"DNI: {dni}")
+    print("----------------")
+    pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
+    print("Pasajero registrado")
+    return dni
+
+
+def listarPasajes(pasajes, pasajeros):
+    """
+    Lista todos los pasajes registrados junto con sus datos
+
+    Args:
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
+    for nPasaje, datos in pasajes.items():
+        nombre = nombrePasajero(pasajeros, datos["dni"])
+        print(
+            f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}"
+        )
+    return
+
+
+def nombrePasajero(pasajeros, dni):
+    if dni in pasajeros:
+        nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
+        return nombre
+
+    # def modificarPasaje(pasajes):
+    """
+    Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
+    dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
+    solicita acciones al usuario.
+
+    Args:
+    - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
+    """
+    while True:
+        codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
+        if codigoPasaje == 2:
+            exit()
+        elif codigoPasaje not in pasajes:
+            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
+        else:
+            print("--------------------------")
+            mostrarPasaje(codigoPasaje)
+            print("--------------------------")
+            while True:
+                print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
+                print("[2] CAMBIAR CLASE")
+                print("[3] SALIR")
+                opcion = int(input("SELECCIONE UNA OPCION: "))
+                if opcion == 1:
+                    print()
+                    print(
+                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                    )
+                    if esEjecutiva(pasajes, codigoPasaje):
+                        mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
+                        cambiarAsiento(codigoPasaje, matrizEjecutiva)
+                    else:
+                        mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
+                        cambiarAsiento(codigoPasaje, matrizEconomica)
+                    print()
+                    print(
+                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+                    )
+                    break
+                elif opcion == 2:
+                    while True:
+                        print("[1] ECONÓMICA")
+                        print("[2] EJECUTIVA")
+                        opcion = int(input("SELECCIONE UNA OPCION: "))
+                        if opcion == 1:
+                            ...
+                        elif opcion == 2:
+                            ...
+                        else:
+                            print("INGRESE UN VALOR EN EL RANGO")
+                elif opcion == 3:
+                    exit()
+                else:
+                    print("INGRESE UN VALOR EN EL RANGO")
+            break
+
+
+def eliminarPasaje(dni, pasajes):  # MODULO FACU
+    """
+    Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
+
+    Args:
+    - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
+    for codigo, datos in list(pasajes.items()):
+        if datos["dni"] == dni:
+            del pasajes[codigo]
+            print(f"El pasaje {codigo} del pasajero con DNI {dni} ha sido eliminado.")
+            return
+
+
+def eliminarPasaje(pasajeros):  # MODULO ALVARO
+    """
+    Elimina la información de un pasajero del sistema mediante su DNI, verificando
+    previamente si el pasajero existe en el diccionario de pasajeros.
+
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    """
+    eliminar = False
+    while eliminar == False:
+        print("Desea eliminar el pasaje junto a la informacion del pasajero?")
+        print("--------------------")
+        print("[1] Eliminar pasajero")
+        print("[2] Volver al menu anterior")
+        print("--------------------")
+        opcion = input("Seleccione una opcion")
+        if opcion == "1":
+            verificador = False
+            print("Coloque el DNI del pasajero a eliminar")
+            dni = int(input("DNI: "))
+            if dni not in pasajeros:
+                print("Dicho dni no se encuentra registrado")
+            else:
+                print(
+                    "Aun esta seguro de que desea eliminar a dicho pasajero del diccionario?"
+                )
+                print("------------------")
+                print("[1] Eliminar pasajero")
+                print("[2] Volver al menu anterior")
+                print("------------------")
+                opcion = input()
+                if opcion == "1":
+                    del pasajeros[int(dni)]
+                    print(f"El pasajero {dni} ha sido eliminado")
+        elif opcion == "2":
+            break
+        else:
+            print("Esa opcion no existe")
+    return
+
+
+# ----------------------------------------------------------------------------------------------
+# PASAJEROS
+# ----------------------------------------------------------------------------------------------
+def listarPasajeros(pasajeros: dict):
+    """
+    Lista todos los pasajeros registrados junto con su DNI y nombre completo.
+
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    """
+    for dni, datos in pasajeros.items():
+        print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
+    return
 
 
 def modificarPasajero(pasajeros: dict):
@@ -391,67 +588,6 @@ def modificarPasajero(pasajeros: dict):
     return
 
 
-def listarPasajeros(pasajeros: dict):
-    """
-    Lista todos los pasajeros registrados junto con su DNI y nombre completo.
-
-    Args:
-    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
-    """
-    for dni, datos in pasajeros.items():
-        print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
-    return
-
-
-def listarVuelos(vuelos: dict):
-    """
-    Lista todos los vuelos registrados junto con sus datos
-
-    Args:
-    - vuelos (dict): Diccionario que contiene la información de los vuelos.
-    """
-    for nVuelo, datos in vuelos.items():
-        print(
-            f"VUELO: {nVuelo},  FECHA: {datos["Fecha"]},  ORIGEN: {datos["Origen"]},  DESTINO: {datos["Destino"]},  AVIÓN: {datos["Avion"]}"
-        )
-    return
-
-
-def listarAviones(aviones: dict):
-    """
-    Lista todos los aviones registrados junto con sus datos
-
-    Args:
-    - aviones (dict): Diccionario que contiene la información de los aviones.
-    """
-    for nAvion, datos in aviones.items():
-        print(
-            f"MATRICULA: {nAvion},  MODELO: {datos["modelo"]},  ASIENTOS: PRIMERA CLASE: {datos["Asientos"]["primera"]}  CLASE ECONÓMICA: {datos["Asientos"]["economica"]}"
-        )
-    return
-
-
-def listarPasajes(pasajes, pasajeros):
-    """
-    Lista todos los pasajes registrados junto con sus datos
-
-    Args:
-    - pasajes (dict): Diccionario que contiene la información de los pasajes.
-    """
-    for nPasaje, datos in pasajes.items():
-        nombre = nombrePasajero(pasajeros, datos["dni"])
-        print(
-            f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}"
-        )
-    return
-
-
-def nombrePasajero(pasajeros, dni):
-    if dni in pasajeros:
-        nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
-        return nombre
-
-
 def eliminarPasajero(pasajeros, pasajes):
     """
     Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
@@ -495,16 +631,35 @@ def eliminarPasajero(pasajeros, pasajes):
     return
 
 
-def eliminarPasaje(dni, pasajes):
+# ----------------------------------------------------------------------------------------------
+# VUELOS
+# ----------------------------------------------------------------------------------------------
+def listarVuelos(vuelos: dict):
     """
-    Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
+    Lista todos los vuelos registrados junto con sus datos
 
     Args:
-    - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
-    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
-    for codigo, datos in list(pasajes.items()):
-        if datos["dni"] == dni:
-            del pasajes[codigo]
-            print(f"El pasaje {codigo} del pasajero con DNI {dni} ha sido eliminado.")
-            return
+    for nVuelo, datos in vuelos.items():
+        print(
+            f"VUELO: {nVuelo},  FECHA: {datos["Fecha"]},  ORIGEN: {datos["Origen"]},  DESTINO: {datos["Destino"]},  AVIÓN: {datos["Avion"]}"
+        )
+    return
+
+
+# ----------------------------------------------------------------------------------------------
+# AVIONES
+# ----------------------------------------------------------------------------------------------
+def listarAviones(aviones: dict):
+    """
+    Lista todos los aviones registrados junto con sus datos
+
+    Args:
+    - aviones (dict): Diccionario que contiene la información de los aviones.
+    """
+    for nAvion, datos in aviones.items():
+        print(
+            f"MATRICULA: {nAvion},  MODELO: {datos["modelo"]},  ASIENTOS: PRIMERA CLASE: {datos["Asientos"]["primera"]}  CLASE ECONÓMICA: {datos["Asientos"]["economica"]}"
+        )
+    return

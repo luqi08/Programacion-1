@@ -9,20 +9,14 @@ Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 # ----------------------------------------------------------------------------------------------
 # MÓDULOS
 # ----------------------------------------------------------------------------------------------
-import modulo_alvaro, modulo_facu, modulo_luis, modulo_compras, time, datos_precargados
+import time
+import funciones
+import datos_precargados
 
 
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
-def preGenerarPasajes():
-    return
-
-
-def cancelarBoleto():
-    return
-
-
 def subMenuPasajes():
     while True:
         opciones = 5
