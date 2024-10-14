@@ -1,5 +1,7 @@
-# FUNCIONES
+import modulo_alvaro
 
+
+# FUNCIONES
 def crearMatriz(filas, columnas, relleno):
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
@@ -174,7 +176,6 @@ def esEjecutiva(pasajes, codigo):
                     print("INGRESE UN VALOR EN EL RANGO")
             break
 
-import modulo_alvaro
 
 def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     """
@@ -205,7 +206,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         "21": "Santa Fe",
         "22": "Santiago del Estero",
         "23": "Tierra del Fuego",
-        "24": "Tucumán"
+        "24": "Tucumán",
     }
 
     # Seleccionar destino
@@ -217,7 +218,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             print(f"[{key}] {value}")
         print("[0] Volver al Menú Principal")
         print()
-        
+
         opcion_destino = input("Seleccione un destino: ")
         if opcion_destino == "0":
             return  # Volver al menú principal
@@ -228,8 +229,10 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
 
     # Filtrar vuelos disponibles para el destino seleccionado
-    vuelos_destino = {key: vuelo for key, vuelo in vuelos.items() if vuelo["Destino"] == destino}
-    
+    vuelos_destino = {
+        key: vuelo for key, vuelo in vuelos.items() if vuelo["Destino"] == destino
+    }
+
     if not vuelos_destino:
         print(f"No hay vuelos disponibles para {destino}.")
         return
@@ -279,7 +282,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         "dni": dni,
         "vuelo": vuelo_seleccionado,
         "clase": clase_seleccionada,
-        "asiento": asiento
+        "asiento": asiento,
     }
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
@@ -441,6 +444,7 @@ def listarPasajes(pasajes, pasajeros):
             f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}"
         )
     return
+
 
 def nombrePasajero(pasajeros, dni):
     if dni in pasajeros:
