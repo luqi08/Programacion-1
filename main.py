@@ -9,7 +9,9 @@ Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 # ----------------------------------------------------------------------------------------------
 # MÓDULOS
 # ----------------------------------------------------------------------------------------------
-import modulo_alvaro, modulo_facu, modulo_luis, modulo_compras, time, datos_precargados
+import time
+import funciones
+import datos_precargados
 
 
 # ----------------------------------------------------------------------------------------------
