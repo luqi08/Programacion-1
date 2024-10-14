@@ -1,6 +1,6 @@
 """
 -----------------------------------------------------------------------------------------------
-Título: SISTEMA DE COMPRA DE PASAJES DE AVION
+Título: SISTEMA DE GESTIÓN DE AEROLÍNEAS
 Fecha: 24/9/2024
 Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 -----------------------------------------------------------------------------------------------
@@ -41,7 +41,6 @@ def subMenuPasajes():
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
-            #modulo_compras.comprarPasaje(datos_precargados.pasajeros)
             funciones.comprarPasaje(datos_precargados.pasajeros, datos_precargados.pasajes, datos_precargados.vuelos)
         elif opcion_submenu == "2":  # Listar Pasajes
             funciones.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
