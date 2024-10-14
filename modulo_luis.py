@@ -1,25 +1,3 @@
-# Estructura de Datos
-pasajeros = {"dni": {"nombre": str, "Apellido": str}}
-
-pasajes = {
-    "pasaje": {"dni": int, "vuelo": str, "clase": str, "asiento": str}
-}
-
-aviones = {
-    "matricula": {
-        "modelo": str,
-        "Asientos": {"primera": int, "economica": int},
-    }
-}
-
-vuelos = {
-    "Numero de Vuelo": {
-        "Fecha": "dd/mm/yyyy | hh:mm",
-        "Origen": str,
-        "Destino": str,
-        "Avion": "Matricula de Avion",
-    }
-}
 
 
 # PRECARGADOS
