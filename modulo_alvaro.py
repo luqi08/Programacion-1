@@ -31,7 +31,7 @@ def registrarDatos(pasajeros):
         opcion = input("Seleccione una opcion: ")
         if opcion == "1":
             print("Escriba su nombre.")
-            escribirNombre = input()
+            escribirNombre = input().capitalize()
             for letra in escribirNombre:
                 if letra in prohibidos:
                     bandera = False
@@ -40,7 +40,7 @@ def registrarDatos(pasajeros):
                     bandera = True
             while escribirNombre == "" or bandera == False:
                 print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirNombre = input("Escribalo nuevamente: ")
+                escribirNombre = input("Escribalo nuevamente: ").capitalize()
                 for letra in escribirNombre:
                     if letra in prohibidos:
                         bandera = False
@@ -51,7 +51,7 @@ def registrarDatos(pasajeros):
             verificadorNombre == True
         elif opcion == "2":
             print("Escriba su apellido")
-            escribirApellido = input()
+            escribirApellido = input().capitalize()
             for letra in escribirApellido:
                 if letra in prohibidos:
                     bandera = False
@@ -60,7 +60,7 @@ def registrarDatos(pasajeros):
                     bandera = True
             while escribirApellido == "" or bandera == False:
                 print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirApellido = input("Escribalo nuevamente: ")
+                escribirApellido = input("Escribalo nuevamente: ").capitalize()
                 for letra in escribirApellido:
                     if letra in prohibidos:
                         bandera = False

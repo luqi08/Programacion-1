@@ -47,7 +47,8 @@ def subMenuPasajes():
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
-            dni = modulo_compras.comprarPasaje(datos_precargados.pasajeros)
+            #modulo_compras.comprarPasaje(datos_precargados.pasajeros)
+            modulo_facu.comprarPasaje(datos_precargados.pasajeros, datos_precargados.pasajes, datos_precargados.vuelos)
         elif opcion_submenu == "2":  # Listar Pasajes
             modulo_facu.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasaje
@@ -55,7 +56,6 @@ def subMenuPasajes():
             modulo_facu.modificarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasaje
             modulo_facu.eliminarPasajero(datos_precargados.pasajeros, datos_precargados.pasajes)
-            #modulo_alvaro.eliminarPasaje(datos_precargados.pasajeros)
     return
 
 

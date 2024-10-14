@@ -1,6 +1,4 @@
 # FUNCIONES
-"ARREGLAR CREACION DE MATRICES AL USAR LA SEGUNDA OPCION DE CAMBIAR DE CLASE"
-
 
 def crearMatriz(filas, columnas, relleno):
     """
@@ -69,20 +67,7 @@ def mostrarMatriz(matriz, pasaje, codigo):
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
 
-
-def mostrarPasaje(codigoPasaje):
-    """
-    Muestra los detalles del pasaje especificado.
-
-    Args:
-    - codigoPasaje (str): Código identificador del pasaje.
-    """
-    for clave, valor in pasajes[codigoPasaje].items():
-        print(f"{clave}: {valor}".title())
-    return
-
-
-def cambiarAsiento(codigoPasaje, matriz):
+#def cambiarAsiento(codigoPasaje, matriz):
     """
     Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
 
@@ -132,7 +117,7 @@ def esEjecutiva(pasajes, codigo):
         return False
 
 
-def modificarPasaje(pasajes):
+#def modificarPasaje(pasajes):
     """
     Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
     dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
@@ -189,19 +174,116 @@ def modificarPasaje(pasajes):
                     print("INGRESE UN VALOR EN EL RANGO")
             break
 
+import modulo_alvaro
 
-# MAIN
-pasajes = {
-    000000: {"avion": 4523452, "clase": "primera", "asiento": "D4", "pasajero": 2354323}
-}
-vuelos = {000000: {"Fecha": "20/10/2024", "Origen": "Misiones", "destino": "eze"}}
-aviones = {"modelo": "Boeing747"}
+def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
+    """
+    Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
+    seleccionar una clase y asiento, y registrar los datos del pasajero para crear un pasaje.
+    """
+    destinos = {
+        "1": "Buenos Aires",
+        "2": "Catamarca",
+        "3": "Chaco",
+        "4": "Chubut",
+        "5": "Ciudad Autónoma de Buenos Aires",
+        "6": "Córdoba",
+        "7": "Corrientes",
+        "8": "Entre Ríos",
+        "9": "Formosa",
+        "10": "Jujuy",
+        "11": "La Pampa",
+        "12": "La Rioja",
+        "13": "Mendoza",
+        "14": "Misiones",
+        "15": "Neuquén",
+        "16": "Río Negro",
+        "17": "Salta",
+        "18": "San Juan",
+        "19": "San Luis",
+        "20": "Santa Cruz",
+        "21": "Santa Fe",
+        "22": "Santiago del Estero",
+        "23": "Tierra del Fuego",
+        "24": "Tucumán"
+    }
 
-matrizEjecutiva = crearMatriz(6, 30, 0)
-matrizEconomica = crearMatriz(4, 4, 0)
+    # Seleccionar destino
+    while True:
+        print("---------------------------")
+        print("DESTINOS DISPONIBLES")
+        print("---------------------------")
+        for key, value in destinos.items():
+            print(f"[{key}] {value}")
+        print("[0] Volver al Menú Principal")
+        print()
+        
+        opcion_destino = input("Seleccione un destino: ")
+        if opcion_destino == "0":
+            return  # Volver al menú principal
+        elif opcion_destino in destinos:
+            destino = destinos[opcion_destino]
+            break
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
 
-# if __name__ == "__main__": # Para no ejecutar la función al importar el módulo
-#     modificarPasaje(pasajes)
+    # Filtrar vuelos disponibles para el destino seleccionado
+    vuelos_destino = {key: vuelo for key, vuelo in vuelos.items() if vuelo["Destino"] == destino}
+    
+    if not vuelos_destino:
+        print(f"No hay vuelos disponibles para {destino}.")
+        return
+
+    # Seleccionar vuelo
+    print("\nVuelos disponibles para", destino)
+    vuelos_lista = list(vuelos_destino.items())  # Convertimos el diccionario en una lista de tuplas
+
+    for idx, (vuelo_id, vuelo_info) in enumerate(vuelos_lista, start=1):
+        print(f"[{idx}] {vuelo_info['Fecha']} | Origen: {vuelo_info['Origen']}")
+
+    while True:
+        try:
+            seleccion = int(input("Seleccione el número del vuelo: "))  # Pedimos el número del vuelo
+            if 1 <= seleccion <= len(vuelos_lista):  # Verificamos que el número esté en el rango válido
+                vuelo_seleccionado = vuelos_lista[seleccion - 1][0]  # Obtenemos el código del vuelo
+                vuelo = vuelos_lista[seleccion - 1][1]  # Obtenemos la información del vuelo
+                break
+            else:
+                input("Selección inválida. Presione ENTER para volver a seleccionar.")
+        except ValueError:
+            input("Entrada inválida. Presione ENTER para volver a intentar.")
+
+    # Selección de clase
+    while True:
+        clase = input("Seleccione la clase del pasaje ([1] Primera, [2] Económica): ")
+        if clase == "1":
+            clase_seleccionada = "primera"
+            break
+        elif clase == "2":
+            clase_seleccionada = "economica"
+            break
+        else:
+            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+
+    # Asignación de asiento (simplificado para este ejemplo)
+    asiento = input("Seleccione su asiento (Ej: A1, B2): ").upper()
+
+    # Generar nuevo ID de pasaje
+    nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
+
+    # Registrar datos del pasajero
+    dni = modulo_alvaro.registrarDatos(pasajeros)
+
+    # Crear el nuevo pasaje
+    pasajes[nuevo_id] = {
+        "dni": dni,
+        "vuelo": vuelo_seleccionado,
+        "clase": clase_seleccionada,
+        "asiento": asiento
+    }
+
+    print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
+    return pasajes
 
 
 def modificarPasajero(pasajeros: dict):
@@ -245,7 +327,7 @@ def modificarPasajero(pasajeros: dict):
         opcion = input("Seleccione una opcion: ")
 
         if opcion == "1":
-            escribirNombre = input("Ingrese Nombre: ")
+            escribirNombre = input("Ingrese Nombre: ").capitalize()
             for letra in escribirNombre:
                 if letra in prohibidos:
                     bandera = False
@@ -254,7 +336,7 @@ def modificarPasajero(pasajeros: dict):
                     bandera = True
             while escribirNombre == "" or bandera == False:
                 print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirNombre = input("Escribalo nuevamente: ")
+                escribirNombre = input("Escribalo nuevamente: ").capitalize()
                 for letra in escribirNombre:
                     if letra in prohibidos:
                         bandera = False
@@ -264,7 +346,7 @@ def modificarPasajero(pasajeros: dict):
             pasajeros[dni]["nombre"] = escribirNombre
 
         elif opcion == "2":
-            escribirApellido = input("Ingrese Apellido: ")
+            escribirApellido = input("Ingrese Apellido: ").capitalize()
             for letra in escribirApellido:
                 if letra in prohibidos:
                     bandera = False
@@ -273,7 +355,7 @@ def modificarPasajero(pasajeros: dict):
                     bandera = True
             while escribirApellido == "" or bandera == False:
                 print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirApellido = input("Escribalo nuevamente: ")
+                escribirApellido = input("Escribalo nuevamente: ").capitalize()
                 for letra in escribirApellido:
                     if letra in prohibidos:
                         bandera = False
@@ -346,12 +428,6 @@ def listarAviones(aviones: dict):
     return
 
 
-def nombrePasajero(pasajeros, dni):
-    if dni in pasajeros:
-        nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
-        return nombre
-
-
 def listarPasajes(pasajes, pasajeros):
     """
     Lista todos los pasajes registrados junto con sus datos
@@ -365,6 +441,11 @@ def listarPasajes(pasajes, pasajeros):
             f"CÓDIGO: {nPasaje},  PASAJERO: {datos["dni"]} {nombre},  VUELO: {datos["vuelo"]},  CLASE: {datos["clase"].capitalize()},  ASIENTO: {datos["asiento"]}"
         )
     return
+
+def nombrePasajero(pasajeros, dni):
+    if dni in pasajeros:
+        nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
+        return nombre
 
 
 def eliminarPasajero(pasajeros, pasajes):

@@ -308,7 +308,7 @@ vuelos = {
     "VU032": {
         "Fecha": "13/10/2024 | 09:00",
         "Origen": "La Plata (Buenos Aires)",
-        "Destino": "Ciudad Autónoma de Buenos Aires (CABA)",
+        "Destino": "Santa Fe",
         "Avion": "LV-BRD",
     },
 }
