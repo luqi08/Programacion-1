@@ -125,6 +125,11 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
     seleccionar una clase y asiento, y registrar los datos del pasajero para crear un pasaje.
+
+    Args:
+    - pasajeros (dict): Información sobre los pasajeros.
+    - pasajes (dict): Información sobre los pasajes y asientos ocupados.
+    - vuelos (dict): Información sobre los vuelos.
     """
     destinos = {
         "1": "Buenos Aires",
@@ -191,24 +196,19 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         print(f"[{idx}] {vuelo_info['Fecha']} | Origen: {vuelo_info['Origen']}")
 
     while True:
-        try:
-            seleccion = int(
-                input("Seleccione el número del vuelo: ")
-            )  # Pedimos el número del vuelo
-            if (
-                1 <= seleccion <= len(vuelos_lista)
-            ):  # Verificamos que el número esté en el rango válido
-                vuelo_seleccionado = vuelos_lista[seleccion - 1][
-                    0
-                ]  # Obtenemos el código del vuelo
-                vuelo = vuelos_lista[seleccion - 1][
-                    1
-                ]  # Obtenemos la información del vuelo
+        seleccion = input("Seleccione el número del vuelo: ")  # Pedimos el número del vuelo
+
+        if seleccion.isdigit():  # Verificamos que la entrada sea un número
+            seleccion = int(seleccion)
+
+            if 1 <= seleccion <= len(vuelos_lista):  # Verificamos que el número esté en el rango válido
+                vuelo_seleccionado = vuelos_lista[seleccion - 1][0]  # Obtenemos el código del vuelo
                 break
             else:
                 input("Selección inválida. Presione ENTER para volver a seleccionar.")
-        except ValueError:
+        else:
             input("Entrada inválida. Presione ENTER para volver a intentar.")
+
 
     # Selección de clase
     while True:
@@ -356,6 +356,21 @@ def listarPasajes(pasajes, pasajeros):
 
 
 def nombrePasajero(pasajeros: dict, dni: int) -> str:
+    """
+    Obtiene el nombre completo de un pasajero a partir de su DNI.
+
+    Esta función busca el pasajero en el diccionario de pasajeros utilizando el DNI 
+    como clave y devuelve una cadena con el nombre y apellido concatenados.
+
+    Args:
+    pasajeros (dict): Un diccionario que contiene la información de los pasajeros.
+    dni (int): El DNI del pasajero que se desea buscar.
+
+    Retorna:
+    str: El nombre completo del pasajero en formato 'Nombre Apellido' si el DNI existe en el diccionario.
+    
+    None: Si el DNI no se encuentra en el diccionario de pasajeros.
+    """
     if dni in pasajeros:
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
