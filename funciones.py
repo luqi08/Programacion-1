@@ -569,7 +569,7 @@ def modificarPasajero(pasajeros: dict) -> None:
     return
 
 
-def eliminarPasajero(pasajeros: dict, pasajes: dict) -> none:
+def eliminarPasajero(pasajeros: dict, pasajes: dict) -> None:
     """
     Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -615,7 +615,7 @@ def eliminarPasajero(pasajeros: dict, pasajes: dict) -> none:
 # ----------------------------------------------------------------------------------------------
 # VUELOS
 # ----------------------------------------------------------------------------------------------
-def listarVuelos(vuelos: dict) -> none:
+def listarVuelos(vuelos: dict) -> None:
     """
     Lista todos los vuelos registrados junto con sus datos
 
@@ -632,7 +632,7 @@ def listarVuelos(vuelos: dict) -> none:
 # ----------------------------------------------------------------------------------------------
 # AVIONES
 # ----------------------------------------------------------------------------------------------
-def listarAviones(aviones: dict) -> none:
+def listarAviones(aviones: dict) -> None:
     """
     Lista todos los aviones registrados junto con sus datos
 
