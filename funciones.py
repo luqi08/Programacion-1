@@ -380,62 +380,62 @@ def nombrePasajero(pasajeros: dict, dni: int) -> str:
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
 
-        #   def modificarPasaje(pasajes):
-        """
-        Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
-        dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
-        solicita acciones al usuario.
+# def modificarPasaje(pasajes):
+#     """
+#     Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
+#     dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
+#     solicita acciones al usuario.
 
-        Args:
-        - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
-        """
-        while True:
-            codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
-            if codigoPasaje == 2:
-                exit()
-            elif codigoPasaje not in pasajes:
-                print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
-            else:
-                print("--------------------------")
-                mostrarPasaje(codigoPasaje)
-                print("--------------------------")
-                while True:
-                    print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
-                    print("[2] CAMBIAR CLASE")
-                    print("[3] SALIR")
-                    opcion = int(input("SELECCIONE UNA OPCION: "))
-                    if opcion == 1:
-                        print()
-                        print(
-                            f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                        )
-                        if esEjecutiva(pasajes, codigoPasaje):
-                            mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
-                            cambiarAsiento(codigoPasaje, matrizEjecutiva)
-                        else:
-                            mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
-                            cambiarAsiento(codigoPasaje, matrizEconomica)
-                        print()
-                        print(
-                            f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                        )
-                        break
-                    elif opcion == 2:
-                        while True:
-                            print("[1] ECONÓMICA")
-                            print("[2] EJECUTIVA")
-                            opcion = int(input("SELECCIONE UNA OPCION: "))
-                            if opcion == 1:
-                                ...
-                            elif opcion == 2:
-                                ...
-                            else:
-                                print("INGRESE UN VALOR EN EL RANGO")
-                    elif opcion == 3:
-                        exit()
-                    else:
-                        print("INGRESE UN VALOR EN EL RANGO")
-                break
+#     Args:
+#     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
+#     """
+#     while True:
+#         codigoPasaje = int(input("INGRESE EL CODIGO DEL PASAJE O [2] PARA SALIR: "))
+#         if codigoPasaje == 2:
+#             exit()
+#         elif codigoPasaje not in pasajes:
+#             print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
+#         else:
+#             print("--------------------------")
+#             mostrarPasaje(codigoPasaje)
+#             print("--------------------------")
+#             while True:
+#                 print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
+#                 print("[2] CAMBIAR CLASE")
+#                 print("[3] SALIR")
+#                 opcion = int(input("SELECCIONE UNA OPCION: "))
+#                 if opcion == 1:
+#                     print()
+#                     print(
+#                         f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+#                     )
+#                     if esEjecutiva(pasajes, codigoPasaje):
+#                         mostrarMatriz(matrizEjecutiva, pasajes, codigoPasaje)
+#                         cambiarAsiento(codigoPasaje, matrizEjecutiva)
+#                     else:
+#                         mostrarMatriz(matrizEconomica, pasajes, codigoPasaje)
+#                         cambiarAsiento(codigoPasaje, matrizEconomica)
+#                     print()
+#                     print(
+#                         f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
+#                     )
+#                     break
+#                 elif opcion == 2:
+#                     while True:
+#                         print("[1] ECONÓMICA")
+#                         print("[2] EJECUTIVA")
+#                         opcion = int(input("SELECCIONE UNA OPCION: "))
+#                         if opcion == 1:
+#                             ...
+#                         elif opcion == 2:
+#                             ...
+#                         else:
+#                             print("INGRESE UN VALOR EN EL RANGO")
+#                 elif opcion == 3:
+#                     exit()
+#                 else:
+#                     print("INGRESE UN VALOR EN EL RANGO")
+#             break
 
 
 def eliminarPasaje(dni: int, pasajes: dict) -> None:
