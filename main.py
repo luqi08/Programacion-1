@@ -41,14 +41,22 @@ def subMenuPasajes():
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
-            funciones.comprarPasaje(datos_precargados.pasajeros, datos_precargados.pasajes, datos_precargados.vuelos)
+            funciones.comprarPasaje(
+                datos_precargados.pasajeros,
+                datos_precargados.pasajes,
+                datos_precargados.vuelos,
+            )
         elif opcion_submenu == "2":  # Listar Pasajes
-            funciones.listarPasajes(datos_precargados.pasajes, datos_precargados.pasajeros)
+            funciones.listarPasajes(
+                datos_precargados.pasajes, datos_precargados.pasajeros
+            )
         elif opcion_submenu == "3":  # Modificar Pasaje
             print("Ingrese el número de boleto: ")
-            #funciones.modificarPasaje(datos_precargados.pasajeros)
+            # funciones.modificarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            funciones.eliminarPasajero(datos_precargados.pasajeros, datos_precargados.pasajes)
+            funciones.eliminarPasajero(
+                datos_precargados.pasajeros, datos_precargados.pasajes
+            )
     return
 
 
