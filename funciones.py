@@ -163,8 +163,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         print("---------------------------")
         print("DESTINOS DISPONIBLES")
         print("---------------------------")
-        for key, value in destinos.items():
-            print(f"[{key}] {value}")
+        for clave, destino in destinos.items():
+            print(f"[{clave}] {destino}")
         print("[0] Volver al Menú Principal")
         print()
 
@@ -179,7 +179,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
 
     # Filtrar vuelos disponibles para el destino seleccionado
     vuelosDestino = {
-        key: vuelo for key, vuelo in vuelos.items() if vuelo["Destino"] == destino
+        clave: vuelo for clave, vuelo in vuelos.items() if vuelo["Destino"] == destino
     }
 
     if not vuelosDestino:
@@ -192,8 +192,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         vuelosDestino.items()
     )  # Convertimos el diccionario en una lista de tuplas
 
-    for idx, (vueloId, vueloInfo) in enumerate(vuelosLista, start=1):
-        print(f"[{idx}] {vueloInfo['Fecha']} | Origen: {vueloInfo['Origen']}")
+    for indice, (vueloId, vueloInfo) in enumerate(vuelosLista, start=1):
+        print(f"[{indice}] {vueloInfo['Fecha']} | Origen: {vueloInfo['Origen']}")
 
     while True:
         seleccion = input(
