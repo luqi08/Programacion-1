@@ -168,32 +168,32 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
         print("[0] Volver al Menú Principal")
         print()
 
-        opcion_destino = input("Seleccione un destino: ")
-        if opcion_destino == "0":
+        opcionDestino = input("Seleccione un destino: ")
+        if opcionDestino == "0":
             return  # Volver al menú principal
-        elif opcion_destino in destinos:
-            destino = destinos[opcion_destino]
+        elif opcionDestino in destinos:
+            destino = destinos[opcionDestino]
             break
         else:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
 
     # Filtrar vuelos disponibles para el destino seleccionado
-    vuelos_destino = {
+    vuelosDestino = {
         key: vuelo for key, vuelo in vuelos.items() if vuelo["Destino"] == destino
     }
 
-    if not vuelos_destino:
+    if not vuelosDestino:
         print(f"No hay vuelos disponibles para {destino}.")
         return
 
     # Seleccionar vuelo
     print("\nVuelos disponibles para", destino)
-    vuelos_lista = list(
-        vuelos_destino.items()
+    vuelosLista = list(
+        vuelosDestino.items()
     )  # Convertimos el diccionario en una lista de tuplas
 
-    for idx, (vuelo_id, vuelo_info) in enumerate(vuelos_lista, start=1):
-        print(f"[{idx}] {vuelo_info['Fecha']} | Origen: {vuelo_info['Origen']}")
+    for idx, (vueloId, vueloInfo) in enumerate(vuelosLista, start=1):
+        print(f"[{idx}] {vueloInfo['Fecha']} | Origen: {vueloInfo['Origen']}")
 
     while True:
         seleccion = input(
@@ -204,9 +204,9 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             seleccion = int(seleccion)
 
             if (
-                1 <= seleccion <= len(vuelos_lista)
+                1 <= seleccion <= len(vuelosLista)
             ):  # Verificamos que el número esté en el rango válido
-                vuelo_seleccionado = vuelos_lista[seleccion - 1][
+                vueloSeleccionado = vuelosLista[seleccion - 1][
                     0
                 ]  # Obtenemos el código del vuelo
                 break
@@ -219,10 +219,10 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     while True:
         clase = input("Seleccione la clase del pasaje ([1] Primera, [2] Económica): ")
         if clase == "1":
-            clase_seleccionada = "primera"
+            claseSeleccionada = "primera"
             break
         elif clase == "2":
-            clase_seleccionada = "economica"
+            claseSeleccionada = "economica"
             break
         else:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -239,8 +239,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     # Crear el nuevo pasaje
     pasajes[nuevo_id] = {
         "dni": dni,
-        "vuelo": vuelo_seleccionado,
-        "clase": clase_seleccionada,
+        "vuelo": vueloSeleccionado,
+        "clase": claseSeleccionada,
         "asiento": asiento,
     }
 
