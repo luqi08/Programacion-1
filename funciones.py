@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
-def crearMatriz(filas, columnas, relleno):
+def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
 
@@ -16,7 +16,7 @@ def crearMatriz(filas, columnas, relleno):
     return [[relleno] * columnas for fila in range(filas)]
 
 
-def letraNumero(letra):
+def letraNumero(letra: str) -> int:
     """
     Convierte una letra en su correspondiente número para indexación de matriz.
 
@@ -41,7 +41,7 @@ def letraNumero(letra):
     return letra
 
 
-def mostrarMatriz(matriz, pasaje, codigo):
+def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> none:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -99,7 +99,7 @@ def mostrarMatriz(matriz, pasaje, codigo):
     return
 
 
-def esEjecutiva(pasajes, codigo):
+def esEjecutiva(pasajes: dict, codigo: str) -> bool:
     """
     Verifica si un asiento pertenece a la clase ejecutiva o no.
 
@@ -243,7 +243,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     return pasajes
 
 
-def registrarDatos(pasajeros):
+def registrarDatos(pasajeros: dict) -> int:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -251,6 +251,9 @@ def registrarDatos(pasajeros):
 
     Args:
     - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
+
+    Returns:
+    - dni (int): Numero dni para identificar al pasajero.
     """
     prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     nombre = ""
@@ -352,7 +355,7 @@ def listarPasajes(pasajes, pasajeros):
     return
 
 
-def nombrePasajero(pasajeros, dni):
+def nombrePasajero(pasajeros: dict, dni: int) -> str:
     if dni in pasajeros:
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
@@ -416,7 +419,7 @@ def nombrePasajero(pasajeros, dni):
                 break
 
 
-def eliminarPasaje(dni, pasajes):
+def eliminarPasaje(dni: int, pasajes: dict) -> none:
     """
     Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
 
@@ -434,7 +437,7 @@ def eliminarPasaje(dni, pasajes):
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def listarPasajeros(pasajeros: dict):
+def listarPasajeros(pasajeros: dict) -> none:
     """
     Lista todos los pasajeros registrados junto con su DNI y nombre completo.
 
@@ -446,7 +449,7 @@ def listarPasajeros(pasajeros: dict):
     return
 
 
-def modificarPasajero(pasajeros: dict):
+def modificarPasajero(pasajeros: dict) -> none:
     """
     Permite modificar los datos de un pasajero identificado por su DNI.
 
@@ -547,7 +550,7 @@ def modificarPasajero(pasajeros: dict):
     return
 
 
-def eliminarPasajero(pasajeros, pasajes):
+def eliminarPasajero(pasajeros: dict, pasajes: dict) -> none:
     """
     Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -593,7 +596,7 @@ def eliminarPasajero(pasajeros, pasajes):
 # ----------------------------------------------------------------------------------------------
 # VUELOS
 # ----------------------------------------------------------------------------------------------
-def listarVuelos(vuelos: dict):
+def listarVuelos(vuelos: dict) -> none:
     """
     Lista todos los vuelos registrados junto con sus datos
 
@@ -610,7 +613,7 @@ def listarVuelos(vuelos: dict):
 # ----------------------------------------------------------------------------------------------
 # AVIONES
 # ----------------------------------------------------------------------------------------------
-def listarAviones(aviones: dict):
+def listarAviones(aviones: dict) -> none:
     """
     Lista todos los aviones registrados junto con sus datos
 
