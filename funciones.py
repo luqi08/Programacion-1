@@ -438,7 +438,7 @@ def nombrePasajero(pasajeros: dict, dni: int) -> str:
 #             break
 
 
-def eliminarPasaje(dni: int, pasajes: dict) -> None:
+def eliminarPasaje(pasajes: dict) -> None:
     """
     Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
 
@@ -446,10 +446,23 @@ def eliminarPasaje(dni: int, pasajes: dict) -> None:
     - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
+    while True:
+        pasaje = input("Ingrese número de pasaje o [0] para salir: ")
+        if pasaje == "0":
+            return
+        elif pasaje == "":
+            print("No ha ingresado el número de pasaje")
+        elif pasaje not in pasajes.keys():
+            print("No se encontró ningún pasaje con el número ingresado")
+        else:
+            del pasajes[pasaje]
+            print()
+            print(f"Pasaje número: {pasaje}, eliminado")
+            return
     for codigo, datos in list(pasajes.items()):
         if datos["dni"] == dni:
             del pasajes[codigo]
-            print(f"El pasaje {codigo} del pasajero con DNI {dni} ha sido eliminado.")
+            print(f"El pasaje {codigo} del pasajero con DNI: {dni}, ha sido eliminado.")
             return
 
 
@@ -569,7 +582,7 @@ def modificarPasajero(pasajeros: dict) -> None:
     return
 
 
-def eliminarPasajero(pasajeros: dict, pasajes: dict) -> None:
+def eliminarPasajero(pasajeros: dict) -> None:
     """
     Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -578,8 +591,9 @@ def eliminarPasajero(pasajeros: dict, pasajes: dict) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
+        print()
         dni = input(
-            "Ingrese DNI de pasajero para eliminar su información o [0] para salir: "
+            "Ingrese DNI del pasajero o [0] para salir: "
         )
         if dni == "0":
             return
@@ -588,12 +602,18 @@ def eliminarPasajero(pasajeros: dict, pasajes: dict) -> None:
         elif not dni.isnumeric():
             print("Solo se aceptan números")
         elif int(dni) not in pasajeros.keys():
-            print("El pasajero no está registrado")
+            print()
+            print("El DNI {dni} no se encuentra registrado")
         else:
             dni = int(dni)
+            nombre = pasajeros[dni]["nombre"]
+            apellido = pasajeros[dni]["apellido"]
             break
 
     while True:
+        print()
+        print(f"Pasajero: {nombre} {apellido} | {dni}")
+        print()
         print("¿Está seguro de eliminarlo?")
         print("[1] Si")
         print("[2] Volver")
@@ -601,14 +621,13 @@ def eliminarPasajero(pasajeros: dict, pasajes: dict) -> None:
         if opcion == "1":
             # Eliminar al pasajero
             del pasajeros[dni]
+            print()
             print(f"El pasajero con DNI {dni} ha sido eliminado.")
-            # Eliminar su pasaje asociado
-            eliminarPasaje(dni, pasajes)
             return
         elif opcion == "2":
             break
         else:
-            print("Ingrese una opción válida")
+            print("Opción inválida")
     return
 
 

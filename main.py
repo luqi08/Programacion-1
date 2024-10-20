@@ -54,22 +54,22 @@ def subMenuPasajes():
             print("Ingrese el número de boleto: ")
             # funciones.modificarPasaje(datos_precargados.pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            funciones.eliminarPasajero(
-                datos_precargados.pasajeros, datos_precargados.pasajes
-            )
+            funciones.eliminarPasaje(datos_precargados.pasajes)
     return
 
 
 def subMenuPasajeros():
     while True:
-        opciones = 3
+        opciones = 5
         while True:
             print()
             print("---------------------------")
             print("MENÚ PASAJEROS             ")
             print("---------------------------")
-            print("[1] Listar")
-            print("[2] Modificar")
+            print("[1] Registrar")
+            print("[2] Listar")
+            print("[3] Modificar")
+            print("[4] Eliminar")
             print("---------------------------")
             print("[0] Volver al menú principal")
             print()
@@ -81,10 +81,15 @@ def subMenuPasajeros():
         print()
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal
-        elif opcion_submenu == "1":  # Listar Pasajeros
+
+        elif opcion_submenu == "1":  # Registrar Pasajero
+            ...
+        elif opcion_submenu == "2":  # Listar Pasajeros
             funciones.listarPasajeros(datos_precargados.pasajeros)
-        elif opcion_submenu == "2":  # Modificar Pasajero
+        elif opcion_submenu == "3":  # Modificar Pasajero
             funciones.modificarPasajero(datos_precargados.pasajeros)
+        elif opcion_submenu == "4":  # Eliminar Pasajero
+            funciones.eliminarPasajero(datos_precargados.pasajeros)
     return
 
 
@@ -145,7 +150,6 @@ def subMenuAviones():
         print()
         if opcion_submenu == "0":  # Volver al menú principal
             break
-
         elif opcion_submenu == "1":  # Registrar Avión
             ...
         elif opcion_submenu == "2":  # Listar Aviones
