@@ -121,6 +121,24 @@
 # ----------------------------------------------------------------------------------------------
 # PASAJES
 # ----------------------------------------------------------------------------------------------
+
+
+def buscarAsiento(matriz, selecto):
+    """
+    Esta función se encarga de buscar el asiento selecto  entre los asientos disponibles entre todos los disponibles en la matriz de asientos.
+    Utiliza un iterable while para recorrer la matriz hasta encontrar el asiento. En caso de estar vacío devuelve True y se compra dicho asiento,
+    en caso contrario, devolverá False y se le pedirá otro asiento al comprador.
+    """
+
+    contador = 0
+    for asiento in matriz:
+        for asiento in matriz[contador]:
+            if asiento == selecto:
+                return True
+        contador = contador + 1
+    return False
+
+
 def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
@@ -380,6 +398,7 @@ def nombrePasajero(pasajeros: dict, dni: int) -> str:
         nombre = f"{pasajeros[dni]['nombre']} {pasajeros[dni]['apellido']}"
         return nombre
 
+
 # def modificarPasaje(pasajes):
 #     """
 #     Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
@@ -592,9 +611,7 @@ def eliminarPasajero(pasajeros: dict) -> None:
     """
     while True:
         print()
-        dni = input(
-            "Ingrese DNI del pasajero o [0] para salir: "
-        )
+        dni = input("Ingrese DNI del pasajero o [0] para salir: ")
         if dni == "0":
             return
         elif dni == "":
