@@ -703,10 +703,19 @@ def registrarAviones(aviones):
             claseEconomica = ""
 
         elif opcion == "5":
-            aviones[matricula] = {
-                "modelo": modelo,
-                "asientos": {"primera": primeraClase, "econocmica": claseEconomica},
-            }
+            if (
+                modelo != ""
+                and matricula != ""
+                and primeraClase != ""
+                and claseEconomica != ""
+            ):
+                aviones[matricula] = {
+                    "modelo": modelo,
+                    "asientos": {"primera": primeraClase, "econocmica": claseEconomica},
+                }
+                break
+            else:
+                print("Aun faltan datos por completar")
 
         else:
             print("Esa opcion no existe")

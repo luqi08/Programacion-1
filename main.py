@@ -160,7 +160,7 @@ def subMenuAviones():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Avión
-            ...
+            funciones.registrarAviones(datos_precargados.aviones)
         elif opcion_submenu == "2":  # Listar Aviones
             funciones.listarAviones(datos_precargados.aviones)
         elif opcion_submenu == "3":  # Modificar Aviones
