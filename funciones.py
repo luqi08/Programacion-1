@@ -696,26 +696,28 @@ def registrarAviones(aviones):
                 for asientos in range(columnas):
                     matriz[asiento].append(0)
 
-        elif opcion == "4":
+        elif opcion == "5":
             modelo = ""
             matricula = ""
             primeraClase = ""
             claseEconomica = ""
 
-        elif opcion == "5":
+        elif opcion == "6":
             if (
                 modelo != ""
                 and matricula != ""
                 and primeraClase != ""
                 and claseEconomica != ""
             ):
+                print("Aun quedan datos por completar")
+            else:
                 aviones[matricula] = {
                     "modelo": modelo,
                     "asientos": {"primera": primeraClase, "econocmica": claseEconomica},
                 }
                 break
-            else:
-                print("Aun faltan datos por completar")
+        elif opcion == 0:
+            break
 
         else:
             print("Esa opcion no existe")
