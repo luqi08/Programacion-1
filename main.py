@@ -60,8 +60,7 @@ def subMenuPasajes():
                 datos_precargados.pasajes, datos_precargados.pasajeros
             )
         elif opcion_submenu == "3":  # Modificar Pasaje
-            print("Ingrese el número de boleto: ")
-            # funciones.modificarPasaje(datos_precargados.pasajeros)
+            funciones.modificarPasaje(datos_precargados.pasajes, datos_precargados.vuelos)
         elif opcion_submenu == "4":  # Eliminar Pasaje
             funciones.eliminarPasaje(datos_precargados.pasajes)
     return
