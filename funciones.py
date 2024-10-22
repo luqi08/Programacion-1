@@ -31,7 +31,7 @@ def ingresoEntero(palabra: str) -> int:
 def mostrarPasaje(pasajes, codigoPasaje):
     print(f"DNI: {pasajes[codigoPasaje]['dni']}")
     print(f"Vuelo: {pasajes[codigoPasaje]['vuelo']}")
-    print(f"Clase: {pasajes[codigoPasaje]['clase']}".capitalize())
+    print(f"Clase: {pasajes[codigoPasaje]['clase'].capitalize()}")
     print(f"Asiento: {pasajes[codigoPasaje]['asiento']}")
 
 def esEjecutiva(pasajes: dict, codigo: str) -> bool:
