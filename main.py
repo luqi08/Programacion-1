@@ -10,6 +10,7 @@ Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 # MÓDULOS
 # ----------------------------------------------------------------------------------------------
 import time
+import os
 import funciones
 import datos_precargados
 
@@ -17,6 +18,14 @@ import datos_precargados
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+def limpiarTerminal() -> None:
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+    return
+
+
 def subMenuPasajes():
     while True:
         opciones = 5
@@ -171,6 +180,7 @@ def main():
     while True:
         opciones = 5
         while True:
+            limpiarTerminal()
             print()
             print("---------------------------")
             print("MENÚ DEL SISTEMA           ")
