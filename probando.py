@@ -1,6 +1,3 @@
-
-import datos_precargados
-
 def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
@@ -114,8 +111,14 @@ def cambiarAsiento(codigoPasaje, matriz, pasajes):
     for indice, fila in enumerate(matriz):
         letra = chr(65 + indice)
         listaLetras.append(letra)
-    
-    #SELECCIONAR ASIENTO
+
+    # Guardar asiento anterior antes de actualizarlo
+    asientoAnterior = pasajes[codigoPasaje]["asiento"]
+    letraAnterior = asientoAnterior[0]
+    numero_asientoAnterior = int(asientoAnterior[1:])
+    filaAnterior = letraNumero(letraAnterior.capitalize())
+
+    # SELECCIONAR NUEVO ASIENTO
     while True:
         while True:
             filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
@@ -131,23 +134,19 @@ def cambiarAsiento(codigoPasaje, matriz, pasajes):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
                 break
-            
+
         if estaOcupado(fila, filaColumna, matriz):
             print("Asiento ocupado... Reintente")
         else:
             break
 
-    #MODIFICAR DICCIONARIO  Y MATRIZ
+    # MODIFICAR DICCIONARIO Y MATRIZ
     pasajes[codigoPasaje]["asiento"] = filaAsiento.capitalize() + str(filaColumna)
     filaAsiento = letraNumero(filaAsiento.capitalize())
     matriz[filaAsiento][filaColumna - 5] = 1
 
-    asiento = pasajes[codigoPasaje]["asiento"]
-    letra = asiento[0]
-    numero_asiento = int(asiento[1:]) - 6
-    letraPosicion = letraNumero(letra.capitalize())
-    print(f"posicion letra: {letraPosicion} y columna {numero_asiento}")
-    matriz[letraPosicion][numero_asiento] = 0
+    # Ahora poner en 0 el asiento anterior
+    matriz[filaAnterior][numero_asientoAnterior - 5] = 0
     return
 
 
@@ -271,7 +270,7 @@ vuelos = {
 }
 
 pasajes = {
-    "PA001": {"dni": 47307151, "vuelo": "VU001", "clase": "primera", "asiento": "A1"}
+    "PA001": {"dni": 47307151, "vuelo": "VU001", "clase": "primera", "asiento": "D5"}
 }
 
 modificarPasaje(pasajes, vuelos)
