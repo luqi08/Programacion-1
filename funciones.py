@@ -599,6 +599,9 @@ def registrarAviones(aviones):
         elif opcion == "2":
             print("Escriba la matricula del avion")
             matricula = input()
+            while matricula in aviones.keys():
+                print("Dicha matricula ya ha sido ingresada.")
+                matricula = input("Intentelo nuevamente: ")
             print("Matricula ingresada")
         elif opcion == "3":
             print("Indique con cuantos asientos de primera clase contara el avion")
