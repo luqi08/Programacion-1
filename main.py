@@ -20,9 +20,9 @@ import datos_precargados
 # ----------------------------------------------------------------------------------------------
 def limpiarTerminal() -> None:
     if os.name == "nt":
-        os.system("cls")
+        os.system("cls")  # Windows
     else:
-        os.system("clear")
+        os.system("clear")  # Mac/Linux
     return
 
 
@@ -92,7 +92,7 @@ def subMenuPasajeros():
             break  # Volver al ciclo principal
 
         elif opcion_submenu == "1":  # Registrar Pasajero
-            ...
+            funciones.registrarPasajero(datos_precargados.pasajeros)
         elif opcion_submenu == "2":  # Listar Pasajeros
             funciones.listarPasajeros(datos_precargados.pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasajero
