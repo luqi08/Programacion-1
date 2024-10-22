@@ -1,7 +1,32 @@
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+def ingresoTexto(palabra: str) -> str:
+    """
+    Recibe un str para el mensaje de ingreso de dato
+    Filtra todo lo que no sea caracteres alfabéticos
+    """
+    ingreso = input(f"Ingrese {palabra}: ")
+    while ingreso.isalpha() == False:
+        print()
+        print("INGRESO INVÁLIDO")
+        print()
+        ingreso = input(f"Ingrese {palabra}: ")
+    return ingreso
 
+
+def ingresoEntero(palabra: str) -> int:
+    """
+    Recibe un str para el mensaje de ingreso de dato
+    Filtra todo lo que no sea caracteres numéricos enteros
+    """
+    ingreso = input(f"Ingrese {palabra}: ")
+    while ingreso.isnumeric() == False:
+        print()
+        print("INGRESO INVÁLIDO")
+        print()
+        ingreso = input(f"Ingrese {palabra}: ")
+    return int(ingreso)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -206,11 +231,6 @@ def eliminarPasaje(pasajes: dict) -> None:
             print()
             print(f"Pasaje número: {pasaje}, eliminado")
             return
-    for codigo, datos in list(pasajes.items()):
-        if datos["dni"] == dni:
-            del pasajes[codigo]
-            print(f"El pasaje {codigo} del pasajero con DNI: {dni}, ha sido eliminado.")
-            return
 
 
 # ----------------------------------------------------------------------------------------------
@@ -269,7 +289,7 @@ def registrarPasajero(pasajeros: dict) -> None:
             dni = ""
             break
         else:
-            print("Esa opcion no existe")
+            print("OPCIÓN INVÁLIDA")
     print("Sus datos")
     print("----------------")
     print(f"Nombre: {nombre}")
@@ -279,34 +299,6 @@ def registrarPasajero(pasajeros: dict) -> None:
     pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
     print("Pasajero registrado")
     return
-
-
-def ingresoTexto(palabra: str) -> str:
-    """
-    Recibe un str para el mensaje de ingreso de dato
-    Filtra todo lo que no sea caracteres alfabéticos
-    """
-    ingreso = input(f"Ingrese {palabra}: ")
-    while ingreso.isalpha() == False:
-        print()
-        print("INGRESO INVÁLIDO")
-        print()
-        ingreso = input(f"Ingrese {palabra}: ")
-    return ingreso
-
-
-def ingresoEntero(palabra: str) -> int:
-    """
-    Recibe un str para el mensaje de ingreso de dato
-    Filtra todo lo que no sea caracteres numéricos enteros
-    """
-    ingreso = input(f"Ingrese {palabra}: ")
-    while ingreso.isnumeric() == False:
-        print()
-        print("INGRESO INVÁLIDO")
-        print()
-        ingreso = input(f"Ingrese {palabra}: ")
-    return int(ingreso)
 
 
 def listarPasajeros(pasajeros: dict) -> None:
@@ -329,8 +321,6 @@ def modificarPasajero(pasajeros: dict) -> None:
     - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
     - dni (int): DNI del pasajero que se desea modificar.
     """
-    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-
     while True:
         dni = input("Ingrese DNI o [0] Para volver al Menú Anterior: ")
         if dni.isnumeric() == True:  # Verificar ingreso válido
@@ -361,42 +351,12 @@ def modificarPasajero(pasajeros: dict) -> None:
         opcion = input("Seleccione una opcion: ")
 
         if opcion == "1":
-            escribirNombre = input("Ingrese Nombre: ").capitalize()
-            for letra in escribirNombre:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirNombre == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirNombre = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirNombre:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            pasajeros[dni]["nombre"] = escribirNombre
+            nombre = ingresoTexto("Nombre").capitalize()
+            pasajeros[dni]["nombre"] = nombre
 
         elif opcion == "2":
-            escribirApellido = input("Ingrese Apellido: ").capitalize()
-            for letra in escribirApellido:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirApellido == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirApellido = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirApellido:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            pasajeros[dni]["apellido"] = escribirApellido
+            apellido = ingresoTexto("Apellido").capitalize()
+            pasajeros[dni]["apellido"] = apellido
 
         elif opcion == "3":
             print()
