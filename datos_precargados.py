@@ -252,7 +252,7 @@ vuelos = {
     "VU006": {
         "Fecha": "08/10/2024 | 06:00",
         "Origen": "Santiago del Estero",
-        "Destino": "San Miguel de Tucumán (Tucumán)",
+        "Destino": "San Miguel de Tucumán",
         "Avion": "LV-GHT",
         "Asientos": {
             "Primera": [
@@ -273,8 +273,8 @@ vuelos = {
     },
     "VU007": {
         "Fecha": "08/10/2024 | 08:00",
-        "Origen": "San Miguel de Tucumán (Tucumán)",
-        "Destino": "San Fernando del Valle de Catamarca",
+        "Origen": "San Miguel de Tucumán",
+        "Destino": "Catamarca",
         "Avion": "LV-HJK",
         "Asientos": {
             "Primera": [
@@ -295,7 +295,7 @@ vuelos = {
     },
     "VU008": {
         "Fecha": "08/10/2024 | 10:00",
-        "Origen": "San Fernando del Valle de Catamarca",
+        "Origen": "Catamarca",
         "Destino": "La Rioja",
         "Avion": "LV-JLM",
         "Asientos": {
@@ -540,7 +540,7 @@ vuelos = {
     "VU019": {
         "Fecha": "10/10/2024 | 13:00",
         "Origen": "San Salvador de Jujuy",
-        "Destino": "San Fernando del Valle de Catamarca",
+        "Destino": "Catamarca",
         "Avion": "LV-KRS",
          "Asientos": {
             "Primera": [
@@ -561,7 +561,7 @@ vuelos = {
     },
     "VU020": {
         "Fecha": "10/10/2024 | 16:00",
-        "Origen": "San Fernando del Valle de Catamarca",
+        "Origen": "Catamarca",
         "Destino": "La Rioja",
         "Avion": "LV-LPQ",
          "Asientos": {
