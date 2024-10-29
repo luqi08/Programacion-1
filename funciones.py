@@ -2,6 +2,20 @@ from datetime import datetime
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
+    """
+    Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
+
+    Args:
+    - filas (int): Número de filas de la matriz.
+    - columnas (int): Número de columnas de la matriz.
+    - relleno (any): Valor con el que se llenará la matriz.
+
+    Returns:
+    - list: Matriz creada con las dimensiones y valores especificados.
+    """
+    return [[relleno] * columnas for fila in range(filas)]
+
 def contarAsientosDisponibles(vuelos, codigo_vuelo):
     """
     Calcula la cantidad de asientos disponibles (0) en la matriz de asientos de un vuelo.
@@ -516,11 +530,11 @@ def modificarPasaje(pasajes, vuelos):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = "PA" + input("INGRESE EL CODIGO DEL PASAJE O [0] PARA SALIR: ")
+        codigoPasaje = "PA" + input("Ingrese el codigo del pasaje o [0] para salir: ")
         if codigoPasaje == 'PA0':
-            exit()
+            return
         elif codigoPasaje not in pasajes:
-            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
+            print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
         else:
             print("--------------------------")
             mostrarPasaje(pasajes, codigoPasaje)
@@ -529,7 +543,7 @@ def modificarPasaje(pasajes, vuelos):
                 print("[1] Cambiar asiento dentro de la misma clase")
                 print("[2] Cambiar clase")
                 print("[3] Volver a Pasajes")
-                opcion = int(input("SELECCIONE UNA OPCION: "))
+                opcion = int(input("Selecciona una opcion: "))
 
                 if opcion == 1:
                     print()
@@ -574,7 +588,7 @@ def modificarPasaje(pasajes, vuelos):
                 elif opcion == 3:
                     break
                 else:
-                    print("INGRESE UN VALOR EN EL RANGO")
+                    print("Ingrese un valor en el rango")
             break
 
 
@@ -898,12 +912,19 @@ def registrarVuelo(vuelos: dict, aviones:dict):
         else:
             print("OPCIÓN INVÁLIDA")
 
+    matrizPrimera = crearMatriz(4,4,0)
+    matrizEconomica = crearMatriz(6,20,0)
+
     vuelos[codigo] = {
         "Fecha" : fecha,
         "Hora" : hora,
         "Origen" : origen,
         "Destino" : destino,
-        "Avion" : avion
+        "Avion" : avion,
+        "Asientos" : {
+            "Primera" : matrizPrimera,
+            "Economica" : matrizEconomica
+                      }
     }
 
     print("Sus datos")
