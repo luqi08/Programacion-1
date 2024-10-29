@@ -2,6 +2,28 @@ from datetime import datetime
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+def contarAsientosDisponibles(vuelos, codigo_vuelo):
+    """
+    Calcula la cantidad de asientos disponibles (0) en la matriz de asientos de un vuelo.
+
+    Args:
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
+    - codigo_vuelo (str): Código del vuelo en el cual contar asientos disponibles.
+
+    Returns:
+    - int: Cantidad total de asientos disponibles.
+    """
+    asientos_disponibles = 0
+    if codigo_vuelo in vuelos:
+        # Recorre cada clase
+        for clase, matriz_asientos in vuelos[codigo_vuelo]["Asientos"].items():
+            for fila in matriz_asientos:
+                asientos_disponibles += fila.count(0)
+    else:
+        print(f"El vuelo con código {codigo_vuelo} no existe.")
+    
+    return asientos_disponibles
+
 def ingresoTexto(palabra: str) -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
@@ -793,13 +815,14 @@ def listarVuelos(vuelos: dict) -> None:
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
     # Encabezado de la tabla
-    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10}")
-    print("-" * 93)
+    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10} | {'DISPONIBILIDAD':<10}")
+    print("-" * 115)
 
     # Filas de la tabla
     for nVuelo, datos in vuelos.items():
+        asientosDisponibles = contarAsientosDisponibles(vuelos, nVuelo)
         print(
-            f"{nVuelo:<5} | {datos['Fecha']:<10} | {datos['Hora']:<5} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10}"
+            f"{nVuelo:<5} | {datos['Fecha']:<10} | {datos['Hora']:<5} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10} | {asientosDisponibles:<10}"
         )
     return
 
