@@ -1,3 +1,4 @@
+from datetime import datetime
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
@@ -802,10 +803,10 @@ def listarVuelos(vuelos: dict) -> None:
         )
     return
 
-def modificarVuelo(vuelos: dict):
+def modificarVuelo(vuelos: dict, aviones:dict):
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():
@@ -818,6 +819,7 @@ def modificarVuelo(vuelos: dict):
     copiaHora = vuelos[codigo]['Hora']
     copiaOrigen = vuelos[codigo]['Origen']
     copiaDestino = vuelos[codigo]['Destino']
+    copiaAvion = vuelos[codigo]['Avion']
 
     while True:
         print("Modifique sus datos")
@@ -827,19 +829,38 @@ def modificarVuelo(vuelos: dict):
         print(f"[3] Hora: {vuelos[codigo]['Hora']}")
         print(f"[4] Origen: {vuelos[codigo]['Origen']}")
         print(f"[5] Destino: {vuelos[codigo]['Destino']}")
-        print("[6] Guardar")
-        print("[7] Cancelar")
+        print(f"[6] Avion: {vuelos[codigo]['Avion']}")
+        print("[7] Guardar")
+        print("[8] Cancelar")
         print("-----------------")
-        opcion = input("Seleccione una opcion: ")
+
+        opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            print('El codigo no puede modificarse')
+            print('El código no puede modificarse')
 
         elif opcion == "2":
-            vuelos[codigo]['Fecha'] = input()
+            while True:
+                fecha = input("Ingrese la fecha (dd/mm/yyyy): ")
+                try:
+                    # Intenta convertir la entrada a formato de fecha
+                    fechaFormateada = datetime.strptime(fecha, "%d/%m/%Y")
+                    # Si es válida, la almacena en el diccionario y sale del bucle
+                    vuelos[codigo]['Fecha'] = fechaFormateada.strftime("%d/%m/%Y")
+                    break
+                except ValueError:
+                    # Mensaje de error si el formato es incorrecto
+                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
 
         elif opcion == "3":
-            vuelos[codigo]['Hora'] = input()
+            while True:
+                hora = input("Ingrese la hora (hh:mm): ")
+                try:
+                    horaFormateada = datetime.strptime(hora, "%H:%M")
+                    vuelos[codigo]['Hora'] = horaFormateada.strftime("%H:%M")
+                    break
+                except ValueError:
+                    print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
             vuelos[codigo]['Origen'] = input().title()
@@ -848,13 +869,23 @@ def modificarVuelo(vuelos: dict):
             vuelos[codigo]['Destino'] = input().title()
 
         elif opcion == "6":
+            while True:
+                matricula = input().upper()
+                if matricula not in aviones.keys():
+                    print('El avion no esta registrado')
+                else:
+                    vuelos[codigo]['Avion'] = matricula
+                    break
+
+        elif opcion == "7":
             return
 
-        elif opcion == "7":  # Cancelar
+        elif opcion == "8":  # Cancelar
             vuelos[codigo]["Fecha"] = copiaFecha
             vuelos[codigo]["Hora"] = copiaHora
             vuelos[codigo]["Origen"] = copiaOrigen
             vuelos[codigo]["Destino"] = copiaDestino
+            vuelos[codigo]["Avion"] = copiaAvion
             break
 
         else:
@@ -866,6 +897,7 @@ def modificarVuelo(vuelos: dict):
     print(f"[3] Hora: {vuelos[codigo]['Hora']}")
     print(f"[4] Origen: {vuelos[codigo]['Origen']}")
     print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+    print(f"[6] Avion: {vuelos[codigo]['Avion']}")
     print("-----------------")
     print("Vuelo modificado correctamente")
     return
