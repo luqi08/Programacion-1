@@ -803,6 +803,98 @@ def listarVuelos(vuelos: dict) -> None:
         )
     return
 
+def registrarVuelo(vuelos: dict, aviones:dict):
+    codigo = 'VU0' + str(len(vuelos) + 1)
+    fecha = ''
+    hora = ''
+    origen = ''
+    destino = ''
+    avion = ''
+
+    while True:
+        print("Registre datos del vuelo")
+        print("-----------------")
+        print(f"[1] Codigo: {codigo}")
+        print(f"[2] Fecha: {fecha}")
+        print(f"[3] Hora: {hora}")
+        print(f"[4] Origen: {origen}")
+        print(f"[5] Destino: {destino}")
+        print(f"[6] Avion: {avion}")
+        print("[7] Guardar")
+        print("[8] Cancelar")
+        print("-----------------")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            print('El código no puede modificarse')
+
+        elif opcion == "2":
+            while True:
+                fecha = input("Ingrese la fecha (dd/mm/yyyy): ")
+                try:
+                    # Intenta convertir la entrada a formato de fecha
+                    fechaFormateada = datetime.strptime(fecha, "%d/%m/%Y")
+                    # Si es válida, la almacena en el diccionario y sale del bucle
+                    fecha = fechaFormateada.strftime("%d/%m/%Y")
+                    break
+                except ValueError:
+                    # Mensaje de error si el formato es incorrecto
+                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
+
+        elif opcion == "3":
+            while True:
+                hora = input("Ingrese la hora (hh:mm): ")
+                try:
+                    horaFormateada = datetime.strptime(hora, "%H:%M")
+                    hora = horaFormateada.strftime("%H:%M")
+                    break
+                except ValueError:
+                    print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
+
+        elif opcion == "4":
+            origen = input().title()
+
+        elif opcion == "5":
+            destino = input().title()
+
+        elif opcion == "6":
+            while True:
+                matricula = input().upper()
+                if matricula not in aviones.keys():
+                    print('El avion no esta registrado')
+                else:
+                    avion = matricula
+                    break
+
+        elif opcion == "7":
+            if fecha == '' or hora == '' or origen == '' or destino == '' or avion == '':
+                print('Quedan dantos sin completar')
+            else:
+                break
+        else:
+            print("OPCIÓN INVÁLIDA")
+
+    vuelos[codigo] = {
+        "Fecha" : fecha,
+        "Hora" : hora,
+        "Origen" : origen,
+        "Destino" : destino,
+        "Avion" : avion
+    }
+
+    print("Sus datos")
+    print("-----------------")
+    print(f"[1] Codigo: {codigo}")
+    print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
+    print(f"[3] Hora: {vuelos[codigo]['Hora']}")
+    print(f"[4] Origen: {vuelos[codigo]['Origen']}")
+    print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+    print(f"[6] Avion: {vuelos[codigo]['Avion']}")
+    print("-----------------")
+    print("Vuelo registrado correctamente")
+    return
+
 def modificarVuelo(vuelos: dict, aviones:dict):
     while True:
         print()
@@ -912,7 +1004,7 @@ def eliminarVuelo(vuelos: dict) -> None:
     """
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():

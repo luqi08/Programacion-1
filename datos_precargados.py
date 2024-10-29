@@ -281,7 +281,7 @@ vuelos = {
         "Fecha": "08/10/2024",
         "Hora": "08:00",
         "Origen": "San Miguel de Tucumán",
-        "Destino": "San Fernando del Valle de Catamarca",
+        "Destino": "Catamarca",
         "Avion": "LV-HJK",
         "Asientos": {
             "Primera": [
