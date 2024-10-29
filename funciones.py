@@ -802,6 +802,74 @@ def listarVuelos(vuelos: dict) -> None:
         )
     return
 
+def modificarVuelo(vuelos: dict):
+    while True:
+        print()
+        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        if codigo == "VU0":
+            return
+        elif codigo not in vuelos.keys():
+            print()
+            print(f"El Vuelo {codigo} no se encuentra registrado")
+        else:
+            break
+    
+    copiaFecha = vuelos[codigo]['Fecha']
+    copiaHora = vuelos[codigo]['Hora']
+    copiaOrigen = vuelos[codigo]['Origen']
+    copiaDestino = vuelos[codigo]['Destino']
+
+    while True:
+        print("Modifique sus datos")
+        print("-----------------")
+        print(f"[1] Codigo: {codigo}")
+        print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
+        print(f"[3] Hora: {vuelos[codigo]['Hora']}")
+        print(f"[4] Origen: {vuelos[codigo]['Origen']}")
+        print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+        print("[6] Guardar")
+        print("[7] Cancelar")
+        print("-----------------")
+        opcion = input("Seleccione una opcion: ")
+
+        if opcion == "1":
+            print('El codigo no puede modificarse')
+
+        elif opcion == "2":
+            vuelos[codigo]['Fecha'] = input()
+
+        elif opcion == "3":
+            vuelos[codigo]['Hora'] = input()
+
+        elif opcion == "4":
+            vuelos[codigo]['Origen'] = input().title()
+
+        elif opcion == "5":
+            vuelos[codigo]['Destino'] = input().title()
+
+        elif opcion == "6":
+            return
+
+        elif opcion == "7":  # Cancelar
+            vuelos[codigo]["Fecha"] = copiaFecha
+            vuelos[codigo]["Hora"] = copiaHora
+            vuelos[codigo]["Origen"] = copiaOrigen
+            vuelos[codigo]["Destino"] = copiaDestino
+            break
+
+        else:
+            print("OPCIÓN INVÁLIDA")
+    print("Sus datos")
+    print("-----------------")
+    print(f"[1] Codigo: {codigo}")
+    print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
+    print(f"[3] Hora: {vuelos[codigo]['Hora']}")
+    print(f"[4] Origen: {vuelos[codigo]['Origen']}")
+    print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+    print("-----------------")
+    print("Vuelo modificado correctamente")
+    return
+
 def eliminarVuelo(vuelos: dict) -> None:
     """
     Elimina un vuelo del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
