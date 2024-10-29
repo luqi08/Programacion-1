@@ -125,11 +125,11 @@ def subMenuVuelos():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Vuelos
-            ...
+            funciones.registrarVuelo(datos_precargados.vuelos, datos_precargados.aviones)
         elif opcion_submenu == "2":  # Listar Vuelos
             funciones.listarVuelos(datos_precargados.vuelos)
         elif opcion_submenu == "3":  # Modificar Vuelo
-            funciones.modificarVuelo(datos_precargados.vuelos)
+            funciones.modificarVuelo(datos_precargados.vuelos, datos_precargados.aviones)
         elif opcion_submenu == "4":  # Eliminar Vuelo
             funciones.eliminarVuelo(datos_precargados.vuelos)
     return

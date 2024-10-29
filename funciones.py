@@ -1,6 +1,43 @@
+from datetime import datetime
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
+    """
+    Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
+
+    Args:
+    - filas (int): Número de filas de la matriz.
+    - columnas (int): Número de columnas de la matriz.
+    - relleno (any): Valor con el que se llenará la matriz.
+
+    Returns:
+    - list: Matriz creada con las dimensiones y valores especificados.
+    """
+    return [[relleno] * columnas for fila in range(filas)]
+
+def contarAsientosDisponibles(vuelos, codigo_vuelo):
+    """
+    Calcula la cantidad de asientos disponibles (0) en la matriz de asientos de un vuelo.
+
+    Args:
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
+    - codigo_vuelo (str): Código del vuelo en el cual contar asientos disponibles.
+
+    Returns:
+    - int: Cantidad total de asientos disponibles.
+    """
+    asientos_disponibles = 0
+    if codigo_vuelo in vuelos:
+        # Recorre cada clase
+        for clase, matriz_asientos in vuelos[codigo_vuelo]["Asientos"].items():
+            for fila in matriz_asientos:
+                asientos_disponibles += fila.count(0)
+    else:
+        print(f"El vuelo con código {codigo_vuelo} no existe.")
+    
+    return asientos_disponibles
+
 def ingresoTexto(palabra: str) -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
@@ -423,11 +460,11 @@ def modificarPasaje(pasajes, vuelos):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = "PA" + input("INGRESE EL CODIGO DEL PASAJE O [0] PARA SALIR: ")
+        codigoPasaje = "PA" + input("Ingrese el codigo del pasaje o [0] para salir: ")
         if codigoPasaje == 'PA0':
-            exit()
+            return
         elif codigoPasaje not in pasajes:
-            print(f"SU PASAJE {codigoPasaje} NO ESTA REGISTRADO. REINTENTE...")
+            print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
         else:
             print("--------------------------")
             mostrarPasaje(pasajes, codigoPasaje)
@@ -436,7 +473,7 @@ def modificarPasaje(pasajes, vuelos):
                 print("[1] Cambiar asiento dentro de la misma clase")
                 print("[2] Cambiar clase")
                 print("[3] Volver a Pasajes")
-                opcion = int(input("SELECCIONE UNA OPCION: "))
+                opcion = int(input("Selecciona una opcion: "))
 
                 if opcion == 1:
                     print()
@@ -481,7 +518,7 @@ def modificarPasaje(pasajes, vuelos):
                 elif opcion == 3:
                     break
                 else:
-                    print("INGRESE UN VALOR EN EL RANGO")
+                    print("Ingrese un valor en el rango")
             break
 
 
@@ -723,20 +760,120 @@ def listarVuelos(vuelos: dict) -> None:
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
     # Encabezado de la tabla
-    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10}")
-    print("-" * 93)
+    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10} | {'DISPONIBILIDAD':<10}")
+    print("-" * 115)
 
     # Filas de la tabla
     for nVuelo, datos in vuelos.items():
+        asientosDisponibles = contarAsientosDisponibles(vuelos, nVuelo)
         print(
-            f"{nVuelo:<5} | {datos['Fecha']:<10} | {datos['Hora']:<5} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10}"
+            f"{nVuelo:<5} | {datos['Fecha']:<10} | {datos['Hora']:<5} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10} | {asientosDisponibles:<10}"
         )
     return
 
-def modificarVuelo(vuelos: dict):
+def registrarVuelo(vuelos: dict, aviones:dict):
+    codigo = 'VU0' + str(len(vuelos) + 1)
+    fecha = ''
+    hora = ''
+    origen = ''
+    destino = ''
+    avion = ''
+
+    while True:
+        print("Registre datos del vuelo")
+        print("-----------------")
+        print(f"[1] Codigo: {codigo}")
+        print(f"[2] Fecha: {fecha}")
+        print(f"[3] Hora: {hora}")
+        print(f"[4] Origen: {origen}")
+        print(f"[5] Destino: {destino}")
+        print(f"[6] Avion: {avion}")
+        print("[7] Guardar")
+        print("[8] Cancelar")
+        print("-----------------")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            print('El código no puede modificarse')
+
+        elif opcion == "2":
+            while True:
+                fecha = input("Ingrese la fecha (dd/mm/yyyy): ")
+                try:
+                    # Intenta convertir la entrada a formato de fecha
+                    fechaFormateada = datetime.strptime(fecha, "%d/%m/%Y")
+                    # Si es válida, la almacena en el diccionario y sale del bucle
+                    fecha = fechaFormateada.strftime("%d/%m/%Y")
+                    break
+                except ValueError:
+                    # Mensaje de error si el formato es incorrecto
+                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
+
+        elif opcion == "3":
+            while True:
+                hora = input("Ingrese la hora (hh:mm): ")
+                try:
+                    horaFormateada = datetime.strptime(hora, "%H:%M")
+                    hora = horaFormateada.strftime("%H:%M")
+                    break
+                except ValueError:
+                    print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
+
+        elif opcion == "4":
+            origen = input().title()
+
+        elif opcion == "5":
+            destino = input().title()
+
+        elif opcion == "6":
+            while True:
+                matricula = input().upper()
+                if matricula not in aviones.keys():
+                    print('El avion no esta registrado')
+                else:
+                    avion = matricula
+                    break
+
+        elif opcion == "7":
+            if fecha == '' or hora == '' or origen == '' or destino == '' or avion == '':
+                print('Quedan dantos sin completar')
+            else:
+                break
+        else:
+            print("OPCIÓN INVÁLIDA")
+
+    matrizPrimera = crearMatriz(4,4,0)
+    matrizEconomica = crearMatriz(6,20,0)
+
+    vuelos[codigo] = {
+        "Fecha" : fecha,
+        "Hora" : hora,
+        "Origen" : origen,
+        "Destino" : destino,
+        "Avion" : avion,
+        "Asientos" : {
+            "Primera" : matrizPrimera,
+            "Economica" : matrizEconomica
+                      }
+    }
+
+    print("Sus datos")
+    print("-----------------")
+    print(f"[1] Codigo: {codigo}")
+    print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
+    print(f"[3] Hora: {vuelos[codigo]['Hora']}")
+    print(f"[4] Origen: {vuelos[codigo]['Origen']}")
+    print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+    print(f"[6] Avion: {vuelos[codigo]['Avion']}")
+    print("-----------------")
+    print("Vuelo registrado correctamente")
+    return
+
+def modificarVuelo(vuelos: dict, aviones:dict):
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():
@@ -749,6 +886,7 @@ def modificarVuelo(vuelos: dict):
     copiaHora = vuelos[codigo]['Hora']
     copiaOrigen = vuelos[codigo]['Origen']
     copiaDestino = vuelos[codigo]['Destino']
+    copiaAvion = vuelos[codigo]['Avion']
 
     while True:
         print("Modifique sus datos")
@@ -758,19 +896,38 @@ def modificarVuelo(vuelos: dict):
         print(f"[3] Hora: {vuelos[codigo]['Hora']}")
         print(f"[4] Origen: {vuelos[codigo]['Origen']}")
         print(f"[5] Destino: {vuelos[codigo]['Destino']}")
-        print("[6] Guardar")
-        print("[7] Cancelar")
+        print(f"[6] Avion: {vuelos[codigo]['Avion']}")
+        print("[7] Guardar")
+        print("[8] Cancelar")
         print("-----------------")
-        opcion = input("Seleccione una opcion: ")
+
+        opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            print('El codigo no puede modificarse')
+            print('El código no puede modificarse')
 
         elif opcion == "2":
-            vuelos[codigo]['Fecha'] = input()
+            while True:
+                fecha = input("Ingrese la fecha (dd/mm/yyyy): ")
+                try:
+                    # Intenta convertir la entrada a formato de fecha
+                    fechaFormateada = datetime.strptime(fecha, "%d/%m/%Y")
+                    # Si es válida, la almacena en el diccionario y sale del bucle
+                    vuelos[codigo]['Fecha'] = fechaFormateada.strftime("%d/%m/%Y")
+                    break
+                except ValueError:
+                    # Mensaje de error si el formato es incorrecto
+                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
 
         elif opcion == "3":
-            vuelos[codigo]['Hora'] = input()
+            while True:
+                hora = input("Ingrese la hora (hh:mm): ")
+                try:
+                    horaFormateada = datetime.strptime(hora, "%H:%M")
+                    vuelos[codigo]['Hora'] = horaFormateada.strftime("%H:%M")
+                    break
+                except ValueError:
+                    print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
             vuelos[codigo]['Origen'] = input().title()
@@ -779,13 +936,23 @@ def modificarVuelo(vuelos: dict):
             vuelos[codigo]['Destino'] = input().title()
 
         elif opcion == "6":
+            while True:
+                matricula = input().upper()
+                if matricula not in aviones.keys():
+                    print('El avion no esta registrado')
+                else:
+                    vuelos[codigo]['Avion'] = matricula
+                    break
+
+        elif opcion == "7":
             return
 
-        elif opcion == "7":  # Cancelar
+        elif opcion == "8":  # Cancelar
             vuelos[codigo]["Fecha"] = copiaFecha
             vuelos[codigo]["Hora"] = copiaHora
             vuelos[codigo]["Origen"] = copiaOrigen
             vuelos[codigo]["Destino"] = copiaDestino
+            vuelos[codigo]["Avion"] = copiaAvion
             break
 
         else:
@@ -797,6 +964,7 @@ def modificarVuelo(vuelos: dict):
     print(f"[3] Hora: {vuelos[codigo]['Hora']}")
     print(f"[4] Origen: {vuelos[codigo]['Origen']}")
     print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+    print(f"[6] Avion: {vuelos[codigo]['Avion']}")
     print("-----------------")
     print("Vuelo modificado correctamente")
     return
@@ -811,7 +979,7 @@ def eliminarVuelo(vuelos: dict) -> None:
     """
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():
