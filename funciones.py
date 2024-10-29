@@ -802,7 +802,44 @@ def listarVuelos(vuelos: dict) -> None:
         )
     return
 
+def eliminarVuelo(vuelos: dict) -> None:
+    """
+    Elimina un vuelo del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
+    Args:
+    - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
+    - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    """
+    while True:
+        print()
+        codigo = "VU" + input('Ingrese codigo o [0] para salir')
+        if codigo == "VU0":
+            return
+        elif codigo not in vuelos.keys():
+            print()
+            print(f"El Vuelo {codigo} no se encuentra registrado")
+        else:
+            break
+
+    while True:
+        print()
+        print(f"Vuelo: {codigo}")
+        print()
+        print("¿Está seguro de eliminarlo?")
+        print("[1] Si")
+        print("[2] Volver")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            # Eliminar al vuelo
+            del vuelos[codigo]
+            print()
+            print(f"El vuelo {codigo} ha sido eliminado.")
+            return
+        elif opcion == "2":
+            break
+        else:
+            print("Opción inválida")
+    return
 
 # ----------------------------------------------------------------------------------------------
 # AVIONES

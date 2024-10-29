@@ -131,7 +131,7 @@ def subMenuVuelos():
         elif opcion_submenu == "3":  # Modificar Vuelo
             ...
         elif opcion_submenu == "4":  # Eliminar Vuelo
-            ...
+            funciones.eliminarVuelo(datos_precargados.vuelos)
     return
 
 
