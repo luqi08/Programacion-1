@@ -6,6 +6,7 @@ def ingresoTexto(palabra: str) -> str:
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres alfabéticos
     """
+    print()
     ingreso = input(f"Ingrese {palabra}: ")
     while ingreso.isalpha() == False:
         print()
@@ -20,7 +21,8 @@ def ingresoEntero(palabra: str) -> int:
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres numéricos enteros
     """
-    ingreso = input(f"Ingrese {palabra}: ")
+    print()
+    ingreso = input(f"Ingrese {palabra} o [0] para regresar: ")
     while ingreso.isnumeric() == False:
         print()
         print("INGRESO INVÁLIDO")
@@ -227,6 +229,35 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     - pasajes (dict): Información sobre los pasajes y asientos ocupados.
     - vuelos (dict): Información sobre los vuelos.
     """
+    # Ingreso/Registro Pasajero
+    bandera = True
+    while bandera:
+        dni = ingresoEntero("DNI")
+        if dni == 0:
+            return
+        if dni in pasajeros.keys():
+            bandera = False
+        elif dni not in pasajeros.keys():
+            print()
+            print(f"El DNI: {dni}, no se encuentra registrado.")
+            while True:
+                print()
+                print("¿Desea registrarlo?")
+                print("[1] Si")
+                print("[2] No")
+                opcion = input("Ingrese opción: ")
+                if opcion == "1":
+                    if registrarPasajero(pasajeros, dni) == True:
+                        bandera = False
+                        break
+                    else:
+                        break
+                elif opcion == "2":
+                    break
+                else:
+                    print()
+                    print("Ingreso Inválido")
+
     destinos = {
         "1": "Buenos Aires",
         "2": "Catamarca",
@@ -329,9 +360,6 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     # Generar nuevo ID de pasaje
     nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
 
-    # Registrar datos del pasajero
-    dni = registrarDatos(pasajeros)
-
     # Crear el nuevo pasaje
     pasajes[nuevo_id] = {
         "dni": dni,
@@ -342,103 +370,6 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
     return pasajes
-
-
-def registrarDatos(pasajeros: dict) -> int:
-    """
-    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
-    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
-    ingresados son almacenados en el diccionario de pasajeros.
-
-    Args:
-    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
-
-    Returns:
-    - dni (int): Numero dni para identificar al pasajero.
-    """
-    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-    nombre = ""
-    apellido = ""
-    dni = ""
-    verificador = False
-    verificadorNombre = False
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"[1]Nombre: {nombre}")
-        print(f"[2]Apellido: {apellido}")
-        print(f"[3]DNI: {dni}")
-        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[5]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "1":
-            print("Escriba su nombre.")
-            escribirNombre = input().capitalize()
-            for letra in escribirNombre:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirNombre == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirNombre = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirNombre:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            nombre = escribirNombre
-            verificadorNombre == True
-        elif opcion == "2":
-            print("Escriba su apellido")
-            escribirApellido = input().capitalize()
-            for letra in escribirApellido:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirApellido == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirApellido = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirApellido:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            apellido = escribirApellido
-        elif opcion == "3":
-            print("Escriba su DNI")
-            escribirDni = input()
-            while escribirDni == "" or escribirDni.isnumeric() == False:
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirDni = input("Intentelo nuevamente: ")
-            dni = int(escribirDni)
-        elif opcion == "4":
-            nombre = ""
-            apellido = ""
-            dni = ""
-            verificadorNombre = False
-        elif opcion == "5":
-            if nombre == "" or apellido == "" or dni == "":
-                print("Aun quedan datos por completar")
-            else:
-                break
-        else:
-            print("Esa opcion no existe")
-    print("Sus datos")
-    print("----------------")
-    print(f"Nombre: {nombre}")
-    print(f"Apellido: {apellido}")
-    print(f"DNI: {dni}")
-    print("----------------")
-    pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
-    print("Pasajero registrado")
-    return dni
 
 
 def listarPasajes(pasajes, pasajeros):
@@ -459,7 +390,6 @@ def listarPasajes(pasajes, pasajeros):
             f"{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
         )
     return
-
 
 
 def nombrePasajero(pasajeros: dict, dni: int) -> str:
@@ -581,7 +511,7 @@ def eliminarPasaje(pasajes: dict) -> None:
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros: dict) -> None:
+def registrarPasajero(pasajeros: dict, dni="") -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -595,9 +525,9 @@ def registrarPasajero(pasajeros: dict) -> None:
     """
     nombre = ""
     apellido = ""
-    dni = ""
     verificador = False
     while verificador == False:
+        print()
         print("Ingrese sus datos")
         print("-----------------")
         print(f"[1] Nombre: {nombre}")
@@ -625,6 +555,7 @@ def registrarPasajero(pasajeros: dict) -> None:
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
+                print()
                 print("Aun quedan datos por completar")
             else:
                 break
@@ -632,7 +563,7 @@ def registrarPasajero(pasajeros: dict) -> None:
             nombre = ""
             apellido = ""
             dni = ""
-            break
+            return
         else:
             print("OPCIÓN INVÁLIDA")
     print("Sus datos")
@@ -643,7 +574,7 @@ def registrarPasajero(pasajeros: dict) -> None:
     print("----------------")
     pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
     print("Pasajero registrado")
-    return
+    return True
 
 
 def listarPasajeros(pasajeros: dict) -> None:
