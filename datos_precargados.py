@@ -138,7 +138,8 @@ pasajeros = {
 }
 vuelos = {
     "VU001": {
-        "Fecha": "07/10/2024 | 06:00",
+        "Fecha": "07/10/2024",
+        "Hora": "06:00",
         "Origen": "Santa Fe",
         "Destino": "La Plata (Buenos Aires)",
         "Avion": "LV-ABC",
@@ -160,7 +161,8 @@ vuelos = {
         }
     },
     "VU002": {
-        "Fecha": "07/10/2024 | 08:00",
+        "Fecha": "07/10/2024",
+        "Hora": "08:00",
         "Origen": "La Plata (Buenos Aires)",
         "Destino": "Paraná (Entre Ríos)",
         "Avion": "LV-BRD",
@@ -182,7 +184,8 @@ vuelos = {
         }
     },
     "VU003": {
-        "Fecha": "07/10/2024 | 10:00",
+        "Fecha": "07/10/2024",
+        "Hora": "10:00",
         "Origen": "Paraná (Entre Ríos)",
         "Destino": "Santa Fe",
         "Avion": "LV-CFT",
@@ -205,7 +208,8 @@ vuelos = {
     },
 
     "VU004": {
-        "Fecha": "07/10/2024 | 13:00",
+        "Fecha": "07/10/2024",
+        "Hora": "13:00",
         "Origen": "Santa Fe",
         "Destino": "Córdoba",
         "Avion": "LV-DRT",
@@ -227,7 +231,8 @@ vuelos = {
         }
     },
     "VU005": {
-        "Fecha": "07/10/2024 | 16:00",
+        "Fecha": "07/10/2024",
+        "Hora": "16:00",
         "Origen": "Córdoba",
         "Destino": "Santiago del Estero",
         "Avion": "LV-EFP",
@@ -250,7 +255,8 @@ vuelos = {
     },
     # Día 2 - Martes
     "VU006": {
-        "Fecha": "08/10/2024 | 06:00",
+        "Fecha": "08/10/2024",
+        "Hora": "06:00",
         "Origen": "Santiago del Estero",
         "Destino": "San Miguel de Tucumán",
         "Avion": "LV-GHT",
@@ -272,9 +278,10 @@ vuelos = {
         }
     },
     "VU007": {
-        "Fecha": "08/10/2024 | 08:00",
+        "Fecha": "08/10/2024",
+        "Hora": "08:00",
         "Origen": "San Miguel de Tucumán",
-        "Destino": "Catamarca",
+        "Destino": "San Fernando del Valle de Catamarca",
         "Avion": "LV-HJK",
         "Asientos": {
             "Primera": [
@@ -294,7 +301,8 @@ vuelos = {
         }
     },
     "VU008": {
-        "Fecha": "08/10/2024 | 10:00",
+        "Fecha": "08/10/2024",
+        "Hora": "10:00",
         "Origen": "Catamarca",
         "Destino": "La Rioja",
         "Avion": "LV-JLM",
@@ -316,7 +324,8 @@ vuelos = {
         }
     },
     "VU009": {
-        "Fecha": "08/10/2024 | 13:00",
+        "Fecha": "08/10/2024",
+        "Hora": "13:00",
         "Origen": "La Rioja",
         "Destino": "San Juan",
         "Avion": "LV-KRS",
@@ -338,7 +347,8 @@ vuelos = {
         }
     },
     "VU010": {
-        "Fecha": "08/10/2024 | 16:00",
+        "Fecha": "08/10/2024",
+        "Hora": "16:00",
         "Origen": "San Juan",
         "Destino": "Mendoza",
         "Avion": "LV-LPQ",
@@ -361,7 +371,8 @@ vuelos = {
     },
     # Día 3 - Miércoles
     "VU011": {
-        "Fecha": "09/10/2024 | 06:00",
+        "Fecha": "09/10/2024",
+        "Hora": "06:00",
         "Origen": "Mendoza",
         "Destino": "San Luis",
         "Avion": "LV-ABC",
@@ -383,7 +394,8 @@ vuelos = {
         }
     },
     "VU012": {
-        "Fecha": "09/10/2024 | 09:00",
+        "Fecha": "09/10/2024",
+        "Hora": "09:00",
         "Origen": "San Luis",
         "Destino": "Formosa",
         "Avion": "LV-BRD",
@@ -405,7 +417,8 @@ vuelos = {
         }
     },
     "VU013": {
-        "Fecha": "09/10/2024 | 12:00",
+        "Fecha": "09/10/2024",
+        "Hora": "12:00",
         "Origen": "Formosa",
         "Destino": "Resistencia (Chaco)",
         "Avion": "LV-CFT",
@@ -427,7 +440,8 @@ vuelos = {
         }
     },
     "VU014": {
-        "Fecha": "09/10/2024 | 15:00",
+        "Fecha": "09/10/2024",
+        "Hora": "15:00",
         "Origen": "Resistencia (Chaco)",
         "Destino": "Corrientes",
         "Avion": "LV-DRT",
@@ -449,7 +463,8 @@ vuelos = {
         }
     },
     "VU015": {
-        "Fecha": "09/10/2024 | 18:00",
+        "Fecha": "09/10/2024",
+        "Hora": "18:00",
         "Origen": "Corrientes",
         "Destino": "Posadas (Misiones)",
         "Avion": "LV-EFP",
@@ -472,7 +487,8 @@ vuelos = {
     },
     # Día 4 - Jueves
     "VU016": {
-        "Fecha": "10/10/2024 | 06:00",
+        "Fecha": "10/10/2024",
+        "Hora": "06:00",
         "Origen": "Posadas (Misiones)",
         "Destino": "Formosa",
         "Avion": "LV-GHT",
@@ -494,7 +510,8 @@ vuelos = {
         }
     },
     "VU017": {
-        "Fecha": "10/10/2024 | 08:00",
+        "Fecha": "10/10/2024",
+        "Hora": "08:00",
         "Origen": "Formosa",
         "Destino": "Salta",
         "Avion": "LV-HJK",
@@ -516,7 +533,8 @@ vuelos = {
         }
     },
     "VU018": {
-        "Fecha": "10/10/2024 | 10:00",
+        "Fecha": "10/10/2024",
+        "Hora": "10:00",
         "Origen": "Salta",
         "Destino": "San Salvador de Jujuy",
         "Avion": "LV-JLM",
@@ -538,7 +556,8 @@ vuelos = {
         }
     },
     "VU019": {
-        "Fecha": "10/10/2024 | 13:00",
+        "Fecha": "10/10/2024",
+        "Hora": "13:00",
         "Origen": "San Salvador de Jujuy",
         "Destino": "Catamarca",
         "Avion": "LV-KRS",
@@ -560,7 +579,8 @@ vuelos = {
         }
     },
     "VU020": {
-        "Fecha": "10/10/2024 | 16:00",
+        "Fecha": "10/10/2024",
+        "Hora": "16:00",
         "Origen": "Catamarca",
         "Destino": "La Rioja",
         "Avion": "LV-LPQ",
@@ -583,7 +603,8 @@ vuelos = {
     },
     # Día 5 - Viernes
     "VU021": {
-        "Fecha": "11/10/2024 | 06:00",
+        "Fecha": "11/10/2024",
+        "Hora": "06:00",
         "Origen": "La Rioja",
         "Destino": "Neuquén",
         "Avion": "LV-ABC",
@@ -605,7 +626,8 @@ vuelos = {
         }
     },
     "VU022": {
-        "Fecha": "11/10/2024 | 09:00",
+        "Fecha": "11/10/2024",
+        "Hora": "09:00",
         "Origen": "Neuquén",
         "Destino": "Viedma (Río Negro)",
         "Avion": "LV-BRD",
@@ -627,7 +649,8 @@ vuelos = {
         }
     },
     "VU023": {
-        "Fecha": "11/10/2024 | 12:00",
+        "Fecha": "11/10/2024",
+        "Hora": "12:00",
         "Origen": "Viedma (Río Negro)",
         "Destino": "Rawson (Chubut)",
         "Avion": "LV-CFT",
@@ -649,7 +672,8 @@ vuelos = {
         }
     },
     "VU024": {
-        "Fecha": "11/10/2024 | 15:00",
+        "Fecha": "11/10/2024",
+        "Hora": "15:00",
         "Origen": "Rawson (Chubut)",
         "Destino": "Río Gallegos (Santa Cruz)",
         "Avion": "LV-DRT",
@@ -671,7 +695,8 @@ vuelos = {
         }
     },
     "VU025": {
-        "Fecha": "11/10/2024 | 18:00",
+        "Fecha": "11/10/2024",
+        "Hora": "18:00",
         "Origen": "Río Gallegos (Santa Cruz)",
         "Destino": "Ushuaia (Tierra del Fuego)",
         "Avion": "LV-EFP",
@@ -694,7 +719,8 @@ vuelos = {
     },
     # Día 6 - Sábado
     "VU026": {
-        "Fecha": "12/10/2024 | 06:00",
+        "Fecha": "12/10/2024",
+        "Hora": "06:00",
         "Origen": "Ushuaia (Tierra del Fuego)",
         "Destino": "Río Gallegos (Santa Cruz)",
         "Avion": "LV-GHT",
@@ -716,7 +742,8 @@ vuelos = {
         }
     },
     "VU027": {
-        "Fecha": "12/10/2024 | 09:00",
+        "Fecha": "12/10/2024",
+        "Hora": "09:00",
         "Origen": "Río Gallegos (Santa Cruz)",
         "Destino": "Rawson (Chubut)",
         "Avion": "LV-HJK",
@@ -738,7 +765,8 @@ vuelos = {
         }
     },
     "VU028": {
-        "Fecha": "12/10/2024 | 12:00",
+        "Fecha": "12/10/2024",
+        "Hora": "12:00",
         "Origen": "Rawson (Chubut)",
         "Destino": "Viedma (Río Negro)",
         "Avion": "LV-JLM",
@@ -760,7 +788,8 @@ vuelos = {
         }
     },
     "VU029": {
-        "Fecha": "12/10/2024 | 14:00",
+        "Fecha": "12/10/2024",
+        "Hora": "14:00",
         "Origen": "Viedma (Río Negro)",
         "Destino": "Neuquén",
         "Avion": "LV-KRS",
@@ -782,7 +811,8 @@ vuelos = {
         }
     },
     "VU030": {
-        "Fecha": "12/10/2024 | 16:00",
+        "Fecha": "12/10/2024",
+        "Hora": "16:00",
         "Origen": "Neuquén",
         "Destino": "Santa Rosa (La Pampa)",
         "Avion": "LV-LPQ",
@@ -805,7 +835,8 @@ vuelos = {
     },
     # Día 7 - Domingo
     "VU031": {
-        "Fecha": "13/10/2024 | 06:00",
+        "Fecha": "13/10/2024",
+        "Hora": "06:00",
         "Origen": "Santa Rosa (La Pampa)",
         "Destino": "La Plata (Buenos Aires)",
         "Avion": "LV-ABC",
@@ -827,7 +858,8 @@ vuelos = {
         }
     },
     "VU032": {
-        "Fecha": "13/10/2024 | 09:00",
+        "Fecha": "13/10/2024",
+        "Hora": "09:00",
         "Origen": "La Plata (Buenos Aires)",
         "Destino": "Santa Fe",
         "Avion": "LV-BRD",
