@@ -792,13 +792,13 @@ def listarVuelos(vuelos: dict) -> None:
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
     # Encabezado de la tabla
-    print(f"{'VUELO':<5} | {'FECHA':<18} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10}")
+    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10}")
     print("-" * 93)
 
     # Filas de la tabla
     for nVuelo, datos in vuelos.items():
         print(
-            f"{nVuelo:<5} | {datos['Fecha']:<18} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10}"
+            f"{nVuelo:<5} | {datos['Fecha']:<10} | {datos['Hora']:<5} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10}"
         )
     return
 
