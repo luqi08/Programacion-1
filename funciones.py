@@ -503,9 +503,9 @@ def modificarPasaje(pasajes, vuelos):
             mostrarPasaje(pasajes, codigoPasaje)
             print("--------------------------")
             while True:
-                print("[1] CAMBIAR ASIENTO DENTRO DE MISMA CLASE")
-                print("[2] CAMBIAR CLASE")
-                print("[3] SALIR")
+                print("[1] Cambiar asiento dentro de la misma clase")
+                print("[2] Cambiar clase")
+                print("[3] Volver a Pasajes")
                 opcion = int(input("SELECCIONE UNA OPCION: "))
 
                 if opcion == 1:
@@ -549,7 +549,7 @@ def modificarPasaje(pasajes, vuelos):
                     break
 
                 elif opcion == 3:
-                    exit()
+                    break
                 else:
                     print("INGRESE UN VALOR EN EL RANGO")
             break
@@ -564,7 +564,7 @@ def eliminarPasaje(pasajes: dict) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        pasaje = input("Ingrese número de pasaje o [0] para salir: ")
+        pasaje = "PA" + input("Ingrese número de pasaje o [0] para salir: ")
         if pasaje == "0":
             return
         elif pasaje == "":
