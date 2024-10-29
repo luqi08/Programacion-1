@@ -448,12 +448,18 @@ def listarPasajes(pasajes, pasajeros):
     Args:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
+    # Encabezado de la tabla
+    print(f"{'CÓDIGO':<6} | {'PASAJERO':<20} | {'DNI':<10} | {'VUELO':<5} | {'CLASE':<9} | {'ASIENTO':<10}")
+    print("-" * 75)
+
+    # Filas de la tabla
     for nPasaje, datos in pasajes.items():
         nombre = nombrePasajero(pasajeros, datos["dni"])
         print(
-            f"CÓDIGO: {nPasaje},  PASAJERO: {datos['dni']} {nombre},  VUELO: {datos['vuelo']},  CLASE: {datos['clase'].capitalize()},  ASIENTO: {datos['asiento']}"
+            f"{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
         )
     return
+
 
 
 def nombrePasajero(pasajeros: dict, dni: int) -> str:
@@ -647,9 +653,16 @@ def listarPasajeros(pasajeros: dict) -> None:
     Args:
     - pasajeros (dict): Diccionario que contiene la información de los pasajeros.
     """
+    # Encabezado de la tabla
+    print(f"{'DNI':<10} | {'NOMBRE COMPLETO':<30}")
+    print("-" * 28)
+
+    # Filas de la tabla
     for dni, datos in pasajeros.items():
-        print(f"DNI: {dni}  PASAJERO: {datos['nombre']} {datos['apellido']}")
+        nombre_completo = f"{datos['nombre']} {datos['apellido']}"
+        print(f"{dni:<10} | {nombre_completo:<30}")
     return
+
 
 
 def modificarPasajero(pasajeros: dict) -> None:
@@ -773,16 +786,22 @@ def eliminarPasajero(pasajeros: dict) -> None:
 # ----------------------------------------------------------------------------------------------
 def listarVuelos(vuelos: dict) -> None:
     """
-    Lista todos los vuelos registrados junto con sus datos
+    Lista todos los vuelos registrados junto con sus datos.
 
     Args:
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
+    # Encabezado de la tabla
+    print(f"{'VUELO':<5} | {'FECHA':<18} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10}")
+    print("-" * 93)
+
+    # Filas de la tabla
     for nVuelo, datos in vuelos.items():
         print(
-            f"VUELO: {nVuelo},  FECHA: {datos['Fecha']},  ORIGEN: {datos['Origen']},  DESTINO: {datos['Destino']},  AVIÓN: {datos['Avion']}"
+            f"{nVuelo:<5} | {datos['Fecha']:<18} | {datos['Origen']:<26} | {datos['Destino']:<26} | {datos['Avion']:<10}"
         )
     return
+
 
 
 # ----------------------------------------------------------------------------------------------
@@ -790,16 +809,22 @@ def listarVuelos(vuelos: dict) -> None:
 # ----------------------------------------------------------------------------------------------
 def listarAviones(aviones: dict) -> None:
     """
-    Lista todos los aviones registrados junto con sus datos
+    Lista todos los aviones registrados junto con sus datos.
 
     Args:
     - aviones (dict): Diccionario que contiene la información de los aviones.
     """
+    # Encabezado de la tabla
+    print(f"{'MATRICULA':<9} | {'MODELO':<13} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}")
+    print("-" * 60)
+
+    # Filas de la tabla
     for nAvion, datos in aviones.items():
         print(
-            f"MATRICULA: {nAvion},  MODELO: {datos['modelo']},  ASIENTOS: PRIMERA CLASE: {datos['Asientos']['primera']}  CLASE ECONÓMICA: {datos['Asientos']['economica']}"
+            f"{nAvion:<9} | {datos['modelo']:<12} | {datos['Asientos']['primera']:<13} | {datos['Asientos']['economica']:<15}"
         )
     return
+
 
 
 def registrarAviones(aviones):
