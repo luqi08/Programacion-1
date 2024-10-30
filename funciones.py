@@ -53,19 +53,30 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(palabra: str) -> int:
+def ingresoEntero(mensaje: str) -> int:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres numéricos enteros
     """
-    print()
-    ingreso = input(f"Ingrese {palabra} o [0] para regresar: ")
-    while ingreso.isnumeric() == False:
-        print()
-        print("INGRESO INVÁLIDO")
-        print()
-        ingreso = input(f"Ingrese {palabra}: ")
-    return int(ingreso)
+    while True:
+        try:
+            print()
+            ingreso = input(f"{mensaje} o [0] para regresar: ")
+            if ingreso == "0":
+                break
+            elif ingreso == "":
+                raise Exception("ERROR NO SE INGRESÓ NADA")
+            else:
+                int(ingreso)
+                break
+            break
+        except ValueError:
+                print()
+                print("ERROR INGRESO INVÁLIDO | Ingresar solamente números")
+        except Exception as ex:
+            print()
+            print(ex)
+    return ingreso
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -269,8 +280,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     # Ingreso/Registro Pasajero
     bandera = True
     while bandera:
-        dni = ingresoEntero("DNI")
-        if dni == 0:
+        dni = ingresoEntero("Ingrese DNI")
+        if dni == "0":
             return
         if dni in pasajeros.keys():
             bandera = False
@@ -339,7 +350,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             destino = destinos[opcionDestino]
             break
         else:
-            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+            print("OPCIÓN INVÁLIDA")
 
     # Filtrar vuelos disponibles para el destino seleccionado
     vuelosDestino = {
@@ -588,7 +599,7 @@ def registrarPasajero(pasajeros: dict, dni="") -> None:
         # Ingreso DNI
         elif opcion == "3":
             print()
-            dni = ingresoEntero("DNI")
+            dni = ingresoEntero("Ingrese DNI")
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
@@ -642,19 +653,15 @@ def modificarPasajero(pasajeros: dict) -> None:
     - dni (int): DNI del pasajero que se desea modificar.
     """
     while True:
-        dni = input("Ingrese DNI o [0] Para volver al Menú Anterior: ")
-        if dni.isnumeric() == True:  # Verificar ingreso válido
-            dni = int(dni)
-            if dni == 0:
-                return
-            elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
-                print()
-                print(f"El DNI {dni} no se encuentra registrado")
-                print()
-            else:
-                break
+        dni = ingresoEntero("Ingrese DNI")
+        if dni == "0":
+            return
+        elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
+            print()
+            print(f"El DNI {dni} no se encuentra registrado")
+            print()
         else:
-            print("Ingreso Inválido")
+            break
 
     copiaNombre = pasajeros[dni]["nombre"]
     copiaApellido = pasajeros[dni]["apellido"]
@@ -711,17 +718,12 @@ def eliminarPasajero(pasajeros: dict) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        print()
-        dni = input("Ingrese DNI del pasajero o [0] para salir: ")
+        dni = ingresoEntero("Ingrese DNI")
         if dni == "0":
             return
-        elif dni == "":
-            print("No ha ingresado el DNI")
-        elif not dni.isnumeric():
-            print("Solo se aceptan números")
-        elif int(dni) not in pasajeros.keys():
+        elif dni not in pasajeros.keys():
             print()
-            print("El DNI {dni} no se encuentra registrado")
+            print(f"El DNI {dni} no se encuentra registrado")
         else:
             dni = int(dni)
             nombre = pasajeros[dni]["nombre"]
