@@ -910,7 +910,7 @@ def registrarVuelo(vuelos: dict, aviones:dict):
             else:
                 break
         else:
-            print("OPCIÓN INVÁLIDA")
+            print("Opcion invalida")
 
     matrizPrimera = crearMatriz(4,4,0)
     matrizEconomica = crearMatriz(6,20,0)

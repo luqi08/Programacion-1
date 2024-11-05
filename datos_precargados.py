@@ -62,23 +62,23 @@ pasajes = {
 aviones = {
     "LV-ABC": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 20, "economica": 162},
+        "Asientos": {"primera": 16, "economica": 120},
     },
     "LV-BRD": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 20, "economica": 162},
+        "Asientos": {"primera": 16, "economica": 120},
     },
     "LV-CFT": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 20, "economica": 162},
+        "Asientos": {"primera": 16, "economica": 120},
     },
     "LV-DRT": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 20, "economica": 162},
+        "Asientos": {"primera": 16, "economica": 120},
     },
     "LV-EFP": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 20, "economica": 162},
+        "Asientos": {"primera": 16, "economica": 120},
     },
     "LV-GHT": {
         "modelo": "AirbusA320Neo",
