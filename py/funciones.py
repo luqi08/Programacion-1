@@ -93,30 +93,16 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(mensaje: str) -> int:
-    """
-    Recibe un str para el mensaje de ingreso de dato
-    Filtra todo lo que no sea caracteres numéricos enteros
-    """
+def ingresoEntero(mensaje): # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
     while True:
         try:
-            print()
-            ingreso = input(f"{mensaje} o [0] para regresar: ")
-            if ingreso == "0":
-                break
-            elif ingreso == "":
-                raise Exception("ERROR NO SE INGRESÓ NADA")
-            else:
-                int(ingreso)
-                break
+            valor = int(input(f'{mensaje} o [0] para salir: ')) # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
+            if valor < 0 or valor > 100000000: # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
+                raise ValueError
             break
         except ValueError:
-            print()
-            print("ERROR INGRESO INVÁLIDO | Ingresar solamente números")
-        except Exception as ex:
-            print()
-            print(ex)
-    return ingreso
+            print(f'Ingrese un {mensaje} valido')
+    return valor
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -318,14 +304,13 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     - vuelos (dict): Información sobre los vuelos.
     """
     # Ingreso/Registro Pasajero
-    bandera = True
-    while bandera:
+    while True:
         dni = ingresoEntero("Ingrese DNI")
         if dni == "0":
             return
-        if dni in pasajeros.keys():
-            bandera = False
-        elif dni not in pasajeros.keys():
+        elif dni in pasajeros.keys():
+            break
+        else:
             print()
             print(f"El DNI: {dni}, no se encuentra registrado.")
             while True:
