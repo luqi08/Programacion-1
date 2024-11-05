@@ -1,89 +1,75 @@
-def registrarAviones(aviones):
+def registrarAviones(aviones: dict) -> int:
     """
-    Esta función sirve para registrar aviones adquiridos dentro del programa. Funciona bastante parecido a crear pasajes
-    solo que se reemplazan los datos del pasajero con los del avión.
-    """
+    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
+    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
+    ingresados son almacenados en el diccionario de pasajeros.
 
+    Args:
+    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
+
+    Returns:
+    - dni (int): Numero dni para identificar al pasajero.
+    """
     modelo = ""
     matricula = ""
     primeraClase = ""
     claseEconomica = ""
-    while True:
-        print("-------------------------------------")
-        print("Ingrese los datos del avion adquirido")
-        print("-------------------------------------")
+    verificador = False
+    while verificador == False:
+        print("Ingrese sus datos")
+        print("-----------------")
         print(f"[1]Modelo: {modelo}")
         print(f"[2]Matricula: {matricula}")
-        print(f"[3]Asientos en primera clase: {primeraClase}")
-        print(f"[4]Asientos en clase economica: {claseEconomica}")
-        print("[5]Reestablecer todo a sus valores predeterminados")
+        print(f"[3]Asientos de primera clase: {primeraClase}")
+        print(f"[4]Asientos de clase economica: {claseEconomica}")
+        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[6]Completar")
-        print("-------------------------------------")
-        print(f"[0]Volver al menu anterior")
-        print("-------------------------------------")
-
+        print("-----------------")
         opcion = input("Seleccione una opcion: ")
         if opcion == "1":
-            print("Escriba el modelo del avion.")
-            modelo = input()
-            print("Modelo ingresado.")
+            print("Escriba el nombre del modelo.")
+            escribirModelo = input().capitalize()
+            while escribirNombre == "":
+                print("No es valido dejar el espacio en blanco")
+                escribirNombre = input("Escribalo nuevamente: ").capitalize()
+            nombre = escribirNombre
         elif opcion == "2":
-            print("Escriba la matricula del avion")
-            matricula = input()
-            while matricula in aviones.keys():
-                print("Dicha matricula ya ha sido ingresada.")
-                matricula = input("Intentelo nuevamente: ")
-            print("Matricula ingresada")
+            print("Escriba su apellido")
+            escribirMatricula = input()
+            while escribirMatricula == "":
+                print("No es valido dejar el espacio en blanco")
+                escribirMatricula = input("Escribalo nuevamente: ").capitalize()
+            matricula = escribirMatricula
         elif opcion == "3":
-            print("Indique con cuantos asientos de primera clase contara el avion")
-            primeraClase = int(input())
-            columnas = int(input("Indique la cantidad de columnas: "))
-            filas = int(input("Indique la cantidad de filas: "))
-            while (columnas * filas) != int(primeraClase):
-                print(
-                    "ERROR! La cantidad de asientos no coincide con la propuesta anteriormente."
-                )
-                print("Intentelo nuevamente")
-                primeraClase = int(input("Indique los asientos de primera clase: "))
-                columnas = int(input("Indique la cantidad de columnas: "))
-                filas = int(input("Indique la cantidad de filas: "))
-            matriz = []
-
-            for asiento in range(filas):
-                matriz.append([])
-                for asientos in range(columnas):
-                    matriz[asiento].append(0)
+            print("Escriba su DNI")
+            escribirDni = input()
+            while escribirDni == "" or escribirDni.isnumeric() == False:
+                print("No es valido dejar espacion en blanco ni involucrar letras")
+                escribirDni = input("Intentelo nuevamente: ")
+            dni = int(escribirDni)
         elif opcion == "4":
-            print("Indique con cuantos asientos de primera clase contara el avion")
-            claseEconomica = int(input())
-            columnas = int(input("Indique la cantidad de columnas: "))
-            filas = int(input("Indique la cantidad de filas: "))
-            while (columnas * filas) != int(claseEconomica):
-                print(
-                    "ERROR! La cantidad de asientos no coincide con la propuesta anteriormente."
-                )
-                print("Intentelo nuevamente")
-                claseEconomica = int(input("Indique los asientos de primera clase: "))
-                columnas = int(input("Indique la cantidad de columnas: "))
-                filas = int(input("Indique la cantidad de filas: "))
-            matriz = []
-
-            for asiento in range(filas):
-                matriz.append([])
-                for asientos in range(columnas):
-                    matriz[asiento].append(0)
-
-        elif opcion == "4":
-            modelo = ""
-            matricula = ""
-            primeraClase = ""
-            claseEconomica = ""
-
+            nombre = ""
+            apellido = ""
+            dni = ""
         elif opcion == "5":
-            aviones[matricula] = {
-                "modelo": modelo,
-                "asientos": {"primera": primeraClase, "econocmica": claseEconomica},
-            }
-
+            if (
+                modelo == ""
+                or matricula == ""
+                or claseEconomica == ""
+                or primeraClase == ""
+            ):
+                print("Aun quedan datos por completar")
+            else:
+                break
         else:
             print("Esa opcion no existe")
+    print("Los datos")
+    print("----------------")
+    print(f"Modelo: {modelo}")
+    print(f"Matricula: {matricula}")
+    print(f"Asientos en primera clase: {primeraClase}")
+    print(f"Asientos en clase economica: {claseEconomica}")
+    print("----------------")
+    aviones[matricula] = {"nombre": nombre, "apellido": apellido}
+    print("Pasajero registrado")
+    return
