@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 
 # ----------------------------------------------------------------------------------------------
 # JSON
@@ -40,6 +41,37 @@ from datetime import datetime
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
+
+
+def leerJson(ruta):
+    """
+    Funcion encargada de leer archivos json y pasarlos a un diccionario.
+
+    Args:
+    - ruta: Contiene la ruta del archivo json.
+    """
+    f = open(ruta, mode="r", encoding="utf-8")
+    diccionario = json.load(f)
+    f.close
+
+    return diccionario
+
+
+def escribirJson(ruta, diccionario):
+    """
+    Funcion encargada de escribir dentro de archivos json
+
+    Args:
+    - ruta: Contiene la ruta del archivo json
+    - diccionario: Contiene el diccionario actualizado del archivo json
+    """
+    f = open(ruta, mode="w", encoding="utf-8")
+    json.dump(diccionario, f, ensure_ascii=False, indent=4)
+    f.close
+
+    return
+
+
 def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
     """
     Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
@@ -648,7 +680,7 @@ def modificarPasaje(pasajes, vuelos):
             break
 
 
-def eliminarPasaje(pasajes: dict) -> None:
+def eliminarPasaje(pasajes: dict, ruta) -> None:
     """
     Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
 
@@ -668,13 +700,14 @@ def eliminarPasaje(pasajes: dict) -> None:
             del pasajes[pasaje]
             print()
             print(f"Pasaje número: {pasaje}, eliminado")
+            escribirJson(ruta, pasajes)
             return
 
 
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros: dict, dni="") -> None:
+def registrarPasajero(pasajeros: dict, dni="", ruta) -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -736,6 +769,7 @@ def registrarPasajero(pasajeros: dict, dni="") -> None:
     print(f"DNI: {dni}")
     print("----------------")
     pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
+    escribirJson(ruta, pasajeros)
     print("Pasajero registrado")
     return True
 
@@ -758,7 +792,7 @@ def listarPasajeros(pasajeros: dict) -> None:
     return
 
 
-def modificarPasajero(pasajeros: dict) -> None:
+def modificarPasajero(pasajeros: dict, ruta) -> None:
     """
     Permite modificar los datos de un pasajero identificado por su DNI.
 
@@ -819,11 +853,12 @@ def modificarPasajero(pasajeros: dict) -> None:
     print(f"Apellido: {pasajeros[dni]['apellido']}")
     print(f"DNI: {dni}")
     print("----------------")
+    escribirJson(ruta, pasajeros)
     print("Pasajero Modificado Correctamente")
     return
 
 
-def eliminarPasajero(pasajeros: dict) -> None:
+def eliminarPasajero(pasajeros: dict, ruta) -> None:
     """
     Elimina un pasajero del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -862,6 +897,7 @@ def eliminarPasajero(pasajeros: dict) -> None:
             break
         else:
             print("Opción inválida")
+    escribirJson(ruta, pasajeros)
     return
 
 

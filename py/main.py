@@ -23,24 +23,6 @@ rutaPasajeros = r"pasajeros.json"
 rutaAviones = r"aviones.json"
 rutaPasajes = r"pasajes.json"
 rutaVuelos = r"vuelos.json"
-# ----------------------------------------------------------------------------------------------
-# DATOS
-# ----------------------------------------------------------------------------------------------
-f = open(rutaPasajeros, mode="r", encoding="utf-8")
-pasajeros = json.load(f)
-f.close
-
-f = open(rutaAviones, mode="r", encoding="utf-8")
-aviones = json.load(f)
-f.close
-
-f = open(rutaPasajes, mode="r", encoding="utf-8")
-pasajes = json.load(f)
-f.close
-
-f = open(rutaVuelos, mode="r", encoding="utf-8")
-vuelos = json.load(f)
-f.close
 
 
 # ----------------------------------------------------------------------------------------------
@@ -56,6 +38,9 @@ def limpiarTerminal() -> None:
 
 def subMenuPasajes():
     while True:
+        pasajes = funciones.leerJson(rutaPasajes)
+        pasajeros = funciones.leerJson(rutaPasajeros)
+        vuelos = funciones.leerJson(rutaVuelos)
         opciones = 5
         while True:
             print()
@@ -94,6 +79,7 @@ def subMenuPasajes():
 
 def subMenuPasajeros():
     while True:
+        pasajeros = funciones.leerJson(rutaPasajeros)
         opciones = 5
         while True:
             print()
@@ -129,6 +115,8 @@ def subMenuPasajeros():
 
 def subMenuVuelos():
     while True:
+        aviones = funciones.leerJson(rutaAviones)
+        vuelos = funciones.leerJson(rutaVuelos)
         opciones = 5
         while True:
             print()
@@ -163,6 +151,7 @@ def subMenuVuelos():
 
 def subMenuAviones():
     while True:
+        aviones = funciones.leerJson(rutaAviones)
         opciones = 5
         while True:
             print()
@@ -189,9 +178,9 @@ def subMenuAviones():
         elif opcion_submenu == "2":  # Listar Aviones
             funciones.listarAviones(aviones)
         elif opcion_submenu == "3":  # Modificar Aviones
-            ...
+            funciones.modificarAviones(aviones)
         elif opcion_submenu == "4":  # Eliminar Aviones
-            ...
+            funciones.eliminarAviones(aviones)
     return
 
 
