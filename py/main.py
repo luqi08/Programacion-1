@@ -16,6 +16,32 @@ import json
 import funciones
 import datos_precargados
 
+# ----------------------------------------------------------------------------------------------
+# ARCHIVOS
+# ----------------------------------------------------------------------------------------------
+rutaPasajeros = r"pasajeros.json"
+rutaAviones = r"aviones.json"
+rutaPasajes = r"pasajes.json"
+rutaVuelos = r"vuelos.json"
+# ----------------------------------------------------------------------------------------------
+# DATOS
+# ----------------------------------------------------------------------------------------------
+f = open(rutaPasajeros, mode="r", encoding="utf-8")
+pasajeros = json.load(f)
+f.close
+
+f = open(rutaAviones, mode="r", encoding="utf-8")
+aviones = json.load(f)
+f.close
+
+f = open(rutaPasajes, mode="r", encoding="utf-8")
+pasajes = json.load(f)
+f.close
+
+f = open(rutaVuelos, mode="r", encoding="utf-8")
+vuelos = json.load(f)
+f.close
+
 
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
@@ -53,20 +79,16 @@ def subMenuPasajes():
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
             funciones.comprarPasaje(
-                datos_precargados.pasajeros,
-                datos_precargados.pasajes,
-                datos_precargados.vuelos,
+                pasajeros,
+                pasajes,
+                vuelos,
             )
         elif opcion_submenu == "2":  # Listar Pasajes
-            funciones.listarPasajes(
-                datos_precargados.pasajes, datos_precargados.pasajeros
-            )
+            funciones.listarPasajes(pasajes, pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasaje
-            funciones.modificarPasaje(
-                datos_precargados.pasajes, datos_precargados.vuelos
-            )
+            funciones.modificarPasaje(pasajes, vuelos)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            funciones.eliminarPasaje(datos_precargados.pasajes)
+            funciones.eliminarPasaje(pasajes)
     return
 
 
@@ -95,13 +117,13 @@ def subMenuPasajeros():
             break  # Volver al ciclo principal
 
         elif opcion_submenu == "1":  # Registrar Pasajero
-            funciones.registrarPasajero(datos_precargados.pasajeros)
+            funciones.registrarPasajero(pasajeros)
         elif opcion_submenu == "2":  # Listar Pasajeros
-            funciones.listarPasajeros(datos_precargados.pasajeros)
+            funciones.listarPasajeros(pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasajero
-            funciones.modificarPasajero(datos_precargados.pasajeros)
+            funciones.modificarPasajero(pasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasajero
-            funciones.eliminarPasajero(datos_precargados.pasajeros)
+            funciones.eliminarPasajero(pasajeros)
     return
 
 
@@ -129,17 +151,13 @@ def subMenuVuelos():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Vuelos
-            funciones.registrarVuelo(
-                datos_precargados.vuelos, datos_precargados.aviones
-            )
+            funciones.registrarVuelo(vuelos, aviones)
         elif opcion_submenu == "2":  # Listar Vuelos
             funciones.listarVuelos(datos_precargados.vuelos)
         elif opcion_submenu == "3":  # Modificar Vuelo
-            funciones.modificarVuelo(
-                datos_precargados.vuelos, datos_precargados.aviones
-            )
+            funciones.modificarVuelo(vuelos, aviones)
         elif opcion_submenu == "4":  # Eliminar Vuelo
-            funciones.eliminarVuelo(datos_precargados.vuelos)
+            funciones.eliminarVuelo(vuelos)
     return
 
 
@@ -167,9 +185,9 @@ def subMenuAviones():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Avión
-            funciones.registrarAviones(datos_precargados.aviones)
+            funciones.registrarAviones(aviones)
         elif opcion_submenu == "2":  # Listar Aviones
-            funciones.listarAviones(datos_precargados.aviones)
+            funciones.listarAviones(aviones)
         elif opcion_submenu == "3":  # Modificar Aviones
             ...
         elif opcion_submenu == "4":  # Eliminar Aviones
@@ -181,6 +199,7 @@ def subMenuAviones():
 # CUERPO PRINCIPAL
 # ----------------------------------------------------------------------------------------------
 def main():
+
     # -------------------------------------------------
     # Bloque de menú
     # ----------------------------------------------------------------------------------------------
