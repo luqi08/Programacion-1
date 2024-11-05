@@ -29,29 +29,61 @@ def registrarAviones(aviones: dict) -> int:
         if opcion == "1":
             print("Escriba el nombre del modelo.")
             escribirModelo = input().capitalize()
-            while escribirNombre == "":
+            while escribirModelo == "":
                 print("No es valido dejar el espacio en blanco")
-                escribirNombre = input("Escribalo nuevamente: ").capitalize()
-            nombre = escribirNombre
+                escribirModelo = input("Escribalo nuevamente: ")
+            modelo = escribirModelo
         elif opcion == "2":
             print("Escriba su apellido")
-            escribirMatricula = input()
+            escribirMatricula = input().upper()
             while escribirMatricula == "":
                 print("No es valido dejar el espacio en blanco")
-                escribirMatricula = input("Escribalo nuevamente: ").capitalize()
+                escribirMatricula = input("Escribalo nuevamente: ")
             matricula = escribirMatricula
         elif opcion == "3":
-            print("Escriba su DNI")
-            escribirDni = input()
-            while escribirDni == "" or escribirDni.isnumeric() == False:
+            print("Escriba los asientos totales de la primera clase")
+            escribirPrimeraClase = input()
+            while escribirPrimeraClase == "":
                 print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirDni = input("Intentelo nuevamente: ")
-            dni = int(escribirDni)
+                escribirPrimeraClase = input("Intentelo nuevamente: ")
+            primeraClase = escribirPrimeraClase
+            print("Ahora coloque la cantidad de asientos por fila.")
+            porFilaPC = int(input())
+            print("Ahora coloque la cantidad de asientos por columna")
+            porColumnaPC = int(input())
+            while (porFilaPC * porColumnaPC) != primeraClase:
+                print("ERROR!")
+                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
+                print("Coloque la cantidad de asientos por fila.")
+                porFilaPC = int(input())
+                print("Coloque la cantidad de asientos por columna")
+                porColumnaPC = int(input())
         elif opcion == "4":
-            nombre = ""
+            print("Escriba los asientos totales de la clase economica.")
+            escribirClaseEconomica = input()
+            while escribirClaseEconomica == "":
+                print("No es valido dejar espacios en blanco")
+                print("Intentelo nuevamente")
+                escribirClaseEconomica = input()
+            claseEconomica = escribirClaseEconomica
+            print("Ahora escriba los asientos por fila")
+            porFilaCE = int(input())
+            print("Ahora escriba la cantidad de asientos por columna")
+            porColumnaCE = int(input())
+            while (porFilaCE * porColumnaCE) == claseEconomica:
+                print(
+                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
+                )
+                print("Intentelo nuevamente")
+                print("Ahora escriba los asientos por fila")
+                porFilaCE = int(input())
+                print("Ahora escriba la cantidad de asientos por columna")
+                porColumnaCE = int(input())
+        elif opcion == "5":
+            modelo = ""
             apellido = ""
             dni = ""
-        elif opcion == "5":
+        elif opcion == "6":
             if (
                 modelo == ""
                 or matricula == ""
@@ -70,6 +102,10 @@ def registrarAviones(aviones: dict) -> int:
     print(f"Asientos en primera clase: {primeraClase}")
     print(f"Asientos en clase economica: {claseEconomica}")
     print("----------------")
-    aviones[matricula] = {"nombre": nombre, "apellido": apellido}
-    print("Pasajero registrado")
-    return
+    aviones[matricula] = {
+        "modelo": modelo,
+        "asientos en primera clase": int(primeraClase),
+        "asientos en clase economica": int(claseEconomica),
+    }
+    print("Avion registrado")
+    return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
