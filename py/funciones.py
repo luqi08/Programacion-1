@@ -156,6 +156,32 @@ def letraNumero(letra: str) -> int:
         letra = 5
     return letra
 
+def mostrarMatrizdeVuelo(matriz: list[list], pasaje: dict) -> None:
+    """
+    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
+
+    Args:
+    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
+    - codigo (str): Código identificador del pasaje.
+    """
+    longitud = len(matriz[0])
+    ancho_columna = 2
+    filas_totales = len(matriz)
+    medio = filas_totales // 2
+
+    if longitud < 7:
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
+    else:
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+
+    for indice, fila in enumerate(matriz):
+        letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
+        print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
+        if indice == medio - 1:
+            print("PASILLO".center(longitud * 3 + 1, "="))
+    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
+    return
 
 def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> None:
     """
@@ -211,6 +237,48 @@ def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str) -> 
             print("PASILLO".center(longitud * 3 + 1, "="))
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
+
+def seleccionarAsiento(matriz):
+    """
+    Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
+
+    Args:
+    - codigoPasaje (str): Código identificador del pasaje.
+    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    """
+    longitud = len(matriz[0])
+    listaLetras = []
+    for indice, fila in enumerate(matriz):
+        letra = chr(65 + indice)
+        listaLetras.append(letra)
+
+    # SELECCIONAR NUEVO ASIENTO
+    while True:
+        while True:
+            filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
+            if filaAsiento.capitalize() not in listaLetras:
+                print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
+            else:
+                fila = letraNumero(filaAsiento.capitalize())
+                break
+
+        while True:
+            filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
+            if 1 > filaColumna > longitud:
+                print(f"{filaColumna} NO ESTÁ EN EL RANGO")
+            else:
+                break
+
+        if estaOcupado(fila, filaColumna, matriz):
+            print("Asiento ocupado... Reintente")
+        else:
+            break
+
+    # MODIFICAR DICCIONARIO Y MATRIZ
+    asiento = filaAsiento.capitalize() + str(filaColumna)
+    filaAsiento = letraNumero(filaAsiento.capitalize())
+    matriz[filaAsiento][filaColumna - 5] = 1
+    return asiento
 
 
 def estaOcupado(fila, columna, matriz):
@@ -428,7 +496,10 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
 
     # Asignación de asiento (simplificado para este ejemplo)
-    asiento = input("Seleccione su asiento (Ej: A1, B2): ").upper()
+    matrizAsientos = vuelos[vueloSeleccionado]["Asientos"][claseSeleccionada]
+    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
+    asiento = seleccionarAsiento(matrizAsientos)
+    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
 
     # Generar nuevo ID de pasaje
     nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
