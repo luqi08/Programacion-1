@@ -101,7 +101,7 @@ def ingresoEntero(mensaje): # Si se trata de validar contra valores discretos po
                 raise ValueError
             break
         except ValueError:
-            print(f'Ingrese un {mensaje} valido')
+            print(f'{mensaje} valido')
     return valor
 
 
@@ -306,7 +306,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     # Ingreso/Registro Pasajero
     while True:
         dni = ingresoEntero("Ingrese DNI")
-        if dni == "0":
+        if dni == 0:
             return
         elif dni in pasajeros.keys():
             break
@@ -419,10 +419,10 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     while True:
         clase = input("Seleccione la clase del pasaje ([1] Primera, [2] Económica): ")
         if clase == "1":
-            claseSeleccionada = "primera"
+            claseSeleccionada = "Primera"
             break
         elif clase == "2":
-            claseSeleccionada = "economica"
+            claseSeleccionada = "Economica"
             break
         else:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -578,7 +578,7 @@ def eliminarPasaje(pasajes: dict) -> None:
     """
     while True:
         pasaje = "PA" + input("Ingrese número de pasaje o [0] para salir: ")
-        if pasaje == "0":
+        if pasaje == "PA0":
             return
         elif pasaje == "":
             print("No ha ingresado el número de pasaje")
