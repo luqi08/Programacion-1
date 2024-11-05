@@ -93,30 +93,16 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(mensaje: str) -> int:
-    """
-    Recibe un str para el mensaje de ingreso de dato
-    Filtra todo lo que no sea caracteres numéricos enteros
-    """
+def ingresoEntero(mensaje): # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
     while True:
         try:
-            print()
-            ingreso = input(f"{mensaje} o [0] para regresar: ")
-            if ingreso == "0":
-                break
-            elif ingreso == "":
-                raise Exception("ERROR NO SE INGRESÓ NADA")
-            else:
-                int(ingreso)
-                break
+            valor = int(input(f'{mensaje} o [0] para salir: ')) # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
+            if valor < 0 or valor > 100000000: # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
+                raise ValueError
             break
         except ValueError:
-            print()
-            print("ERROR INGRESO INVÁLIDO | Ingresar solamente números")
-        except Exception as ex:
-            print()
-            print(ex)
-    return ingreso
+            print(f'{mensaje} valido')
+    return valor
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -318,14 +304,13 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     - vuelos (dict): Información sobre los vuelos.
     """
     # Ingreso/Registro Pasajero
-    bandera = True
-    while bandera:
+    while True:
         dni = ingresoEntero("Ingrese DNI")
-        if dni == "0":
+        if dni == 0:
             return
-        if dni in pasajeros.keys():
-            bandera = False
-        elif dni not in pasajeros.keys():
+        elif dni in pasajeros.keys():
+            break
+        else:
             print()
             print(f"El DNI: {dni}, no se encuentra registrado.")
             while True:
@@ -434,10 +419,10 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     while True:
         clase = input("Seleccione la clase del pasaje ([1] Primera, [2] Económica): ")
         if clase == "1":
-            claseSeleccionada = "primera"
+            claseSeleccionada = "Primera"
             break
         elif clase == "2":
-            claseSeleccionada = "economica"
+            claseSeleccionada = "Economica"
             break
         else:
             input("Opción inválida. Presione ENTER para volver a seleccionar.")
@@ -593,7 +578,7 @@ def eliminarPasaje(pasajes: dict) -> None:
     """
     while True:
         pasaje = "PA" + input("Ingrese número de pasaje o [0] para salir: ")
-        if pasaje == "0":
+        if pasaje == "PA0":
             return
         elif pasaje == "":
             print("No ha ingresado el número de pasaje")
@@ -903,7 +888,7 @@ def registrarVuelo(vuelos: dict, aviones: dict):
             else:
                 break
         else:
-            print("OPCIÓN INVÁLIDA")
+            print("Opcion invalida")
 
     matrizPrimera = crearMatriz(4, 4, 0)
     matrizEconomica = crearMatriz(6, 20, 0)
