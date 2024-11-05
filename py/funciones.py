@@ -93,15 +93,21 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(mensaje): # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
+def ingresoEntero(
+    mensaje,
+):  # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
     while True:
         try:
-            valor = int(input(f'{mensaje} o [0] para salir: ')) # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
-            if valor < 0 or valor > 100000000: # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
+            valor = int(
+                input(f"{mensaje} o [0] para salir: ")
+            )  # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
+            if (
+                valor < 0 or valor > 100000000
+            ):  # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
                 raise ValueError
             break
         except ValueError:
-            print(f'{mensaje} valido')
+            print(f"{mensaje} valido")
     return valor
 
 
@@ -1192,3 +1198,20 @@ def registrarAviones(aviones: dict) -> int:
     }
     print("Avion registrado")
     return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
+
+
+def eliminarAviones(aviones: dict):
+    print("Ingrese la matricula del avion que desea eliminar de los archivos.")
+    matricula = input("Matricula: ")
+    print("¿Está seguro de querer eliminar los datos de este avión?")
+    print("[1] Eliminar avion")
+    print("[2] Volver al menu anterior")
+    opcion = input()
+    if opcion == 1:
+        del aviones[matricula]
+        print("Los datos del avion han sido eliminados exitosamente")
+    elif opcion == 2:
+        return
+    else:
+        print("Esa opcion no existe")
+        opcion = input("Intentelo nuevamente: ")
