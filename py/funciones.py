@@ -1,4 +1,42 @@
 from datetime import datetime
+
+# ----------------------------------------------------------------------------------------------
+# JSON
+# ----------------------------------------------------------------------------------------------
+# try:
+#     f = open("pasajes.json", mode="r", encoding="utf-8")
+#     pasajes = json.load(f)
+#     f.close()
+#     f = open("pasajeros.json", mode="r", encoding="utf-8")
+#     pasajeros = json.load(f)
+#     f.close()
+#     f = open("vuelos.json", mode="r", encoding="utf-8")
+#     vuelos = json.load(f)
+#     f.close()
+#     f = open("aviones.json", mode="r", encoding="utf-8")
+#     aviones = json.load(f)
+#     f.close()
+# except:
+#     print("No se pudo abrir los archivos json")
+
+
+# def guardarCambios() -> None:
+#     try:
+#         f = open("pasajes.json", mode="w", encoding="utf-8")
+#         json.dump(pasajes, f, ensure_ascii=False, indent=4)
+#         f.close()
+#         f = open("pasajeros.json", mode="w", encoding="utf-8")
+#         json.dump(pasajeros, f, ensure_ascii=False, indent=4)
+#         f.close()
+#         f = open("vuelos.json", mode="w", encoding="utf-8")
+#         json.dump(vuelos, f, ensure_ascii=False, indent=4)
+#         f.close()
+#         f = open("aviones.json", mode="w", encoding="utf-8")
+#         json.dump(aviones, f, ensure_ascii=False, indent=4)
+#         f.close()
+#     except:
+#         print("Error guardando los cambios")
+#     return
 # ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
@@ -15,6 +53,7 @@ def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
     - list: Matriz creada con las dimensiones y valores especificados.
     """
     return [[relleno] * columnas for fila in range(filas)]
+
 
 def contarAsientosDisponibles(vuelos, codigo_vuelo):
     """
@@ -35,14 +74,16 @@ def contarAsientosDisponibles(vuelos, codigo_vuelo):
                 asientos_disponibles += fila.count(0)
     else:
         print(f"El vuelo con código {codigo_vuelo} no existe.")
-    
+
     return asientos_disponibles
+
 
 def ingresoTexto(palabra: str) -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres alfabéticos
     """
+    print()
     ingreso = input(f"Ingrese {palabra}: ")
     while ingreso.isalpha() == False:
         print()
@@ -52,18 +93,30 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(palabra: str) -> int:
+def ingresoEntero(mensaje: str) -> int:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres numéricos enteros
     """
-    ingreso = input(f"Ingrese {palabra}: ")
-    while ingreso.isnumeric() == False:
-        print()
-        print("INGRESO INVÁLIDO")
-        print()
-        ingreso = input(f"Ingrese {palabra}: ")
-    return int(ingreso)
+    while True:
+        try:
+            print()
+            ingreso = input(f"{mensaje} o [0] para regresar: ")
+            if ingreso == "0":
+                break
+            elif ingreso == "":
+                raise Exception("ERROR NO SE INGRESÓ NADA")
+            else:
+                int(ingreso)
+                break
+            break
+        except ValueError:
+            print()
+            print("ERROR INGRESO INVÁLIDO | Ingresar solamente números")
+        except Exception as ex:
+            print()
+            print(ex)
+    return ingreso
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -264,6 +317,35 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     - pasajes (dict): Información sobre los pasajes y asientos ocupados.
     - vuelos (dict): Información sobre los vuelos.
     """
+    # Ingreso/Registro Pasajero
+    bandera = True
+    while bandera:
+        dni = ingresoEntero("Ingrese DNI")
+        if dni == "0":
+            return
+        if dni in pasajeros.keys():
+            bandera = False
+        elif dni not in pasajeros.keys():
+            print()
+            print(f"El DNI: {dni}, no se encuentra registrado.")
+            while True:
+                print()
+                print("¿Desea registrarlo?")
+                print("[1] Si")
+                print("[2] No")
+                opcion = input("Ingrese opción: ")
+                if opcion == "1":
+                    if registrarPasajero(pasajeros, dni) == True:
+                        bandera = False
+                        break
+                    else:
+                        break
+                elif opcion == "2":
+                    break
+                else:
+                    print()
+                    print("Ingreso Inválido")
+
     destinos = {
         "1": "Buenos Aires",
         "2": "Catamarca",
@@ -308,7 +390,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
             destino = destinos[opcionDestino]
             break
         else:
-            input("Opción inválida. Presione ENTER para volver a seleccionar.")
+            print("OPCIÓN INVÁLIDA")
 
     # Filtrar vuelos disponibles para el destino seleccionado
     vuelosDestino = {
@@ -366,9 +448,6 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     # Generar nuevo ID de pasaje
     nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
 
-    # Registrar datos del pasajero
-    dni = registrarDatos(pasajeros)
-
     # Crear el nuevo pasaje
     pasajes[nuevo_id] = {
         "dni": dni,
@@ -381,103 +460,6 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     return pasajes
 
 
-def registrarDatos(pasajeros: dict) -> int:
-    """
-    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
-    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
-    ingresados son almacenados en el diccionario de pasajeros.
-
-    Args:
-    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
-
-    Returns:
-    - dni (int): Numero dni para identificar al pasajero.
-    """
-    prohibidos = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-    nombre = ""
-    apellido = ""
-    dni = ""
-    verificador = False
-    verificadorNombre = False
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"[1]Nombre: {nombre}")
-        print(f"[2]Apellido: {apellido}")
-        print(f"[3]DNI: {dni}")
-        print("[4]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[5]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "1":
-            print("Escriba su nombre.")
-            escribirNombre = input().capitalize()
-            for letra in escribirNombre:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirNombre == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirNombre = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirNombre:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            nombre = escribirNombre
-            verificadorNombre == True
-        elif opcion == "2":
-            print("Escriba su apellido")
-            escribirApellido = input().capitalize()
-            for letra in escribirApellido:
-                if letra in prohibidos:
-                    bandera = False
-                    break
-                else:
-                    bandera = True
-            while escribirApellido == "" or bandera == False:
-                print("No es valido dejar el espacio en blanco ni involucrar numeros")
-                escribirApellido = input("Escribalo nuevamente: ").capitalize()
-                for letra in escribirApellido:
-                    if letra in prohibidos:
-                        bandera = False
-                        break
-                    else:
-                        bandera = True
-            apellido = escribirApellido
-        elif opcion == "3":
-            print("Escriba su DNI")
-            escribirDni = input()
-            while escribirDni == "" or escribirDni.isnumeric() == False:
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirDni = input("Intentelo nuevamente: ")
-            dni = int(escribirDni)
-        elif opcion == "4":
-            nombre = ""
-            apellido = ""
-            dni = ""
-            verificadorNombre = False
-        elif opcion == "5":
-            if nombre == "" or apellido == "" or dni == "":
-                print("Aun quedan datos por completar")
-            else:
-                break
-        else:
-            print("Esa opcion no existe")
-    print("Sus datos")
-    print("----------------")
-    print(f"Nombre: {nombre}")
-    print(f"Apellido: {apellido}")
-    print(f"DNI: {dni}")
-    print("----------------")
-    pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
-    print("Pasajero registrado")
-    return dni
-
-
 def listarPasajes(pasajes, pasajeros):
     """
     Lista todos los pasajes registrados junto con sus datos
@@ -486,7 +468,9 @@ def listarPasajes(pasajes, pasajeros):
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     # Encabezado de la tabla
-    print(f"{'CÓDIGO':<6} | {'PASAJERO':<20} | {'DNI':<10} | {'VUELO':<5} | {'CLASE':<9} | {'ASIENTO':<10}")
+    print(
+        f"{'CÓDIGO':<6} | {'PASAJERO':<20} | {'DNI':<10} | {'VUELO':<5} | {'CLASE':<9} | {'ASIENTO':<10}"
+    )
     print("-" * 75)
 
     # Filas de la tabla
@@ -496,7 +480,6 @@ def listarPasajes(pasajes, pasajeros):
             f"{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
         )
     return
-
 
 
 def nombrePasajero(pasajeros: dict, dni: int) -> str:
@@ -531,7 +514,7 @@ def modificarPasaje(pasajes, vuelos):
     """
     while True:
         codigoPasaje = "PA" + input("Ingrese el codigo del pasaje o [0] para salir: ")
-        if codigoPasaje == 'PA0':
+        if codigoPasaje == "PA0":
             return
         elif codigoPasaje not in pasajes:
             print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
@@ -551,11 +534,15 @@ def modificarPasaje(pasajes, vuelos):
                         f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
                     if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]['vuelo']]['Asientos']['Primera']
+                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
+                            "Asientos"
+                        ]["Primera"]
                         mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]['vuelo']]['Asientos']['Economica']
+                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
+                            "Asientos"
+                        ]["Economica"]
                         mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     print()
@@ -571,11 +558,15 @@ def modificarPasaje(pasajes, vuelos):
                         f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
                     if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]['vuelo']]['Asientos']['economica']
+                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
+                            "Asientos"
+                        ]["economica"]
                         mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]['vuelo']]['Asientos']['primera']
+                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
+                            "Asientos"
+                        ]["primera"]
                         mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     print()
@@ -618,7 +609,7 @@ def eliminarPasaje(pasajes: dict) -> None:
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros: dict) -> None:
+def registrarPasajero(pasajeros: dict, dni="") -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -632,9 +623,9 @@ def registrarPasajero(pasajeros: dict) -> None:
     """
     nombre = ""
     apellido = ""
-    dni = ""
     verificador = False
     while verificador == False:
+        print()
         print("Ingrese sus datos")
         print("-----------------")
         print(f"[1] Nombre: {nombre}")
@@ -658,10 +649,11 @@ def registrarPasajero(pasajeros: dict) -> None:
         # Ingreso DNI
         elif opcion == "3":
             print()
-            dni = ingresoEntero("DNI")
+            dni = ingresoEntero("Ingrese DNI")
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
+                print()
                 print("Aun quedan datos por completar")
             else:
                 break
@@ -669,7 +661,7 @@ def registrarPasajero(pasajeros: dict) -> None:
             nombre = ""
             apellido = ""
             dni = ""
-            break
+            return
         else:
             print("OPCIÓN INVÁLIDA")
     print("Sus datos")
@@ -680,7 +672,7 @@ def registrarPasajero(pasajeros: dict) -> None:
     print("----------------")
     pasajeros[dni] = {"nombre": nombre, "apellido": apellido}
     print("Pasajero registrado")
-    return
+    return True
 
 
 def listarPasajeros(pasajeros: dict) -> None:
@@ -701,7 +693,6 @@ def listarPasajeros(pasajeros: dict) -> None:
     return
 
 
-
 def modificarPasajero(pasajeros: dict) -> None:
     """
     Permite modificar los datos de un pasajero identificado por su DNI.
@@ -711,19 +702,15 @@ def modificarPasajero(pasajeros: dict) -> None:
     - dni (int): DNI del pasajero que se desea modificar.
     """
     while True:
-        dni = input("Ingrese DNI o [0] Para volver al Menú Anterior: ")
-        if dni.isnumeric() == True:  # Verificar ingreso válido
-            dni = int(dni)
-            if dni == 0:
-                return
-            elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
-                print()
-                print(f"El DNI {dni} no se encuentra registrado")
-                print()
-            else:
-                break
+        dni = ingresoEntero("Ingrese DNI")
+        if dni == "0":
+            return
+        elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
+            print()
+            print(f"El DNI {dni} no se encuentra registrado")
+            print()
         else:
-            print("Ingreso Inválido")
+            break
 
     copiaNombre = pasajeros[dni]["nombre"]
     copiaApellido = pasajeros[dni]["apellido"]
@@ -780,17 +767,12 @@ def eliminarPasajero(pasajeros: dict) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        print()
-        dni = input("Ingrese DNI del pasajero o [0] para salir: ")
+        dni = ingresoEntero("Ingrese DNI")
         if dni == "0":
             return
-        elif dni == "":
-            print("No ha ingresado el DNI")
-        elif not dni.isnumeric():
-            print("Solo se aceptan números")
-        elif int(dni) not in pasajeros.keys():
+        elif dni not in pasajeros.keys():
             print()
-            print("El DNI {dni} no se encuentra registrado")
+            print(f"El DNI {dni} no se encuentra registrado")
         else:
             dni = int(dni)
             nombre = pasajeros[dni]["nombre"]
@@ -829,7 +811,9 @@ def listarVuelos(vuelos: dict) -> None:
     - vuelos (dict): Diccionario que contiene la información de los vuelos.
     """
     # Encabezado de la tabla
-    print(f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10} | {'DISPONIBILIDAD':<10}")
+    print(
+        f"{'VUELO':<5} | {'FECHA':<10} | {'HORA':<5} | {'ORIGEN':<26} | {'DESTINO':<26} | {'AVIÓN':<10} | {'DISPONIBILIDAD':<10}"
+    )
     print("-" * 115)
 
     # Filas de la tabla
@@ -840,13 +824,14 @@ def listarVuelos(vuelos: dict) -> None:
         )
     return
 
-def registrarVuelo(vuelos: dict, aviones:dict):
-    codigo = 'VU0' + str(len(vuelos) + 1)
-    fecha = ''
-    hora = ''
-    origen = ''
-    destino = ''
-    avion = ''
+
+def registrarVuelo(vuelos: dict, aviones: dict):
+    codigo = "VU0" + str(len(vuelos) + 1)
+    fecha = ""
+    hora = ""
+    origen = ""
+    destino = ""
+    avion = ""
 
     while True:
         print("Registre datos del vuelo")
@@ -864,7 +849,7 @@ def registrarVuelo(vuelos: dict, aviones:dict):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            print('El código no puede modificarse')
+            print("El código no puede modificarse")
 
         elif opcion == "2":
             while True:
@@ -877,7 +862,9 @@ def registrarVuelo(vuelos: dict, aviones:dict):
                     break
                 except ValueError:
                     # Mensaje de error si el formato es incorrecto
-                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
+                    print(
+                        "Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy."
+                    )
 
         elif opcion == "3":
             while True:
@@ -899,32 +886,35 @@ def registrarVuelo(vuelos: dict, aviones:dict):
             while True:
                 matricula = input().upper()
                 if matricula not in aviones.keys():
-                    print('El avion no esta registrado')
+                    print("El avion no esta registrado")
                 else:
                     avion = matricula
                     break
 
         elif opcion == "7":
-            if fecha == '' or hora == '' or origen == '' or destino == '' or avion == '':
-                print('Quedan dantos sin completar')
+            if (
+                fecha == ""
+                or hora == ""
+                or origen == ""
+                or destino == ""
+                or avion == ""
+            ):
+                print("Quedan dantos sin completar")
             else:
                 break
         else:
             print("Opcion invalida")
 
-    matrizPrimera = crearMatriz(4,4,0)
-    matrizEconomica = crearMatriz(6,20,0)
+    matrizPrimera = crearMatriz(4, 4, 0)
+    matrizEconomica = crearMatriz(6, 20, 0)
 
     vuelos[codigo] = {
-        "Fecha" : fecha,
-        "Hora" : hora,
-        "Origen" : origen,
-        "Destino" : destino,
-        "Avion" : avion,
-        "Asientos" : {
-            "Primera" : matrizPrimera,
-            "Economica" : matrizEconomica
-                      }
+        "Fecha": fecha,
+        "Hora": hora,
+        "Origen": origen,
+        "Destino": destino,
+        "Avion": avion,
+        "Asientos": {"Primera": matrizPrimera, "Economica": matrizEconomica},
     }
 
     print("Sus datos")
@@ -939,10 +929,11 @@ def registrarVuelo(vuelos: dict, aviones:dict):
     print("Vuelo registrado correctamente")
     return
 
-def modificarVuelo(vuelos: dict, aviones:dict):
+
+def modificarVuelo(vuelos: dict, aviones: dict):
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
+        codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():
@@ -950,12 +941,12 @@ def modificarVuelo(vuelos: dict, aviones:dict):
             print(f"El Vuelo {codigo} no se encuentra registrado")
         else:
             break
-    
-    copiaFecha = vuelos[codigo]['Fecha']
-    copiaHora = vuelos[codigo]['Hora']
-    copiaOrigen = vuelos[codigo]['Origen']
-    copiaDestino = vuelos[codigo]['Destino']
-    copiaAvion = vuelos[codigo]['Avion']
+
+    copiaFecha = vuelos[codigo]["Fecha"]
+    copiaHora = vuelos[codigo]["Hora"]
+    copiaOrigen = vuelos[codigo]["Origen"]
+    copiaDestino = vuelos[codigo]["Destino"]
+    copiaAvion = vuelos[codigo]["Avion"]
 
     while True:
         print("Modifique sus datos")
@@ -973,7 +964,7 @@ def modificarVuelo(vuelos: dict, aviones:dict):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            print('El código no puede modificarse')
+            print("El código no puede modificarse")
 
         elif opcion == "2":
             while True:
@@ -982,35 +973,37 @@ def modificarVuelo(vuelos: dict, aviones:dict):
                     # Intenta convertir la entrada a formato de fecha
                     fechaFormateada = datetime.strptime(fecha, "%d/%m/%Y")
                     # Si es válida, la almacena en el diccionario y sale del bucle
-                    vuelos[codigo]['Fecha'] = fechaFormateada.strftime("%d/%m/%Y")
+                    vuelos[codigo]["Fecha"] = fechaFormateada.strftime("%d/%m/%Y")
                     break
                 except ValueError:
                     # Mensaje de error si el formato es incorrecto
-                    print("Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy.")
+                    print(
+                        "Formato de fecha inválido. Ingrese la fecha en formato dd/mm/yyyy."
+                    )
 
         elif opcion == "3":
             while True:
                 hora = input("Ingrese la hora (hh:mm): ")
                 try:
                     horaFormateada = datetime.strptime(hora, "%H:%M")
-                    vuelos[codigo]['Hora'] = horaFormateada.strftime("%H:%M")
+                    vuelos[codigo]["Hora"] = horaFormateada.strftime("%H:%M")
                     break
                 except ValueError:
                     print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
-            vuelos[codigo]['Origen'] = input().title()
+            vuelos[codigo]["Origen"] = input().title()
 
         elif opcion == "5":
-            vuelos[codigo]['Destino'] = input().title()
+            vuelos[codigo]["Destino"] = input().title()
 
         elif opcion == "6":
             while True:
                 matricula = input().upper()
                 if matricula not in aviones.keys():
-                    print('El avion no esta registrado')
+                    print("El avion no esta registrado")
                 else:
-                    vuelos[codigo]['Avion'] = matricula
+                    vuelos[codigo]["Avion"] = matricula
                     break
 
         elif opcion == "7":
@@ -1038,6 +1031,7 @@ def modificarVuelo(vuelos: dict, aviones:dict):
     print("Vuelo modificado correctamente")
     return
 
+
 def eliminarVuelo(vuelos: dict) -> None:
     """
     Elimina un vuelo del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
@@ -1048,7 +1042,7 @@ def eliminarVuelo(vuelos: dict) -> None:
     """
     while True:
         print()
-        codigo = "VU" + input('Ingrese codigo de vuelo o [0] para salir: ')
+        codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
         if codigo == "VU0":
             return
         elif codigo not in vuelos.keys():
@@ -1077,6 +1071,7 @@ def eliminarVuelo(vuelos: dict) -> None:
             print("Opción inválida")
     return
 
+
 # ----------------------------------------------------------------------------------------------
 # AVIONES
 # ----------------------------------------------------------------------------------------------
@@ -1088,7 +1083,9 @@ def listarAviones(aviones: dict) -> None:
     - aviones (dict): Diccionario que contiene la información de los aviones.
     """
     # Encabezado de la tabla
-    print(f"{'MATRICULA':<9} | {'MODELO':<13} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}")
+    print(
+        f"{'MATRICULA':<9} | {'MODELO':<13} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}"
+    )
     print("-" * 60)
 
     # Filas de la tabla
@@ -1099,104 +1096,114 @@ def listarAviones(aviones: dict) -> None:
     return
 
 
-
-def registrarAviones(aviones):
+def registrarAviones(aviones: dict) -> int:
     """
-    Esta función sirve para registrar aviones adquiridos dentro del programa. Funciona bastante parecido a crear pasajes
-    solo que se reemplazan los datos del pasajero con los del avión.
-    """
+    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
+    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
+    ingresados son almacenados en el diccionario de pasajeros.
 
+    Args:
+    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
+
+    Returns:
+    - dni (int): Numero dni para identificar al pasajero.
+    """
     modelo = ""
     matricula = ""
     primeraClase = ""
     claseEconomica = ""
-    while True:
-        print("-------------------------------------")
-        print("Ingrese los datos del avion adquirido")
-        print("-------------------------------------")
+    verificador = False
+    while verificador == False:
+        print("Ingrese sus datos")
+        print("-----------------")
         print(f"[1]Modelo: {modelo}")
         print(f"[2]Matricula: {matricula}")
-        print(f"[3]Asientos en primera clase: {primeraClase}")
-        print(f"[4]Asientos en clase economica: {claseEconomica}")
-        print("[5]Reestablecer todo a sus valores predeterminados")
+        print(f"[3]Asientos de primera clase: {primeraClase}")
+        print(f"[4]Asientos de clase economica: {claseEconomica}")
+        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
         print("[6]Completar")
-        print("-------------------------------------")
-        print(f"[0]Volver al menu anterior")
-        print("-------------------------------------")
-
+        print("-----------------")
         opcion = input("Seleccione una opcion: ")
         if opcion == "1":
-            print("Escriba el modelo del avion.")
-            modelo = input()
-            print("Modelo ingresado.")
+            print("Escriba el nombre del modelo.")
+            escribirModelo = input().capitalize()
+            while escribirModelo == "":
+                print("No es valido dejar el espacio en blanco")
+                escribirModelo = input("Escribalo nuevamente: ")
+            modelo = escribirModelo
         elif opcion == "2":
-            print("Escriba la matricula del avion")
-            matricula = input()
-            while matricula in aviones.keys():
-                print("Dicha matricula ya ha sido ingresada.")
-                matricula = input("Intentelo nuevamente: ")
-            print("Matricula ingresada")
+            print("Escriba su apellido")
+            escribirMatricula = input().upper()
+            while escribirMatricula == "":
+                print("No es valido dejar el espacio en blanco")
+                escribirMatricula = input("Escribalo nuevamente: ")
+            matricula = escribirMatricula
         elif opcion == "3":
-            print("Indique con cuantos asientos de primera clase contara el avion")
-            primeraClase = int(input())
-            columnas = int(input("Indique la cantidad de columnas: "))
-            filas = int(input("Indique la cantidad de filas: "))
-            while (columnas * filas) != int(primeraClase):
-                print(
-                    "ERROR! La cantidad de asientos no coincide con la propuesta anteriormente."
-                )
-                print("Intentelo nuevamente")
-                primeraClase = int(input("Indique los asientos de primera clase: "))
-                columnas = int(input("Indique la cantidad de columnas: "))
-                filas = int(input("Indique la cantidad de filas: "))
-            matriz = []
-
-            for asiento in range(filas):
-                matriz.append([])
-                for asientos in range(columnas):
-                    matriz[asiento].append(0)
+            print("Escriba los asientos totales de la primera clase")
+            escribirPrimeraClase = input()
+            while escribirPrimeraClase == "":
+                print("No es valido dejar espacion en blanco ni involucrar letras")
+                escribirPrimeraClase = input("Intentelo nuevamente: ")
+            primeraClase = escribirPrimeraClase
+            print("Ahora coloque la cantidad de asientos por fila.")
+            porFilaPC = int(input())
+            print("Ahora coloque la cantidad de asientos por columna")
+            porColumnaPC = int(input())
+            while (porFilaPC * porColumnaPC) != primeraClase:
+                print("ERROR!")
+                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
+                print("Coloque la cantidad de asientos por fila.")
+                porFilaPC = int(input())
+                print("Coloque la cantidad de asientos por columna")
+                porColumnaPC = int(input())
         elif opcion == "4":
-            print("Indique con cuantos asientos de primera clase contara el avion")
-            claseEconomica = int(input())
-            columnas = int(input("Indique la cantidad de columnas: "))
-            filas = int(input("Indique la cantidad de filas: "))
-            while (columnas * filas) != int(claseEconomica):
+            print("Escriba los asientos totales de la clase economica.")
+            escribirClaseEconomica = input()
+            while escribirClaseEconomica == "":
+                print("No es valido dejar espacios en blanco")
+                print("Intentelo nuevamente")
+                escribirClaseEconomica = input()
+            claseEconomica = escribirClaseEconomica
+            print("Ahora escriba los asientos por fila")
+            porFilaCE = int(input())
+            print("Ahora escriba la cantidad de asientos por columna")
+            porColumnaCE = int(input())
+            while (porFilaCE * porColumnaCE) == claseEconomica:
                 print(
-                    "ERROR! La cantidad de asientos no coincide con la propuesta anteriormente."
+                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
                 )
                 print("Intentelo nuevamente")
-                claseEconomica = int(input("Indique los asientos de primera clase: "))
-                columnas = int(input("Indique la cantidad de columnas: "))
-                filas = int(input("Indique la cantidad de filas: "))
-            matriz = []
-
-            for asiento in range(filas):
-                matriz.append([])
-                for asientos in range(columnas):
-                    matriz[asiento].append(0)
-
+                print("Ahora escriba los asientos por fila")
+                porFilaCE = int(input())
+                print("Ahora escriba la cantidad de asientos por columna")
+                porColumnaCE = int(input())
         elif opcion == "5":
             modelo = ""
-            matricula = ""
-            primeraClase = ""
-            claseEconomica = ""
-
+            apellido = ""
+            dni = ""
         elif opcion == "6":
             if (
-                modelo != ""
-                and matricula != ""
-                and primeraClase != ""
-                and claseEconomica != ""
+                modelo == ""
+                or matricula == ""
+                or claseEconomica == ""
+                or primeraClase == ""
             ):
                 print("Aun quedan datos por completar")
             else:
-                aviones[matricula] = {
-                    "modelo": modelo,
-                    "asientos": {"primera": primeraClase, "econocmica": claseEconomica},
-                }
                 break
-        elif opcion == 0:
-            break
-
         else:
             print("Esa opcion no existe")
+    print("Los datos")
+    print("----------------")
+    print(f"Modelo: {modelo}")
+    print(f"Matricula: {matricula}")
+    print(f"Asientos en primera clase: {primeraClase}")
+    print(f"Asientos en clase economica: {claseEconomica}")
+    print("----------------")
+    aviones[matricula] = {
+        "modelo": modelo,
+        "asientos en primera clase": int(primeraClase),
+        "asientos en clase economica": int(claseEconomica),
+    }
+    print("Avion registrado")
+    return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)

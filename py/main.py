@@ -11,6 +11,8 @@ Autor: Facundo Muruchi - Alvaro Beron - Luis Lin
 # ----------------------------------------------------------------------------------------------
 import time
 import os
+import json
+
 import funciones
 import datos_precargados
 
@@ -60,7 +62,9 @@ def subMenuPasajes():
                 datos_precargados.pasajes, datos_precargados.pasajeros
             )
         elif opcion_submenu == "3":  # Modificar Pasaje
-            funciones.modificarPasaje(datos_precargados.pasajes, datos_precargados.vuelos)
+            funciones.modificarPasaje(
+                datos_precargados.pasajes, datos_precargados.vuelos
+            )
         elif opcion_submenu == "4":  # Eliminar Pasaje
             funciones.eliminarPasaje(datos_precargados.pasajes)
     return
@@ -125,11 +129,15 @@ def subMenuVuelos():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Vuelos
-            funciones.registrarVuelo(datos_precargados.vuelos, datos_precargados.aviones)
+            funciones.registrarVuelo(
+                datos_precargados.vuelos, datos_precargados.aviones
+            )
         elif opcion_submenu == "2":  # Listar Vuelos
             funciones.listarVuelos(datos_precargados.vuelos)
         elif opcion_submenu == "3":  # Modificar Vuelo
-            funciones.modificarVuelo(datos_precargados.vuelos, datos_precargados.aviones)
+            funciones.modificarVuelo(
+                datos_precargados.vuelos, datos_precargados.aviones
+            )
         elif opcion_submenu == "4":  # Eliminar Vuelo
             funciones.eliminarVuelo(datos_precargados.vuelos)
     return
@@ -199,6 +207,7 @@ def main():
         print()
         if opcion == "0":  # Opción salir del programa
             print("Saliendo del programa...")
+#            funciones.guardarCambios()
             break  # Salir del ciclo principal
 
         elif opcion == "1":  # SUBMENÚ PASAJES
