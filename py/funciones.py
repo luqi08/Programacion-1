@@ -769,7 +769,7 @@ def modificarPasajero(pasajeros: dict, ruta) -> None:
     - dni (int): DNI del pasajero que se desea modificar.
     """
     while True:
-        dni = ingresoEntero("Ingrese DNI")
+        dni = str(ingresoEntero("Ingrese DNI"))
         if dni == "0":
             return
         elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
