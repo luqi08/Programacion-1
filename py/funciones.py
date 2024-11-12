@@ -402,7 +402,7 @@ def buscarAsiento(matriz, selecto):
     return False
 
 
-def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
+def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
     seleccionar una clase y asiento, y registrar los datos del pasajero para crear un pasaje.
@@ -429,7 +429,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
                 print("[2] No")
                 opcion = input("Ingrese opción: ")
                 if opcion == "1":
-                    if registrarPasajero(pasajeros, dni) == True:
+                    if registrarPasajero(pasajeros, rutaPasajeros) == True:
                         bandera = False
                         break
                     else:
@@ -1197,7 +1197,7 @@ def listarAviones(aviones: dict) -> None:
     return
 
 
-def registrarAviones(aviones: dict) -> int:
+def registrarAviones(aviones: dict, ruta) -> int:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -1307,6 +1307,7 @@ def registrarAviones(aviones: dict) -> int:
         "primera": int(primeraClase),
         "economica": int(claseEconomica),
     }
+    escribirJson(ruta, aviones)
     print("Avion registrado")
     return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
 

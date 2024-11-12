@@ -1,42 +1,77 @@
 {
-  "LV-ABC": {
-    "modelo": "Boeing747-800",
-    "Asientos": { "primera": 20, "economica": 162 }
-  },
-  "LV-BRD": {
-    "modelo": "Boeing747-800",
-    "Asientos": { "primera": 20, "economica": 162 }
-  },
-  "LV-CFT": {
-    "modelo": "Boeing747-800",
-    "Asientos": { "primera": 20, "economica": 162 }
-  },
-  "LV-DRT": {
-    "modelo": "Boeing747-800",
-    "Asientos": { "primera": 20, "economica": 162 }
-  },
-  "LV-EFP": {
-    "modelo": "Boeing747-800",
-    "Asientos": { "primera": 20, "economica": 162 }
-  },
-  "LV-GHT": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": { "primera": 28, "economica": 150 }
-  },
-  "LV-HJK": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": { "primera": 28, "economica": 150 }
-  },
-  "LV-JLM": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": { "primera": 28, "economica": 150 }
-  },
-  "LV-KRS": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": { "primera": 28, "economica": 150 }
-  },
-  "LV-LPQ": {
-    "modelo": "AirbusA320Neo",
-    "Asientos": { "primera": 28, "economica": 150 }
-  }
+    "LV-ABC": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "LV-BRD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "LV-CFT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "LV-DRT": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "LV-EFP": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "LV-GHT": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "LV-HJK": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "LV-JLM": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "LV-KRS": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "LV-LPQ": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "HOLA": {
+        "modelo": "Boeing-747",
+        "primera": 12,
+        "economica": 12
+    }
 }
