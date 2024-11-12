@@ -895,7 +895,15 @@ def listarVuelos(vuelos: dict) -> None:
     return
 
 
-def registrarVuelo(vuelos: dict, aviones: dict):
+def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
+    """
+    Registra nuevos vuelos con los datos que ingrese el usuario
+
+    Args:
+    vuelos: El diccionario de vuelos
+    aviones: El diccionario de aviones. De aqui se verificara la exstencia del avion
+    rutaVuelos: la ruta del archivo json de vuelos
+    """
     codigo = "VU0" + str(len(vuelos) + 1)
     fecha = ""
     hora = ""
@@ -986,6 +994,8 @@ def registrarVuelo(vuelos: dict, aviones: dict):
         "Avion": avion,
         "Asientos": {"Primera": matrizPrimera, "Economica": matrizEconomica},
     }
+
+    escribirJson(rutaVuelos, vuelos)
 
     print("Sus datos")
     print("-----------------")
