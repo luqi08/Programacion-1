@@ -415,7 +415,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
     # Ingreso/Registro Pasajero
     while True:
         dni = str(ingresoEntero("Ingrese DNI"))
-        if dni == 0:
+        if dni == '0':
             return
         elif dni in pasajeros.keys():
             break
@@ -477,7 +477,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
         print("[0] Volver al Menú Principal")
         print()
 
-        opcionDestino = input("Seleccione un destino: ")
+        opcionDestino = input("Seleccione un destino o [0] para salir: ")
         if opcionDestino == "0":
             return  # Volver al menú principal
         elif opcionDestino in destinos:
