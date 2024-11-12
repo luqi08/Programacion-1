@@ -382,7 +382,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
     # Ingreso/Registro Pasajero
     while True:
         dni = str(ingresoEntero("Ingrese DNI"))
-        if dni == 0:
+        if dni == "0":
             return
         elif dni in pasajeros.keys():
             break
@@ -396,11 +396,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
                 print("[2] No")
                 opcion = input("Ingrese opción: ")
                 if opcion == "1":
-                    if registrarPasajero(pasajeros, rutaPasajeros) == True:
-                        bandera = False
-                        break
-                    else:
-                        break
+                    registrarPasajero(pasajeros, rutaPasajeros, dni)
+                    break
                 elif opcion == "2":
                     break
                 else:
@@ -444,7 +441,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
         print("[0] Volver al Menú Principal")
         print()
 
-        opcionDestino = input("Seleccione un destino: ")
+        opcionDestino = input("Seleccione un destino o [0] para salir: ")
         if opcionDestino == "0":
             return  # Volver al menú principal
         elif opcionDestino in destinos:
@@ -674,7 +671,7 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros: dict, ruta) -> None:
+def registrarPasajero(pasajeros: dict, ruta, dni="") -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -688,7 +685,6 @@ def registrarPasajero(pasajeros: dict, ruta) -> None:
     """
     nombre = ""
     apellido = ""
-    dni = ""
     verificador = False
     while verificador == False:
         print()
