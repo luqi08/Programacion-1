@@ -20,7 +20,6 @@ def leerJson(ruta):
     except FileNotFoundError:
         print("Archivo no encontrado")
 
-
     return diccionario
 
 
@@ -567,7 +566,7 @@ def nombrePasajero(pasajeros: dict, dni: str) -> str:
         return nombre
 
 
-def modificarPasaje(pasajes, vuelos):
+def modificarPasaje(pasajes, vuelos, rutaPasajes):
     """
     Permite modificar un pasaje existente mediante su código, ya sea cambiando el asiento
     dentro de la misma clase o cambiando de clase. Muestra detalles del pasaje actual y
@@ -614,6 +613,7 @@ def modificarPasaje(pasajes, vuelos):
                         f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
                     mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                    escribirJson(rutaPasajes, pasajes)
                     break
 
                 elif opcion == 2:
@@ -638,6 +638,7 @@ def modificarPasaje(pasajes, vuelos):
                         f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
                     mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                    escribirJson(rutaPasajes, pasajes)
                     break
 
                 elif opcion == 3:
