@@ -110,36 +110,36 @@ def contarAsientosDisponibles(vuelos, codigo_vuelo):
     return asientos_disponibles
 
 
-def ingresoTexto(mensaje: str) -> str:
+def ingresoTexto(palabra: str) -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres alfabéticos
     """
     print()
-    ingreso = input(f"Ingrese {mensaje}: ")
+    ingreso = input(f"Ingrese {palabra}: ")
     while ingreso.isalpha() == False:
         print()
         print("INGRESO INVÁLIDO")
         print()
-        ingreso = input(f"Ingrese {mensaje}: ")
+        ingreso = input(f"Ingrese {palabra}: ")
     return ingreso
 
 
-def ingresoNumero(mensaje ="Ingrese un valor: ", error = None, minimo=float("-inf"), maximo=float("+inf"), lista=[], tipofloat=False): 
+def ingresoEntero(
+    mensaje,
+):  # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
     while True:
         try:
-            print()
-            valor = (int(input(mensaje)) if tipofloat == False else float(input(mensaje)))
-            if len(lista) > 0: # Si se recibe una lista de valores válidos, el ingreso del usuario se limita a esta lista
-                if valor in lista:
-                    break 
-            else: # Si NO se recibe una lista de valores válidos, el ingreso del usuario se limita entre los valores mínimo y máximo recibidos (o sin limitación si no se reciben)
-                if valor >= minimo and valor <= maximo:
-                    break
-            raise ValueError
+            valor = int(
+                input(f"{mensaje} o [0] para salir: ")
+            )  # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
+            if (
+                valor < 0 or valor > 100000000
+            ):  # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
+                raise ValueError
+            break
         except ValueError:
-            print()
-            print("El valor es inválido." if error == None else f"El valor es inválido. {error}") # Siempre se muestra "El valor es inválido.", y si se recibe le agrega el texto del parámetro
+            print(f"{mensaje} valido")
     return valor
 
 
@@ -414,7 +414,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
     """
     # Ingreso/Registro Pasajero
     while True:
-        dni = ingresoNumero("Ingrese DNI: ")
+        dni = ingresoEntero("Ingrese DNI")
         if dni == 0:
             return
         elif dni in pasajeros.keys():
@@ -435,7 +435,6 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict) -> dict:
                     else:
                         break
                 elif opcion == "2":
-                    print()
                     break
                 else:
                     print()
@@ -708,7 +707,7 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros: dict, dni="", ruta) -> None:
+def registrarPasajero(pasajeros, dni="", ruta) -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -748,7 +747,7 @@ def registrarPasajero(pasajeros: dict, dni="", ruta) -> None:
         # Ingreso DNI
         elif opcion == "3":
             print()
-            dni = ingresoNumero("Ingrese DNI: ")
+            dni = ingresoEntero("Ingrese DNI")
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
@@ -802,7 +801,7 @@ def modificarPasajero(pasajeros: dict, ruta) -> None:
     - dni (int): DNI del pasajero que se desea modificar.
     """
     while True:
-        dni = ingresoNumero("Ingrese DNI: ")
+        dni = ingresoEntero("Ingrese DNI")
         if dni == "0":
             return
         elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
@@ -868,7 +867,7 @@ def eliminarPasajero(pasajeros: dict, ruta) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        dni = ingresoNumero("Ingrese DNI: ")
+        dni = ingresoEntero("Ingrese DNI")
         if dni == "0":
             return
         elif dni not in pasajeros.keys():

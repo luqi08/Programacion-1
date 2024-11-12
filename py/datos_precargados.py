@@ -25,7 +25,7 @@ vuelos = {
 
 
 # Precarga pasajes
-rutaPasajes = {
+pasajes = {
     "PA001": {"dni": 47307151, "vuelo": "VU003", "clase": "primera", "asiento": "A1"},
     "PA002": {
         "dni": 40215863,
@@ -124,26 +124,26 @@ rutaPasajes = {
 }
 
 # Precarga de aviones
-rutaAviones = {
+aviones = {
     "LV-ABC": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 16, "economica": 120},
+        "Asientos": {"primera": 20, "economica": 162},
     },
     "LV-BRD": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 16, "economica": 120},
+        "Asientos": {"primera": 20, "economica": 162},
     },
     "LV-CFT": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 16, "economica": 120},
+        "Asientos": {"primera": 20, "economica": 162},
     },
     "LV-DRT": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 16, "economica": 120},
+        "Asientos": {"primera": 20, "economica": 162},
     },
     "LV-EFP": {
         "modelo": "Boeing747-800",
-        "Asientos": {"primera": 16, "economica": 120},
+        "Asientos": {"primera": 20, "economica": 162},
     },
     "LV-GHT": {
         "modelo": "AirbusA320Neo",
@@ -201,7 +201,7 @@ rutaPasajeros = {
     40215698: {"nombre": "Florencia", "apellido": "Pereyra"},
     42589647: {"nombre": "Leandro", "apellido": "Navarro"},
 }
-rutaVuelos = {
+vuelos = {
     "VU001": {
         "Fecha": "07/10/2024",
         "Hora": "06:00",
