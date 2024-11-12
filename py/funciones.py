@@ -707,7 +707,7 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
 # ----------------------------------------------------------------------------------------------
 # PASAJEROS
 # ----------------------------------------------------------------------------------------------
-def registrarPasajero(pasajeros, dni="", ruta) -> None:
+def registrarPasajero(pasajeros: dict, ruta) -> None:
     """
     Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
     introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
@@ -721,6 +721,7 @@ def registrarPasajero(pasajeros, dni="", ruta) -> None:
     """
     nombre = ""
     apellido = ""
+    dni = ""
     verificador = False
     while verificador == False:
         print()
@@ -867,14 +868,13 @@ def eliminarPasajero(pasajeros: dict, ruta) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        dni = ingresoEntero("Ingrese DNI")
+        dni = input("Ingrese DNI")
         if dni == "0":
             return
         elif dni not in pasajeros.keys():
             print()
             print(f"El DNI {dni} no se encuentra registrado")
         else:
-            dni = int(dni)
             nombre = pasajeros[dni]["nombre"]
             apellido = pasajeros[dni]["apellido"]
             break
@@ -892,7 +892,7 @@ def eliminarPasajero(pasajeros: dict, ruta) -> None:
             del pasajeros[dni]
             print()
             print(f"El pasajero con DNI {dni} ha sido eliminado.")
-            return
+            break
         elif opcion == "2":
             break
         else:

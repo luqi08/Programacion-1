@@ -103,13 +103,13 @@ def subMenuPasajeros():
             break  # Volver al ciclo principal
 
         elif opcion_submenu == "1":  # Registrar Pasajero
-            funciones.registrarPasajero(pasajeros)
+            funciones.registrarPasajero(pasajeros, rutaPasajeros)
         elif opcion_submenu == "2":  # Listar Pasajeros
             funciones.listarPasajeros(pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasajero
-            funciones.modificarPasajero(pasajeros)
+            funciones.modificarPasajero(pasajeros, rutaPasajeros)
         elif opcion_submenu == "4":  # Eliminar Pasajero
-            funciones.eliminarPasajero(pasajeros)
+            funciones.eliminarPasajero(pasajeros, rutaPasajeros)
     return
 
 
