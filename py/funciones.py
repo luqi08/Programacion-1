@@ -1012,7 +1012,7 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
     return
 
 
-def modificarVuelo(vuelos: dict, aviones: dict):
+def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
     while True:
         print()
         codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
@@ -1110,6 +1110,7 @@ def modificarVuelo(vuelos: dict, aviones: dict):
     print(f"[5] Destino: {vuelos[codigo]['Destino']}")
     print(f"[6] Avion: {vuelos[codigo]['Avion']}")
     print("-----------------")
+    escribirJson(rutaVuelos, vuelos)
     print("Vuelo modificado correctamente")
     return
 
