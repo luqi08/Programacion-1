@@ -369,7 +369,9 @@ def buscarAsiento(matriz, selecto):
     return False
 
 
-def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -> dict:
+def comprarPasaje(
+    pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros, rutaPasajes
+) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
     seleccionar una clase y asiento, y registrar los datos del pasajero para crear un pasaje.
@@ -518,6 +520,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
     }
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
+    escribirJson(rutaPasajes, pasajes)
     return pasajes
 
 
