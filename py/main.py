@@ -14,7 +14,6 @@ import os
 import json
 
 import funciones
-import datos_precargados
 
 # ----------------------------------------------------------------------------------------------
 # ARCHIVOS
@@ -63,11 +62,7 @@ def subMenuPasajes():
         if opcion_submenu == "0":  # Volver al menú principal
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
-            funciones.comprarPasaje(
-                pasajeros,
-                pasajes,
-                vuelos,
-            )
+            funciones.comprarPasaje(pasajeros, pasajes, vuelos, rutaPasajeros)
         elif opcion_submenu == "2":  # Listar Pasajes
             funciones.listarPasajes(pasajes, pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasaje
@@ -141,7 +136,7 @@ def subMenuVuelos():
         elif opcion_submenu == "1":  # Registrar Vuelos
             funciones.registrarVuelo(vuelos, aviones)
         elif opcion_submenu == "2":  # Listar Vuelos
-            funciones.listarVuelos(datos_precargados.vuelos)
+            funciones.listarVuelos(vuelos)
         elif opcion_submenu == "3":  # Modificar Vuelo
             funciones.modificarVuelo(vuelos, aviones)
         elif opcion_submenu == "4":  # Eliminar Vuelo
@@ -174,13 +169,13 @@ def subMenuAviones():
         if opcion_submenu == "0":  # Volver al menú principal
             break
         elif opcion_submenu == "1":  # Registrar Avión
-            funciones.registrarAviones(aviones)
+            funciones.registrarAviones(aviones, rutaAviones)
         elif opcion_submenu == "2":  # Listar Aviones
             funciones.listarAviones(aviones)
         elif opcion_submenu == "3":  # Modificar Aviones
             funciones.modificarAviones(aviones)
         elif opcion_submenu == "4":  # Eliminar Aviones
-            funciones.eliminarAviones(aviones)
+            funciones.eliminarAviones(aviones, rutaAviones)
     return
 
 
