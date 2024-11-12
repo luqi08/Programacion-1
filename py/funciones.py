@@ -572,14 +572,14 @@ def listarPasajes(pasajes, pasajeros):
 
     # Filas de la tabla
     for nPasaje, datos in pasajes.items():
-        nombre = nombrePasajero(pasajeros, datos["dni"])
+        nombre = nombrePasajero(pasajeros, str(datos["dni"]))
         print(
             f"{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
         )
     return
 
 
-def nombrePasajero(pasajeros: dict, dni: int) -> str:
+def nombrePasajero(pasajeros: dict, dni: str) -> str:
     """
     Obtiene el nombre completo de un pasajero a partir de su DNI.
 
