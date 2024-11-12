@@ -980,7 +980,7 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                 print("Quedan dantos sin completar")
             else:
                 break
-        elif opcion == '8':
+        elif opcion == "8":
             return
         else:
             print("Opcion invalida")
@@ -1114,7 +1114,7 @@ def modificarVuelo(vuelos: dict, aviones: dict):
     return
 
 
-def eliminarVuelo(vuelos: dict) -> None:
+def eliminarVuelo(vuelos: dict, rutaVuelos) -> None:
     """
     Elimina un vuelo del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -1146,6 +1146,7 @@ def eliminarVuelo(vuelos: dict) -> None:
             del vuelos[codigo]
             print()
             print(f"El vuelo {codigo} ha sido eliminado.")
+            escribirJson(rutaVuelos, vuelos)
             return
         elif opcion == "2":
             break

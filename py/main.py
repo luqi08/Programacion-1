@@ -142,7 +142,7 @@ def subMenuVuelos():
         elif opcion_submenu == "3":  # Modificar Vuelo
             funciones.modificarVuelo(vuelos, aviones)
         elif opcion_submenu == "4":  # Eliminar Vuelo
-            funciones.eliminarVuelo(vuelos)
+            funciones.eliminarVuelo(vuelos, rutaVuelos)
     return
 
 
