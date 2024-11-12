@@ -868,7 +868,7 @@ def eliminarPasajero(pasajeros: dict, ruta) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        dni = input("Ingrese DNI")
+        dni = str(ingresoEntero("Ingrese DNI"))
         if dni == "0":
             return
         elif dni not in pasajeros.keys():
@@ -1245,7 +1245,7 @@ def registrarAviones(aviones: dict) -> int:
             while escribirPrimeraClase == "":
                 print("No es valido dejar espacion en blanco ni involucrar letras")
                 escribirPrimeraClase = input("Intentelo nuevamente: ")
-            primeraClase = escribirPrimeraClase
+            primeraClase = int(escribirPrimeraClase)
             print("Ahora coloque la cantidad de asientos por fila.")
             porFilaPC = int(input())
             print("Ahora coloque la cantidad de asientos por columna")
@@ -1264,7 +1264,7 @@ def registrarAviones(aviones: dict) -> int:
                 print("No es valido dejar espacios en blanco")
                 print("Intentelo nuevamente")
                 escribirClaseEconomica = input()
-            claseEconomica = escribirClaseEconomica
+            claseEconomica = int(escribirClaseEconomica)
             print("Ahora escriba los asientos por fila")
             porFilaCE = int(input())
             print("Ahora escriba la cantidad de asientos por columna")
@@ -1280,8 +1280,9 @@ def registrarAviones(aviones: dict) -> int:
                 porColumnaCE = int(input())
         elif opcion == "5":
             modelo = ""
-            apellido = ""
-            dni = ""
+            matricula = ""
+            primeraClase = ""
+            claseEconomica = ""
         elif opcion == "6":
             if (
                 modelo == ""
