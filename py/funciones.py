@@ -624,13 +624,13 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
                     if esEjecutiva(pasajes, codigoPasaje):
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
-                        ]["economica"]
+                        ]["Economica"]
                         mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     else:
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
-                        ]["primera"]
+                        ]["Primera"]
                         mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     print()

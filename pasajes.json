@@ -178,11 +178,5 @@
         "vuelo": "VU003",
         "clase": "economica",
         "asiento": "A17"
-    },
-    "PA031": {
-        "dni": "1234",
-        "vuelo": "VU010",
-        "clase": "Primera",
-        "asiento": "D4"
     }
 }
