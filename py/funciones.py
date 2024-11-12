@@ -541,7 +541,7 @@ def listarPasajes(pasajes, pasajeros):
     for nPasaje, datos in pasajes.items():
         nombre = nombrePasajero(pasajeros, str(datos["dni"]))
         print(
-            f"{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
+            f"PA-{nPasaje:<6} | {nombre:<20} | {datos['dni']:<10} | {datos['vuelo']:<5} | {datos['clase'].capitalize():<9} | {datos['asiento']:<10}"
         )
     return
 
@@ -577,8 +577,8 @@ def modificarPasaje(pasajes, vuelos):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = "PA" + input("Ingrese el codigo del pasaje o [0] para salir: ")
-        if codigoPasaje == "PA0":
+        codigoPasaje = str(ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: "))
+        if codigoPasaje == "0":
             return
         elif codigoPasaje not in pasajes:
             print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
