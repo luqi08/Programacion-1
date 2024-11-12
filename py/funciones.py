@@ -980,6 +980,8 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                 print("Quedan dantos sin completar")
             else:
                 break
+        elif opcion == '8':
+            return
         else:
             print("Opcion invalida")
 
