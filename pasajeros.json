@@ -119,6 +119,7 @@
         "nombre": "Leandro",
         "apellido": "Navarro"
     },
+<<<<<<< HEAD
     "123456": {
         "nombre": "Asd",
         "apellido": "Asd"
@@ -126,5 +127,10 @@
     "1234": {
         "nombre": "Asd",
         "apellido": "Asd"
+=======
+    "1234": {
+        "nombre": "Miguel",
+        "apellido": "Hernandez"
+>>>>>>> 349d15a36cc817c27bd5cdaa9bfe66be185c69b0
     }
 }
