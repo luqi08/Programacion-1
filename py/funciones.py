@@ -2,43 +2,6 @@ from datetime import datetime
 import json
 
 # ----------------------------------------------------------------------------------------------
-# JSON
-# ----------------------------------------------------------------------------------------------
-# try:
-#     f = open("pasajes.json", mode="r", encoding="utf-8")
-#     pasajes = json.load(f)
-#     f.close()
-#     f = open("pasajeros.json", mode="r", encoding="utf-8")
-#     pasajeros = json.load(f)
-#     f.close()
-#     f = open("vuelos.json", mode="r", encoding="utf-8")
-#     vuelos = json.load(f)
-#     f.close()
-#     f = open("aviones.json", mode="r", encoding="utf-8")
-#     aviones = json.load(f)
-#     f.close()
-# except:
-#     print("No se pudo abrir los archivos json")
-
-
-# def guardarCambios() -> None:
-#     try:
-#         f = open("pasajes.json", mode="w", encoding="utf-8")
-#         json.dump(pasajes, f, ensure_ascii=False, indent=4)
-#         f.close()
-#         f = open("pasajeros.json", mode="w", encoding="utf-8")
-#         json.dump(pasajeros, f, ensure_ascii=False, indent=4)
-#         f.close()
-#         f = open("vuelos.json", mode="w", encoding="utf-8")
-#         json.dump(vuelos, f, ensure_ascii=False, indent=4)
-#         f.close()
-#         f = open("aviones.json", mode="w", encoding="utf-8")
-#         json.dump(aviones, f, ensure_ascii=False, indent=4)
-#         f.close()
-#     except:
-#         print("Error guardando los cambios")
-#     return
-# ----------------------------------------------------------------------------------------------
 # FUNCIONES
 # ----------------------------------------------------------------------------------------------
 
@@ -50,9 +13,13 @@ def leerJson(ruta):
     Args:
     - ruta: Contiene la ruta del archivo json.
     """
-    f = open(ruta, mode="r", encoding="utf-8")
-    diccionario = json.load(f)
-    f.close
+    try:
+        f = open(ruta, mode="r", encoding="utf-8")
+        diccionario = json.load(f)
+        f.close
+    except FileNotFoundError:
+        print("Archivo no encontrado")
+
 
     return diccionario
 
