@@ -414,7 +414,7 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
     """
     # Ingreso/Registro Pasajero
     while True:
-        dni = ingresoEntero("Ingrese DNI")
+        dni = str(ingresoEntero("Ingrese DNI"))
         if dni == 0:
             return
         elif dni in pasajeros.keys():
