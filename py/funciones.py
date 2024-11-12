@@ -772,7 +772,7 @@ def modificarPasajero(pasajeros: dict, ruta) -> None:
         dni = str(ingresoEntero("Ingrese DNI"))
         if dni == "0":
             return
-        elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
+        elif dni not in pasajeros:  # Verificar existencia DNI
             print()
             print(f"El DNI {dni} no se encuentra registrado")
             print()
