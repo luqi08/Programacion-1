@@ -429,11 +429,8 @@ def comprarPasaje(pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros) -
                 print("[2] No")
                 opcion = input("Ingrese opción: ")
                 if opcion == "1":
-                    if registrarPasajero(pasajeros, rutaPasajeros) == True:
-                        bandera = False
-                        break
-                    else:
-                        break
+                    registrarPasajero(pasajeros, rutaPasajeros)
+                    break
                 elif opcion == "2":
                     break
                 else:
