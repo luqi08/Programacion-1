@@ -576,7 +576,9 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = str(ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: "))
+        codigoPasaje = str(
+            ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: ")
+        )
         if codigoPasaje == "0":
             return
         elif codigoPasaje not in pasajes:
@@ -715,7 +717,7 @@ def registrarPasajero(pasajeros: dict, ruta, dni="") -> None:
         # Ingreso DNI
         elif opcion == "3":
             print()
-            dni = ingresoEntero("Ingrese DNI")
+            dni = str(ingresoEntero("Ingrese DNI"))
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
