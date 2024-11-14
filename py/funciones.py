@@ -574,7 +574,9 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = str(ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: "))
+        codigoPasaje = str(
+            ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: ")
+        )
         if codigoPasaje == "0":
             return
         elif codigoPasaje not in pasajes:
@@ -713,7 +715,7 @@ def registrarPasajero(pasajeros: dict, ruta, dni="") -> None:
         # Ingreso DNI
         elif opcion == "3":
             print()
-            dni = ingresoEntero("Ingrese DNI")
+            dni = str(ingresoEntero("Ingrese DNI"))
             print()
         elif opcion == "4":
             if nombre == "" or apellido == "" or dni == "":
@@ -770,7 +772,7 @@ def modificarPasajero(pasajeros: dict, ruta) -> None:
         dni = str(ingresoEntero("Ingrese DNI"))
         if dni == "0":
             return
-        elif dni != 0 and dni not in pasajeros:  # Verificar existencia DNI
+        elif dni not in pasajeros:  # Verificar existencia DNI
             print()
             print(f"El DNI {dni} no se encuentra registrado")
             print()
@@ -891,7 +893,15 @@ def listarVuelos(vuelos: dict) -> None:
     return
 
 
-def registrarVuelo(vuelos: dict, aviones: dict):
+def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
+    """
+    Registra nuevos vuelos con los datos que ingrese el usuario
+
+    Args:
+    vuelos: El diccionario de vuelos
+    aviones: El diccionario de aviones. De aqui se verificara la exstencia del avion
+    rutaVuelos: la ruta del archivo json de vuelos
+    """
     codigo = "VU0" + str(len(vuelos) + 1)
     fecha = ""
     hora = ""
@@ -968,6 +978,8 @@ def registrarVuelo(vuelos: dict, aviones: dict):
                 print("Quedan dantos sin completar")
             else:
                 break
+        elif opcion == "8":
+            return
         else:
             print("Opcion invalida")
 
@@ -983,6 +995,8 @@ def registrarVuelo(vuelos: dict, aviones: dict):
         "Asientos": {"Primera": matrizPrimera, "Economica": matrizEconomica},
     }
 
+    escribirJson(rutaVuelos, vuelos)
+
     print("Sus datos")
     print("-----------------")
     print(f"[1] Codigo: {codigo}")
@@ -996,7 +1010,7 @@ def registrarVuelo(vuelos: dict, aviones: dict):
     return
 
 
-def modificarVuelo(vuelos: dict, aviones: dict):
+def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
     while True:
         print()
         codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
@@ -1094,11 +1108,12 @@ def modificarVuelo(vuelos: dict, aviones: dict):
     print(f"[5] Destino: {vuelos[codigo]['Destino']}")
     print(f"[6] Avion: {vuelos[codigo]['Avion']}")
     print("-----------------")
+    escribirJson(rutaVuelos, vuelos)
     print("Vuelo modificado correctamente")
     return
 
 
-def eliminarVuelo(vuelos: dict) -> None:
+def eliminarVuelo(vuelos: dict, rutaVuelos) -> None:
     """
     Elimina un vuelo del diccionario de pasajeros y su pasaje asociado del diccionario de pasajes.
 
@@ -1130,6 +1145,7 @@ def eliminarVuelo(vuelos: dict) -> None:
             del vuelos[codigo]
             print()
             print(f"El vuelo {codigo} ha sido eliminado.")
+            escribirJson(rutaVuelos, vuelos)
             return
         elif opcion == "2":
             break
