@@ -91,9 +91,7 @@ def ingresoTexto(palabra: str) -> str:
     return ingreso
 
 
-def ingresoEntero(
-    mensaje,
-):  # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
+def ingresoEntero(_mensajeIngreso, _mensajeError, _valorMinimo, _valorMaximo):  # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
     while True:
         try:
             valor = int(

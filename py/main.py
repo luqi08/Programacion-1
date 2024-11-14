@@ -212,7 +212,8 @@ def main():
         print()
         if opcion == "0":  # Opción salir del programa
             print("Saliendo del programa...")
-            #            funciones.guardarCambios()
+            time.sleep(3)
+            limpiarTerminal()
             break  # Salir del ciclo principal
 
         elif opcion == "1":  # SUBMENÚ PASAJES
