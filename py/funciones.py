@@ -91,8 +91,7 @@ def ingresoTexto(
                 raise ValueError
             return ingreso
         except ValueError:
-            print(mensajeError)
-
+                print(mensajeError)
 
 def ingresoEntero(
     mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"
@@ -102,10 +101,9 @@ def ingresoEntero(
             valor = int(input(f"{mensajeIngreso} o [0] para volver: "))
             if valor < 0:
                 raise ValueError
-            break
+            return valor
         except ValueError:
             print(mensajeError)
-    return valor
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -575,9 +573,7 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = str(
-            ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: ")
-        )
+        codigoPasaje = str(ingresoEntero("Ingrese el codigo del pasaje"))
         if codigoPasaje == "0":
             return
         elif codigoPasaje not in pasajes:
@@ -1302,17 +1298,18 @@ def registrarAviones(aviones: dict, ruta) -> int:
     return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
 
 
-def eliminarAviones(aviones: dict):
+def eliminarAviones(aviones: dict, ruta):
     print("Ingrese la matricula del avion que desea eliminar de los archivos.")
     matricula = input("Matricula: ")
     print("¿Está seguro de querer eliminar los datos de este avión?")
     print("[1] Eliminar avion")
     print("[2] Volver al menu anterior")
     opcion = input()
-    if opcion == 1:
+    if opcion == "1":
         del aviones[matricula]
+        escribirJson(ruta, aviones)
         print("Los datos del avion han sido eliminados exitosamente")
-    elif opcion == 2:
+    elif opcion == "2":
         return
     else:
         print("Esa opcion no existe")
