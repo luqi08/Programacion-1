@@ -175,7 +175,7 @@ def subMenuAviones():
         elif opcion_submenu == "2":  # Listar Aviones
             funciones.listarAviones(aviones)
         elif opcion_submenu == "3":  # Modificar Aviones
-            funciones.modificarAviones(aviones)
+            funciones.modificarAviones(aviones, rutaAviones)
         elif opcion_submenu == "4":  # Eliminar Aviones
             funciones.eliminarAviones(aviones, rutaAviones)
     return
