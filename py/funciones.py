@@ -1325,6 +1325,9 @@ def modificarAviones(aviones: dict, ruta):
     primeraClase = aviones[matricula]["Asientos"]["primera"]
     claseEconomica = aviones[matricula]["Asientos"]["economica"]
     verificador = False
+    contadorPC = 0
+    contadorCE = 0
+    contadorModTotal = 0
     while verificador == False:
         print("Ingrese sus datos")
         print("-----------------")
@@ -1354,6 +1357,7 @@ def modificarAviones(aviones: dict, ruta):
                 porFilaPC = int(input())
                 print("Coloque la cantidad de asientos por columna")
                 porColumnaPC = int(input())
+            contadorPC += 1
         elif opcion == "4":
             print("Escriba los asientos totales de la clase economica.")
             escribirClaseEconomica = input()
@@ -1375,10 +1379,12 @@ def modificarAviones(aviones: dict, ruta):
                 porFilaCE = int(input())
                 print("Ahora escriba la cantidad de asientos por columna")
                 porColumnaCE = int(input())
+            contadorCE += 1
         elif opcion == "5":
             modelo = ""
             primeraClase = ""
             claseEconomica = ""
+            contadorModTotal += 1
         elif opcion == "6":
             if (
                 modelo == ""
@@ -1407,4 +1413,11 @@ def modificarAviones(aviones: dict, ruta):
     }
     print("Avion registrado")
     escribirJson(ruta, aviones)
-    return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
+    if contadorPC > 0 and contadorCE == 0:
+        return (porFilaPC, porColumnaPC)
+    elif contadorCE > 0 and contadorPC == 0:
+        return (porFilaCE, porColumnaCE)
+    elif (contadorCE > 0 and contadorPC > 0) or contadorModTotal > 0:
+        return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
+    else:
+        return
