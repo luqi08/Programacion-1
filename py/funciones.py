@@ -91,8 +91,7 @@ def ingresoTexto(
                 raise ValueError
             return ingreso
         except ValueError:
-            print(mensajeError)
-
+                print(mensajeError)
 
 def ingresoEntero(
     mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"
@@ -102,10 +101,9 @@ def ingresoEntero(
             valor = int(input(f"{mensajeIngreso} o [0] para volver: "))
             if valor < 0:
                 raise ValueError
-            break
+            return valor
         except ValueError:
             print(mensajeError)
-    return valor
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -575,9 +573,7 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
     - pasajes (dict): Diccionario que contiene la información de todos los pasajes.
     """
     while True:
-        codigoPasaje = str(
-            ingresoEntero("Ingrese el codigo del pasaje o [0] para salir: ")
-        )
+        codigoPasaje = str(ingresoEntero("Ingrese el codigo del pasaje"))
         if codigoPasaje == "0":
             return
         elif codigoPasaje not in pasajes:
