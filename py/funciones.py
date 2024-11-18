@@ -76,34 +76,31 @@ def contarAsientosDisponibles(vuelos, codigo_vuelo):
     return asientos_disponibles
 
 
-def ingresoTexto(palabra: str) -> str:
+def ingresoTexto(mensajeIngreso="ingrese texto", mensajeError="error: valor inválido") -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres alfabéticos
     """
-    print()
-    ingreso = input(f"Ingrese {palabra}: ")
-    while ingreso.isalpha() == False:
-        print()
-        print("INGRESO INVÁLIDO")
-        print()
-        ingreso = input(f"Ingrese {palabra}: ")
+    while True:
+        try:
+            print()
+            ingreso = input(f"{mensajeIngreso} o [0] para volver: ")
+            if ingreso.isalpha() == False and ingreso != "0":
+                raise ValueError
+        except ValueError:
+                print(mensajeError)
     return ingreso
 
 
-def ingresoEntero(_mensajeIngreso, _mensajeError, _valorMinimo, _valorMaximo):  # Si se trata de validar contra valores discretos podemos usar "def ingresoNumero(_mensajeIngreso, _mensajeError, _listaValoresValidos):"
+def ingresoEntero(mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"):
     while True:
         try:
-            valor = int(
-                input(f"{mensaje} o [0] para salir: ")
-            )  # Si se permiten decimales en el ingreso usar "valor = float(input(_mensajeIngreso))"
-            if (
-                valor < 0 or valor > 100000000
-            ):  # Si se trata de validar contra valores discretos podemos usar "if valor not in _listaValoresValidos:"
+            valor = int(input(f"{mensajeIngreso} o [0] para volver: "))
+            if valor < 0:
                 raise ValueError
             break
         except ValueError:
-            print(f"{mensaje} valido")
+            print(mensajeError)
     return valor
 
 
