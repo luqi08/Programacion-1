@@ -76,7 +76,9 @@ def contarAsientosDisponibles(vuelos, codigo_vuelo):
     return asientos_disponibles
 
 
-def ingresoTexto(mensajeIngreso="ingrese texto", mensajeError="error: valor inválido") -> str:
+def ingresoTexto(
+    mensajeIngreso="ingrese texto", mensajeError="error: valor inválido"
+) -> str:
     """
     Recibe un str para el mensaje de ingreso de dato
     Filtra todo lo que no sea caracteres alfabéticos
@@ -89,11 +91,12 @@ def ingresoTexto(mensajeIngreso="ingrese texto", mensajeError="error: valor inv�
                 raise ValueError
             return ingreso
         except ValueError:
-                print(mensajeError)
-    
+            print(mensajeError)
 
 
-def ingresoEntero(mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"):
+def ingresoEntero(
+    mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"
+):
     while True:
         try:
             valor = int(input(f"{mensajeIngreso} o [0] para volver: "))
@@ -1254,7 +1257,7 @@ def registrarAviones(aviones: dict, ruta) -> int:
             porFilaCE = int(input())
             print("Ahora escriba la cantidad de asientos por columna")
             porColumnaCE = int(input())
-            while (porFilaCE * porColumnaCE) == claseEconomica:
+            while (porFilaCE * porColumnaCE) != claseEconomica:
                 print(
                     "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
                 )
@@ -1289,8 +1292,10 @@ def registrarAviones(aviones: dict, ruta) -> int:
     print("----------------")
     aviones[matricula] = {
         "modelo": modelo,
-        "primera": int(primeraClase),
-        "economica": int(claseEconomica),
+        "Asientos": {
+            "primera": int(primeraClase),
+            "economica": int(claseEconomica),
+        },
     }
     escribirJson(ruta, aviones)
     print("Avion registrado")

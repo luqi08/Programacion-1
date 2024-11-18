@@ -70,13 +70,10 @@
         }
     },
     "HOLA": {
-        "modelo": "Boeing-747",
-        "primera": 12,
-        "economica": 12
-    },
-    "ASD": {
-        "modelo": "Asd",
-        "primera": 10,
-        "economica": 10
+        "modelo": "Boeing 747",
+        "Asientos": {
+            "primera": 12,
+            "economica": 36
+        }
     }
 }
