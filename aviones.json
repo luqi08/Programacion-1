@@ -69,11 +69,11 @@
             "economica": 150
         }
     },
-    "ADIOS": {
-        "modelo": "Airbusneo",
+    "LV-CHD": {
+        "modelo": "Boeing-747",
         "Asientos": {
-            "primera": 12,
-            "economica": 40
+            "primera": 16,
+            "economica": 50
         }
     }
 }

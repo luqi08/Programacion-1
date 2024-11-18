@@ -1322,8 +1322,8 @@ def modificarAviones(aviones: dict, ruta):
         matricula = input("Intentelo nuevamente: ")
 
     modelo = aviones[matricula]["modelo"]
-    primeraClase = aviones["asientos"]["primera"]
-    claseEconomica = aviones["asientos"]["economica"]
+    primeraClase = aviones[matricula]["Asientos"]["primera"]
+    claseEconomica = aviones[matricula]["Asientos"]["economica"]
     verificador = False
     while verificador == False:
         print("Ingrese sus datos")
@@ -1377,8 +1377,8 @@ def modificarAviones(aviones: dict, ruta):
                 porColumnaCE = int(input())
         elif opcion == "5":
             modelo = ""
-            apellido = ""
-            dni = ""
+            primeraClase = ""
+            claseEconomica = ""
         elif opcion == "6":
             if (
                 modelo == ""
@@ -1400,8 +1400,10 @@ def modificarAviones(aviones: dict, ruta):
     print("----------------")
     aviones[matricula] = {
         "modelo": modelo,
-        "asientos en primera clase": int(primeraClase),
-        "asientos en clase economica": int(claseEconomica),
+        "Asientos": {
+            "primera": int(primeraClase),
+            "economica": int(claseEconomica),
+        },
     }
     print("Avion registrado")
     escribirJson(ruta, aviones)
