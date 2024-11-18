@@ -1170,10 +1170,16 @@ def listarAviones(aviones: dict) -> None:
 
     # Filas de la tabla
     for nAvion, datos in aviones.items():
+        modelo = datos.get("modelo", "N/A")
+        asientos = datos.get("Asientos", {})
+        primera_clase = asientos.get("primera", "N/A")
+        economica = asientos.get("economica", "N/A")
+
         print(
-            f"{nAvion:<9} | {datos['modelo']:<12} | {datos['Asientos']['primera']:<13} | {datos['Asientos']['economica']:<15}"
+            f"{nAvion:<9} | {modelo:<12} | {primera_clase:<13} | {economica:<15}"
         )
     return
+
 
 
 def registrarAviones(aviones: dict, ruta) -> int:
