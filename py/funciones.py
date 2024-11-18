@@ -1296,17 +1296,18 @@ def registrarAviones(aviones: dict, ruta) -> int:
     return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
 
 
-def eliminarAviones(aviones: dict):
+def eliminarAviones(aviones: dict, ruta):
     print("Ingrese la matricula del avion que desea eliminar de los archivos.")
     matricula = input("Matricula: ")
     print("¿Está seguro de querer eliminar los datos de este avión?")
     print("[1] Eliminar avion")
     print("[2] Volver al menu anterior")
     opcion = input()
-    if opcion == 1:
+    if opcion == "1":
         del aviones[matricula]
+        escribirJson(ruta, aviones)
         print("Los datos del avion han sido eliminados exitosamente")
-    elif opcion == 2:
+    elif opcion == "2":
         return
     else:
         print("Esa opcion no existe")

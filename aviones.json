@@ -68,12 +68,5 @@
             "primera": 28,
             "economica": 150
         }
-    },
-    "HOLA": {
-        "modelo": "Boeing 747",
-        "Asientos": {
-            "primera": 12,
-            "economica": 36
-        }
     }
 }
