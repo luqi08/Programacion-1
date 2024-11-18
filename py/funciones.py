@@ -1286,8 +1286,10 @@ def registrarAviones(aviones: dict, ruta) -> int:
     print("----------------")
     aviones[matricula] = {
         "modelo": modelo,
-        "primera": int(primeraClase),
-        "economica": int(claseEconomica),
+        "Asientos": {
+            "primera": int(primeraClase),
+            "economica": int(claseEconomica),
+        },
     }
     escribirJson(ruta, aviones)
     print("Avion registrado")
