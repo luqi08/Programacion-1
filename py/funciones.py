@@ -91,7 +91,8 @@ def ingresoTexto(
                 raise ValueError
             return ingreso
         except ValueError:
-                print(mensajeError)
+            print(mensajeError)
+
 
 def ingresoEntero(
     mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"
@@ -1310,7 +1311,7 @@ def eliminarAviones(aviones: dict, ruta):
         opcion = input("Intentelo nuevamente: ")
 
 
-def modificarAviones(aviones: dict):
+def modificarAviones(aviones: dict, ruta):
     print("Escriba la matricula del avion que desea modificar.")
     matricula = input()
     while matricula == "":
@@ -1400,4 +1401,5 @@ def modificarAviones(aviones: dict):
         "asientos en clase economica": int(claseEconomica),
     }
     print("Avion registrado")
+    escribirJson(ruta, aviones)
     return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)

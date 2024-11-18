@@ -68,5 +68,12 @@
             "primera": 28,
             "economica": 150
         }
+    },
+    "ADIOS": {
+        "modelo": "Airbusneo",
+        "Asientos": {
+            "primera": 12,
+            "economica": 40
+        }
     }
 }
