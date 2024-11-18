@@ -87,9 +87,10 @@ def ingresoTexto(mensajeIngreso="ingrese texto", mensajeError="error: valor inv√
             ingreso = input(f"{mensajeIngreso} o [0] para volver: ")
             if ingreso.isalpha() == False and ingreso != "0":
                 raise ValueError
+            return ingreso
         except ValueError:
                 print(mensajeError)
-    return ingreso
+    
 
 
 def ingresoEntero(mensajeIngreso="Ingrese un valor", mensajeError="error: valor inv√°lido"):
