@@ -1085,6 +1085,17 @@ def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                     break
 
         elif opcion == "7":
+            print("Sus datos")
+            print("-----------------")
+            print(f"[1] Codigo: {codigo}")
+            print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
+            print(f"[3] Hora: {vuelos[codigo]['Hora']}")
+            print(f"[4] Origen: {vuelos[codigo]['Origen']}")
+            print(f"[5] Destino: {vuelos[codigo]['Destino']}")
+            print(f"[6] Avion: {vuelos[codigo]['Avion']}")
+            print("-----------------")
+            escribirJson(rutaVuelos, vuelos)
+            print("Vuelo modificado correctamente")
             return
 
         elif opcion == "8":  # Cancelar
@@ -1097,17 +1108,6 @@ def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
 
         else:
             print("OPCIÓN INVÁLIDA")
-    print("Sus datos")
-    print("-----------------")
-    print(f"[1] Codigo: {codigo}")
-    print(f"[2] Fecha: {vuelos[codigo]['Fecha']}")
-    print(f"[3] Hora: {vuelos[codigo]['Hora']}")
-    print(f"[4] Origen: {vuelos[codigo]['Origen']}")
-    print(f"[5] Destino: {vuelos[codigo]['Destino']}")
-    print(f"[6] Avion: {vuelos[codigo]['Avion']}")
-    print("-----------------")
-    escribirJson(rutaVuelos, vuelos)
-    print("Vuelo modificado correctamente")
     return
 
 
@@ -1175,11 +1175,8 @@ def listarAviones(aviones: dict) -> None:
         primera_clase = asientos.get("primera", "N/A")
         economica = asientos.get("economica", "N/A")
 
-        print(
-            f"{nAvion:<9} | {modelo:<12} | {primera_clase:<13} | {economica:<15}"
-        )
+        print(f"{nAvion:<9} | {modelo:<12} | {primera_clase:<13} | {economica:<15}")
     return
-
 
 
 def registrarAviones(aviones: dict, ruta) -> int:
