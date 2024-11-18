@@ -98,8 +98,8 @@ def ingresoEntero(
 ):
     while True:
         try:
-            valor = int(input(f"{mensajeIngreso} o [0] para volver: "))
-            if valor < 0:
+            valor = input(f"{mensajeIngreso} o [0] para volver: ")
+            if int(valor) < 0:
                 raise ValueError
             return valor
         except ValueError:
@@ -505,7 +505,7 @@ def comprarPasaje(
     mostrarMatrizdeVuelo(matrizAsientos, pasajes)
 
     # Generar nuevo ID de pasaje
-    nuevo_id = f"PA{str(len(pasajes) + 1).zfill(3)}"
+    nuevo_id = str(len(pasajes) + 1).zfill(3)
 
     # Crear el nuevo pasaje
     pasajes[nuevo_id] = {
@@ -654,8 +654,8 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
     """
     while True:
-        pasaje = "PA" + input("Ingrese número de pasaje o [0] para salir: ")
-        if pasaje == "PA0":
+        pasaje = input("Ingrese número de pasaje o [0] para salir: ")
+        if pasaje == "0":
             return
         elif pasaje == "":
             print("No ha ingresado el número de pasaje")
