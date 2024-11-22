@@ -38,19 +38,31 @@ def escribirJson(ruta, diccionario):
     return
 
 
-def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
+def crearMatrizAsientos(total_asientos: int, asientos_por_fila: int) -> list[list]:
     """
-    Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
+    Crea una matriz rectangular para representar la disposición de asientos en un avión
+    y luego intercambia filas por columnas.
 
     Args:
-    - filas (int): Número de filas de la matriz.
-    - columnas (int): Número de columnas de la matriz.
-    - relleno (any): Valor con el que se llenará la matriz.
+    - total_asientos (int): Número total de asientos a organizar.
+    - asientos_por_fila (int): Número de asientos por fila.
 
     Returns:
-    - list: Matriz creada con las dimensiones y valores especificados.
+    - list: Matriz  (filas convertidas a columnas).
     """
-    return [[relleno] * columnas for fila in range(filas)]
+    # Crear la matriz original
+    filas_completas = total_asientos // asientos_por_fila
+    asientos_restantes = total_asientos % asientos_por_fila
+
+    matriz = [[0] * asientos_por_fila for _ in range(filas_completas)]
+    if asientos_restantes > 0:
+        fila_extra = [0] * asientos_restantes + [0] * (asientos_por_fila - asientos_restantes)
+        matriz.append(fila_extra)
+
+    # Transponer la matriz (intercambiar filas por columnas)
+    matriz = [list(fila) for fila in zip(*matriz)]
+
+    return matriz
 
 
 def contarAsientosDisponibles(vuelos, codigo_vuelo):
@@ -159,7 +171,7 @@ def letraNumero(letra: str) -> int:
     return letra
 
 
-def mostrarMatrizdeVuelo(matriz: list[list], pasaje: dict) -> None:
+def mostrarMatrizdeVuelo(matriz: list[list]) -> None:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -501,9 +513,9 @@ def comprarPasaje(
 
     # Asignación de asiento (simplificado para este ejemplo)
     matrizAsientos = vuelos[vueloSeleccionado]["Asientos"][claseSeleccionada]
-    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
+    mostrarMatrizdeVuelo(matrizAsientos)
     asiento = seleccionarAsiento(matrizAsientos)
-    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
+    mostrarMatrizdeVuelo(matrizAsientos)
 
     # Generar nuevo ID de pasaje
     nuevo_id = str(len(pasajes) + 1).zfill(3)
@@ -1025,7 +1037,7 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
             for matricula in aviones:
                 print(f"- {matricula} ({aviones[matricula]['modelo']})")
             
-            #Elegir
+            # Elegir un avión
             while True:
                 avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
                 if avion == "0":
@@ -1033,6 +1045,14 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                 elif avion not in aviones:
                     print(f"Error: No se encontró un avión con la matrícula '{avion}'.")
                 else:
+                    # Obtener asientos de primera clase y económica
+                    asientosPrimera = aviones[avion]['Asientos']['primera']
+                    asientosEconomica = aviones[avion]['Asientos']['economica']
+                    
+                    print(f"\nAvión seleccionado: {aviones[avion]['modelo']}")
+                    print(f"Asientos en primera clase: {asientosPrimera}")
+                    print(f"Asientos en clase económica: {asientosEconomica}")
+                    
                     break
 
         elif opcion == "7":
@@ -1051,8 +1071,8 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
         else:
             print("Opcion invalida")
 
-    matrizPrimera = crearMatriz(4, 4, 0)
-    matrizEconomica = crearMatriz(6, 20, 0)
+    matrizPrimera = crearMatrizAsientos(asientosPrimera, 4)
+    matrizEconomica = crearMatrizAsientos(asientosEconomica, 6)
 
     vuelos[codigo] = {
         "Fecha": fecha,
