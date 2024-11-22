@@ -69,11 +69,11 @@
             "economica": 150
         }
     },
-    "LV-CHD": {
-        "modelo": "Boeing-747",
+    "AS-DSA": {
+        "modelo": "Boeing747-800",
         "Asientos": {
-            "primera": 16,
-            "economica": 50
+            "primera": 20,
+            "economica": 162
         }
     }
 }

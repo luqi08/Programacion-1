@@ -1164,9 +1164,9 @@ def listarAviones(aviones: dict) -> None:
     """
     # Encabezado de la tabla
     print(
-        f"{'MATRICULA':<9} | {'MODELO':<13} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}"
+        f"{'MATRICULA':<10} | {'MODELO':<14} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}"
     )
-    print("-" * 60)
+    print("-" * 62)
 
     # Filas de la tabla
     for nAvion, datos in aviones.items():
@@ -1175,249 +1175,187 @@ def listarAviones(aviones: dict) -> None:
         primera_clase = asientos.get("primera", "N/A")
         economica = asientos.get("economica", "N/A")
 
-        print(f"{nAvion:<9} | {modelo:<12} | {primera_clase:<13} | {economica:<15}")
+        print(f"{nAvion:<10} | {modelo:<14} | {primera_clase:<13} | {economica:<15}")
     return
 
 
-def registrarAviones(aviones: dict, ruta) -> int:
+def registrarAviones(aviones: dict, ruta: str) -> None:
     """
-    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
-    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
-    ingresados son almacenados en el diccionario de pasajeros.
-
+    Registra un nuevo avión en el diccionario `aviones`.
+    
+    Permite seleccionar entre dos modelos predefinidos, evitando ingresar datos manualmente.
+    Los datos se almacenan en el diccionario y se escriben en un archivo JSON.
+    
     Args:
-    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
-
-    Returns:
-    - dni (int): Numero dni para identificar al pasajero.
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenarán los datos.
     """
-    modelo = ""
-    matricula = ""
-    primeraClase = ""
-    claseEconomica = ""
-    verificador = False
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"[1]Modelo: {modelo}")
-        print(f"[2]Matricula: {matricula}")
-        print(f"[3]Asientos de primera clase: {primeraClase}")
-        print(f"[4]Asientos de clase economica: {claseEconomica}")
-        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[6]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "1":
-            print("Escriba el nombre del modelo.")
-            escribirModelo = input().capitalize()
-            while escribirModelo == "":
-                print("No es valido dejar el espacio en blanco")
-                escribirModelo = input("Escribalo nuevamente: ")
-            modelo = escribirModelo
-        elif opcion == "2":
-            print("Escriba la matricula")
-            escribirMatricula = input().upper()
-            while escribirMatricula == "":
-                print("No es valido dejar el espacio en blanco")
-                escribirMatricula = input("Escribalo nuevamente: ")
-            matricula = escribirMatricula
-        elif opcion == "3":
-            print("Escriba los asientos totales de la primera clase")
-            escribirPrimeraClase = input()
-            while escribirPrimeraClase == "":
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirPrimeraClase = input("Intentelo nuevamente: ")
-            primeraClase = int(escribirPrimeraClase)
-            print("Ahora coloque la cantidad de asientos por fila.")
-            porFilaPC = int(input())
-            print("Ahora coloque la cantidad de asientos por columna")
-            porColumnaPC = int(input())
-            while (porFilaPC * porColumnaPC) != primeraClase:
-                print("ERROR!")
-                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
-                print("Coloque la cantidad de asientos por fila.")
-                porFilaPC = int(input())
-                print("Coloque la cantidad de asientos por columna")
-                porColumnaPC = int(input())
-        elif opcion == "4":
-            print("Escriba los asientos totales de la clase economica.")
-            escribirClaseEconomica = input()
-            while escribirClaseEconomica == "":
-                print("No es valido dejar espacios en blanco")
-                print("Intentelo nuevamente")
-                escribirClaseEconomica = input()
-            claseEconomica = int(escribirClaseEconomica)
-            print("Ahora escriba los asientos por fila")
-            porFilaCE = int(input())
-            print("Ahora escriba la cantidad de asientos por columna")
-            porColumnaCE = int(input())
-            while (porFilaCE * porColumnaCE) != claseEconomica:
-                print(
-                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
-                )
-                print("Intentelo nuevamente")
-                print("Ahora escriba los asientos por fila")
-                porFilaCE = int(input())
-                print("Ahora escriba la cantidad de asientos por columna")
-                porColumnaCE = int(input())
-        elif opcion == "5":
-            modelo = ""
-            matricula = ""
-            primeraClase = ""
-            claseEconomica = ""
-        elif opcion == "6":
-            if (
-                modelo == ""
-                or matricula == ""
-                or claseEconomica == ""
-                or primeraClase == ""
-            ):
-                print("Aun quedan datos por completar")
-            else:
-                break
-        else:
-            print("Esa opcion no existe")
-    print("Los datos")
-    print("----------------")
-    print(f"Modelo: {modelo}")
-    print(f"Matricula: {matricula}")
-    print(f"Asientos en primera clase: {primeraClase}")
-    print(f"Asientos en clase economica: {claseEconomica}")
-    print("----------------")
-    aviones[matricula] = {
-        "modelo": modelo,
-        "Asientos": {
-            "primera": int(primeraClase),
-            "economica": int(claseEconomica),
+    modelos_predefinidos = {
+        "1": {
+            "modelo": "Boeing747-800",
+            "primera_clase": 20,
+            "economica": 162
         },
+        "2": {
+            "modelo": "AirbusA320Neo",
+            "primera_clase": 28,
+            "economica": 150
+        }
     }
+
+    print("Seleccione un modelo de avión:")
+    print("1. Boeing 747-800 (20/162)")
+    print("2. Airbus A320 Neo (28/150)")
+
+    modelo_seleccionado = None
+    while not modelo_seleccionado:
+        opcion = input("Seleccione una opción (1 o 2): ")
+        if opcion in modelos_predefinidos:
+            modelo_seleccionado = modelos_predefinidos[opcion]
+        else:
+            print("Opción inválida. Intente nuevamente.")
+
+    matricula = input("Ingrese la matrícula del avión (ejemplo: LV-XXX): ").strip().upper()
+    while not matricula:
+        print("La matrícula no puede estar vacía.")
+        matricula = input("Ingrese la matrícula nuevamente: ").strip().upper()
+
+    # Verificar si la matrícula ya existe
+    if matricula in aviones:
+        print(f"Error: La matrícula {matricula} ya está registrada.")
+        return
+
+    # Agregar el avión al diccionario
+    aviones[matricula] = {
+        "modelo": modelo_seleccionado["modelo"],
+        "Asientos": {
+            "primera": modelo_seleccionado["primera_clase"],
+            "economica": modelo_seleccionado["economica"]
+        }
+    }
+
+    # Guardar los datos en JSON
     escribirJson(ruta, aviones)
-    print("Avion registrado")
-    return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
+
+    print("\nAvión registrado exitosamente:")
+    print(f"Matrícula: {matricula}")
+    print(f"Modelo: {modelo_seleccionado['modelo']}")
+    print(f"Asientos - Primera clase: {modelo_seleccionado['primera_clase']}, Económica: {modelo_seleccionado['economica']}")
 
 
-def eliminarAviones(aviones: dict, ruta):
-    print("Ingrese la matricula del avion que desea eliminar de los archivos.")
-    matricula = input("Matricula: ")
-    print("¿Está seguro de querer eliminar los datos de este avión?")
-    print("[1] Eliminar avion")
-    print("[2] Volver al menu anterior")
-    opcion = input()
+def eliminarAviones(aviones: dict, ruta: str) -> None:
+    """
+    Elimina un avión registrado en el diccionario `aviones`.
+    
+    Valida que la matrícula exista antes de eliminarla y confirma la acción.
+    
+    Args:
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
+    """
+    if not aviones:
+        print("No hay aviones registrados actualmente.")
+        return
+
+    print("Aviones registrados:")
+    for matricula in aviones:
+        print(f"- {matricula} ({aviones[matricula]['modelo']})")
+    
+    matricula = input("\nIngrese la matrícula del avión que desea eliminar: ").strip().upper()
+    
+    if matricula not in aviones:
+        print(f"Error: No se encontró un avión con la matrícula '{matricula}'.")
+        return
+
+    print(f"\nEstá a punto de eliminar el avión con matrícula '{matricula}':")
+    print(f"Modelo: {aviones[matricula]['modelo']}")
+    print("[1] Confirmar eliminación")
+    print("[2] Cancelar y volver al menú anterior")
+    
+    opcion = input("Seleccione una opción: ").strip()
+    
     if opcion == "1":
         del aviones[matricula]
         escribirJson(ruta, aviones)
-        print("Los datos del avion han sido eliminados exitosamente")
+        print(f"\nEl avión con matrícula '{matricula}' ha sido eliminado exitosamente.")
     elif opcion == "2":
-        return
+        print("\nOperación cancelada. No se eliminó ningún avión.")
     else:
-        print("Esa opcion no existe")
-        opcion = input("Intentelo nuevamente: ")
+        print("\nOpción inválida. No se realizó ninguna acción.")
 
 
-def modificarAviones(aviones: dict, ruta):
-    print("Escriba la matricula del avion que desea modificar.")
-    matricula = input()
-    while matricula == "":
-        print("No se permiten los espacios en blanco")
-        matricula = input("Intentelo nuevamente: ")
+def modificarAviones(aviones: dict, ruta: str) -> None:
+    """
+    Modifica los datos de un avión registrado en el diccionario `aviones`.
+    
+    Permite editar la matrícula, el modelo y los asientos en primera clase y económica,
+    con validaciones para garantizar datos consistentes.
+    
+    Args:
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
+    """
+    if not aviones:
+        print("No hay aviones registrados actualmente.")
+        return
 
-    modelo = aviones[matricula]["modelo"]
-    primeraClase = aviones[matricula]["Asientos"]["primera"]
-    claseEconomica = aviones[matricula]["Asientos"]["economica"]
-    verificador = False
-    contadorPC = 0
-    contadorCE = 0
-    contadorModTotal = 0
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"Modelo: {modelo}")
-        print(f"Matricula: {matricula}")
-        print(f"[3]Asientos de primera clase: {primeraClase}")
-        print(f"[4]Asientos de clase economica: {claseEconomica}")
-        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[6]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "3":
-            print("Escriba los asientos totales de la primera clase")
-            escribirPrimeraClase = input()
-            while escribirPrimeraClase == "":
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirPrimeraClase = input("Intentelo nuevamente: ")
-            primeraClase = escribirPrimeraClase
-            print("Ahora coloque la cantidad de asientos por fila.")
-            porFilaPC = int(input())
-            print("Ahora coloque la cantidad de asientos por columna")
-            porColumnaPC = int(input())
-            while (porFilaPC * porColumnaPC) != primeraClase:
-                print("ERROR!")
-                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
-                print("Coloque la cantidad de asientos por fila.")
-                porFilaPC = int(input())
-                print("Coloque la cantidad de asientos por columna")
-                porColumnaPC = int(input())
-            contadorPC += 1
+    print("\nAviones registrados:")
+    for matricula in aviones:
+        print(f"- {matricula} ({aviones[matricula]['modelo']})")
+    
+    matricula = input("\nIngrese la matrícula del avión que desea modificar: ").strip().upper()
+
+    if matricula not in aviones:
+        print(f"Error: No se encontró un avión con la matrícula '{matricula}'.")
+        return
+
+    avion = aviones[matricula]
+
+    while True: 
+        print("\nSeleccione el dato que desea modificar:")
+        print(f"[1] Matrícula: {matricula}")
+        print(f"[2] Modelo: {avion['modelo']}")
+        print(f"[3] Asientos de primera clase: {avion['Asientos']['primera']}")
+        print(f"[4] Asientos de clase económica: {avion['Asientos']['economica']}")
+        print("[5] Guardar")
+        print("[0] Salir sin realizar cambios")
+
+        opcion = input("Seleccione una opción o [0] para salir: ").strip()
+
+        if opcion == "1":
+            print("La matrícula no es modificable.")
+        
+        elif opcion == "2":
+            nuevo_modelo = input("Ingrese el nuevo modelo: ").strip().title()
+            while not nuevo_modelo:
+                print("El modelo no puede estar vacío.")
+                nuevo_modelo = input("Ingrese el nuevo modelo nuevamente: ").strip()
+            avion['modelo'] = nuevo_modelo
+        
+        elif opcion == "3":
+            nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
+            while not nueva_primera.isdigit() or int(nueva_primera) <= 0:
+                print("La cantidad de asientos debe ser un número entero positivo.")
+                nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
+            avion['Asientos']['primera'] = int(nueva_primera)
+        
         elif opcion == "4":
-            print("Escriba los asientos totales de la clase economica.")
-            escribirClaseEconomica = input()
-            while escribirClaseEconomica == "":
-                print("No es valido dejar espacios en blanco")
-                print("Intentelo nuevamente")
-                escribirClaseEconomica = input()
-            claseEconomica = escribirClaseEconomica
-            print("Ahora escriba los asientos por fila")
-            porFilaCE = int(input())
-            print("Ahora escriba la cantidad de asientos por columna")
-            porColumnaCE = int(input())
-            while (porFilaCE * porColumnaCE) == claseEconomica:
-                print(
-                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
-                )
-                print("Intentelo nuevamente")
-                print("Ahora escriba los asientos por fila")
-                porFilaCE = int(input())
-                print("Ahora escriba la cantidad de asientos por columna")
-                porColumnaCE = int(input())
-            contadorCE += 1
+            nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
+            while not nueva_economica.isdigit() or int(nueva_economica) <= 0:
+                print("La cantidad de asientos debe ser un número entero positivo.")
+                nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
+            avion['Asientos']['economica'] = int(nueva_economica)
+        
         elif opcion == "5":
-            modelo = ""
-            primeraClase = ""
-            claseEconomica = ""
-            contadorModTotal += 1
-        elif opcion == "6":
-            if (
-                modelo == ""
-                or matricula == ""
-                or claseEconomica == ""
-                or primeraClase == ""
-            ):
-                print("Aun quedan datos por completar")
-            else:
-                break
+            # Guardar los cambios en el archivo JSON
+            escribirJson(ruta, aviones)
+            print("\nLos datos del avión se han actualizado exitosamente.")
+            return
+        
+        elif opcion == "0":
+            print("No se realizaron cambios.")
+            return
+        
         else:
-            print("Esa opcion no existe")
-    print("Los datos")
-    print("----------------")
-    print(f"Modelo: {modelo}")
-    print(f"Matricula: {matricula}")
-    print(f"Asientos en primera clase: {primeraClase}")
-    print(f"Asientos en clase economica: {claseEconomica}")
-    print("----------------")
-    aviones[matricula] = {
-        "modelo": modelo,
-        "Asientos": {
-            "primera": int(primeraClase),
-            "economica": int(claseEconomica),
-        },
-    }
-    print("Avion registrado")
-    escribirJson(ruta, aviones)
-    if contadorPC > 0 and contadorCE == 0:
-        return (porFilaPC, porColumnaPC)
-    elif contadorCE > 0 and contadorPC == 0:
-        return (porFilaCE, porColumnaCE)
-    elif (contadorCE > 0 and contadorPC > 0) or contadorModTotal > 0:
-        return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
-    else:
-        return
+            print("Opción inválida. No se realizaron cambios.")
+            return
