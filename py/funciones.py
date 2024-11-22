@@ -1079,6 +1079,33 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
 
 
 def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
+    provincias = {
+        "1": "Buenos Aires",
+        "2": "Catamarca",
+        "3": "Chaco",
+        "4": "Chubut",
+        "5": "Ciudad Autónoma de Buenos Aires",
+        "6": "Córdoba",
+        "7": "Corrientes",
+        "8": "Entre Ríos",
+        "9": "Formosa",
+        "10": "Jujuy",
+        "11": "La Pampa",
+        "12": "La Rioja",
+        "13": "Mendoza",
+        "14": "Misiones",
+        "15": "Neuquén",
+        "16": "Río Negro",
+        "17": "Salta",
+        "18": "San Juan",
+        "19": "San Luis",
+        "20": "Santa Cruz",
+        "21": "Santa Fe",
+        "22": "Santiago del Estero",
+        "23": "Tierra del Fuego",
+        "24": "Tucumán",
+    }
+
     while True:
         print()
         codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
@@ -1140,18 +1167,64 @@ def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                     print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
-            vuelos[codigo]["Origen"] = input().title()
+            print("---------------------------")
+            print("ORIGENES DISPONIBLES")
+            print("---------------------------")
+            for clave, origen in provincias.items():
+                print(f"[{clave}] {origen}")
+            print()
+            # Seleccionar origen
+            while True:
+
+                opcionOrigen = input("Seleccione un origen o [0] para salir: ")
+                if opcionOrigen == "0":
+                    return  # Volver al menú principal
+                elif opcionOrigen in provincias:
+                    origen = provincias[opcionOrigen]
+                    vuelos[codigo]["Origen"] = origen
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "5":
-            vuelos[codigo]["Destino"] = input().title()
+            print("---------------------------")
+            print("DESTINOS DISPONIBLES")
+            print("---------------------------")
+            for clave, destino in provincias.items():
+                print(f"[{clave}] {destino}")
+            print()
+            # Seleccionar destino
+            while True:
+
+                opcionDestino = input("Seleccione un destino o [0] para salir: ")
+                if opcionDestino == "0":
+                    return  # Volver al menú principal
+                elif opcionDestino in provincias:
+                    destino = provincias[opcionDestino]
+                    vuelos[codigo]["Destino"] = destino
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "6":
+            if not aviones:
+                print("No hay aviones registrados actualmente.")
+                return
+
+            #Mostrar matriculas
+            print("\nAviones registrados:")
+            for matricula in aviones:
+                print(f"- {matricula} ({aviones[matricula]['modelo']})")
+            
+            #Elegir
             while True:
-                matricula = input().upper()
-                if matricula not in aviones.keys():
-                    print("El avion no esta registrado")
+                avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
+                if avion == "0":
+                    return
+                elif avion not in aviones:
+                    print(f"Error: No se encontró un avión con la matrícula '{avion}'.")
                 else:
-                    vuelos[codigo]["Avion"] = matricula
+                    vuelos[codigo]["Avion"] = avion
                     break
 
         elif opcion == "7":
