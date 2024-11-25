@@ -171,7 +171,7 @@ def letraNumero(letra: str) -> int:
     return letra
 
 
-def mostrarMatrizdeVuelo(matriz: list[list]) -> None:
+def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -185,10 +185,12 @@ def mostrarMatrizdeVuelo(matriz: list[list]) -> None:
     filas_totales = len(matriz)
     medio = filas_totales // 2
 
-    if longitud < 7:
+    print()
+
+    if longitud < 12:
         print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
     else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
 
     for indice, fila in enumerate(matriz):
         letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
@@ -379,7 +381,7 @@ def buscarAsiento(matriz, selecto):
 
 
 def comprarPasaje(
-    pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros, rutaPasajes
+    pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros, rutaPasajes, rutaVuelos
 ) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
@@ -513,9 +515,10 @@ def comprarPasaje(
 
     # Asignación de asiento (simplificado para este ejemplo)
     matrizAsientos = vuelos[vueloSeleccionado]["Asientos"][claseSeleccionada]
-    mostrarMatrizdeVuelo(matrizAsientos)
+    lonPrimera = len(vuelos[vueloSeleccionado]["Asientos"]["Primera"][0])
+    mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
     asiento = seleccionarAsiento(matrizAsientos)
-    mostrarMatrizdeVuelo(matrizAsientos)
+    mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
 
     # Generar nuevo ID de pasaje
     nuevo_id = str(len(pasajes) + 1).zfill(3)
@@ -530,6 +533,7 @@ def comprarPasaje(
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
     escribirJson(rutaPasajes, pasajes)
+    escribirJson(rutaVuelos, vuelos)
     return
 
 

@@ -63,7 +63,7 @@ def subMenuPasajes():
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
             funciones.comprarPasaje(
-                pasajeros, pasajes, vuelos, rutaPasajeros, rutaPasajes
+                pasajeros, pasajes, vuelos, rutaPasajeros, rutaPasajes, rutaVuelos
             )
         elif opcion_submenu == "2":  # Listar Pasajes
             funciones.listarPasajes(pasajes, pasajeros)
