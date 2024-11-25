@@ -200,63 +200,6 @@ def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
 
-
-def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str, longitudPrimera) -> None:
-    """
-    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
-
-    Args:
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
-    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
-    - codigo (str): Código identificador del pasaje.
-    """
-    longitud = len(matriz[0])
-    ancho_columna = 2
-    filas_totales = len(matriz)
-    medio = filas_totales // 2
-
-    if esEjecutiva(pasaje, codigo):
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
-    else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
-
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
-        print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
-        if indice == medio - 1:
-            print("PASILLO".center(longitud * 3 + 1, "="))
-    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
-    return
-
-
-def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str, longitudPrimera) -> None:
-    """
-    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
-
-    Args:
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
-    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
-    - codigo (str): Código identificador del pasaje.
-    """
-    longitud = len(matriz[0])
-    ancho_columna = 2
-    filas_totales = len(matriz)
-    medio = filas_totales // 2
-
-    if esEjecutiva(pasaje, codigo):
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
-    else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
-
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
-        print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
-        if indice == medio - 1:
-            print("PASILLO".center(longitud * 3 + 1, "="))
-    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
-    return
-
-
 def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     """
     Permite seleccionar un asiento en un vuelo específico y una clase específica.
@@ -327,57 +270,81 @@ def estaOcupado(fila, columna, matriz):
         return False
 
 
-def cambiarAsiento(codigoPasaje, matriz, pasajes):
+def cambiarAsiento(codigoPasaje, vuelos, pasajes, longitudPrimera):
     """
-    Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
+    Permite cambiar el asiento de un pasajero, actualiza la matriz de asientos ocupados y soporta cambios entre clases.
 
     Args:
     - codigoPasaje (str): Código identificador del pasaje.
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    - vuelos (dict): Diccionario con información de los vuelos.
+    - pasajes (dict): Diccionario que contiene los pasajes de los pasajeros.
+    - longitudPrimera (int): Cantidad de columnas en primera clase.
     """
-    longitud = len(matriz[0])
-    listaLetras = []
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)
-        listaLetras.append(letra)
-
-    # Guardar asiento anterior antes de actualizarlo
+    # Obtener los detalles del pasaje actual
+    vuelo = pasajes[codigoPasaje]["vuelo"]
+    claseAnterior = pasajes[codigoPasaje]["clase"].capitalize()
     asientoAnterior = pasajes[codigoPasaje]["asiento"]
     letraAnterior = asientoAnterior[0]
     numero_asientoAnterior = int(asientoAnterior[1:])
-    filaAnterior = letraNumero(letraAnterior.capitalize())
+    filaAnterior = ord(letraAnterior.capitalize()) - 65
 
-    # SELECCIONAR NUEVO ASIENTO
+    # Determinar matriz y columna inicial para la clase anterior
+    matrizAnterior = vuelos[vuelo]["Asientos"][claseAnterior]
+    inicioColumnaAnterior = 1 if claseAnterior == "Primera" else longitudPrimera + 1
+    columnaAnterior = numero_asientoAnterior - inicioColumnaAnterior
+
+    # Seleccionar nueva clase y asiento
     while True:
+        claseNueva = input("SELECCIONE CLASE (Primera/Economica): ").capitalize()
+        if claseNueva not in vuelos[vuelo]["Asientos"]:
+            print("Clase no válida. Intente nuevamente.")
+            continue
+
+        # Configurar matriz y rango de columnas para la nueva clase
+        matrizNueva = vuelos[vuelo]["Asientos"][claseNueva]
+        inicioColumnaNueva = 1 if claseNueva == "Primera" else longitudPrimera + 1
+        longitudNueva = len(matrizNueva[0])
+        listaLetrasNueva = [chr(65 + indice) for indice in range(len(matrizNueva))]
+
+        mostrarMatrizdeVuelo(matrizNueva, longitudPrimera)
+
+        # Selección de fila
         while True:
             filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
-            if filaAsiento.capitalize() not in listaLetras:
+            if filaAsiento.capitalize() not in listaLetrasNueva:
                 print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
             else:
-                fila = letraNumero(filaAsiento.capitalize())
+                filaNueva = ord(filaAsiento.capitalize()) - 65
                 break
 
+        # Selección de columna
         while True:
             filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
-            if 1 > filaColumna > longitud:
+            if not (inicioColumnaNueva <= filaColumna < inicioColumnaNueva + longitudNueva):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
                 break
 
-        if estaOcupado(fila, filaColumna, matriz):
+        columnaNueva = filaColumna - inicioColumnaNueva  # Ajuste al índice de matriz (0 basado)
+
+        # Verificar si el asiento está ocupado
+        if matrizNueva[filaNueva][columnaNueva] == 1:
             print("Asiento ocupado... Reintente")
         else:
             break
 
-    # MODIFICAR DICCIONARIO Y MATRIZ
+    # Actualizar el pasaje
+    pasajes[codigoPasaje]["clase"] = claseNueva
     pasajes[codigoPasaje]["asiento"] = filaAsiento.capitalize() + str(filaColumna)
-    filaAsiento = letraNumero(filaAsiento.capitalize())
-    matriz[filaAsiento][filaColumna - 5] = 1
+    matrizNueva[filaNueva][columnaNueva] = 1  # Ocupar nuevo asiento
 
-    # Ahora poner en 0 el asiento anterior
-    matriz[filaAnterior][numero_asientoAnterior - 5] = 0
+    # Liberar el asiento anterior
+    matrizAnterior[filaAnterior][columnaAnterior] = 0
+
+    mostrarMatrizdeVuelo(matrizNueva, longitudPrimera)
+
+    print(f"Asiento cambiado exitosamente a {filaAsiento.capitalize()}{filaColumna} en clase {claseNueva}.")
     return
-
 
 # ----------------------------------------------------------------------------------------------
 # PASAJES
@@ -616,72 +583,17 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
         elif codigoPasaje not in pasajes:
             print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
         else:
-            lonPrimera = len(vuelos[pasajes[codigoPasaje]["vuelo"]]["Asientos"]["Primera"][0])
-            print("--------------------------")
-            mostrarPasaje(pasajes, codigoPasaje)
-            print("--------------------------")
-            while True:
-                print("[1] Cambiar asiento dentro de la misma clase")
-                print("[2] Cambiar clase")
-                print("[3] Volver a Pasajes")
-                opcion = int(input("Selecciona una opcion: "))
-
-                if opcion == 1:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Primera"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Economica"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                    escribirJson(rutaPasajes, pasajes)
-                    break
-
-                elif opcion == 2:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Economica"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Primera"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
-                    escribirJson(rutaPasajes, pasajes)
-                    break
-
-                elif opcion == 3:
-                    break
-                else:
-                    print("Ingrese un valor en el rango")
             break
+    lonPrimera = len(vuelos[pasajes[codigoPasaje]["vuelo"]]["Asientos"]["Primera"][0])
 
+    print("--------------------------")
+    mostrarPasaje(pasajes, codigoPasaje)
+    print("--------------------------")
+
+    cambiarAsiento(codigoPasaje, vuelos, pasajes, lonPrimera)
+
+    escribirJson(rutaPasajes, pasajes)
+    return
 
 def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: str) -> None:
     """
@@ -712,11 +624,11 @@ def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: st
                 print(f"Error: el vuelo {vuelo} no se encuentra registrado en los datos.")
             else:
                 # Convertir el asiento (ej. "A1") a fila y columna en la matriz
-                fila_letra = asiento[0]
-                columna_num = int(asiento[1:])
-                fila_indice = ord(fila_letra) - 65  # Convertir 'A' en índice 0
-                inicio_columna = 1 if clase == "Primera" else len(vuelos[vuelo]["Asientos"]["Primera"][0]) + 1  # Determinar el inicio de columnas
-                columna_indice = columna_num - inicio_columna  # Ajustar el índice de la columna
+                filaLetra = asiento[0]
+                columnaNum = int(asiento[1:])
+                filaIndice = ord(filaLetra) - 65  # Convertir 'A' en índice 0
+                inicioColumna = 1 if clase == "Primera" else len(vuelos[vuelo]["Asientos"]["Primera"][0]) + 1  # Determinar el inicio de columnas
+                columnaIndice = columnaNum - inicioColumna  # Ajustar el índice de la columna
 
                 # Validar que la clase existe en el vuelo
                 if clase not in vuelos[vuelo]["Asientos"]:
@@ -725,7 +637,7 @@ def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: st
                     matriz = vuelos[vuelo]["Asientos"][clase]
                     try:
                         # Liberar el asiento marcándolo como 0
-                        matriz[fila_indice][columna_indice] = 0
+                        matriz[filaIndice][columnaIndice] = 0
                         print(f"Asiento {asiento} del vuelo {vuelo} cancelado correctamente.")
                     except IndexError:
                         print(f"Error: el asiento {asiento} no es válido para el vuelo {vuelo}.")
@@ -733,7 +645,7 @@ def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: st
             # Eliminar el pasaje del diccionario
             del pasajes[pasaje]
             print(f"Pasaje número: {pasaje}, eliminado.")
-            
+
             # Guardar cambios en el archivo JSON
             escribirJson(rutaPasajes, pasajes)  
             escribirJson(rutaVuelos, vuelos) 
