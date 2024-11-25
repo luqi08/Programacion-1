@@ -38,19 +38,31 @@ def escribirJson(ruta, diccionario):
     return
 
 
-def crearMatriz(filas: int, columnas: int, relleno) -> list[list]:
+def crearMatrizAsientos(total_asientos: int, asientos_por_fila: int) -> list[list]:
     """
-    Crea una matriz con las dimensiones especificadas y la llena con el valor indicado.
+    Crea una matriz rectangular para representar la disposición de asientos en un avión
+    y luego intercambia filas por columnas.
 
     Args:
-    - filas (int): Número de filas de la matriz.
-    - columnas (int): Número de columnas de la matriz.
-    - relleno (any): Valor con el que se llenará la matriz.
+    - total_asientos (int): Número total de asientos a organizar.
+    - asientos_por_fila (int): Número de asientos por fila.
 
     Returns:
-    - list: Matriz creada con las dimensiones y valores especificados.
+    - list: Matriz  (filas convertidas a columnas).
     """
-    return [[relleno] * columnas for fila in range(filas)]
+    # Crear la matriz original
+    filas_completas = total_asientos // asientos_por_fila
+    asientos_restantes = total_asientos % asientos_por_fila
+
+    matriz = [[0] * asientos_por_fila for _ in range(filas_completas)]
+    if asientos_restantes > 0:
+        fila_extra = [0] * asientos_restantes + [0] * (asientos_por_fila - asientos_restantes)
+        matriz.append(fila_extra)
+
+    # Transponer la matriz (intercambiar filas por columnas)
+    matriz = [list(fila) for fila in zip(*matriz)]
+
+    return matriz
 
 
 def contarAsientosDisponibles(vuelos, codigo_vuelo):
@@ -159,7 +171,7 @@ def letraNumero(letra: str) -> int:
     return letra
 
 
-def mostrarMatrizdeVuelo(matriz: list[list], pasaje: dict) -> None:
+def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -173,10 +185,12 @@ def mostrarMatrizdeVuelo(matriz: list[list], pasaje: dict) -> None:
     filas_totales = len(matriz)
     medio = filas_totales // 2
 
-    if longitud < 7:
+    print()
+
+    if longitud < 12:
         print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
     else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
 
     for indice, fila in enumerate(matriz):
         letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
@@ -186,104 +200,67 @@ def mostrarMatrizdeVuelo(matriz: list[list], pasaje: dict) -> None:
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
 
-
-def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> None:
+def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     """
-    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
+    Permite seleccionar un asiento en un vuelo específico y una clase específica.
 
     Args:
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
-    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
-    - codigo (str): Código identificador del pasaje.
+    - vuelos (dict): Diccionario con información de los vuelos.
+    - codigo_vuelo (str): Código del vuelo (por ejemplo, "VU027").
+    - clase (str): Clase a seleccionar ("Primera" o "Economica").
+    
+    Returns:
+    - str: Asiento seleccionado (por ejemplo, "A5").
     """
-    longitud = len(matriz[0])
-    ancho_columna = 2
-    filas_totales = len(matriz)
-    medio = filas_totales // 2
+    # Validar la existencia del vuelo
+    if codigo_vuelo not in vuelos:
+        raise ValueError(f"El vuelo {codigo_vuelo} no existe.")
 
-    if esEjecutiva(pasaje, codigo):
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
-    else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+    # Validar la clase
+    if clase not in vuelos[codigo_vuelo]["Asientos"]:
+        raise ValueError(f"La clase {clase} no existe en el vuelo {codigo_vuelo}.")
 
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
-        print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
-        if indice == medio - 1:
-            print("PASILLO".center(longitud * 3 + 1, "="))
-    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
-    return
+    # Obtener la matriz de la clase seleccionada
+    matriz = vuelos[codigo_vuelo]["Asientos"][clase]
+    longitud = len(matriz[0])  # Número de columnas
+    listaLetras = [chr(65 + indice) for indice in range(len(matriz))]
 
+    # Determinar el número inicial de columna
+    # Si la clase es económica, asumimos que empieza en la columna 5. Ajustar según datos reales.
+    inicio_columna = 1 if clase == "Primera" else longitudPrimera + 1
 
-def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str) -> None:
-    """
-    Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
-
-    Args:
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
-    - pasaje (dict): Información sobre el pasaje y asiento del pasajero.
-    - codigo (str): Código identificador del pasaje.
-    """
-    longitud = len(matriz[0])
-    ancho_columna = 2
-    filas_totales = len(matriz)
-    medio = filas_totales // 2
-
-    if esEjecutiva(pasaje, codigo):
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
-    else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
-
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
-        print(f"{letra} " + " ".join(f"{el:>{ancho_columna}}" for el in fila))
-        if indice == medio - 1:
-            print("PASILLO".center(longitud * 3 + 1, "="))
-    print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
-    return
-
-
-def seleccionarAsiento(matriz):
-    """
-    Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
-
-    Args:
-    - codigoPasaje (str): Código identificador del pasaje.
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
-    """
-    longitud = len(matriz[0])
-    listaLetras = []
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)
-        listaLetras.append(letra)
-
-    # SELECCIONAR NUEVO ASIENTO
     while True:
+        # Selección de letra de fila
         while True:
             filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
             if filaAsiento.capitalize() not in listaLetras:
                 print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
             else:
-                fila = letraNumero(filaAsiento.capitalize())
+                fila = ord(filaAsiento.capitalize()) - 65
                 break
 
+        # Selección de número de columna
         while True:
             filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
-            if 1 > filaColumna > longitud:
+            if not (inicio_columna <= filaColumna < inicio_columna + longitud):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
                 break
 
-        if estaOcupado(fila, filaColumna, matriz):
+        # Verificar si el asiento está ocupado
+        columna_real = filaColumna - inicio_columna  # Ajustar a índice de matriz (0 basado)
+        if matriz[fila][columna_real] == 1:
             print("Asiento ocupado... Reintente")
         else:
             break
 
-    # MODIFICAR DICCIONARIO Y MATRIZ
-    asiento = filaAsiento.capitalize() + str(filaColumna)
-    filaAsiento = letraNumero(filaAsiento.capitalize())
-    matriz[filaAsiento][filaColumna - 5] = 1
+    # Reservar el asiento
+    matriz[fila][columna_real] = 1
+    asiento = f"{filaAsiento.capitalize()}{filaColumna}"
+    print(f"Asiento {asiento} reservado correctamente en el vuelo {codigo_vuelo}, clase {clase}.")
     return asiento
+
+
 
 
 def estaOcupado(fila, columna, matriz):
@@ -293,57 +270,81 @@ def estaOcupado(fila, columna, matriz):
         return False
 
 
-def cambiarAsiento(codigoPasaje, matriz, pasajes):
+def cambiarAsiento(codigoPasaje, vuelos, pasajes, longitudPrimera):
     """
-    Permite cambiar el asiento de un pasajero y actualiza la matriz de asientos ocupados.
+    Permite cambiar el asiento de un pasajero, actualiza la matriz de asientos ocupados y soporta cambios entre clases.
 
     Args:
     - codigoPasaje (str): Código identificador del pasaje.
-    - matriz (list): Matriz que representa el avión con asientos ocupados.
+    - vuelos (dict): Diccionario con información de los vuelos.
+    - pasajes (dict): Diccionario que contiene los pasajes de los pasajeros.
+    - longitudPrimera (int): Cantidad de columnas en primera clase.
     """
-    longitud = len(matriz[0])
-    listaLetras = []
-    for indice, fila in enumerate(matriz):
-        letra = chr(65 + indice)
-        listaLetras.append(letra)
-
-    # Guardar asiento anterior antes de actualizarlo
+    # Obtener los detalles del pasaje actual
+    vuelo = pasajes[codigoPasaje]["vuelo"]
+    claseAnterior = pasajes[codigoPasaje]["clase"].capitalize()
     asientoAnterior = pasajes[codigoPasaje]["asiento"]
     letraAnterior = asientoAnterior[0]
     numero_asientoAnterior = int(asientoAnterior[1:])
-    filaAnterior = letraNumero(letraAnterior.capitalize())
+    filaAnterior = ord(letraAnterior.capitalize()) - 65
 
-    # SELECCIONAR NUEVO ASIENTO
+    # Determinar matriz y columna inicial para la clase anterior
+    matrizAnterior = vuelos[vuelo]["Asientos"][claseAnterior]
+    inicioColumnaAnterior = 1 if claseAnterior == "Primera" else longitudPrimera + 1
+    columnaAnterior = numero_asientoAnterior - inicioColumnaAnterior
+
+    # Seleccionar nueva clase y asiento
     while True:
+        claseNueva = input("SELECCIONE CLASE (Primera/Economica): ").capitalize()
+        if claseNueva not in vuelos[vuelo]["Asientos"]:
+            print("Clase no válida. Intente nuevamente.")
+            continue
+
+        # Configurar matriz y rango de columnas para la nueva clase
+        matrizNueva = vuelos[vuelo]["Asientos"][claseNueva]
+        inicioColumnaNueva = 1 if claseNueva == "Primera" else longitudPrimera + 1
+        longitudNueva = len(matrizNueva[0])
+        listaLetrasNueva = [chr(65 + indice) for indice in range(len(matrizNueva))]
+
+        mostrarMatrizdeVuelo(matrizNueva, longitudPrimera)
+
+        # Selección de fila
         while True:
             filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
-            if filaAsiento.capitalize() not in listaLetras:
+            if filaAsiento.capitalize() not in listaLetrasNueva:
                 print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
             else:
-                fila = letraNumero(filaAsiento.capitalize())
+                filaNueva = ord(filaAsiento.capitalize()) - 65
                 break
 
+        # Selección de columna
         while True:
             filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
-            if 1 > filaColumna > longitud:
+            if not (inicioColumnaNueva <= filaColumna < inicioColumnaNueva + longitudNueva):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
                 break
 
-        if estaOcupado(fila, filaColumna, matriz):
+        columnaNueva = filaColumna - inicioColumnaNueva  # Ajuste al índice de matriz (0 basado)
+
+        # Verificar si el asiento está ocupado
+        if matrizNueva[filaNueva][columnaNueva] == 1:
             print("Asiento ocupado... Reintente")
         else:
             break
 
-    # MODIFICAR DICCIONARIO Y MATRIZ
+    # Actualizar el pasaje
+    pasajes[codigoPasaje]["clase"] = claseNueva
     pasajes[codigoPasaje]["asiento"] = filaAsiento.capitalize() + str(filaColumna)
-    filaAsiento = letraNumero(filaAsiento.capitalize())
-    matriz[filaAsiento][filaColumna - 5] = 1
+    matrizNueva[filaNueva][columnaNueva] = 1  # Ocupar nuevo asiento
 
-    # Ahora poner en 0 el asiento anterior
-    matriz[filaAnterior][numero_asientoAnterior - 5] = 0
+    # Liberar el asiento anterior
+    matrizAnterior[filaAnterior][columnaAnterior] = 0
+
+    mostrarMatrizdeVuelo(matrizNueva, longitudPrimera)
+
+    print(f"Asiento cambiado exitosamente a {filaAsiento.capitalize()}{filaColumna} en clase {claseNueva}.")
     return
-
 
 # ----------------------------------------------------------------------------------------------
 # PASAJES
@@ -367,7 +368,7 @@ def buscarAsiento(matriz, selecto):
 
 
 def comprarPasaje(
-    pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros, rutaPasajes
+    pasajeros: dict, pasajes: dict, vuelos: dict, rutaPasajeros, rutaPasajes, rutaVuelos
 ) -> dict:
     """
     Permite seleccionar un destino, elegir un vuelo disponible para ese destino,
@@ -501,9 +502,10 @@ def comprarPasaje(
 
     # Asignación de asiento (simplificado para este ejemplo)
     matrizAsientos = vuelos[vueloSeleccionado]["Asientos"][claseSeleccionada]
-    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
-    asiento = seleccionarAsiento(matrizAsientos)
-    mostrarMatrizdeVuelo(matrizAsientos, pasajes)
+    lonPrimera = len(vuelos[vueloSeleccionado]["Asientos"]["Primera"][0])
+    mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
+    asiento = seleccionarAsiento(vuelos, vueloSeleccionado, claseSeleccionada, lonPrimera)
+    mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
 
     # Generar nuevo ID de pasaje
     nuevo_id = str(len(pasajes) + 1).zfill(3)
@@ -518,7 +520,8 @@ def comprarPasaje(
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
     escribirJson(rutaPasajes, pasajes)
-    return pasajes
+    escribirJson(rutaVuelos, vuelos)
+    return
 
 
 def listarPasajes(pasajes, pasajeros):
@@ -580,79 +583,26 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
         elif codigoPasaje not in pasajes:
             print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
         else:
-            print("--------------------------")
-            mostrarPasaje(pasajes, codigoPasaje)
-            print("--------------------------")
-            while True:
-                print("[1] Cambiar asiento dentro de la misma clase")
-                print("[2] Cambiar clase")
-                print("[3] Volver a Pasajes")
-                opcion = int(input("Selecciona una opcion: "))
-
-                if opcion == 1:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Primera"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Economica"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
-                    escribirJson(rutaPasajes, pasajes)
-                    break
-
-                elif opcion == 2:
-                    print()
-                    print(
-                        f"ASIENTO ACTUAL: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    if esEjecutiva(pasajes, codigoPasaje):
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Economica"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    else:
-                        matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
-                            "Asientos"
-                        ]["Primera"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
-                        cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
-                    print()
-                    print(
-                        f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
-                    )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
-                    escribirJson(rutaPasajes, pasajes)
-                    break
-
-                elif opcion == 3:
-                    break
-                else:
-                    print("Ingrese un valor en el rango")
             break
+    lonPrimera = len(vuelos[pasajes[codigoPasaje]["vuelo"]]["Asientos"]["Primera"][0])
 
+    print("--------------------------")
+    mostrarPasaje(pasajes, codigoPasaje)
+    print("--------------------------")
 
-def eliminarPasaje(pasajes: dict, ruta) -> None:
+    cambiarAsiento(codigoPasaje, vuelos, pasajes, lonPrimera)
+
+    escribirJson(rutaPasajes, pasajes)
+    return
+
+def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: str) -> None:
     """
-    Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
+    Elimina el pasaje asociado a un pasajero del diccionario de pasajes y cancela el asiento correspondiente.
 
     Args:
-    - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
+    - rutaPasajes (str): Ruta del archivo JSON donde se guardan los pasajes.
     """
     while True:
         pasaje = input("Ingrese número de pasaje o [0] para salir: ")
@@ -663,11 +613,44 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
         elif pasaje not in pasajes.keys():
             print("No se encontró ningún pasaje con el número ingresado")
         else:
+            # Obtener detalles del pasaje
+            datosPasaje = pasajes[pasaje]
+            vuelo = datosPasaje["vuelo"]
+            clase = datosPasaje["clase"].capitalize()
+            asiento = datosPasaje["asiento"]
+
+            # Validar que el vuelo existe en el diccionario de vuelos
+            if vuelo not in vuelos:
+                print(f"Error: el vuelo {vuelo} no se encuentra registrado en los datos.")
+            else:
+                # Convertir el asiento (ej. "A1") a fila y columna en la matriz
+                filaLetra = asiento[0]
+                columnaNum = int(asiento[1:])
+                filaIndice = ord(filaLetra) - 65  # Convertir 'A' en índice 0
+                inicioColumna = 1 if clase == "Primera" else len(vuelos[vuelo]["Asientos"]["Primera"][0]) + 1  # Determinar el inicio de columnas
+                columnaIndice = columnaNum - inicioColumna  # Ajustar el índice de la columna
+
+                # Validar que la clase existe en el vuelo
+                if clase not in vuelos[vuelo]["Asientos"]:
+                    print(f"Error: la clase {clase} no se encuentra en el vuelo {vuelo}.")
+                else:
+                    matriz = vuelos[vuelo]["Asientos"][clase]
+                    try:
+                        # Liberar el asiento marcándolo como 0
+                        matriz[filaIndice][columnaIndice] = 0
+                        print(f"Asiento {asiento} del vuelo {vuelo} cancelado correctamente.")
+                    except IndexError:
+                        print(f"Error: el asiento {asiento} no es válido para el vuelo {vuelo}.")
+
+            # Eliminar el pasaje del diccionario
             del pasajes[pasaje]
-            print()
-            print(f"Pasaje número: {pasaje}, eliminado")
-            escribirJson(ruta, pasajes)
+            print(f"Pasaje número: {pasaje}, eliminado.")
+
+            # Guardar cambios en el archivo JSON
+            escribirJson(rutaPasajes, pasajes)  
+            escribirJson(rutaVuelos, vuelos) 
             return
+
 
 
 # ----------------------------------------------------------------------------------------------
@@ -907,6 +890,33 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
     destino = ""
     avion = ""
 
+    provincias = {
+        "1": "Buenos Aires",
+        "2": "Catamarca",
+        "3": "Chaco",
+        "4": "Chubut",
+        "5": "Ciudad Autónoma de Buenos Aires",
+        "6": "Córdoba",
+        "7": "Corrientes",
+        "8": "Entre Ríos",
+        "9": "Formosa",
+        "10": "Jujuy",
+        "11": "La Pampa",
+        "12": "La Rioja",
+        "13": "Mendoza",
+        "14": "Misiones",
+        "15": "Neuquén",
+        "16": "Río Negro",
+        "17": "Salta",
+        "18": "San Juan",
+        "19": "San Luis",
+        "20": "Santa Cruz",
+        "21": "Santa Fe",
+        "22": "Santiago del Estero",
+        "23": "Tierra del Fuego",
+        "24": "Tucumán",
+    }
+
     while True:
         print("Registre datos del vuelo")
         print("-----------------")
@@ -951,18 +961,69 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                     print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
-            origen = input().title()
+            print("---------------------------")
+            print("ORIGENES DISPONIBLES")
+            print("---------------------------")
+            for clave, origen in provincias.items():
+                print(f"[{clave}] {origen}")
+            print()
+            # Seleccionar origen
+            while True:
+
+                opcionOrigen = input("Seleccione un origen o [0] para salir: ")
+                if opcionOrigen == "0":
+                    return  # Volver al menú principal
+                elif opcionOrigen in provincias:
+                    origen = provincias[opcionOrigen]
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "5":
-            destino = input().title()
+            print("---------------------------")
+            print("DESTINOS DISPONIBLES")
+            print("---------------------------")
+            for clave, destino in provincias.items():
+                print(f"[{clave}] {destino}")
+            print()
+            # Seleccionar destino
+            while True:
+
+                opcionDestino = input("Seleccione un destino o [0] para salir: ")
+                if opcionDestino == "0":
+                    return  # Volver al menú principal
+                elif opcionDestino in provincias:
+                    destino = provincias[opcionDestino]
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "6":
+            if not aviones:
+                print("No hay aviones registrados actualmente.")
+                return
+
+            #Mostrar matriculas
+            print("\nAviones registrados:")
+            for matricula in aviones:
+                print(f"- {matricula} ({aviones[matricula]['modelo']})")
+            
+            # Elegir un avión
             while True:
-                matricula = input().upper()
-                if matricula not in aviones.keys():
-                    print("El avion no esta registrado")
+                avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
+                if avion == "0":
+                    return
+                elif avion not in aviones:
+                    print(f"Error: No se encontró un avión con la matrícula '{avion}'.")
                 else:
-                    avion = matricula
+                    # Obtener asientos de primera clase y económica
+                    asientosPrimera = aviones[avion]['Asientos']['primera']
+                    asientosEconomica = aviones[avion]['Asientos']['economica']
+                    
+                    print(f"\nAvión seleccionado: {aviones[avion]['modelo']}")
+                    print(f"Asientos en primera clase: {asientosPrimera}")
+                    print(f"Asientos en clase económica: {asientosEconomica}")
+                    
                     break
 
         elif opcion == "7":
@@ -981,8 +1042,8 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
         else:
             print("Opcion invalida")
 
-    matrizPrimera = crearMatriz(4, 4, 0)
-    matrizEconomica = crearMatriz(6, 20, 0)
+    matrizPrimera = crearMatrizAsientos(asientosPrimera, 4)
+    matrizEconomica = crearMatrizAsientos(asientosEconomica, 6)
 
     vuelos[codigo] = {
         "Fecha": fecha,
@@ -1009,6 +1070,33 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
 
 
 def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
+    provincias = {
+        "1": "Buenos Aires",
+        "2": "Catamarca",
+        "3": "Chaco",
+        "4": "Chubut",
+        "5": "Ciudad Autónoma de Buenos Aires",
+        "6": "Córdoba",
+        "7": "Corrientes",
+        "8": "Entre Ríos",
+        "9": "Formosa",
+        "10": "Jujuy",
+        "11": "La Pampa",
+        "12": "La Rioja",
+        "13": "Mendoza",
+        "14": "Misiones",
+        "15": "Neuquén",
+        "16": "Río Negro",
+        "17": "Salta",
+        "18": "San Juan",
+        "19": "San Luis",
+        "20": "Santa Cruz",
+        "21": "Santa Fe",
+        "22": "Santiago del Estero",
+        "23": "Tierra del Fuego",
+        "24": "Tucumán",
+    }
+
     while True:
         print()
         codigo = "VU" + input("Ingrese codigo de vuelo o [0] para salir: ")
@@ -1070,18 +1158,64 @@ def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                     print("Formato de hora inválido. Ingrese la hora en formato hh:mm.")
 
         elif opcion == "4":
-            vuelos[codigo]["Origen"] = input().title()
+            print("---------------------------")
+            print("ORIGENES DISPONIBLES")
+            print("---------------------------")
+            for clave, origen in provincias.items():
+                print(f"[{clave}] {origen}")
+            print()
+            # Seleccionar origen
+            while True:
+
+                opcionOrigen = input("Seleccione un origen o [0] para salir: ")
+                if opcionOrigen == "0":
+                    return  # Volver al menú principal
+                elif opcionOrigen in provincias:
+                    origen = provincias[opcionOrigen]
+                    vuelos[codigo]["Origen"] = origen
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "5":
-            vuelos[codigo]["Destino"] = input().title()
+            print("---------------------------")
+            print("DESTINOS DISPONIBLES")
+            print("---------------------------")
+            for clave, destino in provincias.items():
+                print(f"[{clave}] {destino}")
+            print()
+            # Seleccionar destino
+            while True:
+
+                opcionDestino = input("Seleccione un destino o [0] para salir: ")
+                if opcionDestino == "0":
+                    return  # Volver al menú principal
+                elif opcionDestino in provincias:
+                    destino = provincias[opcionDestino]
+                    vuelos[codigo]["Destino"] = destino
+                    break
+                else:
+                    print("OPCIÓN INVÁLIDA")
 
         elif opcion == "6":
+            if not aviones:
+                print("No hay aviones registrados actualmente.")
+                return
+
+            #Mostrar matriculas
+            print("\nAviones registrados:")
+            for matricula in aviones:
+                print(f"- {matricula} ({aviones[matricula]['modelo']})")
+            
+            #Elegir
             while True:
-                matricula = input().upper()
-                if matricula not in aviones.keys():
-                    print("El avion no esta registrado")
+                avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
+                if avion == "0":
+                    return
+                elif avion not in aviones:
+                    print(f"Error: No se encontró un avión con la matrícula '{avion}'.")
                 else:
-                    vuelos[codigo]["Avion"] = matricula
+                    vuelos[codigo]["Avion"] = avion
                     break
 
         elif opcion == "7":
@@ -1164,9 +1298,9 @@ def listarAviones(aviones: dict) -> None:
     """
     # Encabezado de la tabla
     print(
-        f"{'MATRICULA':<9} | {'MODELO':<13} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}"
+        f"{'MATRICULA':<10} | {'MODELO':<14} | {'PRIMERA CLASE':<13} | {'CLASE ECONÓMICA':<15}"
     )
-    print("-" * 60)
+    print("-" * 62)
 
     # Filas de la tabla
     for nAvion, datos in aviones.items():
@@ -1175,249 +1309,187 @@ def listarAviones(aviones: dict) -> None:
         primera_clase = asientos.get("primera", "N/A")
         economica = asientos.get("economica", "N/A")
 
-        print(f"{nAvion:<9} | {modelo:<12} | {primera_clase:<13} | {economica:<15}")
+        print(f"{nAvion:<10} | {modelo:<14} | {primera_clase:<13} | {economica:<15}")
     return
 
 
-def registrarAviones(aviones: dict, ruta) -> int:
+def registrarAviones(aviones: dict, ruta: str) -> None:
     """
-    Registra un nuevo pasajero solicitando su nombre, apellido y DNI, asegurando que no se
-    introduzcan caracteres numéricos en los nombres y que el DNI sea numérico. Los datos
-    ingresados son almacenados en el diccionario de pasajeros.
-
+    Registra un nuevo avión en el diccionario `aviones`.
+    
+    Permite seleccionar entre dos modelos predefinidos, evitando ingresar datos manualmente.
+    Los datos se almacenan en el diccionario y se escriben en un archivo JSON.
+    
     Args:
-    - pasajeros (dict): Diccionario donde se almacenan los datos de los pasajeros.
-
-    Returns:
-    - dni (int): Numero dni para identificar al pasajero.
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenarán los datos.
     """
-    modelo = ""
-    matricula = ""
-    primeraClase = ""
-    claseEconomica = ""
-    verificador = False
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"[1]Modelo: {modelo}")
-        print(f"[2]Matricula: {matricula}")
-        print(f"[3]Asientos de primera clase: {primeraClase}")
-        print(f"[4]Asientos de clase economica: {claseEconomica}")
-        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[6]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "1":
-            print("Escriba el nombre del modelo.")
-            escribirModelo = input().capitalize()
-            while escribirModelo == "":
-                print("No es valido dejar el espacio en blanco")
-                escribirModelo = input("Escribalo nuevamente: ")
-            modelo = escribirModelo
-        elif opcion == "2":
-            print("Escriba la matricula")
-            escribirMatricula = input().upper()
-            while escribirMatricula == "":
-                print("No es valido dejar el espacio en blanco")
-                escribirMatricula = input("Escribalo nuevamente: ")
-            matricula = escribirMatricula
-        elif opcion == "3":
-            print("Escriba los asientos totales de la primera clase")
-            escribirPrimeraClase = input()
-            while escribirPrimeraClase == "":
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirPrimeraClase = input("Intentelo nuevamente: ")
-            primeraClase = int(escribirPrimeraClase)
-            print("Ahora coloque la cantidad de asientos por fila.")
-            porFilaPC = int(input())
-            print("Ahora coloque la cantidad de asientos por columna")
-            porColumnaPC = int(input())
-            while (porFilaPC * porColumnaPC) != primeraClase:
-                print("ERROR!")
-                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
-                print("Coloque la cantidad de asientos por fila.")
-                porFilaPC = int(input())
-                print("Coloque la cantidad de asientos por columna")
-                porColumnaPC = int(input())
-        elif opcion == "4":
-            print("Escriba los asientos totales de la clase economica.")
-            escribirClaseEconomica = input()
-            while escribirClaseEconomica == "":
-                print("No es valido dejar espacios en blanco")
-                print("Intentelo nuevamente")
-                escribirClaseEconomica = input()
-            claseEconomica = int(escribirClaseEconomica)
-            print("Ahora escriba los asientos por fila")
-            porFilaCE = int(input())
-            print("Ahora escriba la cantidad de asientos por columna")
-            porColumnaCE = int(input())
-            while (porFilaCE * porColumnaCE) != claseEconomica:
-                print(
-                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
-                )
-                print("Intentelo nuevamente")
-                print("Ahora escriba los asientos por fila")
-                porFilaCE = int(input())
-                print("Ahora escriba la cantidad de asientos por columna")
-                porColumnaCE = int(input())
-        elif opcion == "5":
-            modelo = ""
-            matricula = ""
-            primeraClase = ""
-            claseEconomica = ""
-        elif opcion == "6":
-            if (
-                modelo == ""
-                or matricula == ""
-                or claseEconomica == ""
-                or primeraClase == ""
-            ):
-                print("Aun quedan datos por completar")
-            else:
-                break
-        else:
-            print("Esa opcion no existe")
-    print("Los datos")
-    print("----------------")
-    print(f"Modelo: {modelo}")
-    print(f"Matricula: {matricula}")
-    print(f"Asientos en primera clase: {primeraClase}")
-    print(f"Asientos en clase economica: {claseEconomica}")
-    print("----------------")
-    aviones[matricula] = {
-        "modelo": modelo,
-        "Asientos": {
-            "primera": int(primeraClase),
-            "economica": int(claseEconomica),
+    modelos_predefinidos = {
+        "1": {
+            "modelo": "Boeing747-800",
+            "primera_clase": 20,
+            "economica": 162
         },
+        "2": {
+            "modelo": "AirbusA320Neo",
+            "primera_clase": 28,
+            "economica": 150
+        }
     }
+
+    print("Seleccione un modelo de avión:")
+    print("1. Boeing 747-800 (20/162)")
+    print("2. Airbus A320 Neo (28/150)")
+
+    modelo_seleccionado = None
+    while not modelo_seleccionado:
+        opcion = input("Seleccione una opción (1 o 2): ")
+        if opcion in modelos_predefinidos:
+            modelo_seleccionado = modelos_predefinidos[opcion]
+        else:
+            print("Opción inválida. Intente nuevamente.")
+
+    matricula = input("Ingrese la matrícula del avión (ejemplo: LV-XXX): ").strip().upper()
+    while not matricula:
+        print("La matrícula no puede estar vacía.")
+        matricula = input("Ingrese la matrícula nuevamente: ").strip().upper()
+
+    # Verificar si la matrícula ya existe
+    if matricula in aviones:
+        print(f"Error: La matrícula {matricula} ya está registrada.")
+        return
+
+    # Agregar el avión al diccionario
+    aviones[matricula] = {
+        "modelo": modelo_seleccionado["modelo"],
+        "Asientos": {
+            "primera": modelo_seleccionado["primera_clase"],
+            "economica": modelo_seleccionado["economica"]
+        }
+    }
+
+    # Guardar los datos en JSON
     escribirJson(ruta, aviones)
-    print("Avion registrado")
-    return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
+
+    print("\nAvión registrado exitosamente:")
+    print(f"Matrícula: {matricula}")
+    print(f"Modelo: {modelo_seleccionado['modelo']}")
+    print(f"Asientos - Primera clase: {modelo_seleccionado['primera_clase']}, Económica: {modelo_seleccionado['economica']}")
 
 
-def eliminarAviones(aviones: dict, ruta):
-    print("Ingrese la matricula del avion que desea eliminar de los archivos.")
-    matricula = input("Matricula: ")
-    print("¿Está seguro de querer eliminar los datos de este avión?")
-    print("[1] Eliminar avion")
-    print("[2] Volver al menu anterior")
-    opcion = input()
+def eliminarAviones(aviones: dict, ruta: str) -> None:
+    """
+    Elimina un avión registrado en el diccionario `aviones`.
+    
+    Valida que la matrícula exista antes de eliminarla y confirma la acción.
+    
+    Args:
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
+    """
+    if not aviones:
+        print("No hay aviones registrados actualmente.")
+        return
+
+    print("Aviones registrados:")
+    for matricula in aviones:
+        print(f"- {matricula} ({aviones[matricula]['modelo']})")
+    
+    matricula = input("\nIngrese la matrícula del avión que desea eliminar: ").strip().upper()
+    
+    if matricula not in aviones:
+        print(f"Error: No se encontró un avión con la matrícula '{matricula}'.")
+        return
+
+    print(f"\nEstá a punto de eliminar el avión con matrícula '{matricula}':")
+    print(f"Modelo: {aviones[matricula]['modelo']}")
+    print("[1] Confirmar eliminación")
+    print("[2] Cancelar y volver al menú anterior")
+    
+    opcion = input("Seleccione una opción: ").strip()
+    
     if opcion == "1":
         del aviones[matricula]
         escribirJson(ruta, aviones)
-        print("Los datos del avion han sido eliminados exitosamente")
+        print(f"\nEl avión con matrícula '{matricula}' ha sido eliminado exitosamente.")
     elif opcion == "2":
-        return
+        print("\nOperación cancelada. No se eliminó ningún avión.")
     else:
-        print("Esa opcion no existe")
-        opcion = input("Intentelo nuevamente: ")
+        print("\nOpción inválida. No se realizó ninguna acción.")
 
 
-def modificarAviones(aviones: dict, ruta):
-    print("Escriba la matricula del avion que desea modificar.")
-    matricula = input()
-    while matricula == "":
-        print("No se permiten los espacios en blanco")
-        matricula = input("Intentelo nuevamente: ")
+def modificarAviones(aviones: dict, ruta: str) -> None:
+    """
+    Modifica los datos de un avión registrado en el diccionario `aviones`.
+    
+    Permite editar la matrícula, el modelo y los asientos en primera clase y económica,
+    con validaciones para garantizar datos consistentes.
+    
+    Args:
+        aviones (dict): Diccionario donde se almacenan los datos de los aviones.
+        ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
+    """
+    if not aviones:
+        print("No hay aviones registrados actualmente.")
+        return
 
-    modelo = aviones[matricula]["modelo"]
-    primeraClase = aviones[matricula]["Asientos"]["primera"]
-    claseEconomica = aviones[matricula]["Asientos"]["economica"]
-    verificador = False
-    contadorPC = 0
-    contadorCE = 0
-    contadorModTotal = 0
-    while verificador == False:
-        print("Ingrese sus datos")
-        print("-----------------")
-        print(f"Modelo: {modelo}")
-        print(f"Matricula: {matricula}")
-        print(f"[3]Asientos de primera clase: {primeraClase}")
-        print(f"[4]Asientos de clase economica: {claseEconomica}")
-        print("[5]Realizar cambios (Reestablecera todo a su estado predeterminado)")
-        print("[6]Completar")
-        print("-----------------")
-        opcion = input("Seleccione una opcion: ")
-        if opcion == "3":
-            print("Escriba los asientos totales de la primera clase")
-            escribirPrimeraClase = input()
-            while escribirPrimeraClase == "":
-                print("No es valido dejar espacion en blanco ni involucrar letras")
-                escribirPrimeraClase = input("Intentelo nuevamente: ")
-            primeraClase = escribirPrimeraClase
-            print("Ahora coloque la cantidad de asientos por fila.")
-            porFilaPC = int(input())
-            print("Ahora coloque la cantidad de asientos por columna")
-            porColumnaPC = int(input())
-            while (porFilaPC * porColumnaPC) != primeraClase:
-                print("ERROR!")
-                print("La cantidad asientos debe coincidir con la dicha anteriormente.")
-                print("Coloque la cantidad de asientos por fila.")
-                porFilaPC = int(input())
-                print("Coloque la cantidad de asientos por columna")
-                porColumnaPC = int(input())
-            contadorPC += 1
+    print("\nAviones registrados:")
+    for matricula in aviones:
+        print(f"- {matricula} ({aviones[matricula]['modelo']})")
+    
+    matricula = input("\nIngrese la matrícula del avión que desea modificar: ").strip().upper()
+
+    if matricula not in aviones:
+        print(f"Error: No se encontró un avión con la matrícula '{matricula}'.")
+        return
+
+    avion = aviones[matricula]
+
+    while True: 
+        print("\nSeleccione el dato que desea modificar:")
+        print(f"[1] Matrícula: {matricula}")
+        print(f"[2] Modelo: {avion['modelo']}")
+        print(f"[3] Asientos de primera clase: {avion['Asientos']['primera']}")
+        print(f"[4] Asientos de clase económica: {avion['Asientos']['economica']}")
+        print("[5] Guardar")
+        print("[0] Salir sin realizar cambios")
+
+        opcion = input("Seleccione una opción o [0] para salir: ").strip()
+
+        if opcion == "1":
+            print("La matrícula no es modificable.")
+        
+        elif opcion == "2":
+            nuevo_modelo = input("Ingrese el nuevo modelo: ").strip().title()
+            while not nuevo_modelo:
+                print("El modelo no puede estar vacío.")
+                nuevo_modelo = input("Ingrese el nuevo modelo nuevamente: ").strip()
+            avion['modelo'] = nuevo_modelo
+        
+        elif opcion == "3":
+            nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
+            while not nueva_primera.isdigit() or int(nueva_primera) <= 0:
+                print("La cantidad de asientos debe ser un número entero positivo.")
+                nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
+            avion['Asientos']['primera'] = int(nueva_primera)
+        
         elif opcion == "4":
-            print("Escriba los asientos totales de la clase economica.")
-            escribirClaseEconomica = input()
-            while escribirClaseEconomica == "":
-                print("No es valido dejar espacios en blanco")
-                print("Intentelo nuevamente")
-                escribirClaseEconomica = input()
-            claseEconomica = escribirClaseEconomica
-            print("Ahora escriba los asientos por fila")
-            porFilaCE = int(input())
-            print("Ahora escriba la cantidad de asientos por columna")
-            porColumnaCE = int(input())
-            while (porFilaCE * porColumnaCE) == claseEconomica:
-                print(
-                    "Los datos otorgados son incorrectos y la cantidad de asientos por fila y columna debe coincidir"
-                )
-                print("Intentelo nuevamente")
-                print("Ahora escriba los asientos por fila")
-                porFilaCE = int(input())
-                print("Ahora escriba la cantidad de asientos por columna")
-                porColumnaCE = int(input())
-            contadorCE += 1
+            nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
+            while not nueva_economica.isdigit() or int(nueva_economica) <= 0:
+                print("La cantidad de asientos debe ser un número entero positivo.")
+                nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
+            avion['Asientos']['economica'] = int(nueva_economica)
+        
         elif opcion == "5":
-            modelo = ""
-            primeraClase = ""
-            claseEconomica = ""
-            contadorModTotal += 1
-        elif opcion == "6":
-            if (
-                modelo == ""
-                or matricula == ""
-                or claseEconomica == ""
-                or primeraClase == ""
-            ):
-                print("Aun quedan datos por completar")
-            else:
-                break
+            # Guardar los cambios en el archivo JSON
+            escribirJson(ruta, aviones)
+            print("\nLos datos del avión se han actualizado exitosamente.")
+            return
+        
+        elif opcion == "0":
+            print("No se realizaron cambios.")
+            return
+        
         else:
-            print("Esa opcion no existe")
-    print("Los datos")
-    print("----------------")
-    print(f"Modelo: {modelo}")
-    print(f"Matricula: {matricula}")
-    print(f"Asientos en primera clase: {primeraClase}")
-    print(f"Asientos en clase economica: {claseEconomica}")
-    print("----------------")
-    aviones[matricula] = {
-        "modelo": modelo,
-        "Asientos": {
-            "primera": int(primeraClase),
-            "economica": int(claseEconomica),
-        },
-    }
-    print("Avion registrado")
-    escribirJson(ruta, aviones)
-    if contadorPC > 0 and contadorCE == 0:
-        return (porFilaPC, porColumnaPC)
-    elif contadorCE > 0 and contadorPC == 0:
-        return (porFilaCE, porColumnaCE)
-    elif (contadorCE > 0 and contadorPC > 0) or contadorModTotal > 0:
-        return (porFilaPC, porColumnaPC, porFilaCE, porColumnaCE)
-    else:
-        return
+            print("Opción inválida. No se realizaron cambios.")
+            return

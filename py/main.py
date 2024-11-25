@@ -63,14 +63,14 @@ def subMenuPasajes():
             break  # Volver al ciclo principal, no se termina el programa
         elif opcion_submenu == "1":  # Comprar Pasaje
             funciones.comprarPasaje(
-                pasajeros, pasajes, vuelos, rutaPasajeros, rutaPasajes
+                pasajeros, pasajes, vuelos, rutaPasajeros, rutaPasajes, rutaVuelos
             )
         elif opcion_submenu == "2":  # Listar Pasajes
             funciones.listarPasajes(pasajes, pasajeros)
         elif opcion_submenu == "3":  # Modificar Pasaje
             funciones.modificarPasaje(pasajes, vuelos, rutaPasajes)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            funciones.eliminarPasaje(pasajes, rutaPasajes)
+            funciones.eliminarPasaje(pasajes, vuelos, rutaPasajes, rutaVuelos)
     return
 
 
@@ -212,7 +212,7 @@ def main():
         print()
         if opcion == "0":  # Opción salir del programa
             print("Saliendo del programa...")
-            time.sleep(3)
+            time.sleep(2)
             limpiarTerminal()
             break  # Salir del ciclo principal
 
