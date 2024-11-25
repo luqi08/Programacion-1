@@ -201,7 +201,7 @@ def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
     return
 
 
-def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> None:
+def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str, longitudPrimera) -> None:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -218,7 +218,7 @@ def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> None:
     if esEjecutiva(pasaje, codigo):
         print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
     else:
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
 
     for indice, fila in enumerate(matriz):
         letra = chr(65 + indice)  # 65 es el código ASCII de 'A'
@@ -229,7 +229,7 @@ def mostrarMatriz(matriz: list[list], pasaje: dict, codigo: str) -> None:
     return
 
 
-def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str) -> None:
+def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str, longitudPrimera) -> None:
     """
     Muestra visualmente la disposición de asientos en una matriz, con indicación de pasillo.
 
@@ -244,7 +244,7 @@ def mostrarMatrizCambiarClase(matriz: list[list], pasaje: dict, codigo: str) -> 
     medio = filas_totales // 2
 
     if esEjecutiva(pasaje, codigo):
-        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(5, longitud + 5)))
+        print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(longitudPrimera + 1, longitud + longitudPrimera + 1)))
     else:
         print("  " + " ".join(f"{i:>{ancho_columna}}" for i in range(1, longitud + 1)))
 
@@ -596,6 +596,7 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
         elif codigoPasaje not in pasajes:
             print(f"El pasaje {codigoPasaje} no esta registrado. Reintente...")
         else:
+            lonPrimera = len(vuelos[pasajes[codigoPasaje]["vuelo"]]["Asientos"]["Primera"][0])
             print("--------------------------")
             mostrarPasaje(pasajes, codigoPasaje)
             print("--------------------------")
@@ -614,19 +615,19 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
                         ]["Primera"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     else:
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
                         ]["Economica"]
-                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                        mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     print()
                     print(
                         f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                     escribirJson(rutaPasajes, pasajes)
                     break
 
@@ -639,19 +640,19 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
                         ]["Economica"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
+                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     else:
                         matrizAsientos = vuelos[pasajes[codigoPasaje]["vuelo"]][
                             "Asientos"
                         ]["Primera"]
-                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje)
+                        mostrarMatrizCambiarClase(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                         cambiarAsiento(codigoPasaje, matrizAsientos, pasajes)
                     print()
                     print(
                         f"NUEVO ASIENTO: {pasajes[codigoPasaje]['asiento']}, CLASE: {pasajes[codigoPasaje]['clase']}"
                     )
-                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje)
+                    mostrarMatriz(matrizAsientos, pasajes, codigoPasaje, lonPrimera)
                     escribirJson(rutaPasajes, pasajes)
                     break
 
