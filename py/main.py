@@ -70,7 +70,7 @@ def subMenuPasajes():
         elif opcion_submenu == "3":  # Modificar Pasaje
             funciones.modificarPasaje(pasajes, vuelos, rutaPasajes)
         elif opcion_submenu == "4":  # Eliminar Pasaje
-            funciones.eliminarPasaje(pasajes, rutaPasajes)
+            funciones.eliminarPasaje(pasajes, vuelos, rutaPasajes, rutaVuelos)
     return
 
 

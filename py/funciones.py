@@ -683,13 +683,14 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
             break
 
 
-def eliminarPasaje(pasajes: dict, ruta) -> None:
+def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: str) -> None:
     """
-    Elimina el pasaje asociado a un pasajero del diccionario de pasajes.
+    Elimina el pasaje asociado a un pasajero del diccionario de pasajes y cancela el asiento correspondiente.
 
     Args:
-    - dni (int): El DNI del pasajero cuyo pasaje será eliminado.
     - pasajes (dict): Diccionario que contiene la información de los pasajes.
+    - vuelos (dict): Diccionario que contiene la información de los vuelos.
+    - rutaPasajes (str): Ruta del archivo JSON donde se guardan los pasajes.
     """
     while True:
         pasaje = input("Ingrese número de pasaje o [0] para salir: ")
@@ -700,11 +701,44 @@ def eliminarPasaje(pasajes: dict, ruta) -> None:
         elif pasaje not in pasajes.keys():
             print("No se encontró ningún pasaje con el número ingresado")
         else:
+            # Obtener detalles del pasaje
+            datosPasaje = pasajes[pasaje]
+            vuelo = datosPasaje["vuelo"]
+            clase = datosPasaje["clase"].capitalize()
+            asiento = datosPasaje["asiento"]
+
+            # Validar que el vuelo existe en el diccionario de vuelos
+            if vuelo not in vuelos:
+                print(f"Error: el vuelo {vuelo} no se encuentra registrado en los datos.")
+            else:
+                # Convertir el asiento (ej. "A1") a fila y columna en la matriz
+                fila_letra = asiento[0]
+                columna_num = int(asiento[1:])
+                fila_indice = ord(fila_letra) - 65  # Convertir 'A' en índice 0
+                inicio_columna = 1 if clase == "Primera" else len(vuelos[vuelo]["Asientos"]["Primera"][0]) + 1  # Determinar el inicio de columnas
+                columna_indice = columna_num - inicio_columna  # Ajustar el índice de la columna
+
+                # Validar que la clase existe en el vuelo
+                if clase not in vuelos[vuelo]["Asientos"]:
+                    print(f"Error: la clase {clase} no se encuentra en el vuelo {vuelo}.")
+                else:
+                    matriz = vuelos[vuelo]["Asientos"][clase]
+                    try:
+                        # Liberar el asiento marcándolo como 0
+                        matriz[fila_indice][columna_indice] = 0
+                        print(f"Asiento {asiento} del vuelo {vuelo} cancelado correctamente.")
+                    except IndexError:
+                        print(f"Error: el asiento {asiento} no es válido para el vuelo {vuelo}.")
+
+            # Eliminar el pasaje del diccionario
             del pasajes[pasaje]
-            print()
-            print(f"Pasaje número: {pasaje}, eliminado")
-            escribirJson(ruta, pasajes)
+            print(f"Pasaje número: {pasaje}, eliminado.")
+            
+            # Guardar cambios en el archivo JSON
+            escribirJson(rutaPasajes, pasajes)  
+            escribirJson(rutaVuelos, vuelos) 
             return
+
 
 
 # ----------------------------------------------------------------------------------------------
