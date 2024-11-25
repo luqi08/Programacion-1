@@ -33,7 +33,7 @@ def escribirJson(ruta, diccionario):
     """
     f = open(ruta, mode="w", encoding="utf-8")
     json.dump(diccionario, f, ensure_ascii=False, indent=4)
-    f.close
+    f.close()
 
     return
 
