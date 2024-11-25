@@ -69,7 +69,140 @@
             "economica": 150
         }
     },
-    "AS-DSA": {
+    "LV-ASD": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "AB-ABC": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "AB-BCD": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "GF-ASD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "DS-GDF": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "HT-GSD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "JY-FDS": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "GS-KGH": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "FS-GDS": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "FS-SDF": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "GD-FSA": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "HE-GRE": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "DA-GSD": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "GS-KUG": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "FS-KGY": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "XA-ZXC": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "GD-JGF": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "GS-JKH": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
+    },
+    "GD-DFG": {
+        "modelo": "AirbusA320Neo",
+        "Asientos": {
+            "primera": 28,
+            "economica": 150
+        }
+    },
+    "AS-DFG": {
         "modelo": "Boeing747-800",
         "Asientos": {
             "primera": 20,
