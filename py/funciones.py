@@ -530,7 +530,7 @@ def comprarPasaje(
 
     print(f"Pasaje registrado con éxito. ID del pasaje: {nuevo_id}")
     escribirJson(rutaPasajes, pasajes)
-    return pasajes
+    return
 
 
 def listarPasajes(pasajes, pasajeros):

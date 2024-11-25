@@ -212,7 +212,7 @@ def main():
         print()
         if opcion == "0":  # Opción salir del programa
             print("Saliendo del programa...")
-            time.sleep(3)
+            time.sleep(2)
             limpiarTerminal()
             break  # Salir del ciclo principal
 
