@@ -208,5 +208,12 @@
             "primera": 20,
             "economica": 162
         }
+    },
+    "HD-FHD": {
+        "modelo": "Boeing747-800",
+        "Asientos": {
+            "primera": 20,
+            "economica": 162
+        }
     }
 }
