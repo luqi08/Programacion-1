@@ -56,7 +56,9 @@ def crearMatrizAsientos(total_asientos: int, asientos_por_fila: int) -> list[lis
 
     matriz = [[0] * asientos_por_fila for _ in range(filas_completas)]
     if asientos_restantes > 0:
-        fila_extra = [0] * asientos_restantes + [0] * (asientos_por_fila - asientos_restantes)
+        fila_extra = [0] * asientos_restantes + [0] * (
+            asientos_por_fila - asientos_restantes
+        )
         matriz.append(fila_extra)
 
     # Transponer la matriz (intercambiar filas por columnas)
@@ -108,7 +110,7 @@ def ingresoTexto(
 
 def ingresoEntero(
     mensajeIngreso="Ingrese un valor", mensajeError="error: valor inválido"
-):
+) -> str:
     while True:
         try:
             valor = input(f"{mensajeIngreso} o [0] para volver: ")
@@ -117,6 +119,19 @@ def ingresoEntero(
             return valor
         except ValueError:
             print(mensajeError)
+
+
+def ingresoOpcion(opciones, mensajeIngreso="Ingrese una opción") -> str:
+    while True:
+        try:
+            opcion = input(f"{mensajeIngreso} o [0] para volver: ")
+            if not opcion.isnumeric():
+                raise ValueError("valor inválido")
+            if opcion not in opciones:
+                raise ValueError("opción inexistente")
+            return opcion
+        except ValueError as e:
+            print(f"ERROR: {e}")
 
 
 def mostrarPasaje(pasajes, codigoPasaje):
@@ -144,31 +159,6 @@ def esEjecutiva(pasajes: dict, codigo: str) -> bool:
         return True
     else:
         return False
-
-
-def letraNumero(letra: str) -> int:
-    """
-    Convierte una letra en su correspondiente número para indexación de matriz.
-
-    Args:
-    - letra (str): Letra del abecedario ('A'-'F').
-
-    Returns:
-    - int: Número correspondiente (0-5) para 'A'-'F'.
-    """
-    if letra == "A":
-        letra = 0
-    elif letra == "B":
-        letra = 1
-    elif letra == "C":
-        letra = 2
-    elif letra == "D":
-        letra = 3
-    elif letra == "E":
-        letra = 4
-    elif letra == "F":
-        letra = 5
-    return letra
 
 
 def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
@@ -200,6 +190,7 @@ def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
     print("PUNTA DEL AVION A LA IZQUIERDA - COLA DEL AVION A LA DERECHA")
     return
 
+
 def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     """
     Permite seleccionar un asiento en un vuelo específico y una clase específica.
@@ -208,7 +199,7 @@ def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     - vuelos (dict): Diccionario con información de los vuelos.
     - codigo_vuelo (str): Código del vuelo (por ejemplo, "VU027").
     - clase (str): Clase a seleccionar ("Primera" o "Economica").
-    
+
     Returns:
     - str: Asiento seleccionado (por ejemplo, "A5").
     """
@@ -248,7 +239,9 @@ def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
                 break
 
         # Verificar si el asiento está ocupado
-        columna_real = filaColumna - inicio_columna  # Ajustar a índice de matriz (0 basado)
+        columna_real = (
+            filaColumna - inicio_columna
+        )  # Ajustar a índice de matriz (0 basado)
         if matriz[fila][columna_real] == 1:
             print("Asiento ocupado... Reintente")
         else:
@@ -257,10 +250,10 @@ def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     # Reservar el asiento
     matriz[fila][columna_real] = 1
     asiento = f"{filaAsiento.capitalize()}{filaColumna}"
-    print(f"Asiento {asiento} reservado correctamente en el vuelo {codigo_vuelo}, clase {clase}.")
+    print(
+        f"Asiento {asiento} reservado correctamente en el vuelo {codigo_vuelo}, clase {clase}."
+    )
     return asiento
-
-
 
 
 def estaOcupado(fila, columna, matriz):
@@ -320,12 +313,16 @@ def cambiarAsiento(codigoPasaje, vuelos, pasajes, longitudPrimera):
         # Selección de columna
         while True:
             filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
-            if not (inicioColumnaNueva <= filaColumna < inicioColumnaNueva + longitudNueva):
+            if not (
+                inicioColumnaNueva <= filaColumna < inicioColumnaNueva + longitudNueva
+            ):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
                 break
 
-        columnaNueva = filaColumna - inicioColumnaNueva  # Ajuste al índice de matriz (0 basado)
+        columnaNueva = (
+            filaColumna - inicioColumnaNueva
+        )  # Ajuste al índice de matriz (0 basado)
 
         # Verificar si el asiento está ocupado
         if matrizNueva[filaNueva][columnaNueva] == 1:
@@ -343,8 +340,11 @@ def cambiarAsiento(codigoPasaje, vuelos, pasajes, longitudPrimera):
 
     mostrarMatrizdeVuelo(matrizNueva, longitudPrimera)
 
-    print(f"Asiento cambiado exitosamente a {filaAsiento.capitalize()}{filaColumna} en clase {claseNueva}.")
+    print(
+        f"Asiento cambiado exitosamente a {filaAsiento.capitalize()}{filaColumna} en clase {claseNueva}."
+    )
     return
+
 
 # ----------------------------------------------------------------------------------------------
 # PASAJES
@@ -504,7 +504,9 @@ def comprarPasaje(
     matrizAsientos = vuelos[vueloSeleccionado]["Asientos"][claseSeleccionada]
     lonPrimera = len(vuelos[vueloSeleccionado]["Asientos"]["Primera"][0])
     mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
-    asiento = seleccionarAsiento(vuelos, vueloSeleccionado, claseSeleccionada, lonPrimera)
+    asiento = seleccionarAsiento(
+        vuelos, vueloSeleccionado, claseSeleccionada, lonPrimera
+    )
     mostrarMatrizdeVuelo(matrizAsientos, lonPrimera)
 
     # Generar nuevo ID de pasaje
@@ -595,7 +597,10 @@ def modificarPasaje(pasajes, vuelos, rutaPasajes):
     escribirJson(rutaPasajes, pasajes)
     return
 
-def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: str) -> None:
+
+def eliminarPasaje(
+    pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: str
+) -> None:
     """
     Elimina el pasaje asociado a un pasajero del diccionario de pasajes y cancela el asiento correspondiente.
 
@@ -621,7 +626,9 @@ def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: st
 
             # Validar que el vuelo existe en el diccionario de vuelos
             if vuelo not in vuelos:
-                print(f"Error: el vuelo {vuelo} no se encuentra registrado en los datos.")
+                print(
+                    f"Error: el vuelo {vuelo} no se encuentra registrado en los datos."
+                )
             else:
                 # Convertir el asiento (ej. "A1") a fila y columna en la matriz
                 filaLetra = asiento[0]
@@ -632,25 +639,30 @@ def eliminarPasaje(pasajes: dict, vuelos: dict, rutaPasajes: str, rutaVuelos: st
 
                 # Validar que la clase existe en el vuelo
                 if clase not in vuelos[vuelo]["Asientos"]:
-                    print(f"Error: la clase {clase} no se encuentra en el vuelo {vuelo}.")
+                    print(
+                        f"Error: la clase {clase} no se encuentra en el vuelo {vuelo}."
+                    )
                 else:
                     matriz = vuelos[vuelo]["Asientos"][clase]
                     try:
                         # Liberar el asiento marcándolo como 0
                         matriz[filaIndice][columnaIndice] = 0
-                        print(f"Asiento {asiento} del vuelo {vuelo} cancelado correctamente.")
+                        print(
+                            f"Asiento {asiento} del vuelo {vuelo} cancelado correctamente."
+                        )
                     except IndexError:
-                        print(f"Error: el asiento {asiento} no es válido para el vuelo {vuelo}.")
+                        print(
+                            f"Error: el asiento {asiento} no es válido para el vuelo {vuelo}."
+                        )
 
             # Eliminar el pasaje del diccionario
             del pasajes[pasaje]
             print(f"Pasaje número: {pasaje}, eliminado.")
 
             # Guardar cambios en el archivo JSON
-            escribirJson(rutaPasajes, pasajes)  
-            escribirJson(rutaVuelos, vuelos) 
+            escribirJson(rutaPasajes, pasajes)
+            escribirJson(rutaVuelos, vuelos)
             return
-
 
 
 # ----------------------------------------------------------------------------------------------
@@ -1003,11 +1015,11 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                 print("No hay aviones registrados actualmente.")
                 return
 
-            #Mostrar matriculas
+            # Mostrar matriculas
             print("\nAviones registrados:")
             for matricula in aviones:
                 print(f"- {matricula} ({aviones[matricula]['modelo']})")
-            
+
             # Elegir un avión
             while True:
                 avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
@@ -1017,13 +1029,13 @@ def registrarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                     print(f"Error: No se encontró un avión con la matrícula '{avion}'.")
                 else:
                     # Obtener asientos de primera clase y económica
-                    asientosPrimera = aviones[avion]['Asientos']['primera']
-                    asientosEconomica = aviones[avion]['Asientos']['economica']
-                    
+                    asientosPrimera = aviones[avion]["Asientos"]["primera"]
+                    asientosEconomica = aviones[avion]["Asientos"]["economica"]
+
                     print(f"\nAvión seleccionado: {aviones[avion]['modelo']}")
                     print(f"Asientos en primera clase: {asientosPrimera}")
                     print(f"Asientos en clase económica: {asientosEconomica}")
-                    
+
                     break
 
         elif opcion == "7":
@@ -1202,12 +1214,12 @@ def modificarVuelo(vuelos: dict, aviones: dict, rutaVuelos):
                 print("No hay aviones registrados actualmente.")
                 return
 
-            #Mostrar matriculas
+            # Mostrar matriculas
             print("\nAviones registrados:")
             for matricula in aviones:
                 print(f"- {matricula} ({aviones[matricula]['modelo']})")
-            
-            #Elegir
+
+            # Elegir
             while True:
                 avion = input("\nIngrese la matrícula del avión que partirá o [0] para salir: ").strip().upper()
                 if avion == "0":
@@ -1316,10 +1328,10 @@ def listarAviones(aviones: dict) -> None:
 def registrarAviones(aviones: dict, ruta: str) -> None:
     """
     Registra un nuevo avión en el diccionario `aviones`.
-    
+
     Permite seleccionar entre dos modelos predefinidos, evitando ingresar datos manualmente.
     Los datos se almacenan en el diccionario y se escriben en un archivo JSON.
-    
+
     Args:
         aviones (dict): Diccionario donde se almacenan los datos de los aviones.
         ruta (str): Ruta del archivo JSON donde se almacenarán los datos.
@@ -1364,8 +1376,8 @@ def registrarAviones(aviones: dict, ruta: str) -> None:
         "modelo": modelo_seleccionado["modelo"],
         "Asientos": {
             "primera": modelo_seleccionado["primera_clase"],
-            "economica": modelo_seleccionado["economica"]
-        }
+            "economica": modelo_seleccionado["economica"],
+        },
     }
 
     # Guardar los datos en JSON
@@ -1374,15 +1386,17 @@ def registrarAviones(aviones: dict, ruta: str) -> None:
     print("\nAvión registrado exitosamente:")
     print(f"Matrícula: {matricula}")
     print(f"Modelo: {modelo_seleccionado['modelo']}")
-    print(f"Asientos - Primera clase: {modelo_seleccionado['primera_clase']}, Económica: {modelo_seleccionado['economica']}")
+    print(
+        f"Asientos - Primera clase: {modelo_seleccionado['primera_clase']}, Económica: {modelo_seleccionado['economica']}"
+    )
 
 
 def eliminarAviones(aviones: dict, ruta: str) -> None:
     """
     Elimina un avión registrado en el diccionario `aviones`.
-    
+
     Valida que la matrícula exista antes de eliminarla y confirma la acción.
-    
+
     Args:
         aviones (dict): Diccionario donde se almacenan los datos de los aviones.
         ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
@@ -1405,9 +1419,9 @@ def eliminarAviones(aviones: dict, ruta: str) -> None:
     print(f"Modelo: {aviones[matricula]['modelo']}")
     print("[1] Confirmar eliminación")
     print("[2] Cancelar y volver al menú anterior")
-    
+
     opcion = input("Seleccione una opción: ").strip()
-    
+
     if opcion == "1":
         del aviones[matricula]
         escribirJson(ruta, aviones)
@@ -1421,10 +1435,10 @@ def eliminarAviones(aviones: dict, ruta: str) -> None:
 def modificarAviones(aviones: dict, ruta: str) -> None:
     """
     Modifica los datos de un avión registrado en el diccionario `aviones`.
-    
+
     Permite editar la matrícula, el modelo y los asientos en primera clase y económica,
     con validaciones para garantizar datos consistentes.
-    
+
     Args:
         aviones (dict): Diccionario donde se almacenan los datos de los aviones.
         ruta (str): Ruta del archivo JSON donde se almacenan los datos de los aviones.
@@ -1445,7 +1459,7 @@ def modificarAviones(aviones: dict, ruta: str) -> None:
 
     avion = aviones[matricula]
 
-    while True: 
+    while True:
         print("\nSeleccione el dato que desea modificar:")
         print(f"[1] Matrícula: {matricula}")
         print(f"[2] Modelo: {avion['modelo']}")
@@ -1458,38 +1472,46 @@ def modificarAviones(aviones: dict, ruta: str) -> None:
 
         if opcion == "1":
             print("La matrícula no es modificable.")
-        
+
         elif opcion == "2":
             nuevo_modelo = input("Ingrese el nuevo modelo: ").strip().title()
             while not nuevo_modelo:
                 print("El modelo no puede estar vacío.")
                 nuevo_modelo = input("Ingrese el nuevo modelo nuevamente: ").strip()
-            avion['modelo'] = nuevo_modelo
-        
+            avion["modelo"] = nuevo_modelo
+
         elif opcion == "3":
-            nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
+            nueva_primera = input(
+                "Ingrese la nueva cantidad de asientos en primera clase: "
+            ).strip()
             while not nueva_primera.isdigit() or int(nueva_primera) <= 0:
                 print("La cantidad de asientos debe ser un número entero positivo.")
-                nueva_primera = input("Ingrese la nueva cantidad de asientos en primera clase: ").strip()
-            avion['Asientos']['primera'] = int(nueva_primera)
-        
+                nueva_primera = input(
+                    "Ingrese la nueva cantidad de asientos en primera clase: "
+                ).strip()
+            avion["Asientos"]["primera"] = int(nueva_primera)
+
         elif opcion == "4":
-            nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
+            nueva_economica = input(
+                "Ingrese la nueva cantidad de asientos en clase económica: "
+            ).strip()
             while not nueva_economica.isdigit() or int(nueva_economica) <= 0:
                 print("La cantidad de asientos debe ser un número entero positivo.")
-                nueva_economica = input("Ingrese la nueva cantidad de asientos en clase económica: ").strip()
-            avion['Asientos']['economica'] = int(nueva_economica)
-        
+                nueva_economica = input(
+                    "Ingrese la nueva cantidad de asientos en clase económica: "
+                ).strip()
+            avion["Asientos"]["economica"] = int(nueva_economica)
+
         elif opcion == "5":
             # Guardar los cambios en el archivo JSON
             escribirJson(ruta, aviones)
             print("\nLos datos del avión se han actualizado exitosamente.")
             return
-        
+
         elif opcion == "0":
             print("No se realizaron cambios.")
             return
-        
+
         else:
             print("Opción inválida. No se realizaron cambios.")
             return
