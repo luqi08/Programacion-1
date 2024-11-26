@@ -228,4 +228,5 @@ def main():
 
 
 # Punto de entrada al programa
-main()
+if __name__ == "__main__":
+    main()

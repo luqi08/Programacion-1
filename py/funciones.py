@@ -121,13 +121,13 @@ def ingresoEntero(
             print(mensajeError)
 
 
-def ingresoOpcion(opciones, mensajeIngreso="Ingrese una opción") -> str:
+def ingresoOpcion(opcionMax: int, mensajeIngreso="Ingrese una opción") -> str:
     while True:
         try:
             opcion = input(f"{mensajeIngreso} o [0] para volver: ")
-            if not opcion.isnumeric():
+            if not opcion.isnumeric() or opcion < 0:
                 raise ValueError("valor inválido")
-            if opcion not in opciones:
+            if opcion > opcionMax:
                 raise ValueError("opción inexistente")
             return opcion
         except ValueError as e:
@@ -139,26 +139,6 @@ def mostrarPasaje(pasajes, codigoPasaje):
     print(f"Vuelo: {pasajes[codigoPasaje]['vuelo']}")
     print(f"Clase: {pasajes[codigoPasaje]['clase'].capitalize()}")
     print(f"Asiento: {pasajes[codigoPasaje]['asiento']}")
-
-
-def esEjecutiva(pasajes: dict, codigo: str) -> bool:
-    """
-    Verifica si un asiento pertenece a la clase ejecutiva o no.
-
-    Args:
-    - pasajes (dict): Información sobre los pasajes y asientos ocupados.
-    - codigo (str): Código identificador del pasaje.
-
-    Returns:
-    - bool: True si el asiento es ejecutivo, False si no lo es.
-    """
-    asiento = pasajes[codigo]["asiento"]
-    letra = asiento[0]
-    numero_asiento = int(asiento[1:])
-    if numero_asiento < 5 and letra in ["A", "B", "C", "D"]:
-        return True
-    else:
-        return False
 
 
 def mostrarMatrizdeVuelo(matriz: list[list], longitudPrimera) -> None:
@@ -223,7 +203,7 @@ def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
     while True:
         # Selección de letra de fila
         while True:
-            filaAsiento = input("SELECCIONE LETRA (A,B,C,ETC.): ")
+            filaAsiento = ingresoTexto("SELECCIONE LETRA (A,B,C,ETC.): ")
             if filaAsiento.capitalize() not in listaLetras:
                 print(f"{filaAsiento} NO ESTÁ EN EL RANGO")
             else:
@@ -232,7 +212,7 @@ def seleccionarAsiento(vuelos, codigo_vuelo, clase, longitudPrimera):
 
         # Selección de número de columna
         while True:
-            filaColumna = int(input("SELECCIONE NUMERO (1,2,3,ETC.): "))
+            filaColumna = int(ingresoEntero("SELECCIONE NUMERO (1,2,3,ETC.): "))
             if not (inicio_columna <= filaColumna < inicio_columna + longitud):
                 print(f"{filaColumna} NO ESTÁ EN EL RANGO")
             else:
