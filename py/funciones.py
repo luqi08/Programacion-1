@@ -120,20 +120,6 @@ def ingresoEntero(
         except ValueError:
             print(mensajeError)
 
-
-def ingresoOpcion(opcionMax: int, mensajeIngreso="Ingrese una opción") -> str:
-    while True:
-        try:
-            opcion = input(f"{mensajeIngreso} o [0] para volver: ")
-            if not opcion.isnumeric() or opcion < 0:
-                raise ValueError("valor inválido")
-            if opcion > opcionMax:
-                raise ValueError("opción inexistente")
-            return opcion
-        except ValueError as e:
-            print(f"ERROR: {e}")
-
-
 def mostrarPasaje(pasajes, codigoPasaje):
     print(f"DNI: {pasajes[codigoPasaje]['dni']}")
     print(f"Vuelo: {pasajes[codigoPasaje]['vuelo']}")
